@@ -74,3 +74,12 @@ export { useAlbums } from './useAlbums';
 export type { UseAlbumsReturn } from './useAlbums';
 export { useAlbum } from './useAlbum';
 export type { UseAlbumReturn } from './useAlbum';
+
+export {
+  usePlannerProgress,
+  getPhaseStatus,
+} from './usePlannerProgress';
+export type {
+  PhaseProgress,
+  PhaseStatus,
+} from './usePlannerProgress';

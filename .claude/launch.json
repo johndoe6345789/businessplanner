@@ -7,6 +7,14 @@
       "runtimeArgs": [".claude/proxy.js"],
       "port": 8891,
       "cwd": "."
+    },
+    {
+      "name": "frontend",
+      "runtimeExecutable": "/Users/rmac/.nvm/versions/node/v24.13.0/bin/npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3100,
+      "autoPort": true,
+      "cwd": "/Users/rmac/Documents/GitHub/businessplanner/frontend"
     }
   ]
 }

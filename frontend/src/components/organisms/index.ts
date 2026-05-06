@@ -96,3 +96,8 @@ export { CartDrawerItem } from './CartDrawerItem';
 export type { CartDrawerItemProps } from './CartDrawerItem';
 export { CartDrawerFooter } from './CartDrawerFooter';
 export type { CartDrawerFooterProps } from './CartDrawerFooter';
+
+export { StartupRoadmap } from './StartupRoadmap';
+export type {
+  StartupRoadmapProps,
+} from './StartupRoadmap';

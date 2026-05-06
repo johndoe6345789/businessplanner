@@ -1,32 +1,8 @@
 [
-  {
-    "key": "aiChat",
-    "icon": "chat",
-    "href": "/chat"
-  },
-  {
-    "key": "gamification",
-    "icon": "emoji_events",
-    "href": "/leaderboard"
-  },
-  {
-    "key": "alerts",
-    "icon": "notifications_active",
-    "href": "/notifications"
-  },
-  {
-    "key": "darkMode",
-    "icon": "dark_mode",
-    "href": "/settings"
-  },
-  {
-    "key": "multiLang",
-    "icon": "translate",
-    "href": "/settings"
-  },
-  {
-    "key": "secureAuth",
-    "icon": "lock",
-    "href": "/login"
-  }
+  { "key": "roadmap", "icon": "map", "href": "/planner" },
+  { "key": "aiAdvisor", "icon": "psychology", "href": "/chat" },
+  { "key": "progress", "icon": "trending_up", "href": "/dashboard" },
+  { "key": "legal", "icon": "gavel", "href": "/planner" },
+  { "key": "finance", "icon": "account_balance", "href": "/planner" },
+  { "key": "resources", "icon": "auto_stories", "href": "/blog" }
 ]

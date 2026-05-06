@@ -18,6 +18,16 @@ export type { LocaleSwitcherProps }
 export { FormField } from './FormField';
 export type { FormFieldProps } from './FormField';
 
+export { PlanPhaseCard } from './PlanPhaseCard';
+export type {
+  PlanPhaseCardProps,
+} from './PlanPhaseCard';
+
+export { PlanStepRow } from './PlanStepRow';
+export type {
+  PlanStepRowProps,
+} from './PlanStepRow';
+
 export { UserBadge } from './UserBadge';
 export type { UserBadgeProps } from './UserBadge';
 

@@ -15,5 +15,5 @@ import type { RootReducerState } from './store';
 export const persistConfig: PersistConfig<RootReducerState> = {
   key: 'nextra-root',
   storage,
-  whitelist: ['theme'],
+  whitelist: ['theme', 'planner'],
 };

@@ -1,0 +1,65 @@
+{
+  "phases": [
+    {
+      "id": "validate",
+      "icon": "lightbulb",
+      "steps": [
+        { "id": "defineProblem" },
+        { "id": "interviewCustomers" },
+        { "id": "mapCompetitors" },
+        { "id": "landingPageTest" }
+      ]
+    },
+    {
+      "id": "plan",
+      "icon": "description",
+      "steps": [
+        { "id": "onePagePlan" },
+        { "id": "revenueModel" },
+        { "id": "idealCustomer" },
+        { "id": "financialProjections" }
+      ]
+    },
+    {
+      "id": "legal",
+      "icon": "gavel",
+      "steps": [
+        { "id": "chooseStructure" },
+        { "id": "registerCompany" },
+        { "id": "taxId" },
+        { "id": "businessBankAccount" },
+        { "id": "protectIp" }
+      ]
+    },
+    {
+      "id": "finance",
+      "icon": "account_balance",
+      "steps": [
+        { "id": "bootstrapOrRaise" },
+        { "id": "setupAccounting" },
+        { "id": "calculateRunway" },
+        { "id": "pathToRevenue" }
+      ]
+    },
+    {
+      "id": "build",
+      "icon": "build",
+      "steps": [
+        { "id": "mvpScope" },
+        { "id": "buildOrContract" },
+        { "id": "toolStack" },
+        { "id": "firstHire" }
+      ]
+    },
+    {
+      "id": "launch",
+      "icon": "rocket_launch",
+      "steps": [
+        { "id": "launchChannel" },
+        { "id": "websiteAndMessaging" },
+        { "id": "firstTenCustomers" },
+        { "id": "feedbackLoop" }
+      ]
+    }
+  ]
+}

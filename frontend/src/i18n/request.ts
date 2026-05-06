@@ -3,6 +3,7 @@ import { IntlErrorCode } from 'next-intl';
 import { routing } from './routing';
 import { fetchWithRetry } from './fetchRetry';
 import type { Locale } from './config';
+import enFallback from '../messages/en.json';
 
 /** Humanise a missing key into a fallback label. */
 function fallbackLabel(key: string): string {
@@ -33,7 +34,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? (requested as Locale)
     : routing.defaultLocale;
 
-  let messages: Record<string, unknown> = {};
+  let messages: Record<string, unknown> = {
+    ...(enFallback as Record<string, unknown>),
+  };
   try {
     const res = await fetchWithRetry(
       `${API_URL}/api/translations/${locale}`,
@@ -44,11 +47,11 @@ export default getRequestConfig(async ({ requestLocale }) => {
         string, unknown
       >;
       if (Object.keys(data).length > 0) {
-        messages = data;
+        messages = { ...messages, ...data };
       }
     }
   } catch {
-    /* API unreachable — messages stay empty. */
+    /* API unreachable — bundled JSON is the fallback. */
   }
 
   return {
