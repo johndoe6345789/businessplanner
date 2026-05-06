@@ -1,0 +1,106 @@
+{
+  "name": "test",
+  "description": "Run tests: backend (ctest), frontend (jest), e2e (playwright)",
+  "options": [
+    {
+      "name": "scope",
+      "default": "all",
+      "help": "Test scope: all, backend, frontend, e2e"
+    },
+    {
+      "name": "filter",
+      "default": "",
+      "help": "Backend ctest name regex filter"
+    }
+  ],
+  "steps": [
+    {
+      "type": "capture",
+      "command": "case {opt.scope} in all|backend) echo true;; esac",
+      "var": "run_backend"
+    },
+    {
+      "type": "capture",
+      "command": "case {opt.scope} in all|frontend) echo true;; esac",
+      "var": "run_frontend"
+    },
+    {
+      "type": "capture",
+      "command": "case {opt.scope} in all|e2e) echo true;; esac",
+      "var": "run_e2e"
+    },
+    {
+      "type": "print",
+      "text": "[test] ── Backend (ctest) ──",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "set",
+      "var": "build_dir",
+      "value": "build/Debug",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "shell",
+      "tag": "test",
+      "command": "conan install . --output-folder={build_dir} --build=missing -s build_type=Debug",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "shell",
+      "tag": "test",
+      "command": "cmake -B {build_dir} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE={build_dir}/conan_toolchain.cmake",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "shell",
+      "tag": "test",
+      "command": "cmake --build {build_dir} --parallel",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "set",
+      "var": "filter_flag",
+      "value": "",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "set",
+      "var": "filter_flag",
+      "value": "--tests-regex {opt.filter}",
+      "when": "{opt.filter}"
+    },
+    {
+      "type": "shell",
+      "tag": "test",
+      "command": "ctest --test-dir {build_dir} --output-on-failure --parallel {filter_flag}",
+      "when": "{run_backend}"
+    },
+    {
+      "type": "print",
+      "text": "[test] ── Frontend (jest) ──",
+      "when": "{run_frontend}"
+    },
+    {
+      "type": "shell",
+      "tag": "test",
+      "command": "cd frontend && npm test -- --passWithNoTests",
+      "when": "{run_frontend}"
+    },
+    {
+      "type": "print",
+      "text": "[test] ── E2E (playwright) ──",
+      "when": "{run_e2e}"
+    },
+    {
+      "type": "shell",
+      "tag": "test",
+      "command": "cd shared/e2e && npm test",
+      "when": "{run_e2e}"
+    },
+    {
+      "type": "print",
+      "text": "[test] All requested tests complete."
+    }
+  ]
+}

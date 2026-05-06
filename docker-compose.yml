@@ -1,0 +1,1583 @@
+## Unified Docker Compose for the full Nextra stack.
+##
+## Usage:
+##   docker compose up --build              # all services
+##   docker compose up -d                   # detached mode
+##
+## Portal homepage:   http://localhost:8000   (nginx reverse proxy)
+## Email client:       http://localhost:8025
+## PgAdmin tool:       http://localhost:3002  (profile: tools)
+## Package repo:       http://localhost:5051  (profile: tools)
+## S3 server UI:       http://localhost:3001  (profile: tools)
+
+# ==============================================================
+#  Core services (always started)
+# ==============================================================
+services:
+
+  # ---- PostgreSQL (main app) ---------------------------------
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: nextra_db
+      POSTGRES_USER: nextra
+      POSTGRES_PASSWORD: nextra_dev
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nextra -d nextra_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- Keycloak Postgres (identity store, internal only) ----
+  keycloak-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_dev
+    volumes:
+      - keycloak_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- Keycloak (OIDC identity provider) --------------------
+  keycloak:
+    build:
+      context: ./docker/keycloak
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8080"
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_dev
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME_URL: http://localhost:8889/sso
+      KC_HTTP_RELATIVE_PATH: /sso
+      KC_PROXY_HEADERS: xforwarded
+      KC_HOSTNAME_STRICT: "false"
+      KC_GITHUB_CLIENT_ID: ${KC_GITHUB_CLIENT_ID:-}
+      KC_GITHUB_CLIENT_SECRET: ${KC_GITHUB_CLIENT_SECRET:-}
+      KC_GOOGLE_CLIENT_ID: ${KC_GOOGLE_CLIENT_ID:-}
+      KC_GOOGLE_CLIENT_SECRET: ${KC_GOOGLE_CLIENT_SECRET:-}
+      KC_MICROSOFT_CLIENT_ID: ${KC_MICROSOFT_CLIENT_ID:-}
+      KC_MICROSOFT_CLIENT_SECRET: ${KC_MICROSOFT_CLIENT_SECRET:-}
+    restart: unless-stopped
+
+  # ---- Elasticsearch -----------------------------------------
+  elasticsearch:
+    image: elasticsearch:8.17.0
+    ports:
+      - "9200:9200"
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - esdata:/var/lib/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- Redis (cache + token buckets + pub/sub) --------------
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  # ---- Kafka (KRaft single-node, no Zookeeper) ---------------
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: "1"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_LISTENERS: >-
+        PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: >-
+        PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      CLUSTER_ID: "nextra-kraft-cluster-0"
+    volumes:
+      - kafkadata:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL",
+        "kafka-topics --bootstrap-server localhost:9092 --list || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+
+  # ---- Mail server (Postfix + Dovecot) -----------------------
+  mailserver:
+    build:
+      context: docker/mail
+      dockerfile: Dockerfile
+    hostname: mail
+    domainname: nextra.local
+    ports:
+      - "25:25"
+      - "587:587"
+      - "143:143"
+    environment:
+      ENABLE_CLAMAV: 0
+      ENABLE_SPAMASSASSIN: 0
+      ENABLE_FAIL2BAN: 0
+      ENABLE_POSTGREY: 0
+      ENABLE_AMAVIS: 0
+      SSL_TYPE: ""
+      PERMIT_DOCKER: network
+      ONE_DIR: 1
+      OVERRIDE_HOSTNAME: mail.nextra.local
+      POSTFIX_INET_PROTOCOLS: ipv4
+    volumes:
+      - maildata:/var/mail
+      - mailstate:/var/mail-state
+      - maillogs:/var/log/mail
+    healthcheck:
+      test: ["CMD-SHELL", "ss -lntp | grep ':25 ' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # ---- Email client Postgres (metadata store) ----------------
+  emailclient-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: emailclient
+      POSTGRES_USER: emailclient
+      POSTGRES_PASSWORD: emailclient
+    volumes:
+      - emailclient-dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U emailclient -d emailclient"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- Email client API (Flask backend) ----------------------
+  emailclient-api:
+    build:
+      context: ./services/email/webmail
+      dockerfile: deployment/docker/email-service/Dockerfile
+    ports:
+      - "8500:5000"
+    depends_on:
+      mailserver:
+        condition: service_healthy
+      emailclient-db:
+        condition: service_healthy
+    environment:
+      POSTFIX_HOST: mailserver
+      POSTFIX_PORT: "25"
+      DOVECOT_HOST: mailserver
+      DOVECOT_IMAP_PORT: "143"
+      SMTP_HOST: mailserver
+      SMTP_PORT: "587"
+      DATABASE_URL: >-
+        postgresql://emailclient:emailclient@emailclient-db:5432/emailclient
+      FLASK_ENV: development
+      FLASK_DEBUG: "1"
+      IMAP_SYNC_INTERVAL: "300"
+      SMTP_TIMEOUT: "30"
+    restart: unless-stopped
+
+  # ---- Email client frontend (Next.js) -----------------------
+  emailclient:
+    build:
+      context: ./services/email/webmail
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /emailclient
+    volumes:
+      # Named volume preserves node_modules inside the image
+      - emailclient_node_modules:/build/services/email/webmail/node_modules
+      - emailclient_next:/build/services/email/webmail/.next
+    ports:
+      - "8025:3000"
+    depends_on:
+      emailclient-api:
+        condition: service_started
+      mailserver:
+        condition: service_healthy
+    environment:
+      BACKEND_URL: http://emailclient-api:5000
+      NODE_ENV: development
+    restart: unless-stopped
+
+  # ---- C++ API backend ---------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: docker/nextra-api.Dockerfile
+      args:
+        BASE_IMAGE: debian:sid
+        RUNTIME_IMAGE: debian:sid-slim
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      mailserver:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: change-me-in-production
+      SMTP_HOST: mailserver
+      SMTP_PORT: "587"
+      SMTP_USER: noreply@nextra.local
+      SMTP_PASS: nextra_dev
+      SMTP_FROM: noreply@nextra.local
+      APP_BASE_URL: http://localhost:3000
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      FRONTEND_VERSION: "0.1.0"
+    restart: unless-stopped
+
+  # ==============================================================
+  #  Drogon microservices (ports 9001–9013)
+  #  All built from docker/service-base.Dockerfile.
+  # ==============================================================
+
+  nextra-auth:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-auth
+        SVC_DIR: auth-service
+        SVC_PORT: "9001"
+    ports:
+      - "9001:9001"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+    restart: unless-stopped
+
+  nextra-social:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-social
+        SVC_DIR: social-service
+        SVC_PORT: "9002"
+    ports:
+      - "9002:9002"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+
+  nextra-notifications:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-notifications
+        SVC_DIR: notifications-service
+        SVC_PORT: "9003"
+    ports:
+      - "9003:9003"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+
+  nextra-comments:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-comments
+        SVC_DIR: comments-service
+        SVC_PORT: "9004"
+    ports:
+      - "9004:9004"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      s3:
+        condition: service_started
+    environment:
+      JWT_SECRET: change-me-in-production
+      S3_ENDPOINT: http://s3:9000
+      S3_ACCESS_KEY: minioadmin
+      S3_SECRET_KEY: minioadmin
+      S3_FORUM_BUCKET: forum
+    restart: unless-stopped
+
+  nextra-analytics:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-analytics
+        SVC_DIR: analytics-service
+        SVC_PORT: "9005"
+    ports:
+      - "9005:9005"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+
+  nextra-gamification:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-gamification
+        SVC_DIR: gamification-service
+        SVC_PORT: "9006"
+    ports:
+      - "9006:9006"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+    restart: unless-stopped
+
+  nextra-content:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-content
+        SVC_DIR: content-service
+        SVC_PORT: "9007"
+    ports:
+      - "9007:9007"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+    restart: unless-stopped
+
+  nextra-media:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-media
+        SVC_DIR: media-service
+        SVC_PORT: "9008"
+    ports:
+      - "9008:9008"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+    restart: unless-stopped
+
+  nextra-search:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-search
+        SVC_DIR: search-service
+        SVC_PORT: "9009"
+    ports:
+      - "9009:9009"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
+    restart: unless-stopped
+
+  nextra-infra:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-infra
+        SVC_DIR: infra-service
+        SVC_PORT: "9010"
+    ports:
+      - "9010:9010"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      mailserver:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SMTP_HOST: mailserver
+      SMTP_PORT: "587"
+      SMTP_USER: noreply@nextra.local
+      SMTP_PASS: nextra_dev
+      SMTP_FROM: noreply@nextra.local
+    restart: unless-stopped
+
+  nextra-ai:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-ai
+        SVC_DIR: ai-service
+        SVC_PORT: "9011"
+    ports:
+      - "9011:9011"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    restart: unless-stopped
+
+  nextra-platform:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-platform
+        SVC_DIR: platform-service
+        SVC_PORT: "9012"
+    ports:
+      - "9012:9012"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+    restart: unless-stopped
+
+  nextra-commerce:
+    build:
+      context: .
+      dockerfile: docker/service-base.Dockerfile
+      args:
+        SVC_NAME: nextra-commerce
+        SVC_DIR: commerce-service
+        SVC_PORT: "9013"
+    ports:
+      - "9013:9013"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      JWT_SECRET: change-me-in-production
+    restart: unless-stopped
+
+  # ---- Job scheduler daemon (durable ad-hoc queue) -----------
+  job-scheduler:
+    image: next_extra_primary-backend
+    command: ["job-scheduler",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+
+  # ---- Video transcoder daemon (Phase 4.2) -------------------
+  # NOTE: runtime image must provide /usr/bin/ffmpeg.  If the
+  # base runtime (debian:sid-slim) is missing ffmpeg, add the
+  # following apt stanza to backend/Dockerfile's runtime stage:
+  #   RUN apt-get update && apt-get install -y --no-install-recommends \
+  #       ffmpeg && rm -rf /var/lib/apt/lists/*
+  video-transcoder:
+    image: next_extra_primary-backend
+    command: ["video-transcoder",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      job-scheduler:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      S3_ENDPOINT: http://s3server:3001
+    volumes:
+      - transcode-work:/tmp/nextra-transcode
+    restart: unless-stopped
+
+  # ---- Cron manager daemon (scheduled_jobs -> job_queue) -----
+  cron-manager:
+    image: next_extra_primary-backend
+    command: ["cron-manager",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      job-scheduler:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+
+  # ---- Notification router daemon (Phase 1.3) ----------------
+  notification-router:
+    image: next_extra_primary-backend
+    command: ["notification-router",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      EMAIL_API_URL: http://emailclient-api:5000
+    restart: unless-stopped
+
+  # ---- Notifications operator tool (Phase 1.3) ---------------
+  notifications:
+    build:
+      context: ./services/notifications/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /notifications
+    volumes:
+      - notifications_node_modules:/build/tools/notifications/node_modules
+      - notifications_next:/build/tools/notifications/.next
+    depends_on:
+      - notification-router
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /notifications
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Image processor daemon (Phase 4.3) --------------------
+  image-processor:
+    image: next_extra_primary-backend
+    command: ["image-processor",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      s3:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      S3_ENDPOINT: http://s3:9000
+      S3_ACCESS_KEY: nextra-dev
+      S3_SECRET_KEY: nextra-dev
+      S3_BUCKET: image-variants
+    restart: unless-stopped
+
+  # ---- Image processor operator tool (Phase 4.3) -------------
+  image-processor-frontend:
+    build:
+      context: ./services/image/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /image-processor
+    volumes:
+      - image_processor_frontend_node_modules:/build/tools/image-processor/node_modules
+      - image_processor_frontend_next:/build/tools/image-processor/.next
+    depends_on:
+      - image-processor
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /image-processor
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Gotenberg sidecar (HTML -> PDF) -----------------------
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    command:
+      - "gotenberg"
+      - "--api-port=3000"
+      - "--chromium-disable-javascript=false"
+    restart: unless-stopped
+
+  # ---- PDF generator daemon (Phase 6.2) ----------------------
+  pdf-generator:
+    image: next_extra_primary-backend
+    command: ["pdf-generator",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      job-scheduler:
+        condition: service_started
+      gotenberg:
+        condition: service_started
+      s3:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      GOTENBERG_URL: http://gotenberg:3000
+      S3_ENDPOINT: http://s3:9000
+    restart: unless-stopped
+
+  # ---- Ecommerce daemon (products, cart, Stripe) -------------
+  ecommerce-api:
+    image: next_extra_primary-backend
+    command: ["ecommerce-api",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      # Legacy in-house JWT secret. Required during the
+      # Keycloak migration soak — Keycloak verifier is
+      # the primary path, this remains as fallback.
+      JWT_SECRET: ${JWT_SECRET:-nextra_dev_jwt_secret_change_me}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+    restart: unless-stopped
+
+  # ---- Shop admin operator tool ------------------------------
+  shop-admin:
+    build:
+      context: ./services/ecommerce/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /shop-admin
+    volumes:
+      - shop_admin_node_modules:/build/tools/shop-admin/node_modules
+      - shop_admin_next:/build/tools/shop-admin/.next
+    depends_on:
+      - ecommerce-api
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /shop-admin
+      BACKEND_URL: http://ecommerce-api:8080
+    restart: unless-stopped
+
+  # ---- Jobs operator tool (T3 Next.js frontend) --------------
+  jobs:
+    build:
+      context: ./services/job-queue/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /jobs
+    depends_on:
+      - job-scheduler
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /jobs
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Search indexer daemon (Phase 4.5) --------------------
+  search-indexer:
+    image: next_extra_primary-backend
+    command: ["search-indexer",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
+    restart: unless-stopped
+
+  # ---- Search operator tool (Next.js frontend) --------------
+  search:
+    build:
+      context: ./services/search/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /search
+    depends_on:
+      - search-indexer
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /search
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- mediamtx sidecar (RTSP/WebRTC/HLS media server) -------
+  # Note: internal webrtc port 8889 collides with the portal's
+  # host binding — map it to host 8890 instead.
+  mediamtx:
+    image: bluenviron/mediamtx:latest
+    ports:
+      - "8554:8554"
+      - "8890:8889"
+      - "8888:8888"
+      - "9997:9997"
+    environment:
+      MTX_HLSADDRESS: ":8888"
+      MTX_WEBRTCADDRESS: ":8889"
+      MTX_RTSPADDRESS: ":8554"
+      MTX_API: "yes"
+      MTX_APIADDRESS: ":9997"
+    restart: unless-stopped
+
+  # ---- media-streaming daemon (control plane) ---------------
+  media-streaming:
+    image: next_extra_primary-backend
+    command: ["media-streaming",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      mediamtx:
+        condition: service_started
+      backend:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      MEDIAMTX_URL: http://mediamtx:9997
+    restart: unless-stopped
+
+  # ---- Streams operator tool (Next.js frontend) -------------
+  streams:
+    build:
+      context: ./services/streaming/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /streams
+    depends_on:
+      - media-streaming
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /streams
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Cron operator tool (schedule CRUD + preview) ----------
+  cron:
+    build:
+      context: ./services/cron/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /cron
+    depends_on:
+      - cron-manager
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /cron
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Backup manager daemon (pg_dump + encrypt + upload) ---
+  backup-manager:
+    image: next_extra_primary-backend
+    command: ["backup-manager",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      job-scheduler:
+        condition: service_started
+      s3:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      BACKUP_KMS_KEY: >-
+        ${BACKUP_KMS_KEY:-changeme-32-bytes-of-entropy-pad}
+    restart: unless-stopped
+
+  # ---- Webhook dispatcher daemon -----------------------------
+  webhook-dispatcher:
+    image: next_extra_primary-backend
+    command: ["webhook-dispatcher",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+
+  # ---- Backups operator tool (Next.js frontend) -------------
+  backups:
+    build:
+      context: ./services/backup/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /backups
+    depends_on:
+      - backup-manager
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /backups
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Wiki tool (collaborative editor + history) ------------
+  wiki:
+    build:
+      context: ./services/wiki/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /wiki
+    volumes:
+      - wiki_node_modules:/build/tools/wiki/node_modules
+      - wiki_next:/build/tools/wiki/.next
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /wiki
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Webhooks operator tool (T3 Next.js frontend) ----------
+  webhooks:
+    build:
+      context: ./services/webhooks/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /webhooks
+    depends_on:
+      - webhook-dispatcher
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /webhooks
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Polls operator tool (Phase 3.2) -----------------------
+  polls:
+    build:
+      context: ./services/polls/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /polls
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /polls
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Blog operator tool (markdown editor + scheduler) -----
+  blog:
+    build:
+      context: ./services/blog/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /blog
+    volumes:
+      - blog_node_modules:/build/tools/blog/node_modules
+      - blog_next:/build/tools/blog/.next
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /blog
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Next.js frontend (dev mode) ----------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+      additional_contexts:
+        shared: ./shared
+    ports:
+      - "3100:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /app
+      INTERNAL_API_URL: http://backend:8080
+      NEXT_BASE_PATH: /app
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- SSO portal (login gate for all tools) -----------------
+  sso:
+    build:
+      context: ./services/sso/portal
+      dockerfile: Dockerfile
+    volumes:
+      - sso_node_modules:/build/sso/node_modules
+      - sso_next:/build/sso/.next
+    ports:
+      - "3099:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_ORIGIN: http://localhost:8889
+      NODE_ENV: development
+    restart: unless-stopped
+
+  # ---- Audit manager daemon (Kafka → PG hash chain) ----------
+  audit-manager:
+    image: next_extra_primary-backend
+    command: ["audit-manager",
+              "--config", "config/config.worker.prod.json"]
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+      KAFKA_BROKERS: kafka:9092
+    restart: unless-stopped
+
+  # ---- Audit operator tool (T2 Next.js frontend) -------------
+  audit:
+    build:
+      context: ./services/audit/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /audit
+    volumes:
+      - audit_node_modules:/build/tools/audit/node_modules
+      - audit_next:/build/tools/audit/.next
+    depends_on:
+      - audit-manager
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /audit
+      BACKEND_URL: http://backend:8080
+    restart: unless-stopped
+
+  # ---- Nginx reverse proxy -----------------------------------
+  # The portal homepage is now rendered by Drogon from
+  # shared/constants/tool-links.json; nginx only proxies.
+  # The portal/ mount below is kept solely for swagger.html,
+  # which /apidocs/ aliases — remove once swagger moves to
+  # Drogon too.
+  portal:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8889:80"
+    depends_on:
+      - frontend
+      - backend
+      - sso
+      - alerts
+      - jobs
+      - cron
+      - flags
+      - forum
+      - notifications
+      - image-processor-frontend
+      - streams
+      - audit
+      - search
+      - backups
+      - polls
+      - webhooks
+      - blog
+      - gallery
+      - social-admin
+      - shop-admin
+      - analytics
+      - status
+      - wiki
+    restart: unless-stopped
+
+
+  # ---- Social admin operator tool (Phase 7) -----------------
+  social-admin:
+    build:
+      context: ./services/social/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /social-admin
+    volumes:
+      - social_admin_node_modules:/build/tools/social-admin/node_modules
+      - social_admin_next:/build/tools/social-admin/.next
+    ports:
+      - "9018:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /social-admin
+      BACKEND_API_URL: http://backend:8080
+      NODE_ENV: development
+    restart: unless-stopped
+
+
+  # ---- Photo gallery operator tool (Phase 4.4) --------------
+  gallery:
+    build:
+      context: ./services/gallery/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /gallery
+    volumes:
+      - gallery_node_modules:/build/tools/gallery/node_modules
+      - gallery_next:/build/tools/gallery/.next
+    ports:
+      - "9016:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /gallery
+      BACKEND_API_URL: http://backend:8080
+      NODE_ENV: development
+    restart: unless-stopped
+
+
+  # ---- Feature flags operator tool ---------------------------
+  flags:
+    build:
+      context: ./services/feature-flags/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /flags
+    volumes:
+      - flags_node_modules:/build/tools/flags/node_modules
+      - flags_next:/build/tools/flags/.next
+    ports:
+      - "9019:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /flags
+      BACKEND_API_URL: http://backend:8080
+      NODE_ENV: development
+    restart: unless-stopped
+
+
+  # ---- Analytics dashboard (admin tool) ---------------------
+  analytics:
+    build:
+      context: ./services/analytics/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /analytics
+    volumes:
+      - analytics_node_modules:/build/tools/analytics/node_modules
+      - analytics_next:/build/tools/analytics/.next
+    ports:
+      - "9017:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /analytics
+      BACKEND_URL: http://backend:8080
+      NODE_ENV: development
+    restart: unless-stopped
+
+  # ---- Public status page (NOT SSO gated) -------------------
+  status:
+    build:
+      context: ./services/status-page/public
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /status
+    volumes:
+      - status_node_modules:/build/tools/status/node_modules
+      - status_next:/build/tools/status/.next
+    ports:
+      - "9014:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BASE_PATH: /status
+      BACKEND_URL: http://backend:8080
+      NODE_ENV: development
+    restart: unless-stopped
+
+  # ---- Alerts centre -----------------------------------------
+  alerts:
+    build:
+      context: ./services/alerts/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /alerts
+    volumes:
+      - alerts_node_modules:/build/tools/alerts/node_modules
+      - alerts_next:/build/tools/alerts/.next
+    ports:
+      - "8999:3000"
+    depends_on:
+      emailclient-api:
+        condition: service_started
+    environment:
+      EMAIL_API_URL: http://emailclient-api:5000
+      NODE_ENV: development
+    restart: unless-stopped
+
+  # ---- Forum moderation tool ---------------------------------
+  forum:
+    build:
+      context: ./services/comments/admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /forum
+    volumes:
+      - forum_node_modules:/build/tools/forum/node_modules
+      - forum_next:/build/tools/forum/.next
+    ports:
+      - "9020:3000"
+    depends_on:
+      backend:
+        condition: service_started
+    environment:
+      BACKEND_URL: http://backend:8080
+      NODE_ENV: development
+    restart: unless-stopped
+
+# ==============================================================
+#  Tool services
+# ==============================================================
+
+  # ---- Package repo Postgres ---------------------------------
+  packagerepo-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: packagerepo
+      POSTGRES_USER: packagerepo
+      POSTGRES_PASSWORD: packagerepo
+    volumes:
+      - packagerepo-dbdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # ---- S3 server Postgres ------------------------------------
+  s3-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: s3server
+      POSTGRES_USER: s3user
+      POSTGRES_PASSWORD: s3pass
+    volumes:
+      - s3-dbdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # ---- S3-compatible object store ----------------------------
+  s3:
+    build:
+      context: ./services/object-store/server
+      dockerfile: backend/Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      S3_DATA_DIR: /data/s3
+      S3_DB_CONN: >-
+        host=s3-db port=5432
+        dbname=s3server user=s3user password=s3pass
+      S3_REGION: us-east-1
+      S3_PORT: "9000"
+      PGHOST: s3-db
+      PGPORT: "5432"
+      PGUSER: s3user
+      PGPASSWORD: s3pass
+      PGDATABASE: s3server
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
+    volumes:
+      - s3-data:/data/s3
+    depends_on:
+      - s3-db
+      - elasticsearch
+    restart: unless-stopped
+
+  # ---- S3 server frontend ------------------------------------
+  s3-frontend:
+    build:
+      context: ./services/object-store/server/frontend
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /s3
+    volumes:
+      - s3_frontend_node_modules:/build/tools/s3server/frontend/node_modules
+      - s3_frontend_next:/build/tools/s3server/frontend/.next
+    ports:
+      - "3001:3001"
+    environment:
+      BACKEND_URL: http://s3:9000
+    depends_on:
+      - s3
+    restart: unless-stopped
+
+  # ---- Package repo backend ----------------------------------
+  packagerepo-backend:
+    build:
+      context: ./services/package-repository/root
+      dockerfile: backend/Dockerfile
+      args:
+        DEPS_IMAGE: debian:sid
+        RUNTIME_IMAGE: debian:sid-slim
+    ports:
+      - "5050:5000"
+    environment:
+      S3_ENDPOINT: http://s3:9000
+      S3_BUCKET: packagerepo
+      S3_ACCESS_KEY: minioadmin
+      JWT_SECRET: dev-secret-change-in-production
+      DATABASE_URL: >-
+        host=packagerepo-db port=5432
+        dbname=packagerepo user=packagerepo
+        password=packagerepo
+      PGHOST: packagerepo-db
+      PGPORT: "5432"
+      PGUSER: packagerepo
+      PGPASSWORD: packagerepo
+      PGDATABASE: packagerepo
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
+    depends_on:
+      - packagerepo-db
+      - s3
+      - elasticsearch
+    restart: unless-stopped
+
+  # ---- Package repo frontend ---------------------------------
+  packagerepo-frontend:
+    build:
+      context: ./services/package-repository/root/frontend
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /repo
+    volumes:
+      - packagerepo_frontend_node_modules:/build/tools/packagerepo/frontend/node_modules
+      - packagerepo_frontend_next:/build/tools/packagerepo/frontend/.next
+    ports:
+      - "5051:3000"
+    environment:
+      BACKEND_URL: http://packagerepo-backend:5000
+      NODE_ENV: development
+    depends_on:
+      - packagerepo-backend
+    restart: unless-stopped
+
+  # ---- PgAdmin backend (connects to main app DB) -------------
+  pgadmin-backend:
+    build:
+      context: ./services/database/admin
+      dockerfile: backend/Dockerfile
+    ports:
+      - "5060:5060"
+    environment:
+      PG_CONN: >-
+        host=db port=5432
+        dbname=nextra_db user=nextra password=nextra_dev
+      PG_PORT: "5060"
+      JWT_SECRET: dev-secret-change-in-production
+      PGHOST: db
+      PGPORT: "5432"
+      PGUSER: nextra
+      PGPASSWORD: nextra_dev
+      PGDATABASE: nextra_db
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ---- PgAdmin frontend -------------------------------------
+  pgadmin-frontend:
+    build:
+      context: ./services/database/admin/frontend
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+      args:
+        NEXT_BASE_PATH: /db
+    volumes:
+      - pgadmin_frontend_node_modules:/build/tools/pgadmin/frontend/node_modules
+      - pgadmin_frontend_next:/build/tools/pgadmin/frontend/.next
+    ports:
+      - "3002:3002"
+    environment:
+      BACKEND_URL: http://pgadmin-backend:5060
+      NODE_ENV: development
+    depends_on:
+      - pgadmin-backend
+    restart: unless-stopped
+
+# ==============================================================
+#  Build-time proxy caches
+# ==============================================================
+
+  # apt/deb HTTP cache — wire into C++ service Dockerfiles via
+  # Acquire::http::Proxy "http://squid:3128"
+  squid:
+    build:
+      context: docker/squid
+      dockerfile: Dockerfile
+    volumes:
+      - squid-cache:/var/spool/squid
+    ports:
+      - "3128:3128"
+    restart: unless-stopped
+
+  # npm proxy cache — wire into JS Dockerfiles via
+  # NPM_CONFIG_REGISTRY=http://verdaccio:4873
+  verdaccio:
+    build:
+      context: docker/verdaccio
+      dockerfile: Dockerfile
+    volumes:
+      - verdaccio-storage:/verdaccio/storage
+    ports:
+      - "4873:4873"
+    restart: unless-stopped
+
+# ==============================================================
+#  Volumes
+# ==============================================================
+volumes:
+  pgdata:
+  keycloak_pgdata:
+  esdata:
+  redisdata:
+  kafkadata:
+  maildata:
+  mailstate:
+  maillogs:
+  emailclient-dbdata:
+  emailclient_node_modules:
+  emailclient_next:
+  packagerepo-dbdata:
+  s3-dbdata:
+  s3-data:
+  transcode-work:
+  sso_node_modules:
+  sso_next:
+  shop_admin_node_modules:
+  shop_admin_next:
+  wiki_node_modules:
+  wiki_next:
+  blog_node_modules:
+  blog_next:
+  forum_node_modules:
+  forum_next:
+  gallery_node_modules:
+  gallery_next:
+  image_processor_frontend_node_modules:
+  image_processor_frontend_next:
+  pgadmin_frontend_node_modules:
+  pgadmin_frontend_next:
+  s3_frontend_node_modules:
+  s3_frontend_next:
+  packagerepo_frontend_node_modules:
+  packagerepo_frontend_next:
+  audit_node_modules:
+  audit_next:
+  analytics_node_modules:
+  analytics_next:
+  status_node_modules:
+  status_next:
+  social_admin_node_modules:
+  social_admin_next:
+  notifications_node_modules:
+  notifications_next:
+  alerts_node_modules:
+  alerts_next:
+  flags_node_modules:
+  flags_next:
+  squid-cache:
+  verdaccio-storage:
