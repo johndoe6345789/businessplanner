@@ -18,8 +18,6 @@ services:
   # ---- PostgreSQL (main app) ---------------------------------
   db:
     image: postgres:16-alpine
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_DB: nextra_db
       POSTGRES_USER: nextra
@@ -54,8 +52,6 @@ services:
     build:
       context: ./docker/keycloak
       dockerfile: Dockerfile
-    ports:
-      - "8088:8080"
     depends_on:
       keycloak-db:
         condition: service_healthy
@@ -81,8 +77,6 @@ services:
   # ---- Elasticsearch -----------------------------------------
   elasticsearch:
     image: elasticsearch:8.17.0
-    ports:
-      - "9200:9200"
     environment:
       discovery.type: single-node
       xpack.security.enabled: "false"
@@ -99,8 +93,6 @@ services:
   # ---- Redis (cache + token buckets + pub/sub) --------------
   redis:
     image: redis:7-alpine
-    ports:
-      - "6379:6379"
     volumes:
       - redisdata:/data
     command: ["redis-server", "--appendonly", "yes"]
@@ -114,8 +106,6 @@ services:
   # ---- Kafka (KRaft single-node, no Zookeeper) ---------------
   kafka:
     image: confluentinc/cp-kafka:7.6.1
-    ports:
-      - "9092:9092"
     environment:
       KAFKA_NODE_ID: "1"
       KAFKA_PROCESS_ROLES: "broker,controller"
@@ -149,10 +139,6 @@ services:
       dockerfile: Dockerfile
     hostname: mail
     domainname: nextra.local
-    ports:
-      - "25:25"
-      - "587:587"
-      - "143:143"
     environment:
       ENABLE_CLAMAV: 0
       ENABLE_SPAMASSASSIN: 0
@@ -196,8 +182,6 @@ services:
     build:
       context: ./services/email/webmail
       dockerfile: deployment/docker/email-service/Dockerfile
-    ports:
-      - "8500:5000"
     depends_on:
       mailserver:
         condition: service_healthy
@@ -231,8 +215,6 @@ services:
       # Named volume preserves node_modules inside the image
       - emailclient_node_modules:/build/services/email/webmail/node_modules
       - emailclient_next:/build/services/email/webmail/.next
-    ports:
-      - "8025:3000"
     depends_on:
       emailclient-api:
         condition: service_started
@@ -251,8 +233,6 @@ services:
       args:
         BASE_IMAGE: debian:sid
         RUNTIME_IMAGE: debian:sid-slim
-    ports:
-      - "8080:8080"
     depends_on:
       db:
         condition: service_healthy
@@ -300,8 +280,6 @@ services:
         SVC_NAME: nextra-auth
         SVC_DIR: auth-service
         SVC_PORT: "9001"
-    ports:
-      - "9001:9001"
     depends_on:
       db:
         condition: service_healthy
@@ -319,8 +297,6 @@ services:
         SVC_NAME: nextra-social
         SVC_DIR: social-service
         SVC_PORT: "9002"
-    ports:
-      - "9002:9002"
     depends_on:
       db:
         condition: service_healthy
@@ -341,8 +317,6 @@ services:
         SVC_NAME: nextra-notifications
         SVC_DIR: notifications-service
         SVC_PORT: "9003"
-    ports:
-      - "9003:9003"
     depends_on:
       db:
         condition: service_healthy
@@ -363,8 +337,6 @@ services:
         SVC_NAME: nextra-comments
         SVC_DIR: comments-service
         SVC_PORT: "9004"
-    ports:
-      - "9004:9004"
     depends_on:
       db:
         condition: service_healthy
@@ -388,8 +360,6 @@ services:
         SVC_NAME: nextra-analytics
         SVC_DIR: analytics-service
         SVC_PORT: "9005"
-    ports:
-      - "9005:9005"
     depends_on:
       db:
         condition: service_healthy
@@ -410,8 +380,6 @@ services:
         SVC_NAME: nextra-gamification
         SVC_DIR: gamification-service
         SVC_PORT: "9006"
-    ports:
-      - "9006:9006"
     depends_on:
       db:
         condition: service_healthy
@@ -429,8 +397,6 @@ services:
         SVC_NAME: nextra-content
         SVC_DIR: content-service
         SVC_PORT: "9007"
-    ports:
-      - "9007:9007"
     depends_on:
       db:
         condition: service_healthy
@@ -448,8 +414,6 @@ services:
         SVC_NAME: nextra-media
         SVC_DIR: media-service
         SVC_PORT: "9008"
-    ports:
-      - "9008:9008"
     depends_on:
       db:
         condition: service_healthy
@@ -467,8 +431,6 @@ services:
         SVC_NAME: nextra-search
         SVC_DIR: search-service
         SVC_PORT: "9009"
-    ports:
-      - "9009:9009"
     depends_on:
       db:
         condition: service_healthy
@@ -490,8 +452,6 @@ services:
         SVC_NAME: nextra-infra
         SVC_DIR: infra-service
         SVC_PORT: "9010"
-    ports:
-      - "9010:9010"
     depends_on:
       db:
         condition: service_healthy
@@ -519,8 +479,6 @@ services:
         SVC_NAME: nextra-ai
         SVC_DIR: ai-service
         SVC_PORT: "9011"
-    ports:
-      - "9011:9011"
     depends_on:
       db:
         condition: service_healthy
@@ -540,8 +498,6 @@ services:
         SVC_NAME: nextra-platform
         SVC_DIR: platform-service
         SVC_PORT: "9012"
-    ports:
-      - "9012:9012"
     depends_on:
       db:
         condition: service_healthy
@@ -559,8 +515,6 @@ services:
         SVC_NAME: nextra-commerce
         SVC_DIR: commerce-service
         SVC_PORT: "9013"
-    ports:
-      - "9013:9013"
     depends_on:
       db:
         condition: service_healthy
@@ -863,11 +817,6 @@ services:
   # host binding — map it to host 8890 instead.
   mediamtx:
     image: bluenviron/mediamtx:latest
-    ports:
-      - "8554:8554"
-      - "8890:8889"
-      - "8888:8888"
-      - "9997:9997"
     environment:
       MTX_HLSADDRESS: ":8888"
       MTX_WEBRTCADDRESS: ":8889"
@@ -1065,8 +1014,6 @@ services:
       dockerfile: Dockerfile.dev
       additional_contexts:
         shared: ./shared
-    ports:
-      - "3101:3000"
     depends_on:
       - backend
     environment:
@@ -1084,8 +1031,6 @@ services:
     volumes:
       - sso_node_modules:/build/sso/node_modules
       - sso_next:/build/sso/.next
-    ports:
-      - "3098:3000"
     depends_on:
       - backend
     environment:
@@ -1182,8 +1127,6 @@ services:
     volumes:
       - social_admin_node_modules:/build/tools/social-admin/node_modules
       - social_admin_next:/build/tools/social-admin/.next
-    ports:
-      - "9018:3000"
     depends_on:
       - backend
     environment:
@@ -1205,8 +1148,6 @@ services:
     volumes:
       - gallery_node_modules:/build/tools/gallery/node_modules
       - gallery_next:/build/tools/gallery/.next
-    ports:
-      - "9016:3000"
     depends_on:
       - backend
     environment:
@@ -1228,8 +1169,6 @@ services:
     volumes:
       - flags_node_modules:/build/tools/flags/node_modules
       - flags_next:/build/tools/flags/.next
-    ports:
-      - "9019:3000"
     depends_on:
       - backend
     environment:
@@ -1251,8 +1190,6 @@ services:
     volumes:
       - analytics_node_modules:/build/tools/analytics/node_modules
       - analytics_next:/build/tools/analytics/.next
-    ports:
-      - "9017:3000"
     depends_on:
       - backend
     environment:
@@ -1273,8 +1210,6 @@ services:
     volumes:
       - status_node_modules:/build/tools/status/node_modules
       - status_next:/build/tools/status/.next
-    ports:
-      - "9014:3000"
     depends_on:
       - backend
     environment:
@@ -1295,8 +1230,6 @@ services:
     volumes:
       - alerts_node_modules:/build/tools/alerts/node_modules
       - alerts_next:/build/tools/alerts/.next
-    ports:
-      - "8999:3000"
     depends_on:
       emailclient-api:
         condition: service_started
@@ -1317,8 +1250,6 @@ services:
     volumes:
       - forum_node_modules:/build/tools/forum/node_modules
       - forum_next:/build/tools/forum/.next
-    ports:
-      - "9020:3000"
     depends_on:
       backend:
         condition: service_started
@@ -1358,8 +1289,6 @@ services:
     build:
       context: ./services/object-store/server
       dockerfile: backend/Dockerfile
-    ports:
-      - "9000:9000"
     environment:
       S3_DATA_DIR: /data/s3
       S3_DB_CONN: >-
@@ -1393,8 +1322,6 @@ services:
     volumes:
       - s3_frontend_node_modules:/build/tools/s3server/frontend/node_modules
       - s3_frontend_next:/build/tools/s3server/frontend/.next
-    ports:
-      - "3001:3001"
     environment:
       BACKEND_URL: http://s3:9000
     depends_on:
@@ -1409,8 +1336,6 @@ services:
       args:
         DEPS_IMAGE: debian:sid
         RUNTIME_IMAGE: debian:sid-slim
-    ports:
-      - "5050:5000"
     environment:
       S3_ENDPOINT: http://s3:9000
       S3_BUCKET: packagerepo
@@ -1445,8 +1370,6 @@ services:
     volumes:
       - packagerepo_frontend_node_modules:/build/tools/packagerepo/frontend/node_modules
       - packagerepo_frontend_next:/build/tools/packagerepo/frontend/.next
-    ports:
-      - "5051:3000"
     environment:
       BACKEND_URL: http://packagerepo-backend:5000
       NODE_ENV: development
@@ -1459,8 +1382,6 @@ services:
     build:
       context: ./services/database/admin
       dockerfile: backend/Dockerfile
-    ports:
-      - "5060:5060"
     environment:
       PG_CONN: >-
         host=db port=5432
@@ -1489,8 +1410,6 @@ services:
     volumes:
       - pgadmin_frontend_node_modules:/build/tools/pgadmin/frontend/node_modules
       - pgadmin_frontend_next:/build/tools/pgadmin/frontend/.next
-    ports:
-      - "3002:3002"
     environment:
       BACKEND_URL: http://pgadmin-backend:5060
       NODE_ENV: development
@@ -1510,8 +1429,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - squid-cache:/var/spool/squid
-    ports:
-      - "3128:3128"
     restart: unless-stopped
 
   # npm proxy cache — wire into JS Dockerfiles via
@@ -1522,8 +1439,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - verdaccio-storage:/verdaccio/storage
-    ports:
-      - "4873:4873"
     restart: unless-stopped
 
 # ==============================================================
