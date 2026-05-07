@@ -4,9 +4,6 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import { Box, Typography } from '@shared/m3';
-import ProfileContent from
-  '@/components/organisms/ProfileContent';
-
 /** Skip static prerendering for this page. */
 export const dynamic = 'force-dynamic';
 
@@ -31,14 +28,16 @@ export default async function ProfilePage({
   const t = await getTranslations('profile');
 
   return (
-    <Box aria-label={t('title')}>
+    <Box
+      aria-label={t('title')}
+      data-testid="profile-page"
+    >
       <Typography
         variant="h4" component="h1"
         gutterBottom
       >
         {t('title')}
       </Typography>
-      <ProfileContent />
     </Box>
   );
 }

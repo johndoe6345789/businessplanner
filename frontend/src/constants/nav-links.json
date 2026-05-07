@@ -1,13 +1,5 @@
 [
   { "labelKey": "planner", "href": "/planner" },
   { "labelKey": "dashboard", "href": "/dashboard" },
-  { "labelKey": "chat", "href": "/chat" },
-  { "labelKey": "blog", "href": "/blog" },
-  {
-    "labelKey": "notifications",
-    "href": "/notifications"
-  },
-  { "labelKey": "profile", "href": "/profile" },
-  { "labelKey": "about", "href": "/about" },
-  { "labelKey": "contact", "href": "/contact" }
+  { "labelKey": "profile", "href": "/profile" }
 ]

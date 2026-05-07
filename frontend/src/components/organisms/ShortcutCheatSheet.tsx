@@ -7,7 +7,6 @@ import DialogContent from
   '@shared/m3/DialogContent';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import { useTranslations } from 'next-intl';
 import { Kbd } from '../atoms/Kbd';
 import { shortcutLabel } from
   '@/lib/shortcutLabel';
@@ -33,10 +32,8 @@ export interface ShortcutCheatSheetProps {
 export const ShortcutCheatSheet: React.FC<
   ShortcutCheatSheetProps
 > = ({ open, onClose }) => {
-  const tn = useTranslations('nav');
   const labels: Record<SectionKey, string> = {
     global: 'Global',
-    chat: tn('chat'),
     navigation: 'Navigation',
   };
   return (

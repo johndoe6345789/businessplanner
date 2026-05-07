@@ -1,40 +1,27 @@
 /**
- * Configuration for the ShortcutCheatSheet
- * dialog.
- * @module organisms/shortcutCheatSheetConfig
+ * Keyboard shortcut section definitions.
+ * @module components/organisms/shortcutCheatSheetConfig
  */
-import type { ShortcutDef } from
-  '@/lib/shortcutLabel';
-import shortcuts from
-  '@/constants/keyboard-shortcuts.json';
+import shortcuts from '@/constants/keyboard-shortcuts.json';
+import type { ShortcutDef } from '@/lib/shortcutLabel';
 
-/** A named group of shortcut definitions. */
-type Section = Record<string, ShortcutDef>;
+/** Valid section key. */
+export type SectionKey = 'global' | 'navigation';
 
-/** Shortcut category identifiers. */
-export type SectionKey =
-  'global' | 'chat' | 'navigation';
+/** Re-export for consumers. */
+export type { ShortcutDef };
 
-/** Category key paired with its data. */
-export interface SectionEntry {
-  /** Category identifier. */
+/** Ordered sections for the cheat sheet. */
+export const SECTION_KEYS: {
   key: SectionKey;
-  /** Shortcut definitions for this section. */
-  data: Section;
-}
-
-/** Ordered list of shortcut sections. */
-export const SECTION_KEYS: SectionEntry[] = [
+  data: Record<string, ShortcutDef>;
+}[] = [
   {
     key: 'global',
-    data: shortcuts.global as Section,
-  },
-  {
-    key: 'chat',
-    data: shortcuts.chat as Section,
+    data: shortcuts.global as Record<string, ShortcutDef>,
   },
   {
     key: 'navigation',
-    data: shortcuts.navigation as Section,
+    data: shortcuts.navigation as Record<string, ShortcutDef>,
   },
 ];

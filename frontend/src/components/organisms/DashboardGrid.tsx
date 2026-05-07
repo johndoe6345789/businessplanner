@@ -40,6 +40,7 @@ export default function DashboardGrid() {
         >
           {visible.map((w) => {
             const Comp = widgetMap[w.id];
+            if (!Comp) return null;
             return (
               <Grid
                 key={w.id} item

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import AppBar from '@shared/m3/AppBar';
 import Toolbar from '@shared/m3/Toolbar';
 import { useTranslations } from 'next-intl';
@@ -10,32 +10,24 @@ import { useAuth } from '@/hooks';
 import { SkipLink } from '../molecules/SkipLink';
 import { NavbarLogo } from '@shared/components/ui/NavbarLogo';
 import { DesktopActions } from '../molecules/DesktopActions';
-import { NotificationBell } from '../molecules/NotificationBell';
-import { CartButton } from '../molecules/CartButton';
 import { AvatarMenu } from './AvatarMenu';
 import { MobileDrawer } from './MobileDrawer';
-import { NotificationPanel } from './NotificationPanel';
 import navLinks from '@/constants/nav-links.json';
-import { FeatureFlagGate } from
-  '@/components/atoms/FeatureFlagGate';
 
 /** Props for the Navbar organism. */
 export interface NavbarProps {
   testId?: string;
 }
 
-/** App bar with drawer, logo, actions, balloon. */
+/** App bar with drawer, logo, and actions. */
 export const Navbar: React.FC<NavbarProps> = ({
   testId = 'navbar',
 }) => {
-  const [panelOpen, setPanelOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
   const tCommon = useTranslations('common');
   const tNav = useTranslations('nav');
   const tAuth = useTranslations('auth');
   const tA11y = useTranslations('a11y');
-
-  const toggle = () => setPanelOpen((v) => !v);
 
   const LINKS = navLinks.map((l) => ({
     label: tNav(l.labelKey),
@@ -57,13 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="spacer" />
           <DesktopActions />
           {isAuthenticated ? (
-            <>
-              <FeatureFlagGate flag="ecommerce">
-                <CartButton />
-              </FeatureFlagGate>
-              <NotificationBell onClick={toggle} />
-              <AvatarMenu user={user} onLogout={logout} />
-            </>
+            <AvatarMenu user={user} onLogout={logout} />
           ) : (
             <Button
               component={Link} href="/login"
@@ -75,10 +61,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </Toolbar>
       </AppBar>
-      <NotificationPanel
-        open={panelOpen}
-        onClose={() => setPanelOpen(false)}
-      />
     </>
   );
 };

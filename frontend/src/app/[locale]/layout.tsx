@@ -14,21 +14,13 @@ import {
 } from '@/components/organisms/AppShell';
 import { DebugBar } from
   '@/components/molecules/DebugBar';
-import { CartDrawer } from
-  '@/components/organisms/CartDrawer';
 import { PwaRegister } from
   '@/components/atoms/PwaRegister';
 import {
   DashboardShortcuts,
 } from '@/components/organisms/DashboardShortcuts';
-import ImpersonationBanner from
-  '@/components/molecules/ImpersonationBanner';
 import { PwaHead } from './pwa-head';
 import { loadMessages } from './loadMessages';
-import { FeatureFlagProvider } from
-  '@/components/providers/FeatureFlagProvider';
-import { AnalyticsProvider } from
-  '@/components/providers/AnalyticsProvider';
 
 /** All locale pages are dynamic. */
 export const dynamic = 'force-dynamic';
@@ -75,45 +67,39 @@ export default async function LocaleLayout({
       <HtmlLang locale={locale} />
       <PwaHead />
       <PwaRegister />
-      <FeatureFlagProvider>
-        <AnalyticsProvider>
-          <LinkAdapter>
-            <AppShell>
-              <Navbar />
-              <ShiftContent>
-                <AuthGate>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      flex: 1,
-                      minHeight: 0,
-                    }}
-                  >
-                    <ImpersonationBanner />
-                    <DashboardShortcuts />
-                    <Box
-                      sx={{
-                        flex: 1, p: 3,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minHeight: 0,
-                        overflow: 'auto',
-                      }}
-                    >
-                      {children}
-                    </Box>
-                  </Box>
-                </AuthGate>
-                <Footer />
-              </ShiftContent>
-            </AppShell>
-            <CartDrawer />
-            {process.env.NEXT_PUBLIC_DEBUG_BAR
-              === '1' && <DebugBar />}
-          </LinkAdapter>
-        </AnalyticsProvider>
-      </FeatureFlagProvider>
+      <LinkAdapter>
+        <AppShell>
+          <Navbar />
+          <ShiftContent>
+            <AuthGate>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: 1,
+                  minHeight: 0,
+                }}
+              >
+                <DashboardShortcuts />
+                <Box
+                  sx={{
+                    flex: 1, p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: 0,
+                    overflow: 'auto',
+                  }}
+                >
+                  {children}
+                </Box>
+              </Box>
+            </AuthGate>
+            <Footer />
+          </ShiftContent>
+        </AppShell>
+        {process.env.NEXT_PUBLIC_DEBUG_BAR
+          === '1' && <DebugBar />}
+      </LinkAdapter>
     </IntlProvider>
   );
 }

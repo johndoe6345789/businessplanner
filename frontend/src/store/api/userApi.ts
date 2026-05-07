@@ -8,7 +8,6 @@ import type {
   UserStats,
   UpdateProfileRequest,
 } from '../../types/user';
-import type { Badge } from '../../types/gamification';
 import type { PaginatedResponse } from '../../types/api';
 
 /** User CRUD and stats endpoints. */
@@ -31,12 +30,6 @@ export const userApi = baseApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ['User'],
-    }),
-
-    /** Get badges earned by a specific user. */
-    getUserBadges: build.query<Badge[], string>({
-      query: (id) => `/users/${id}/badges`,
-      providesTags: ['User'],
     }),
 
     /** Get aggregated stats for a user. */
@@ -67,7 +60,6 @@ export const userApi = baseApi.injectEndpoints({
 export const {
   useGetUserQuery,
   useUpdateUserMutation,
-  useGetUserBadgesQuery,
   useGetUserStatsQuery,
   useListUsersQuery,
   useSearchUsersQuery,

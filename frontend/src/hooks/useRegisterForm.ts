@@ -8,10 +8,6 @@ import {
   type RegFields,
   type CE,
 } from '@/components/organisms/registerRules';
-import { useAnalytics }
-  from '@/hooks/useAnalytics';
-import EVENTS
-  from '@/constants/analytics-events.json';
 
 /** Return type for the useRegisterForm hook. */
 export interface UseRegisterFormReturn {
@@ -48,7 +44,6 @@ export function useRegisterForm(): UseRegisterFormReturn {
   const { validate, errors } =
     useFormValidation(REG_RULES);
   const router = useRouter();
-  const { track } = useAnalytics();
 
   const set = (k: string) => (e: CE) =>
     setF((p) => ({ ...p, [k]: e.target.value }));
@@ -68,7 +63,6 @@ export function useRegisterForm(): UseRegisterFormReturn {
         displayName: f.displayName,
         password: f.password,
       });
-      track(EVENTS.SIGNUP);
       router.push('/dashboard');
     } catch (err: unknown) {
       const msg =

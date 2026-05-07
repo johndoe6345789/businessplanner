@@ -21,8 +21,3 @@ export type { UserProfileInfoProps }
 export { AvatarOption } from './AvatarOption';
 export type { AvatarOptionProps } from './AvatarOption';
 
-export { CartButton } from './CartButton';
-export type { CartButtonProps } from './CartButton';
-
-export { ProductCard } from './ProductCard';
-export type { ProductCardProps } from './ProductCard';

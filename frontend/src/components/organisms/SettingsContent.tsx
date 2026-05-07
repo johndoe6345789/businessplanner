@@ -9,7 +9,6 @@ import { usePermission } from '@/hooks/usePermission';
 import {
   SettingsCard, SettingsRow,
 } from './SettingsCard';
-import { SettingsApiKeys } from './SettingsApiKeys';
 import SettingsAdminCard from './SettingsAdminCard';
 import SettingsPreferences from './SettingsPreferences';
 
@@ -62,7 +61,6 @@ const SettingsContent: React.FC = () => {
       </SettingsCard>
 
       <SettingsPreferences />
-      <SettingsApiKeys />
       {isAdmin && <SettingsAdminCard />}
     </Box>
   );

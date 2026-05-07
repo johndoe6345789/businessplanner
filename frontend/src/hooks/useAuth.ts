@@ -10,7 +10,6 @@ import {
   useLogoutMutation,
 } from '@/store/api/authApi';
 import type { User, LoginRequest, RegisterRequest } from '@/types/auth';
-import { readKeycloakUser } from './keycloakUserMap';
 
 /** Return type for the useAuth hook. */
 interface UseAuthReturn {
@@ -38,14 +37,8 @@ interface UseAuthReturn {
 export function useAuth(): UseAuthReturn {
   const dispatch = useDispatch();
   const slice = useSelector((s: RootState) => s.auth);
-  // When the Keycloak nextra_sso cookie is present we
-  // derive the User shape directly from the JWT claims
-  // and bypass /api/auth/me entirely. Legacy state is
-  // kept as a fallback.
-  const kc = readKeycloakUser();
-  const user: User | null = kc?.user ?? slice.user;
-  const isAuthenticated =
-    kc !== null || slice.isAuthenticated;
+  const user: User | null = slice.user;
+  const isAuthenticated = slice.isAuthenticated;
   const { isLoading } = slice;
 
   const [loginMut] = useLoginMutation();

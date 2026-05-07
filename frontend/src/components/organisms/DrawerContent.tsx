@@ -10,8 +10,6 @@ import { DrawerFooter } from
   '../molecules/DrawerFooter';
 import { DrawerToolLinks } from
   '../molecules/DrawerToolLinks';
-import { DrawerSearch } from
-  '../molecules/DrawerSearch';
 import type { NavLink } from './MobileDrawer';
 
 /** Props for DrawerContent. */
@@ -36,7 +34,6 @@ export const DrawerContent: React.FC<
     <div style={{
       flex: 1, overflowY: 'auto',
     }}>
-      <DrawerSearch />
       <Divider />
       <List sx={{ py: 1 }} role="menu">
         {links.map((l) => (

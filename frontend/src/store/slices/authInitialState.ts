@@ -6,11 +6,10 @@
  *        auth state on first render.
  */
 import type { AuthState } from '../../types/auth';
-import { readKeycloakUser } from '@/hooks/keycloakUserMap';
 
 /** Build the initial auth slice state. */
 export function buildInitialAuthState(): AuthState {
-  const base: AuthState = {
+  return {
     user: null,
     accessToken: null,
     refreshToken: null,
@@ -19,13 +18,5 @@ export function buildInitialAuthState(): AuthState {
     isInitializing: true,
     requireTotp: false,
     totpSessionToken: null,
-  };
-  const kc = readKeycloakUser();
-  if (!kc) return base;
-  return {
-    ...base,
-    user: kc.user,
-    accessToken: kc.accessToken,
-    isAuthenticated: true,
   };
 }

@@ -17,22 +17,14 @@ import {
 import { baseApi } from './api/baseApi';
 import authReducer from './slices/authSlice';
 import themeReducer from './slices/themeSlice';
-import notificationReducer from './slices/notificationSlice';
-import gamificationReducer from './slices/gamificationSlice';
-import chatReducer from './slices/chatSlice';
 import uiReducer from './slices/uiSlice';
-import cartReducer from './slices/cartSlice';
 import plannerReducer from './slices/plannerSlice';
 import { persistConfig } from './persistConfig';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   theme: themeReducer,
-  notifications: notificationReducer,
-  gamification: gamificationReducer,
-  chat: chatReducer,
   ui: uiReducer,
-  cart: cartReducer,
   planner: plannerReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });

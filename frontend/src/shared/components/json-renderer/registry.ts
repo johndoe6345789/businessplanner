@@ -10,8 +10,7 @@ import {
   Stack, Paper, Alert, CircularProgress,
 } from '@shared/m3';
 import {
-  useAuth, useLoginForm, useContactForm,
-  useDashboard, useGamification,
+  useAuth, useLoginForm, useDashboard,
 } from '@/hooks';
 import type {
   ComponentMap, HookMap, HookFn,
@@ -26,9 +25,7 @@ const components: ComponentMap = {
 const hooks: HookMap = {
   useAuth: useAuth as unknown as HookFn,
   useLoginForm: useLoginForm as unknown as HookFn,
-  useContactForm: useContactForm as unknown as HookFn,
   useDashboard: useDashboard as unknown as HookFn,
-  useGamification: useGamification as unknown as HookFn,
 };
 
 /**

@@ -24,7 +24,7 @@ export interface WidgetCardProps {
   /** Toggle callback. */
   onToggle: (id: WidgetId) => void;
   /** The widget component to preview. */
-  Comp: ComponentType;
+  Comp: ComponentType | undefined;
 }
 
 /**
@@ -73,7 +73,7 @@ export default function WidgetCard({
         {desc}
       </Typography>
       <div style={previewBox}>
-        <Comp />
+        {Comp && <Comp />}
       </div>
     </div>
   );

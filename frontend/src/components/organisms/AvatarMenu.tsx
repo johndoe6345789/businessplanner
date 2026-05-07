@@ -8,20 +8,15 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useGetUserStatsQuery }
   from '@/store/api/userApi';
-import { useAvatarPick }
-  from '@/hooks/useAvatarPick';
 import { Avatar } from '../atoms';
 import { UserProfileCard }
   from '../molecules/UserProfileCard';
 import { UserQuickStats }
   from '../molecules/UserQuickStats';
-import { AvatarPicker }
-  from '../molecules/AvatarPicker';
 import {
   menuStyle, linkStyle, menuLinks,
   resolveAvatar,
 } from './avatarMenuStyles';
-import { runLogout } from './avatarMenuLogout';
 import type { User } from '@/types/auth';
 
 /** Props for AvatarMenu. */
@@ -34,7 +29,7 @@ export interface AvatarMenuProps {
 
 /**
  * Avatar with dropdown showing profile card,
- * avatar picker, quick stats, and nav items.
+ * quick stats, and nav items.
  */
 export const AvatarMenu: React.FC<
   AvatarMenuProps
@@ -47,7 +42,6 @@ export const AvatarMenu: React.FC<
   const { data: stats } = useGetUserStatsQuery(
     user?.id ?? '', { skip: !user?.id },
   );
-  const pick = useAvatarPick(user);
   const { name, src } = resolveAvatar(
     user?.displayName, user?.username,
     user?.avatarUrl, t('guest'),
@@ -72,11 +66,6 @@ export const AvatarMenu: React.FC<
       >
         {user && <UserProfileCard user={user} />}
         <Divider />
-        <AvatarPicker
-          current={user?.avatarUrl}
-          onPick={pick}
-        />
-        <Divider />
         <UserQuickStats stats={stats} />
         <Divider />
         {menuLinks.map((l) => (
@@ -87,9 +76,7 @@ export const AvatarMenu: React.FC<
             </MenuItem>
           </Link>
         ))}
-        <MenuItem
-          onClick={() => { close(); void runLogout(onLogout); }}
-        >
+        <MenuItem onClick={() => { close(); onLogout(); }}>
           {tAuth('logout')}
         </MenuItem>
       </Menu>

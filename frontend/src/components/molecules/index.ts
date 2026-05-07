@@ -1,12 +1,7 @@
 /**
  * Barrel export for all molecule components.
- * Re-exports from domain-scoped sub-barrels.
  * @module components/molecules
  */
-
-export { NotificationBell } from './NotificationBell';
-export type { NotificationBellProps }
-  from './NotificationBell';
 
 export { ThemeToggle } from './ThemeToggle';
 export type { ThemeToggleProps } from './ThemeToggle';
@@ -28,20 +23,12 @@ export type {
   PlanStepRowProps,
 } from './PlanStepRow';
 
-export { UserBadge } from './UserBadge';
-export type { UserBadgeProps } from './UserBadge';
-
 export { StreakCounter } from './StreakCounter';
 export type { StreakCounterProps } from './StreakCounter';
 
 export { PointsDisplay } from './PointsDisplay';
 export type { PointsDisplayProps }
   from './PointsDisplay';
-
-export { SearchBar } from './SearchBar';
-export type { SearchBarProps } from './SearchBar';
-export { SearchSuggestDropdown }
-  from './SearchSuggestDropdown';
 
 export { HeroCta } from '@shared/components/ui/HeroCta';
 export type { HeroCtaProps }
@@ -56,8 +43,6 @@ export type { NavbarLogoProps }
   from '@shared/components/ui/NavbarLogo';
 
 export { DesktopActions } from './DesktopActions';
-export type { DesktopActionsProps }
-  from './DesktopActions';
 
 export { DrawerHeader } from './DrawerHeader';
 export type { DrawerHeaderProps } from './DrawerHeader';
@@ -73,5 +58,4 @@ export { DrawerFooter } from './DrawerFooter';
 export { DrawerToolLinks } from './DrawerToolLinks';
 
 export * from './index.social';
-export * from './index.content';
-export * from './index.gallery';
+export * from './index.auth';

@@ -11,9 +11,6 @@ export type { DraggableWidgetProps }
 export { default as WidgetCard } from './WidgetCard';
 export type { WidgetCardProps } from './WidgetCard';
 
-export { default as CommentRow } from './CommentRow';
-export type { CommentRowProps } from './CommentRow';
-
 export { default as ErrorFallback }
   from './ErrorFallback';
 export type { ErrorFallbackProps }
@@ -31,11 +28,6 @@ export { default as TranslationRowActions }
   from './TranslationRowActions';
 export type { TranslationRowActionsProps }
   from './TranslationRowActions';
-
-export { default as CommentInput }
-  from './CommentInput';
-export type { CommentInputProps }
-  from './CommentInput';
 
 export { default as ApiKeyForm } from './ApiKeyForm';
 export type { ApiKeyFormProps } from './ApiKeyForm';

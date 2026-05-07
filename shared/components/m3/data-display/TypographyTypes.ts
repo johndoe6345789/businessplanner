@@ -58,4 +58,6 @@ export interface TypographyProps
   fontWeight?: React.CSSProperties['fontWeight']
   /** Test ID for automated testing */
   testId?: string
+  /** Forwarded to the rendered element (e.g. when component="label") */
+  htmlFor?: string
 }

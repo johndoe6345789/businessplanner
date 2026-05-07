@@ -2,6 +2,7 @@
 
 import React from 'react'
 import styles from '../../../scss/atoms/mat-progress.module.scss'
+import { sxToStyle } from '../utils/sx'
 
 const s = (key: string): string => styles[key] || key
 
@@ -14,6 +15,8 @@ export interface LinearProgressProps
   variant?: 'determinate' | 'indeterminate' | 'buffer'
   /** Color theme */
   color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'inherit'
+  /** MUI-compatible sx prop for inline styling */
+  sx?: Record<string, unknown>
   /** Test ID for automated testing */
   testId?: string
 }
@@ -27,6 +30,8 @@ export const LinearProgress: React.FC<LinearProgressProps> = ({
   variant = 'indeterminate',
   color = 'primary',
   className = '',
+  sx,
+  style,
   testId,
   ...props
 }) => {
@@ -51,6 +56,7 @@ export const LinearProgress: React.FC<LinearProgressProps> = ({
       }
       aria-valuemin={0}
       aria-valuemax={100}
+      style={{ ...sxToStyle(sx), ...style }}
       data-testid={testId}
       {...props}
     >
