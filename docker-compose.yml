@@ -66,7 +66,7 @@ services:
       KC_DB_PASSWORD: keycloak_dev
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_HOSTNAME_URL: http://localhost:8889/sso
+      KC_HOSTNAME_URL: http://localhost:8892/sso
       KC_HTTP_RELATIVE_PATH: /sso
       KC_PROXY_HEADERS: xforwarded
       KC_HOSTNAME_STRICT: "false"
@@ -1066,7 +1066,7 @@ services:
       additional_contexts:
         shared: ./shared
     ports:
-      - "3100:3000"
+      - "3101:3000"
     depends_on:
       - backend
     environment:
@@ -1085,11 +1085,11 @@ services:
       - sso_node_modules:/build/sso/node_modules
       - sso_next:/build/sso/.next
     ports:
-      - "3099:3000"
+      - "3098:3000"
     depends_on:
       - backend
     environment:
-      NEXT_PUBLIC_ORIGIN: http://localhost:8889
+      NEXT_PUBLIC_ORIGIN: http://localhost:8892
       NODE_ENV: development
     restart: unless-stopped
 
@@ -1142,7 +1142,7 @@ services:
       context: ./docker/nginx
       dockerfile: Dockerfile
     ports:
-      - "8889:80"
+      - "8892:80"
     depends_on:
       - frontend
       - backend

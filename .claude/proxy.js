@@ -1,4 +1,4 @@
-// Transparent TCP forwarder: localhost:8891 → localhost:8889.
+// Transparent TCP forwarder: localhost:8891 → localhost:8892.
 // We do not parse HTTP — just relay bytes. Anything else we
 // tried (Node http.request) altered headers (multi-Link merged,
 // header casing) enough to break Next.js's RSC client bootstrap,
@@ -6,7 +6,7 @@
 
 const net = require('net');
 const port = parseInt(process.env.PORT || '8891', 10);
-const upstreamPort = parseInt(process.env.UPSTREAM_PORT || '8889', 10);
+const upstreamPort = parseInt(process.env.UPSTREAM_PORT || '8892', 10);
 const upstreamHost = '127.0.0.1';
 
 const server = net.createServer((client) => {
