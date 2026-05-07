@@ -67,6 +67,22 @@ services:
       KC_MICROSOFT_CLIENT_SECRET: ${KC_MICROSOFT_CLIENT_SECRET:-}
     restart: unless-stopped
 
+  # ---- Elasticsearch (full-text search) --------------------
+  elasticsearch:
+    image: elasticsearch:8.17.0
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - esdata:/var/lib/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   # ---- Redis (sessions + rate-limiting) ---------------------
   redis:
     image: redis:7-alpine
@@ -94,6 +110,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
     environment:
       DB_HOST: db
       DB_PORT: "5432"
@@ -102,6 +120,8 @@ services:
       DB_PASSWORD: nextra_dev
       REDIS_HOST: redis
       REDIS_PORT: "6379"
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
       JWT_SECRET: change-me-in-production
       APP_BASE_URL: http://localhost:8892
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
@@ -160,6 +180,7 @@ services:
 volumes:
   pgdata:
   keycloak_pgdata:
+  esdata:
   redisdata:
   sso_node_modules:
   sso_next:

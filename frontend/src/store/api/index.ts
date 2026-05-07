@@ -9,3 +9,4 @@ export * from './userApi';
 export * from './dashboardApi';
 export * from './translationApi';
 export * from './preferencesApi';
+export * from './searchApi';

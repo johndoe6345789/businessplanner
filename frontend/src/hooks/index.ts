@@ -36,3 +36,7 @@ export type {
   PhaseProgress,
   PhaseStatus,
 } from './usePlannerProgress';
+export { useGlobalSearch } from './useGlobalSearch';
+export { useSearchKeyboardNav } from './useSearchKeyboardNav';
+export { useSearchPageState } from './useSearchPageState';
+export { useSuggestFetch } from './useSuggestFetch';
