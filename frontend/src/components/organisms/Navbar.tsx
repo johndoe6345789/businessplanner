@@ -27,13 +27,18 @@ export const Navbar: React.FC<NavbarProps> = ({
   const {
     user: kcUser, isAuthenticated, logout,
   } = useKeycloak();
+  const kcRoles = kcUser?.realm_access?.roles ?? [];
+  const role: User['role'] =
+    kcRoles.includes('admin') ? 'admin'
+    : kcRoles.includes('moderator') ? 'moderator'
+    : 'user';
   const user: User | null = kcUser ? {
     id: kcUser.sub,
     email: kcUser.email ?? '',
     username: kcUser.preferred_username ?? '',
     displayName:
       kcUser.name ?? kcUser.preferred_username ?? '',
-    role: 'user',
+    role,
     createdAt: '',
     updatedAt: '',
   } : null;

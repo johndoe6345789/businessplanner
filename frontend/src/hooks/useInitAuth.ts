@@ -1,8 +1,13 @@
 'use client';
 /**
  * @file useInitAuth.ts
- * @brief Bootstraps auth state from the SSO cookie on
- *        app startup — no tokens stored in localStorage.
+ * @brief Bootstraps auth state from the Keycloak
+ *        access-token cookie on app startup.
+ *
+ * The legacy /api/auth/sso-session endpoint always
+ * returns 401 (Keycloak now owns auth end-to-end),
+ * so we parse the token cookie directly — same
+ * approach used by reauthViaKeycloak.
  */
 
 import { useEffect } from 'react';
@@ -11,45 +16,52 @@ import {
   setCredentials,
   initComplete,
 } from '@/store/slices/authSlice';
+import { parseJwt } from '@/lib/keycloakClient';
+import { COOKIE, readCookie }
+  from '@/lib/keycloakCookies';
 import type { User } from '@/types/auth';
 
-/** Shape returned by GET /api/auth/sso-session. */
-interface SsoSessionResponse {
-  accessToken: string;
-  user: User;
-}
-
 /**
- * Calls GET /api/auth/sso-session once on mount.
- * If the HttpOnly SSO cookie is valid the endpoint
- * returns a fresh access token + user profile, which
- * are dispatched into Redux.  On failure the user
- * remains unauthenticated (will be redirected by nginx).
+ * Reads the Keycloak access-token cookie once on
+ * mount, derives the User shape from its claims,
+ * and dispatches setCredentials into Redux.
+ *
+ * Falls back gracefully when no token is present.
  */
 export function useInitAuth(): void {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('/api/auth/sso-session', {
-      method: 'GET',
-      credentials: 'include',
-    })
-      .then(async (res) => {
-        if (res.ok) {
-          const data =
-            (await res.json()) as SsoSessionResponse;
-          dispatch(
-            setCredentials({
-              user: data.user,
-              accessToken: data.accessToken,
-            }),
-          );
-        }
-        dispatch(initComplete());
-      })
-      .catch(() => {
-        // No cookie or network error — stay unauthenticated.
-        dispatch(initComplete());
-      });
+    const tok = readCookie(COOKIE.access);
+    if (tok) {
+      const c = parseJwt(tok);
+      if (c) {
+        const roles =
+          c.realm_access?.roles ?? [];
+        const role: User['role'] =
+          roles.includes('admin') ? 'admin'
+          : roles.includes('moderator')
+            ? 'moderator' : 'user';
+        const user: User = {
+          id: c.sub,
+          email: c.email ?? '',
+          username:
+            c.preferred_username ?? '',
+          displayName:
+            c.name
+            ?? c.preferred_username ?? '',
+          role,
+          createdAt: '',
+          updatedAt: '',
+        };
+        dispatch(
+          setCredentials({
+            user,
+            accessToken: tok,
+          }),
+        );
+      }
+    }
+    dispatch(initComplete());
   }, [dispatch]);
 }
