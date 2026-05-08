@@ -1,4 +1,17 @@
 .features {
-  padding-top: 2rem;
+  padding-top: 3.5rem;
   padding-bottom: 4rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 2.5rem;
+  color: var(--mat-sys-on-surface);
+
+  @media (min-width: 900px) {
+    font-size: 2rem;
+  }
 }

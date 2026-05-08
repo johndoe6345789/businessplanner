@@ -1,9 +1,9 @@
-/* Nextra service worker — offline shell + smart cache.
+/* LaunchPad service worker — offline shell + smart cache.
    - HTML navigations: NETWORK-FIRST (timeout, cache fallback)
    - Static assets:    SWR (filenames are hashed)
    - API:              always network, never cached
    Bump CACHE name on changes to evict stale entries. */
-const CACHE = 'nextra-shell-v3';
+const CACHE = 'launchpad-shell-v1';
 const NAV_TIMEOUT_MS = 1500;
 const SHELL = [
   '/app/en',
@@ -99,7 +99,7 @@ self.addEventListener('message', (event) => {
 });
 
 self.addEventListener('sync', (event) => {
-  if (event.tag === 'nextra-bg-sync') {
+  if (event.tag === 'launchpad-bg-sync') {
     event.waitUntil(Promise.resolve());
   }
 });

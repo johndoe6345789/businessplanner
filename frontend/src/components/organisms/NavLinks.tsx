@@ -37,7 +37,11 @@ export interface NavLinksProps {
 export const NavLinks: React.FC<
   NavLinksProps
 > = ({ links }) => (
-  <nav className={s.root} aria-label="Main">
+  <nav
+    className={s.root}
+    aria-label="Main"
+    data-testid="nav-links"
+  >
     {links.map((l) => {
       const combo = hintMap.get(l.href);
       const title = combo ? (

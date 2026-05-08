@@ -31,7 +31,7 @@ export default function NotFound(): ReactElement {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '100vh',
+        minHeight: '100dvh',
         gap: 3,
         px: 2,
         textAlign: 'center',

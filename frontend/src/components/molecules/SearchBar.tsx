@@ -1,19 +1,20 @@
 /**
- * SearchBar — self-contained navbar/drawer search.
- * Owns global search state via useGlobalSearch and
- * renders input + autocomplete dropdown.
+ * SearchBar — navbar search with autocomplete
+ * dropdown. Owns query state; delegates visuals
+ * to SearchInput atom.
  *
  * @module components/molecules/SearchBar
  */
 'use client';
+
 import React, { useCallback, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import TextField from '@shared/m3/TextField';
 import { useRouter } from '@/i18n/navigation';
 import { useGlobalSearch } from '@/hooks/useGlobalSearch';
 import {
   useSearchKeyboardNav,
 } from '@/hooks/useSearchKeyboardNav';
+import { SearchInput } from '@/components/atoms/SearchInput';
 import {
   SearchSuggestDropdown,
 } from './SearchSuggestDropdown';
@@ -21,26 +22,27 @@ import type { SearchSuggestItem } from '@/types/search';
 
 /** Public props for SearchBar. */
 export interface SearchBarProps {
-  compact?: boolean;
   placeholder?: string;
   testId?: string;
 }
 
-const ROOT_STYLE: React.CSSProperties = {
-  position: 'relative', width: '100%',
+const ROOT: React.CSSProperties = {
+  position: 'relative',
 };
 
 /** Self-contained search bar with autocomplete. */
 export const SearchBar: React.FC<SearchBarProps> = ({
-  compact = false, placeholder, testId = 'search-bar',
+  placeholder, testId = 'search-bar',
 }) => {
   const t = useTranslations('common');
   const router = useRouter();
   const {
-    query, setQuery, suggest, submit, clear,
+    query, setQuery, suggest,
+    isLoading, submit, clear,
   } = useGlobalSearch();
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState(false);
+  const showDrop = open && query.trim().length >= 2;
 
   const onPick = useCallback(
     (it: SearchSuggestItem) => {
@@ -52,8 +54,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   );
 
   const onKeyDown = useSearchKeyboardNav({
-    suggest, active, setActive,
-    setOpen, clear,
+    suggest, active, setActive, setOpen, clear,
     submit: () => submit(), onPick,
   });
 
@@ -66,28 +67,34 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         if (!e.currentTarget.contains(e.relatedTarget))
           setOpen(false);
       }}
-      style={ROOT_STYLE}
+      style={ROOT}
     >
-      <TextField
-        placeholder={placeholder ?? `${t('search')}...`}
+      <SearchInput
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
           setActive(0);
           setOpen(true);
         }}
-        size={compact ? 'small' : undefined}
+        onClear={() => { clear(); setOpen(false); }}
+        isLoading={isLoading}
+        focused={open}
+        placeholder={
+          placeholder ?? `${t('search')}…`
+        }
         testId={`${testId}-input`}
-        inputProps={{ 'aria-label': 'Search' }}
       />
-      {open && suggest.length > 0 && (
+      {showDrop && (
         <SearchSuggestDropdown
           query={query}
           items={suggest}
+          isLoading={isLoading}
           activeIndex={active}
           onHover={setActive}
           onPick={onPick}
-          onViewAll={() => { submit(); setOpen(false); }}
+          onViewAll={() => {
+            submit(); setOpen(false);
+          }}
         />
       )}
     </div>

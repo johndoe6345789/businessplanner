@@ -1,5 +1,8 @@
 import type { ReactElement } from 'react';
-import { setRequestLocale } from 'next-intl/server';
+import {
+  setRequestLocale,
+  getTranslations,
+} from 'next-intl/server';
 import { Box, Container } from '@shared/m3';
 import { HeroSection } from
   '@/components/organisms/HeroSection';
@@ -28,19 +31,26 @@ export default async function LandingPage({
 }: LandingPageProps): Promise<ReactElement> {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations('features');
 
   return (
     <Box
       component="main"
       role="main"
       aria-label="Landing page"
-      style={{ minHeight: '100vh' }}
+      style={{ minHeight: '100dvh' }}
     >
       <HeroSection />
       <Container
         maxWidth="lg"
         className={s.features}
       >
+        <h2
+          className={s.sectionTitle}
+          data-testid="features-heading"
+        >
+          {t('sectionTitle')}
+        </h2>
         <FeatureGrid features={features} />
       </Container>
     </Box>

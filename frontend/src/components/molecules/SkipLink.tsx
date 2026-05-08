@@ -25,13 +25,21 @@ export const SkipLink: React.FC<SkipLinkProps> = ({
     data-testid={testId}
     tabIndex={0}
     style={{
-      position: 'absolute',
+      position: 'fixed',
       left: '-9999px',
+      top: 8,
+      zIndex: 9999,
+      padding: '8px 16px',
+      borderRadius: 4,
+      textDecoration: 'none',
+      fontWeight: 600,
+      background:
+        'var(--mui-palette-primary-main)',
+      color:
+        'var(--mui-palette-primary-contrastText)',
     }}
     onFocus={(e) => {
       e.currentTarget.style.left = '8px';
-      e.currentTarget.style.top = '8px';
-      e.currentTarget.style.zIndex = '9999';
     }}
     onBlur={(e) => {
       e.currentTarget.style.left = '-9999px';

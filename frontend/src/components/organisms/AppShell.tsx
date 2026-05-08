@@ -23,7 +23,7 @@ export const ShiftContent: React.FC<{
           + 'cubic-bezier(0.4,0,0.2,1)',
         display: 'flex',
         flexDirection: 'column' as const,
-        minHeight: 'calc(100vh - 57px)',
+        minHeight: 'calc(100dvh - 57px)',
       }}
     >
       {children}

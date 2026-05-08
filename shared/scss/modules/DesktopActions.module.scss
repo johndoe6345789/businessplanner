@@ -12,39 +12,11 @@
 }
 
 .search {
-  max-width: 160px;
-  min-width: 100px;
-  overflow: hidden;
-
-  label { display: none; }
-
-  input {
-    padding: 6px 12px;
-    font-size: 13px;
-    border-radius:
-      var(--mat-sys-corner-full);
-    border: 1px solid
-      var(--mat-sys-outline-variant);
-    background: color-mix(
-      in srgb,
-      var(--mat-sys-on-surface) 4%,
-      transparent
-    );
-    height: 32px;
-    width: 100%;
-
-    &::placeholder {
-      color:
-        var(--mat-sys-on-surface-variant);
-    }
-
-    &:focus {
-      border-color:
-        var(--mat-sys-primary);
-      background:
-        var(--mat-sys-surface);
-    }
-  }
+  // Width constraints — visual styling handled
+  // inline by the SearchInput atom.
+  max-width: 240px;
+  min-width: 130px;
+  flex: 1;
 }
 
 .locale {

@@ -42,8 +42,9 @@ export function proxy(request: NextRequest) {
   const needsAuth = PROTECTED.some((re) => re.test(path));
   if (needsAuth && !request.cookies.has('nextra_sso')) {
     const next = encodeURIComponent(request.nextUrl.pathname);
+    const base = request.nextUrl.basePath;
     return NextResponse.redirect(
-      new URL(`/sso/login?next=${next}`, request.url),
+      new URL(`${base}/en/login?next=${next}`, request.url),
     );
   }
   return handleI18n(request);

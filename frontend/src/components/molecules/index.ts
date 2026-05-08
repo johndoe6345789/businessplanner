@@ -57,5 +57,17 @@ export type {
 export { DrawerFooter } from './DrawerFooter';
 export { DrawerToolLinks } from './DrawerToolLinks';
 
+export { SkillTagInput } from './SkillTagInput';
+export type {
+  SkillTagInputProps,
+} from './SkillTagInput';
+
+export {
+  PlannerResetButton,
+} from './PlannerResetButton';
+export type {
+  PlannerResetButtonProps,
+} from './PlannerResetButton';
+
 export * from './index.social';
 export * from './index.auth';

@@ -1,7 +1,7 @@
 {
-  "name": "Nextra",
-  "short_name": "Nextra",
-  "description": "Nextra gamified web app with AI chat.",
+  "name": "LaunchPad",
+  "short_name": "LaunchPad",
+  "description": "LaunchPad — guided startup planner from idea to launch.",
   "start_url": "/app/en",
   "scope": "/app/",
   "id": "/app/",

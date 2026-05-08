@@ -15,13 +15,14 @@ import {
 } from '@/constants/search-type-labels';
 import {
   PANEL, LIST, ROW_TOP, BADGE, TITLE, SNIPPET,
-  rowStyle, viewAllStyle,
+  EMPTY_STATE, rowStyle, viewAllStyle,
 } from './searchSuggestStyles';
 
 /** Props for SearchSuggestDropdown. */
 export interface SearchSuggestDropdownProps {
   query: string;
   items: SearchSuggestItem[];
+  isLoading?: boolean;
   activeIndex: number;
   onHover: (i: number) => void;
   onPick: (item: SearchSuggestItem) => void;
@@ -35,8 +36,8 @@ export interface SearchSuggestDropdownProps {
  */
 export const SearchSuggestDropdown: React.FC<
   SearchSuggestDropdownProps
-> = ({ query, items, activeIndex, onHover,
-  onPick, onViewAll }) => {
+> = ({ query, items, isLoading = false,
+  activeIndex, onHover, onPick, onViewAll }) => {
   const t = useTranslations('search');
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -47,12 +48,22 @@ export const SearchSuggestDropdown: React.FC<
       ?.scrollIntoView({ block: 'nearest' });
   }, [activeIndex]);
 
-  if (items.length === 0) return null;
   return (
     <div
       style={PANEL}
       data-testid="search-suggest-dropdown"
     >
+      {isLoading && (
+        <div style={EMPTY_STATE}>
+          {t('searching')}
+        </div>
+      )}
+      {!isLoading && items.length === 0 && (
+        <div style={EMPTY_STATE}>
+          {t('noResultsFor', { query })}
+        </div>
+      )}
+      {!isLoading && items.length > 0 && (
       <ul
         ref={listRef}
         role="listbox"
@@ -92,6 +103,7 @@ export const SearchSuggestDropdown: React.FC<
           {t('viewAll', { query })}
         </li>
       </ul>
+      )}
     </div>
   );
 };

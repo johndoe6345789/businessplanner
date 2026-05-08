@@ -57,3 +57,9 @@ export { StartupRoadmap } from './StartupRoadmap';
 export type {
   StartupRoadmapProps,
 } from './StartupRoadmap';
+
+export {
+  SkillsProfileForm,
+} from './SkillsProfileForm';
+
+export { ContactForm } from './ContactForm';

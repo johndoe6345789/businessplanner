@@ -15,7 +15,9 @@ export const DesktopActions: React.FC = () => (
     className={s.root}
     data-testid="navbar-desktop-actions"
   >
-    <SearchBar />
+    <div className={s.search}>
+      <SearchBar />
+    </div>
     <ThemeToggle />
     <div
       className={s.locale}

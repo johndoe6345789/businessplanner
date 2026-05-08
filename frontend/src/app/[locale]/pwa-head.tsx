@@ -47,7 +47,7 @@ export function PwaHead(): ReactElement {
       />
       <meta
         name="apple-mobile-web-app-title"
-        content="Nextra"
+        content="LaunchPad"
       />
       <meta
         name="mobile-web-app-capable"

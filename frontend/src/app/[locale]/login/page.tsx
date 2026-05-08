@@ -18,9 +18,9 @@
  * Source kept per template-repo policy.
  */
 import { redirect } from 'next/navigation';
+import kc from '@/constants/keycloak.json';
 
-const KC_AUTH =
-  'http://localhost:8889/sso/realms/nextra/protocol/openid-connect/auth';
+const KC_AUTH = kc.endpoints.authorization;
 
 interface LoginPageProps {
   readonly searchParams: Promise<{ next?: string }>;
@@ -38,11 +38,10 @@ export default async function LoginPage({
   const next = rawNext && rawNext.startsWith('/')
     ? rawNext : '/app/en';
   const params = new URLSearchParams({
-    client_id: 'nextra-app',
+    client_id: kc.clientId,
     response_type: 'code',
     scope: 'openid profile email',
-    redirect_uri:
-      'http://localhost:8889/app/en/auth/callback',
+    redirect_uri: kc.redirectUri,
     state: next,
   });
   redirect(`${KC_AUTH}?${params.toString()}`);

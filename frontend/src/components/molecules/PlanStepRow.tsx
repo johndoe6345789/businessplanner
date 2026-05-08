@@ -78,8 +78,8 @@ export const PlanStepRow: React.FC<
             }}
           >
             {expanded
-              ? '▲ hide detail'
-              : '▼ why this matters'}
+              ? t('hideDetail')
+              : t('whyThisMatters')}
           </Typography>
           {expanded && (
             <Typography

@@ -1,31 +1,87 @@
 .root {
-  padding: 5rem 1.5rem 4rem;
+  padding: 5rem 1.5rem 4.5rem;
   text-align: center;
   color: #fff;
-  background: #6750a4;
+  background:
+    radial-gradient(
+      ellipse at 25% 45%,
+      rgba(167, 139, 250, 0.35) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(109, 40, 217, 0.4) 0%,
+      transparent 55%
+    ),
+    linear-gradient(145deg, #2e1065 0%, #6750a4 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Subtle dot-grid texture overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.06) 1px,
+        transparent 1px
+      );
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin: 0 0 1.25rem;
 }
 
 .heading {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  margin-bottom: 1rem;
+  line-height: 1.15;
+  margin: 0 auto 1.1rem;
+  max-width: 680px;
 
   @media (min-width: 900px) {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
   }
 }
 
 .subtitle {
-  font-size: 1.1rem;
-  opacity: 0.85;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  opacity: 0.82;
+  margin: 0 auto 2.5rem;
+  max-width: 560px;
+  line-height: 1.65;
 
   @media (min-width: 900px) {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.75rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(6px);
 }

@@ -52,6 +52,7 @@ export const MobileDrawer: React.FC<
           borderRadius: '0 16px 16px 0',
           display: 'flex',
           flexDirection: 'column',
+          overscrollBehavior: 'contain',
         } }}
       >
         <DrawerHeader onClose={close} />

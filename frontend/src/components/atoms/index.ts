@@ -21,3 +21,9 @@ export { BurgerButton } from '@shared/ui';
 export type { BurgerButtonProps }
   from '@shared/ui';
 
+export { SearchInput } from './SearchInput';
+export type { SearchInputProps } from './SearchInput';
+
+export { SkillTag } from './SkillTag';
+export type { SkillTagProps } from './SkillTag';
+

@@ -11,7 +11,7 @@
   "bruteForceProtected": true,
   "loginTheme": "nextra",
   "attributes": {
-    "frontendUrl": "http://localhost:8889/sso"
+    "frontendUrl": "http://localhost:8892/sso"
   },
   "verifyEmail": false,
   "webAuthnPolicyRpEntityName": "Nextra",
@@ -114,10 +114,10 @@
       "serviceAccountsEnabled": false,
       "implicitFlowEnabled": false,
       "protocol": "openid-connect",
-      "redirectUris": ["http://localhost:8889/*"],
-      "webOrigins": ["http://localhost:8889"],
+      "redirectUris": ["http://localhost:8892/*"],
+      "webOrigins": ["http://localhost:8892"],
       "attributes": {
-        "post.logout.redirect.uris": "http://localhost:8889/*"
+        "post.logout.redirect.uris": "http://localhost:8892/*"
       },
       "fullScopeAllowed": true
     }

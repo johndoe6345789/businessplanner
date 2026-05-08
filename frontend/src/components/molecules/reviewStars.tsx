@@ -24,6 +24,7 @@ export function Stars(
   return (
     <span
       aria-label={`${rating} out of 5 stars`}
+      data-testid={`stars-${rating}`}
       style={{ color: '#f5b921',
         letterSpacing: '0.1em' }}
     >
@@ -34,3 +35,5 @@ export function Stars(
     </span>
   );
 }
+
+export default Stars;

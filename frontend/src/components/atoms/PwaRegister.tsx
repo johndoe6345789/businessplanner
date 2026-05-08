@@ -15,6 +15,7 @@ import {
   type ReactElement,
 } from 'react';
 import { Snackbar } from '@shared/m3';
+import { useTranslations } from 'next-intl';
 
 /** BeforeInstallPromptEvent minimal shape. */
 interface InstallEvent extends Event {
@@ -33,6 +34,7 @@ const SW_URL = '/app/sw.js';
  * @returns Snackbar element or null.
  */
 export default function PwaRegister(): ReactElement {
+  const t = useTranslations('pwa');
   const [evt, setEvt] = useState<InstallEvent | null>(
     null,
   );
@@ -73,12 +75,12 @@ export default function PwaRegister(): ReactElement {
       open={open}
       onClose={() => setOpen(false)}
       autoHideDuration={8000}
-      message="Install Nextra as an app?"
+      message={t('installPrompt')}
       action={
         <button
           type="button"
           data-testid="pwa-install-btn"
-          aria-label="Install Nextra app"
+          aria-label={t('installLabel')}
           onClick={install}>
           Install
         </button>

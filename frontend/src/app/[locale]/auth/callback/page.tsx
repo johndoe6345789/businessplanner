@@ -85,7 +85,11 @@ ReactElement {
         } else if (target === '/app') {
           target = '/';
         }
-        router.replace(target);
+        // Full reload so the layout re-mounts and
+        // useKeycloak reads the freshly-written cookie.
+        const base =
+          process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+        window.location.replace(`${base}${target}`);
       } catch {
         router.replace(`/${locale}/login?error=oidc`);
       }

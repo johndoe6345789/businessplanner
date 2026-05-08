@@ -6,7 +6,8 @@ import Toolbar from '@shared/m3/Toolbar';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@shared/m3/Button';
-import { useAuth } from '@/hooks';
+import { useKeycloak } from '@/hooks/useKeycloak';
+import type { User } from '@/types/auth';
 import { SkipLink } from '../molecules/SkipLink';
 import { NavbarLogo } from '@shared/components/ui/NavbarLogo';
 import { DesktopActions } from '../molecules/DesktopActions';
@@ -23,7 +24,19 @@ export interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   testId = 'navbar',
 }) => {
-  const { user, isAuthenticated, logout } = useAuth();
+  const {
+    user: kcUser, isAuthenticated, logout,
+  } = useKeycloak();
+  const user: User | null = kcUser ? {
+    id: kcUser.sub,
+    email: kcUser.email ?? '',
+    username: kcUser.preferred_username ?? '',
+    displayName:
+      kcUser.name ?? kcUser.preferred_username ?? '',
+    role: 'user',
+    createdAt: '',
+    updatedAt: '',
+  } : null;
   const tCommon = useTranslations('common');
   const tNav = useTranslations('nav');
   const tAuth = useTranslations('auth');
