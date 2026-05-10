@@ -204,13 +204,13 @@ services:
     depends_on:
       minio:
         condition: service_healthy
-    entrypoint: >
-      /bin/sh -c "
-        mc alias set local http://minio:9000
-          minioadmin minioadmin &&
-        mc mb --ignore-existing local/packagerepo &&
-        exit 0
-      "
+    entrypoint:
+      - /bin/sh
+      - -c
+      - >-
+        mc alias set local
+        http://minio:9000 minioadmin minioadmin &&
+        mc mb --ignore-existing local/packagerepo
     restart: "no"
 
   # ---- Package repository — C++ backend ---------------------
