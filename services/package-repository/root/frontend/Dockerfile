@@ -4,13 +4,15 @@
 # Contexts: default=<service>, shared=shared
 
 FROM node:20-alpine
-ARG NPM_REGISTRY=http://host.docker.internal:4873
-ENV NPM_CONFIG_REGISTRY=$NPM_REGISTRY
+ARG NPM_REGISTRY=
 
 COPY --from=shared . /build/shared/
 WORKDIR /build/services/package-repository/root/frontend
 COPY package.json package-lock.json* ./
-RUN npm config set fetch-retries 5 && \
+RUN if [ -n "$NPM_REGISTRY" ]; then \
+        npm config set registry "$NPM_REGISTRY"; \
+    fi && \
+    npm config set fetch-retries 5 && \
     npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
     npm install --prefer-offline --no-audit --no-fund

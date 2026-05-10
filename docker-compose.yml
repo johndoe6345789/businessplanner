@@ -164,6 +164,103 @@ services:
       NODE_ENV: development
     restart: unless-stopped
 
+  # ---- Package repository — dedicated Postgres --------------
+  pkgrepo-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: pkgrepo_db
+      POSTGRES_USER: pkgrepo
+      POSTGRES_PASSWORD: pkgrepo_dev
+    volumes:
+      - pkgrepo_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL",
+             "pg_isready -U pkgrepo -d pkgrepo_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- MinIO (S3-compatible blob store) ---------------------
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f",
+             "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- MinIO bucket init (runs once, then exits) ------------
+  pkgrepo-mc:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+        mc alias set local http://minio:9000
+          minioadmin minioadmin &&
+        mc mb --ignore-existing local/packagerepo &&
+        exit 0
+      "
+    restart: "no"
+
+  # ---- Package repository — C++ backend ---------------------
+  pkgrepo-backend:
+    build:
+      context: ./services/package-repository/root
+      dockerfile: backend/Dockerfile
+    depends_on:
+      pkgrepo-db:
+        condition: service_healthy
+      pkgrepo-mc:
+        condition: service_completed_successfully
+    environment:
+      PGHOST: pkgrepo-db
+      PGPORT: "5432"
+      PGUSER: pkgrepo
+      PGPASSWORD: pkgrepo_dev
+      PGDATABASE: pkgrepo_db
+      DATABASE_URL: >-
+        host=pkgrepo-db port=5432
+        dbname=pkgrepo_db
+        user=pkgrepo password=pkgrepo_dev
+      S3_ENDPOINT: http://minio:9000
+      S3_BUCKET: packagerepo
+      S3_ACCESS_KEY: minioadmin
+      JWT_SECRET: pkgrepo-jwt-dev-secret
+      ES_HOST: elasticsearch
+      ES_PORT: "9200"
+      PORT: "5000"
+    restart: unless-stopped
+
+  # ---- Package repository — Next.js frontend ----------------
+  pkgrepo-frontend:
+    build:
+      context: >-
+        ./services/package-repository/root/frontend
+      dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
+    depends_on:
+      - pkgrepo-backend
+    environment:
+      BACKEND_URL: http://pkgrepo-backend:5000
+      NEXT_BASE_PATH: /repo
+      NODE_ENV: development
+    volumes:
+      - pkgrepo_node_modules:/build/services/package-repository/root/frontend/node_modules
+      - pkgrepo_next:/build/services/package-repository/root/frontend/.next
+    restart: unless-stopped
+
   # ---- Nginx reverse proxy ----------------------------------
   portal:
     build:
@@ -175,6 +272,7 @@ services:
       - frontend
       - backend
       - sso
+      - pkgrepo-frontend
     restart: unless-stopped
 
 volumes:
@@ -184,3 +282,7 @@ volumes:
   redisdata:
   sso_node_modules:
   sso_next:
+  pkgrepo_pgdata:
+  miniodata:
+  pkgrepo_node_modules:
+  pkgrepo_next:
