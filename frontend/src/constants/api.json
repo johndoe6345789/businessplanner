@@ -19,7 +19,10 @@
     "leaderboard": "/api/gamification/leaderboard",
     "badges": "/api/gamification/badges",
     "streaks": "/api/gamification/streaks",
-    "levelUp": "/api/gamification/level-up"
+    "levelUp": "/api/gamification/level-up",
+    "progressMe": "/api/gamification/progress/me",
+    "streaksMe": "/api/gamification/streaks/me",
+    "stepComplete": "/api/gamification/events/step-complete"
   },
   "chat": {
     "messages": "/api/chat/messages",
