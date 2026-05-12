@@ -11,3 +11,5 @@ export * from './translationApi';
 export * from './preferencesApi';
 export * from './searchApi';
 export * from './gamificationApi';
+export * from './startupTypeApi';
+export * from './knowledgeApi';
