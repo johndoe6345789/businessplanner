@@ -2,5 +2,7 @@
   { "labelKey": "planner", "href": "/planner" },
   { "labelKey": "dashboard", "href": "/dashboard" },
   { "labelKey": "knowledge", "href": "/knowledge" },
-  { "labelKey": "profile", "href": "/profile" }
+  { "labelKey": "profile", "href": "/profile" },
+  { "labelKey": "marketResearch",
+    "href": "/market-research" }
 ]
