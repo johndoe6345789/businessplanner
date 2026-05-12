@@ -41,5 +41,15 @@
   "legal": {
     "equitySplit": "/api/legal/equity/split",
     "vesting": "/api/legal/equity/vesting"
+  },
+  "marketResearch": {
+    "tam": "/api/market-research/tam",
+    "competitors": "/api/market-research/competitors",
+    "competitor": "/api/market-research/competitors/:id",
+    "personas": "/api/market-research/personas",
+    "persona": "/api/market-research/personas/:id",
+    "discovery": "/api/market-research/discovery",
+    "discoveryEntry": "/api/market-research/discovery/:id",
+    "bmc": "/api/market-research/bmc"
   }
 }

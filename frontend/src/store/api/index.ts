@@ -14,3 +14,7 @@ export * from './gamificationApi';
 export * from './startupTypeApi';
 export * from './knowledgeApi';
 export * from './legalApi';
+export * from './marketResearchTamApi';
+export * from './marketResearchCompetitorApi';
+export * from './marketResearchPersonaApi';
+export * from './marketResearchBmcApi';
