@@ -17,3 +17,13 @@ export { EquityResultsTable }
   from './EquityResultsTable';
 export type { EquityResultsTableProps }
   from './EquityResultsTable';
+
+export { VestingControls }
+  from './VestingControls';
+export type { VestingControlsProps }
+  from './VestingControls';
+
+export { VestingScheduleTable }
+  from './VestingScheduleTable';
+export type { VestingScheduleTableProps }
+  from './VestingScheduleTable';
