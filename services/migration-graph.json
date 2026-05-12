@@ -30,5 +30,6 @@
   "startup-types": [],
   "legal-team": [],
   "market-research": ["users"],
+  "financials": ["users"],
   "migration-runner": []
 }
