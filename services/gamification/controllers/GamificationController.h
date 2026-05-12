@@ -2,8 +2,10 @@
 /**
  * @file GamificationController.h
  * @brief Gamification endpoints: badges, leaderboard,
- *        streaks, points, and progress.
+ *        streaks, points, progress, and events.
  */
+
+#include "gamification/backend/GamificationService.h"
 
 #include <drogon/HttpController.h>
 
@@ -16,39 +18,68 @@ class GamificationController
   public:
     METHOD_LIST_BEGIN
     ADD_METHOD_TO(GamificationController::listBadges,
-                  "/api/gamification/badges", drogon::Get);
+                  "/api/gamification/badges",
+                  drogon::Get);
     ADD_METHOD_TO(GamificationController::leaderboard,
-                  "/api/gamification/leaderboard", drogon::Get);
+                  "/api/gamification/leaderboard",
+                  drogon::Get);
     ADD_METHOD_TO(GamificationController::myStreaks,
-                  "/api/gamification/streaks/me", drogon::Get,
+                  "/api/gamification/streaks/me",
+                  drogon::Get,
                   "filters::JwtAuthFilter");
     ADD_METHOD_TO(GamificationController::awardPoints,
-                  "/api/gamification/points/award", drogon::Post,
+                  "/api/gamification/points/award",
+                  drogon::Post,
                   "filters::JwtAuthFilter");
     ADD_METHOD_TO(GamificationController::myProgress,
-                  "/api/gamification/progress/me", drogon::Get,
+                  "/api/gamification/progress/me",
+                  drogon::Get,
                   "filters::JwtAuthFilter");
+    ADD_METHOD_TO(
+        GamificationController::stepComplete,
+        "/api/gamification/events/step-complete",
+        drogon::Post,
+        "filters::JwtAuthFilter");
     METHOD_LIST_END
 
     /** @brief List all available badges. */
-    void listBadges(const drogon::HttpRequestPtr& req,
-                    std::function<void(const drogon::HttpResponsePtr&)>&& cb);
+    void listBadges(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
 
-    /** @brief Get the leaderboard (query: period, limit). */
-    void leaderboard(const drogon::HttpRequestPtr& req,
-                     std::function<void(const drogon::HttpResponsePtr&)>&& cb);
+    /** @brief Get the leaderboard (period, limit). */
+    void leaderboard(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
 
     /** @brief Get authenticated user's streaks. */
-    void myStreaks(const drogon::HttpRequestPtr& req,
-                   std::function<void(const drogon::HttpResponsePtr&)>&& cb);
+    void myStreaks(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
 
     /** @brief Award points to a user (admin only). */
-    void awardPoints(const drogon::HttpRequestPtr& req,
-                     std::function<void(const drogon::HttpResponsePtr&)>&& cb);
+    void awardPoints(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
 
     /** @brief Get authenticated user's progress. */
-    void myProgress(const drogon::HttpRequestPtr& req,
-                    std::function<void(const drogon::HttpResponsePtr&)>&& cb);
+    void myProgress(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
+
+    /** @brief Record planner step completion. */
+    void stepComplete(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
+
+  private:
+    services::GamificationService svc_;
 };
 
 } // namespace controllers

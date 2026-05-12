@@ -1,9 +1,10 @@
 /**
  * @file GamificationController.cpp
- * @brief Gamification endpoint implementations:
- *        badges, leaderboard, award points.
+ * @brief Leaderboard and awardPoints handlers.
  *
+ * listBadges is in GamificationBadges.cpp.
  * Streaks and progress are in GamificationProgress.cpp.
+ * Step-complete event is in GamificationEvents.cpp.
  */
 
 #include "GamificationController.h"
@@ -12,6 +13,7 @@
 #include "gamification_handlers.h"
 
 #include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 #include <string>
 
 using json = nlohmann::json;
@@ -21,57 +23,75 @@ using Cb = std::function<void(
 namespace controllers
 {
 
-void GamificationController::listBadges(
-    const drogon::HttpRequestPtr& /*req*/,
-    Cb&& cb)
-{
-    cb(::utils::jsonOk(
-        {{"badges", buildBadgeList()}}));
-}
-
 void GamificationController::leaderboard(
     const drogon::HttpRequestPtr& req,
     Cb&& cb)
 {
     auto period = req->getParameter("period");
     auto limitStr = req->getParameter("limit");
-    int limit = static_cast<int>(
-        ::utils::safeStoll(limitStr, 10));
-    if (period.empty()) {
-        period = "weekly";
-    }
+    if (period.empty())
+        period = "all";
+    auto limit = static_cast<std::int32_t>(
+        ::utils::safeStoll(limitStr, 20));
+    spdlog::debug(
+        "leaderboard period={} limit={}",
+        period, limit);
 
-    json entries = json::array();
-    cb(::utils::jsonOk(
-        {{"period", period},
-         {"limit", limit},
-         {"leaderboard", entries}}));
+    svc_.getLeaderboard(
+        period, limit,
+        [cb](const json& data) {
+            cb(::utils::jsonOk(data));
+        },
+        [cb](drogon::HttpStatusCode code,
+             const std::string& msg) {
+            spdlog::warn(
+                "leaderboard error: {}", msg);
+            cb(::utils::jsonError(code, msg));
+        });
 }
 
 void GamificationController::awardPoints(
     const drogon::HttpRequestPtr& req,
     Cb&& cb)
 {
-    auto body = parseAwardBody(req);
-    if (!body.has_value()) {
-        auto role = req->attributes()
-            ->get<std::string>("user_role");
-        if (role != "admin") {
-            cb(::utils::jsonError(
-                drogon::k403Forbidden,
-                "Admin access required"));
-        } else {
-            cb(::utils::jsonError(
-                drogon::k400BadRequest,
-                "user_id and points required"));
-        }
+    auto role = req->attributes()
+        ->get<std::string>("user_role");
+    if (role != "admin") {
+        cb(::utils::jsonError(
+            drogon::k403Forbidden,
+            "Admin access required"));
         return;
     }
 
-    cb(::utils::jsonOk(
-        {{"message", "Points awarded"},
-         {"user_id", (*body)["user_id"]},
-         {"points", (*body)["points"]}}));
+    auto body = parseAwardBody(req);
+    if (!body.has_value()) {
+        cb(::utils::jsonError(
+            drogon::k400BadRequest,
+            "user_id and points required"));
+        return;
+    }
+
+    auto targetId =
+        (*body)["user_id"].get<std::string>();
+    auto pts =
+        (*body)["points"].get<std::int64_t>();
+    auto reason =
+        body->value("reason", "admin_award");
+    spdlog::debug(
+        "awardPoints target={} pts={}",
+        targetId, pts);
+
+    svc_.awardPoints(
+        targetId, pts, reason, "admin",
+        [cb](const json& data) {
+            cb(::utils::jsonOk(data));
+        },
+        [cb](drogon::HttpStatusCode code,
+             const std::string& msg) {
+            spdlog::warn(
+                "awardPoints error: {}", msg);
+            cb(::utils::jsonError(code, msg));
+        });
 }
 
 } // namespace controllers

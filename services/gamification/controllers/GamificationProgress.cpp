@@ -8,6 +8,7 @@
 #include "drogon-host/backend/utils/JsonResponse.h"
 
 #include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 #include <string>
 
 using json = nlohmann::json;
@@ -23,12 +24,19 @@ void GamificationController::myStreaks(
 {
     auto userId = req->attributes()
         ->get<std::string>("user_id");
-    json streaks = {
-        {"user_id", userId},
-        {"current_streak", 0},
-        {"longest_streak", 0},
-        {"last_activity", nullptr}};
-    cb(::utils::jsonOk(streaks));
+    spdlog::debug("myStreaks userId={}", userId);
+
+    svc_.updateStreak(
+        userId,
+        [cb](const json& data) {
+            cb(::utils::jsonOk(data));
+        },
+        [cb](drogon::HttpStatusCode code,
+             const std::string& msg) {
+            spdlog::warn(
+                "myStreaks error: {}", msg);
+            cb(::utils::jsonError(code, msg));
+        });
 }
 
 void GamificationController::myProgress(
@@ -37,13 +45,19 @@ void GamificationController::myProgress(
 {
     auto userId = req->attributes()
         ->get<std::string>("user_id");
-    json progress = {
-        {"user_id", userId},
-        {"level", 1},
-        {"total_points", 0},
-        {"next_level_at", 100},
-        {"badges_earned", 0}};
-    cb(::utils::jsonOk(progress));
+    spdlog::debug("myProgress userId={}", userId);
+
+    svc_.getUserProgress(
+        userId,
+        [cb](const json& data) {
+            cb(::utils::jsonOk(data));
+        },
+        [cb](drogon::HttpStatusCode code,
+             const std::string& msg) {
+            spdlog::warn(
+                "myProgress error: {}", msg);
+            cb(::utils::jsonError(code, msg));
+        });
 }
 
 } // namespace controllers
