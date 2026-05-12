@@ -125,6 +125,17 @@ curated best practice with your specific situation.
   invisible. Streaks, XP, levels, badges, and the
   leaderboard are one coherent motivation loop.
 
+- **Team workspace** — co-founders share one startup
+  entity. The planner, canvas, and financials are
+  per-startup; gamification is per-founder. Invite
+  co-founders by email; each gets their own streaks
+  and XP while working on the shared plan.
+
+- **Milestone timeline** — declared real-world
+  achievements (first customer, first £1k MRR,
+  launch day, first hire) celebrated with badges,
+  XP, and an optional social share card.
+
 - **Community** — forum organised by startup type,
   progress feed, peer accountability.
 
@@ -216,6 +227,14 @@ Repurposed service: `services/wiki/` → knowledge base
 |     | stage, co-founder status, biggest challenge —     |        |
 |     | personalises dashboard + planner from day one.    |        |
 |     | Until complete, dashboard shows setup prompt.     |        |
+| 2.10| Startup entity: shared workspace for co-founders. | ⬜     |
+|     | Planner, canvas, and financials are per-startup;  |        |
+|     | streaks/XP/badges remain per-user (D23)           |        |
+| 2.11| Co-founder invite: invite by email; invitee links | ⬜     |
+|     | to existing startup workspace                     |        |
+| 2.12| Startup public profile: shareable page (name,     | ⬜     |
+|     | type, stage, one-liner, team) — links to from     |        |
+|     | community, leaderboard, and investor sharing      |        |
 
 ### Phase 3 — Legal, compliance & team foundations
 
@@ -313,6 +332,9 @@ New service: `services/financials/`
 | 5.20| Monthly business review template                  | ⬜     |
 | 5.21| Investor update templates (monthly + quarterly)   | ⬜     |
 | 5.22| Due diligence data room checklist                 | ⬜     |
+| 5.23| Milestone timeline: first customer, first £1k MRR,| ⬜     |
+|     | launch day, first hire — celebrated achievements  |        |
+|     | distinct from planner steps; badges tied to these |        |
 
 ### Phase 6 — Notifications
 
@@ -367,6 +389,7 @@ Founders helping founders. Backend ✅.
 | 9.9 | GDPR: user data export (right of access)          | ⬜     |
 | 9.10| GDPR: account deletion (right to erasure)         | ⬜     |
 | 9.11| Cookie consent management                         | ⬜     |
+| 9.12| WCAG 2.1 AA compliance audit + remediation        | ⬜     |
 
 ### Cross-cutting
 
@@ -397,6 +420,20 @@ Founders helping founders. Backend ✅.
 | X13 | Channel-fit guide: acquisition channels per startup |
 |     | type with rough CAC estimates — helps founders      |
 |     | choose where to spend first                         |
+| X14 | Milestone social cards: "share this moment" button  |
+|     | generates a branded card for Twitter/LinkedIn.      |
+|     | Viral loop for LaunchPad — every shared milestone   |
+|     | is an organic impression                            |
+| X15 | Email sequences: welcome drip (days 1/3/7),         |
+|     | streak-at-risk alert (24 h before break), 30-day    |
+|     | re-engagement for dormant founders                  |
+| X16 | Real-data integrations: Stripe webhook → actual     |
+|     | MRR; accounting tool (Xero/FreeAgent/QuickBooks)    |
+|     | → actual costs. Replaces manual entry in financial  |
+|     | tools with live data once connected.                |
+| X17 | KB content feedback: thumbs up/down on knowledge    |
+|     | base articles — surfaces low-quality content to     |
+|     | admins; improves KB over time                       |
 
 ---
 
@@ -464,6 +501,21 @@ Founders helping founders. Backend ✅.
 |     | as context — pitch deck outline is seeded from the         |
 |     | business model canvas and financial inputs, not generated  |
 |     | from scratch.                                              |
+| D23 | Unit of account: User + Startup entity. Each user has      |
+|     | one active startup. Multiple users (co-founders) belong    |
+|     | to one startup. Gamification (streaks, XP, badges,         |
+|     | leaderboard) is per-user. Planner, canvas, financials,     |
+|     | decision log, and market research are per-startup.         |
+|     | This must be decided before Phase 2 data models are set.   |
+| D24 | Mobile-first for the two highest-frequency flows:          |
+|     | streak check-in and weekly review. These happen            |
+|     | wherever founders are — commuting, between meetings.       |
+|     | The layout and tap targets for these flows must be         |
+|     | designed for a phone screen first.                         |
+| D25 | Milestone timeline events (first customer, first £1k MRR,  |
+|     | launch day) are founder-declared, not system-detected.     |
+|     | The founder marks them; the system celebrates. Badges      |
+|     | and XP awards fire on declaration.                         |
 
 ---
 
@@ -546,3 +598,10 @@ Template backends that will not appear in the UI:
 |     | fields with guided prompts per startup type?          |                    |
 | Q20 | Pivot tracker: part of the decision log, or a         | Separate section   |
 |     | separate dedicated section?                           |                    |
+| Q21 | Team workspace: can a user belong to multiple         | One active startup |
+|     | startups simultaneously (portfolio founder), or       |                    |
+|     | one active at a time?                                 |                    |
+| Q22 | Milestone social cards: opt-in share prompt after     | Opt-in prompt      |
+|     | declaring a milestone, or manual share button only?   |                    |
+| Q23 | Real-data integrations (Stripe, Xero): Phase 5 or     | Post-launch phase  |
+|     | deferred until post-launch KPI tools land?            |                    |
