@@ -69,5 +69,19 @@ export type {
   PlannerResetButtonProps,
 } from './PlannerResetButton';
 
+export {
+  GamificationSummary,
+} from './GamificationSummary';
+export type {
+  GamificationSummaryProps,
+} from './GamificationSummary';
+
+export {
+  GamificationSummaryFull,
+} from './GamificationSummaryFull';
+export type {
+  GamificationSummaryFullProps,
+} from './GamificationSummaryFull';
+
 export * from './index.social';
 export * from './index.auth';

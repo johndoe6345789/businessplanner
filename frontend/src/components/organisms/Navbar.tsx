@@ -13,6 +13,9 @@ import { NavbarLogo } from '@shared/components/ui/NavbarLogo';
 import { DesktopActions } from '../molecules/DesktopActions';
 import { AvatarMenu } from './AvatarMenu';
 import { MobileDrawer } from './MobileDrawer';
+import {
+  GamificationSummary,
+} from '../molecules/GamificationSummary';
 import navLinks from '@/constants/nav-links.json';
 
 /** Props for the Navbar organism. */
@@ -66,6 +69,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <NavbarLogo label={tCommon('appName')} />
           <div className="spacer" />
           <DesktopActions />
+          {isAuthenticated && (
+            <GamificationSummary compact />
+          )}
           {isAuthenticated ? (
             <AvatarMenu user={user} onLogout={logout} />
           ) : (
