@@ -1,10 +1,11 @@
 # ROADMAP — LaunchPad
 
-> **This repo is a GitHub template.** A consumer runs
-> `docker compose up` and gets a working batteries-included
-> Next.js stack — backend, database, SSO, email, S3, package
-> repo, and everything listed below already wired.
-> Their job is to build their product in `frontend/`.
+> **Built on the [next_extra_primary](https://github.com/next_extra_primary)
+> template.** That template provides the batteries-included
+> backend, SSO, package repo, and infra stack. This repo
+> (businessplanner / LaunchPad) is a consumer of it — the
+> product roadmap below tracks what *this product* needs to
+> build on top of that foundation.
 >
 > **Every character is a feature.** Nothing gets deleted.
 > Features get finished, not stripped.
@@ -32,23 +33,34 @@
 
 ---
 
-## 1. Template value proposition
+## 1. What this project is
 
-A single `docker compose up` gives the consumer:
+LaunchPad is a **guided startup planner** — the product
+being built in `frontend/` on top of the `next_extra_primary`
+infrastructure template.
+
+The template contributes (already running locally):
 
 - **Drogon C++20 backend** — auth (JWT + passkeys + TOTP +
   OAuth), gamification, AI chat, comments, email, admin,
-  webhooks, ecommerce, social, and 25+ more domains.
-- **Postgres 16** via Drogon ORM, per-domain migrations,
-  seed data.
-- **Next.js 16 frontend** (App Router, TS strict, MUI v6,
-  next-intl 8 locales, RTK Query, shared M3 library).
-- **Package repository** at `/repo` — full C++/Next.js
-  artifact registry supporting npm, pypi, conan, apt, cargo,
-  helm, OCI/Docker and 10 more protocols.
-- **Nginx portal on :8892** routing `/app`, `/api`, `/repo`,
-  `/sso`, `/v2` and more.
-- **15 Docker services** — fully orchestrated, health-checked.
+  webhooks, ecommerce, social, and 25+ more service domains.
+- **Postgres 16** via Drogon ORM, per-domain migrations.
+- **Next.js 16 frontend scaffold** (App Router, TS strict,
+  MUI v6, next-intl 8 locales, RTK Query, shared M3 library).
+- **Package repository** at `/repo` — C++/Next.js artifact
+  registry with 15 protocol adapters.
+- **Nginx portal on :8892** — 15 Docker services,
+  fully orchestrated and health-checked.
+
+The LaunchPad product adds on top of that:
+
+- Guided startup roadmap (planner) with step-by-step
+  milestones from idea to launch.
+- Skills / qualifications profile builder.
+- AI-assisted planning via the built-in chat integration.
+- Progress tracking with gamification (points, levels,
+  streaks, badges).
+- Community features: forum, social feed, challenges.
 
 ---
 
