@@ -88,11 +88,19 @@ curated best practice with your specific situation.
   customer persona builder, discovery log. Your numbers
   compared against benchmarks for your type.
 
+- **Business model canvas** — one-page structured
+  overview of the business: problem, solution, UVP,
+  channels, customer segments, cost structure, revenue
+  streams. The foundational planning artefact that all
+  other tools reference.
+
 - **Financial planning + funding readiness** — burn
-  rate, runway, unit economics (CAC / LTV / payback),
-  path comparison (lean / bootstrapped / funded), cap
-  table basics, pitch deck structure guide, investor
-  readiness checklist, SEIS/EIS guide, grant finder.
+  rate, runway, unit economics, revenue model,
+  pricing calculator, revenue projections, break-even.
+  Path comparison, cap table basics, pitch deck guide,
+  investor readiness, SEIS/EIS, grant finder.
+  Post-launch: KPI dashboard, growth accounting,
+  PMF measurement, investor update templates.
 
 - **Decision log** — a running record of every
   significant decision: what was decided, why, and what
@@ -204,6 +212,10 @@ Repurposed service: `services/wiki/` → knowledge base
 |     | wiki backend; tree nav + search                   |        |
 | 2.8 | Seed knowledge base: startup guides, playbooks,   | ⬜     |
 |     | benchmarks per type via wiki admin panel          |        |
+| 2.9 | Onboarding wizard: name, startup type, current    | ⬜     |
+|     | stage, co-founder status, biggest challenge —     |        |
+|     | personalises dashboard + planner from day one.    |        |
+|     | Until complete, dashboard shows setup prompt.     |        |
 
 ### Phase 3 — Legal, compliance & team foundations
 
@@ -250,8 +262,11 @@ New service: `services/market-research/`
 | 4.5 | Interview script templates per startup type       | ⬜     |
 | 4.6 | Benchmark comparison: your TAM vs. industry       | ⬜     |
 |     | averages for your type (from Phase 2 seed data)   |        |
-| 4.7 | Market research dashboard page                    | ⬜     |
-| 4.8 | AI synthesis: summarise findings, compare to      | ⬜     |
+| 4.7 | Business model canvas: problem, solution, UVP,    | ⬜     |
+|     | channels, customer segments, cost structure,      |        |
+|     | revenue streams — one-page live overview          |        |
+| 4.8 | Market research dashboard page                    | ⬜     |
+| 4.9 | AI synthesis: summarise findings, compare to      | ⬜     |
 |     | benchmarks, surface blind spots                   |        |
 
 ### Phase 5 — Financial planning + funding readiness
@@ -281,6 +296,23 @@ New service: `services/financials/`
 | 5.11| Investor readiness checklist                      | ⬜     |
 | 5.12| Cap table basics + simple simulator               | ⬜     |
 | 5.13| SEIS / EIS eligibility guide (UK) + grant finder  | ⬜     |
+| 5.14| Revenue model selector: freemium, subscription,   | ⬜     |
+|     | usage-based, per-seat, marketplace fee, one-time  |        |
+|     | — guide + pros/cons per startup type              |        |
+| 5.15| Pricing live calculator: target MRR → required    | ⬜     |
+|     | customers at given price point; tier modelling    |        |
+| 5.16| Revenue projections: customers × ARPU = MRR,      | ⬜     |
+|     | simple growth curve, break-even point             |        |
+| 5.17| PMF measurement: Sean Ellis survey widget (40%    | ⬜     |
+|     | "very disappointed" threshold) + retention cohort |        |
+|     | indicator — answers "when am I done validating?"  |        |
+| 5.18| Post-launch KPI dashboard: MAU, MRR/ARR, churn,   | ⬜     |
+|     | NPS — surfaces after founder marks product live   |        |
+| 5.19| Growth accounting view: new / retained / churned  | ⬜     |
+|     | users per period; visualises growth health        |        |
+| 5.20| Monthly business review template                  | ⬜     |
+| 5.21| Investor update templates (monthly + quarterly)   | ⬜     |
+| 5.22| Due diligence data room checklist                 | ⬜     |
 
 ### Phase 6 — Notifications
 
@@ -316,6 +348,9 @@ Founders helping founders. Backend ✅.
 | 8.2 | AI suggestions per planner step (prompt tuning)   | ⬜     |
 | 8.3 | Save AI chat threads to planner steps             | ⬜     |
 | 8.4 | AI risk report: blind spots in the current plan   | ⬜     |
+| 8.5 | AI document drafting: generate pitch deck outline,| ⬜     |
+|     | investor update, NDA draft, job description —     |        |
+|     | seeded from the founder's own plan data           |        |
 
 ### Phase 9 — Ops and quality
 
@@ -329,6 +364,9 @@ Founders helping founders. Backend ✅.
 | 9.6 | Frontend test coverage: 60% of organisms          | ⬜     |
 | 9.7 | Backend GTest: badges, leaderboards, streaks, xp  | ⬜     |
 | 9.8 | Playwright suites for each new page above         | ⬜     |
+| 9.9 | GDPR: user data export (right of access)          | ⬜     |
+| 9.10| GDPR: account deletion (right to erasure)         | ⬜     |
+| 9.11| Cookie consent management                         | ⬜     |
 
 ### Cross-cutting
 
@@ -349,6 +387,16 @@ Founders helping founders. Backend ✅.
 |     | feature prioritisation tool                         |
 | X10 | Resource library: downloadable templates (NDA,      |
 |     | founder agreement, cap table, pitch deck skeleton)  |
+| X11 | Pivot tracker: formal record of direction changes   |
+|     | — original idea, what changed, why, plan impact.   |
+|     | Distinct from hypothesis tracker; linked to         |
+|     | decision log                                        |
+| X12 | Accelerator & competition tracker: database of      |
+|     | programmes (YC, Techstars, Seedcamp, etc.) with     |
+|     | deadlines + application status per founder          |
+| X13 | Channel-fit guide: acquisition channels per startup |
+|     | type with rough CAC estimates — helps founders      |
+|     | choose where to spend first                         |
 
 ---
 
@@ -398,6 +446,24 @@ Founders helping founders. Backend ✅.
 | D18 | Decision log entries are linked to planner steps by        |
 |     | optional step_id FK; they are always private to the        |
 |     | founder unless explicitly shared                           |
+| D19 | Onboarding wizard is mandatory before the planner          |
+|     | personalises itself. The dashboard shows a "complete       |
+|     | setup" prompt until the wizard is done. No hard feature    |
+|     | gates — founders can explore the app freely, but the       |
+|     | planner steps remain generic until type is confirmed.      |
+| D20 | Business model canvas is the central planning artefact.    |
+|     | The planner, market research, and financial tools all       |
+|     | reference canvas fields — changes in one surface in        |
+|     | others. Canvas lives in services/startup-types/.           |
+| D21 | PMF measurement unlocks post-launch KPI tools. The         |
+|     | Sean Ellis survey and retention cohort tracker are         |
+|     | shown after the founder marks their product as live.       |
+|     | Pre-launch, these sections show a "not yet available"      |
+|     | state with an explanation of what PMF means.               |
+| D22 | AI document drafting uses the founder's saved plan data    |
+|     | as context — pitch deck outline is seeded from the         |
+|     | business model canvas and financial inputs, not generated  |
+|     | from scratch.                                              |
 
 ---
 
@@ -470,3 +536,13 @@ Template backends that will not appear in the UI:
 | Q14 | Weekly review: mandatory for streak or optional?      | Mandatory (D17)    |
 | Q15 | Decision log: private always, or shareable with       | Private (D18)      |
 |     | investors/co-founders via link?                       |                    |
+| Q16 | LaunchPad monetisation: free, freemium, or paid       | Undecided          |
+|     | subscription? Which features are gated?               |                    |
+| Q17 | Planner step versioning: when the type catalogue is   | Additive only v1   |
+|     | updated, how do existing founders' plans migrate?     |                    |
+| Q18 | Post-launch tools: always visible, or unlocked only   | Unlocked (D21)     |
+|     | after founder marks product as live?                  |                    |
+| Q19 | Business model canvas: free-form or structured        | Structured fields  |
+|     | fields with guided prompts per startup type?          |                    |
+| Q20 | Pivot tracker: part of the decision log, or a         | Separate section   |
+|     | separate dedicated section?                           |                    |
