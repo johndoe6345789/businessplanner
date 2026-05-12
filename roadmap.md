@@ -302,41 +302,41 @@ New service: `services/financials/`
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 5.1 | Burn rate + runway live calculator                | ⬜     |
-| 5.2 | Unit economics live model (CAC, LTV, payback)     | ⬜     |
-| 5.3 | Path comparison: lean vs bootstrapped vs funded   | ⬜     |
+| 5.1 | Burn rate + runway live calculator                | ✅     |
+| 5.2 | Unit economics live model (CAC, LTV, payback)     | ✅     |
+| 5.3 | Path comparison: lean vs bootstrapped vs funded   | ✅     |
 |     | — AI-generated pros/cons per context              |        |
-| 5.4 | Kill criteria / pivot signals per startup type    | ⬜     |
-| 5.5 | Hypothesis tracker (assumption → test → result)   | ⬜     |
-| 5.6 | Startup health score: composite signal from       | ⬜     |
+| 5.4 | Kill criteria / pivot signals per startup type    | ✅     |
+| 5.5 | Hypothesis tracker (assumption → test → result)   | ✅     |
+| 5.6 | Startup health score: composite signal from       | ✅     |
 |     | planner progress + research + runway + team       |        |
-| 5.7 | Financial planning dashboard page                 | ⬜     |
-| 5.8 | Funding stage guide: bootstrapped → pre-seed →    | ⬜     |
+| 5.7 | Financial planning dashboard page                 | ✅     |
+| 5.8 | Funding stage guide: bootstrapped → pre-seed →    | ❌ v2  |
 |     | seed → Series A — what each stage requires        |        |
-| 5.9 | Investor type guide: angel, VC, crowdfunding,     | ⬜     |
+| 5.9 | Investor type guide: angel, VC, crowdfunding,     | ❌ v2  |
 |     | grants — what suits each startup type             |        |
-| 5.10| Pitch deck structure guide + section template     | ⬜     |
-| 5.11| Investor readiness checklist                      | ⬜     |
-| 5.12| Cap table basics + simple simulator               | ⬜     |
-| 5.13| SEIS / EIS eligibility guide (UK) + grant finder  | ⬜     |
-| 5.14| Revenue model selector: freemium, subscription,   | ⬜     |
+| 5.10| Pitch deck structure guide + section template     | ❌ v2  |
+| 5.11| Investor readiness checklist                      | ❌ v2  |
+| 5.12| Cap table basics + simple simulator               | ❌ v2  |
+| 5.13| SEIS / EIS eligibility guide (UK) + grant finder  | ❌ v2  |
+| 5.14| Revenue model selector: freemium, subscription,   | ✅     |
 |     | usage-based, per-seat, marketplace fee, one-time  |        |
 |     | — guide + pros/cons per startup type              |        |
-| 5.15| Pricing live calculator: target MRR → required    | ⬜     |
+| 5.15| Pricing live calculator: target MRR → required    | ✅     |
 |     | customers at given price point; tier modelling    |        |
-| 5.16| Revenue projections: customers × ARPU = MRR,      | ⬜     |
+| 5.16| Revenue projections: customers × ARPU = MRR,      | ✅     |
 |     | simple growth curve, break-even point             |        |
-| 5.17| PMF measurement: Sean Ellis survey widget (40%    | ⬜     |
+| 5.17| PMF measurement: Sean Ellis survey widget (40%    | ❌ v2  |
 |     | "very disappointed" threshold) + retention cohort |        |
 |     | indicator — answers "when am I done validating?"  |        |
-| 5.18| Post-launch KPI dashboard: MAU, MRR/ARR, churn,   | ⬜     |
+| 5.18| Post-launch KPI dashboard: MAU, MRR/ARR, churn,   | ❌ v2  |
 |     | NPS — surfaces after founder marks product live   |        |
-| 5.19| Growth accounting view: new / retained / churned  | ⬜     |
+| 5.19| Growth accounting view: new / retained / churned  | ❌ v2  |
 |     | users per period; visualises growth health        |        |
-| 5.20| Monthly business review template                  | ⬜     |
-| 5.21| Investor update templates (monthly + quarterly)   | ⬜     |
-| 5.22| Due diligence data room checklist                 | ⬜     |
-| 5.23| Milestone timeline: first customer, first £1k MRR,| ⬜     |
+| 5.20| Monthly business review template                  | ❌ v2  |
+| 5.21| Investor update templates (monthly + quarterly)   | ❌ v2  |
+| 5.22| Due diligence data room checklist                 | ❌ v2  |
+| 5.23| Milestone timeline: first customer, first £1k MRR,| ❌ v2  |
 |     | launch day, first hire — celebrated achievements  |        |
 |     | distinct from planner steps; badges tied to these |        |
 
