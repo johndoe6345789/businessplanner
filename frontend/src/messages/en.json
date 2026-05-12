@@ -893,5 +893,21 @@
       "acknowledged": "Acknowledged",
       "resolved": "Resolved"
     }
+  },
+  "cookieConsent": {
+    "message": "We use essential cookies to operate this service. No tracking or advertising cookies are used.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "terms": {
+    "title": "Terms of Service"
+  },
+  "privacy": {
+    "title": "Privacy Policy"
+  },
+  "apiKey": {
+    "helpTitle": "API key help",
+    "helpGeneric": "API key stored securely. Never shared with third parties.",
+    "prefixWarning": "This key does not start with the expected prefix. Please double-check it."
   }
 }

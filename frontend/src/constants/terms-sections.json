@@ -1,0 +1,42 @@
+[
+  {
+    "id": "acceptance",
+    "title": "1. Acceptance of Terms",
+    "body": "By accessing or using LaunchPad you agree to be bound by these Terms of Service. If you do not agree to all of these terms, do not use the service."
+  },
+  {
+    "id": "service",
+    "title": "2. Service Description",
+    "body": "LaunchPad is a free, guided startup-planning tool that helps founders move from idea to first customer. The service includes an interactive roadmap, AI advisor features, progress tracking, and community tools."
+  },
+  {
+    "id": "free",
+    "title": "3. Free Service Terms",
+    "body": "LaunchPad is provided free of charge. We reserve the right to introduce optional paid features in the future. Your continued use of free features will never require payment without explicit consent."
+  },
+  {
+    "id": "ai",
+    "title": "4. AI Features",
+    "body": "AI advisor features are powered by third-party models (Anthropic Claude, OpenAI). Your API keys are stored encrypted and are never used to train any model. Conversations are not retained beyond your session unless you explicitly save them."
+  },
+  {
+    "id": "ip",
+    "title": "5. Intellectual Property",
+    "body": "You retain full ownership of any business plans, ideas, or content you create using LaunchPad. We claim no ownership over your data."
+  },
+  {
+    "id": "termination",
+    "title": "6. Termination",
+    "body": "You may delete your account at any time via Settings. We may suspend accounts that violate these terms. Upon deletion, your personal data is removed within 30 days."
+  },
+  {
+    "id": "liability",
+    "title": "7. Limitation of Liability",
+    "body": "LaunchPad is provided 'as is' without warranty of any kind. To the fullest extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the service."
+  },
+  {
+    "id": "governing",
+    "title": "8. Governing Law",
+    "body": "These terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales."
+  }
+]

@@ -87,3 +87,6 @@ export * from './index.financials';
 
 export { default as NotificationInbox }
   from './NotificationInbox';
+
+export { default as CookieConsentBanner }
+  from './CookieConsentBanner';

@@ -165,3 +165,8 @@ export { AiSuggestionCard }
   from './AiSuggestionCard';
 export type { AiSuggestionCardProps }
   from './AiSuggestionCard';
+
+export { default as ApiKeyHelpText }
+  from './ApiKeyHelpText';
+export type { ApiKeyHelpTextProps }
+  from './ApiKeyHelpText';

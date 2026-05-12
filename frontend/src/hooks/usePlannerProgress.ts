@@ -5,9 +5,14 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { toggleStep, resetPlan } from '@/store/slices/plannerSlice';
 import { useCompleteStepMutation } from '@/store/api/gamificationApi';
 import roadmap from '@/constants/startup-roadmap.json';
+import plannerConfig from '@/constants/planner.json';
 
 /** Completion status of a roadmap phase. */
-export type PhaseStatus = 'todo' | 'in-progress' | 'complete';
+export type PhaseStatus =
+  | 'todo'
+  | 'started'
+  | 'in-progress'
+  | 'complete';
 
 /** Per-phase progress summary. */
 export interface PhaseProgress {
@@ -28,7 +33,9 @@ export interface PhaseProgress {
 export function getPhaseStatus(done: number, total: number): PhaseStatus {
   if (done === 0) return 'todo';
   if (done >= total) return 'complete';
-  return 'in-progress';
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const { caution } = plannerConfig.progressThresholds;
+  return pct >= caution ? 'in-progress' : 'started';
 }
 
 /**
@@ -80,15 +87,10 @@ export function usePlannerProgress() {
   const totalDone = phases.reduce((s, p) => s + p.done, 0);
   const totalSteps = phases.reduce((s, p) => s + p.total, 0);
 
+  const overallPct = totalSteps > 0
+    ? Math.round((totalDone / totalSteps) * 100) : 0;
   return {
-    completedSteps,
-    phases,
-    toggle,
-    reset,
-    overallPct: totalSteps > 0
-      ? Math.round((totalDone / totalSteps) * 100)
-      : 0,
-    totalDone,
-    totalSteps,
+    completedSteps, phases, toggle, reset,
+    overallPct, totalDone, totalSteps,
   };
 }
