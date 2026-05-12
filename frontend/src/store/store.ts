@@ -19,6 +19,7 @@ import authReducer from './slices/authSlice';
 import themeReducer from './slices/themeSlice';
 import uiReducer from './slices/uiSlice';
 import plannerReducer from './slices/plannerSlice';
+import gamificationReducer from './slices/gamificationSlice';
 import { persistConfig } from './persistConfig';
 
 const rootReducer = combineReducers({
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   ui: uiReducer,
   planner: plannerReducer,
+  gamification: gamificationReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 
