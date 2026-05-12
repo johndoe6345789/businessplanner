@@ -108,7 +108,14 @@
     "levelUp": "Level up!",
     "newBadge": "New badge unlocked!",
     "dailyStreak": "{count}-day streak",
-    "rank": "Rank #{position}"
+    "rank": "Rank #{position}",
+    "allTime": "All Time",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "player": "Player",
+    "xp": "XP",
+    "optInLeaderboard": "Opt in to leaderboard",
+    "rankCol": "Rank"
   },
   "notifications": {
     "title": "Notifications",

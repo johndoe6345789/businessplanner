@@ -65,3 +65,8 @@ export {
 export { ContactForm } from './ContactForm';
 
 export { BadgeCabinet } from './BadgeCabinet';
+
+export { LeaderboardTable } from './LeaderboardTable';
+export type {
+  LeaderboardTableProps,
+} from './LeaderboardTable';

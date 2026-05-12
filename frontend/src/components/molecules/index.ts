@@ -72,6 +72,11 @@ export type {
 export { BadgeCard } from './BadgeCard';
 export type { BadgeCardProps } from './BadgeCard';
 
+export { LeaderboardRow } from './LeaderboardRow';
+export type {
+  LeaderboardRowProps,
+} from './LeaderboardRow';
+
 export {
   GamificationSummary,
 } from './GamificationSummary';
