@@ -10,5 +10,6 @@
   { "labelKey": "review",
     "href": "/review" },
   { "labelKey": "launch", "href": "/launch" },
-  { "labelKey": "resources", "href": "/resources" }
+  { "labelKey": "resources", "href": "/resources" },
+  { "labelKey": "decisions", "href": "/decisions" }
 ]

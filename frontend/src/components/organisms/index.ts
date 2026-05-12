@@ -110,3 +110,5 @@ export { LaunchChecklist }
 
 export { ResourceLibrary }
   from './ResourceLibrary';
+
+export { DecisionLog } from './DecisionLog';

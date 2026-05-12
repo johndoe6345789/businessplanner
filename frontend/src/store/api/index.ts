@@ -25,3 +25,4 @@ export * from './aiApi';
 export * from './adminApi';
 export * from './weeklyReviewApi';
 export * from './scopingApi';
+export * from './decisionsApi';

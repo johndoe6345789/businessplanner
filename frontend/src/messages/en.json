@@ -92,7 +92,8 @@
     "financials": "Financial Planning",
     "review": "Weekly Review",
     "launch": "Launch Checklist",
-    "resources": "Resources"
+    "resources": "Resources",
+    "decisions": "Decision Log"
   },
   "hero": {
     "title": "Launch your startup with confidence",
