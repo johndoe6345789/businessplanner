@@ -1,5 +1,6 @@
 [
   { "labelKey": "planner", "href": "/planner" },
   { "labelKey": "dashboard", "href": "/dashboard" },
+  { "labelKey": "knowledge", "href": "/knowledge" },
   { "labelKey": "profile", "href": "/profile" }
 ]
