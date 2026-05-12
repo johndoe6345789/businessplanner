@@ -192,7 +192,10 @@
     "longestStreak": "Longest: {days} days",
     "levelLabel": "Level {level}",
     "levelProgress": "Level progress",
-    "pointsToNext": "{points} points to next level"
+    "pointsToNext": "{points} points to next level",
+    "onboardingCtaTitle": "Set up your LaunchPad",
+    "onboardingCtaDesc": "Tell us about your startup to get a personalised planner and knowledge base.",
+    "onboardingCtaCta": "Get Started"
   },
   "profile": {
     "title": "Profile",
@@ -637,7 +640,10 @@
         "title": "Build a systematic feedback loop",
         "why": "After every sale, call the customer to understand why they bought. After every churn, call to learn why they left. Run weekly user calls. Your roadmap should come from these patterns."
       }
-    }
+    },
+    "personalised": "Your {type} Planner",
+    "completeSetup": "Complete your setup to personalise your planner",
+    "completeSetupCta": "Set Up Now"
   },
   "knowledge": {
     "title": "Knowledge Base",
@@ -660,6 +666,29 @@
     "title": "Page not found",
     "description": "The page you are looking for does not exist.",
     "homeLink": "Go Home"
+  },
+  "onboarding": {
+    "title": "Set Up Your LaunchPad",
+    "step1Title": "Name your startup",
+    "step2Title": "What type of startup?",
+    "step3Title": "Where are you now?",
+    "step4Title": "Who is on your team?",
+    "step5Title": "What is your biggest challenge?",
+    "solo": "Solo founder",
+    "withCofounders": "With co-founders",
+    "next": "Next",
+    "back": "Back",
+    "complete": "Complete Setup",
+    "startupNameLabel": "Startup name",
+    "startupNamePlaceholder": "e.g. Acme AI",
+    "biggestChallengeLabel": "Biggest challenge",
+    "findingCustomers": "Finding my first customers",
+    "buildingProduct": "Building the product",
+    "legalCompliance": "Legal and compliance",
+    "fundraising": "Raising funding",
+    "teamBuilding": "Building a team",
+    "marketResearch": "Understanding my market",
+    "stayingMotivated": "Staying motivated"
   },
   "alerts": {
     "pageTitle": "Alerts",

@@ -101,5 +101,22 @@ export type {
   KbFilter,
 } from './KbFilterChips';
 
+export { StartupTypeSelector } from './StartupTypeSelector';
+export type { StartupTypeSelectorProps }
+  from './StartupTypeSelector';
+
+export { StageSelector } from './StageSelector';
+export type { StageSelectorProps } from './StageSelector';
+
+export { OnboardingCta } from './OnboardingCta';
+
+export { WizardStepContent } from './WizardStepContent';
+export type { WizardStepContentProps }
+  from './WizardStepContent';
+
+export { WizardNavButtons } from './WizardNavButtons';
+export type { WizardNavButtonsProps }
+  from './WizardNavButtons';
+
 export * from './index.social';
 export * from './index.auth';
