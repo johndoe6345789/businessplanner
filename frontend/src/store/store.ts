@@ -20,6 +20,8 @@ import themeReducer from './slices/themeSlice';
 import uiReducer from './slices/uiSlice';
 import plannerReducer from './slices/plannerSlice';
 import gamificationReducer from './slices/gamificationSlice';
+import startupTypeReducer
+  from './slices/startupTypeSlice';
 import { persistConfig } from './persistConfig';
 
 const rootReducer = combineReducers({
@@ -28,6 +30,7 @@ const rootReducer = combineReducers({
   ui: uiReducer,
   planner: plannerReducer,
   gamification: gamificationReducer,
+  startupType: startupTypeReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 
