@@ -246,21 +246,26 @@ domain.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 3.1 | Business structure guide: sole trader, LLP, Ltd,  | ⬜     |
+| 3.1 | Business structure guide: sole trader, LLP, Ltd,  | 🔧     |
 |     | C-Corp — pros/cons, tax implications, per type    |        |
-| 3.2 | Company registration checklist (per jurisdiction) | ⬜     |
-| 3.3 | IP primer: trademark, patent, copyright, trade    | ⬜     |
-|     | secret — what applies to each startup type        |        |
-| 3.4 | Founder agreement checklist + template            | ⬜     |
-| 3.5 | Equity split calculator (role, contribution,      | ⬜     |
+|     | Infrastructure ✅ — KB article authoring pending  |        |
+| 3.2 | Company registration checklist (per jurisdiction) | 🔧     |
+|     | Infrastructure ✅ — KB article authoring pending  |        |
+| 3.3 | IP primer: trademark, patent, copyright, trade    | 🔧     |
+|     | secret — KB article authoring pending             |        |
+| 3.4 | Founder agreement checklist + template            | 🔧     |
+|     | Infrastructure ✅ — KB article authoring pending  |        |
+| 3.5 | Equity split calculator (role, contribution,      | ✅     |
 |     | risk weighting)                                   |        |
-| 3.6 | Founder vesting schedule calculator               | ⬜     |
+| 3.6 | Founder vesting schedule calculator               | ✅     |
 |     | (cliff, total period, acceleration)               |        |
-| 3.7 | Advisor equity guide + typical ranges             | ⬜     |
-| 3.8 | GDPR / privacy basics for product builders        | ⬜     |
-| 3.9 | Industry-specific regulatory guides: fintech      | ⬜     |
+| 3.7 | Advisor equity guide + typical ranges             | 🔧     |
+|     | Infrastructure ✅ — KB article authoring pending  |        |
+| 3.8 | GDPR / privacy basics for product builders        | 🔧     |
+|     | Infrastructure ✅ — KB article authoring pending  |        |
+| 3.9 | Industry-specific regulatory guides: fintech      | ❌ v2  |
 |     | (FCA/SEC), health (MHRA/FDA), food, proptech      |        |
-| 3.10| Team role planner: when to hire what, in order    | ⬜     |
+| 3.10| Team role planner: when to hire what, in order    | ❌ v2  |
 
 ### Phase 4 — Market research tools
 
