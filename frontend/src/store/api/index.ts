@@ -13,3 +13,4 @@ export * from './searchApi';
 export * from './gamificationApi';
 export * from './startupTypeApi';
 export * from './knowledgeApi';
+export * from './legalApi';

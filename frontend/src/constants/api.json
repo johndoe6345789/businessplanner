@@ -37,5 +37,9 @@
     "preferences": "/api/notifications/preferences"
   },
   "startupTypes": "/api/startup-types",
-  "knowledge": "/api/wiki/kb"
+  "knowledge": "/api/wiki/kb",
+  "legal": {
+    "equitySplit": "/api/legal/equity/split",
+    "vesting": "/api/legal/equity/vesting"
+  }
 }
