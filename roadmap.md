@@ -28,32 +28,35 @@
 
 ## 1. What this product is
 
-**LaunchPad** is a structured guide from idea to paying customers.
+**LaunchPad** is a structured guide from idea to paying
+customers for any type of startup.
 
-Most startups fail not because founders lack ideas but because
-they don't know what to validate first, waste money on the
-wrong path, and run out of runway before finding
-product-market fit. LaunchPad fixes that.
+Most startups fail not because founders lack ideas but
+because they don't know what to validate first, waste
+money on the wrong path, skip legal and compliance steps
+they didn't know existed, and run out of runway before
+finding product-market fit. LaunchPad addresses all of
+this.
 
 **LaunchPad is simultaneously a knowledge base and an
-interactive tool.** These are not the same thing and both
-are required:
+interactive tool.** Both are required:
 
 - A *knowledge base* tells you what a SaaS startup is,
-  what its common failure modes are, what a typical CAC
-  looks like, and what a go-to-market playbook contains.
-  It is reference material you browse and search.
+  what its failure modes are, what a founder agreement
+  needs to cover, how SEIS/EIS works, and what a
+  go-to-market playbook looks like. Browsable, searchable,
+  admin-curated. **Powered by the wiki backend** —
+  full revision history, tree navigation, markdown
+  rendering, and an admin editor — all built.
 
 - An *interactive tool* takes your actual numbers, your
-  market, your skills, and your current stage, and tells
-  you what *you specifically* should do next. It computes
-  live as you type. It surfaces gaps in your plan. It
-  asks you questions and builds a personalised path.
+  market, your skills, and your stage, and tells you what
+  *you specifically* should do next. Live calculators.
+  Structured frameworks. AI synthesis.
 
 The AI is the bridge: it reads the knowledge base context
-for your startup type *and* your live inputs, then
-synthesises both into advice that is grounded in curated
-best practice and specific to your situation.
+for your type *and* your live inputs, then synthesises
+curated best practice with your specific situation.
 
 **Core capabilities:**
 
@@ -61,53 +64,67 @@ best practice and specific to your situation.
   e-commerce, hardware, services, fintech, health, content,
   and platform startups all have different critical paths,
   cost curves, and failure modes. The planner is dynamic:
-  steps, stage gates, and advice adapt to the founder's
-  type.
+  steps, stage gates, and advice adapt to type.
 
-- **Knowledge base** — curated guides per startup type,
-  launch playbooks (go-to-market, fundraising, hiring),
-  industry benchmarks (typical CAC/LTV/churn by type),
-  common failure patterns, and stage-by-stage checklists.
-  Fully indexed and searchable. Admin-maintained, not
-  user-generated.
+- **Knowledge base** — guides, playbooks, benchmarks,
+  legal primers, compliance checklists, funding guides,
+  and industry-specific content. Organised by startup type
+  and stage. Powered by the wiki backend (D15).
+
+- **Legal & compliance** — business structure guide,
+  registration checklist, IP basics, co-founder agreement
+  template, GDPR/privacy primer, industry-specific
+  regulatory guides (fintech, health, food). One of the
+  biggest unknown unknowns for first-time founders.
+
+- **Co-founder & team tools** — equity split calculator,
+  founder vesting schedule, co-founder agreement
+  checklist, advisor equity guide, team role planner
+  (when to hire which roles and in what order).
 
 - **Interactive research tools** — live calculators for
   TAM/SAM/SOM, burn rate, unit economics, and runway.
-  Inputs update outputs in real time — no page reload.
-  Competitor tracker, customer persona builder, customer
-  discovery log. Your numbers compared against benchmarks
-  for your startup type.
+  Inputs update outputs in real time. Competitor tracker,
+  customer persona builder, discovery log. Your numbers
+  compared against benchmarks for your type.
 
-- **Path analysis + financial planning** — burn rate,
-  runway, unit economics (CAC / LTV / payback period),
-  structured comparison of lean / bootstrapped / funded
-  launch paths. "Which path wastes less money" becomes a
-  calculation, not a guess.
+- **Financial planning + funding readiness** — burn
+  rate, runway, unit economics (CAC / LTV / payback),
+  path comparison (lean / bootstrapped / funded), cap
+  table basics, pitch deck structure guide, investor
+  readiness checklist, SEIS/EIS guide, grant finder.
 
-- **AI planning assistant** — Claude-powered advisor mode
-  that asks structured questions and builds a personalised
-  plan. Market research synthesis, competitor analysis,
-  risk identification, and "what to do next" — all
-  grounded in the founder's type, stage, and current
-  inputs.
+- **Decision log** — a running record of every
+  significant decision: what was decided, why, and what
+  alternatives were ruled out. Searchable, linked to
+  planner steps. Invaluable for new team members and
+  investors. Almost no tools offer this.
 
-- **Gamification** — the core motivation engine. Founding
-  a startup is a long, lonely grind; progress feels
-  invisible. Streaks keep founders coming back daily. XP +
-  levels make incremental progress tangible. Badges
-  celebrate real milestones. The leaderboard adds social
-  proof and healthy competition. All five systems are one
-  coherent loop, not separate features.
+- **Weekly review cadence** — structured weekly prompts
+  (what worked, what didn't, key metrics, next week
+  focus). The primary streak-driver: founders who do
+  weekly reviews consistently out-execute those who
+  don't.
 
-- **Community** — forum for founder Q&A, progress feed,
-  peer accountability.
+- **AI planning assistant** — advisor mode that asks
+  structured questions and builds a personalised plan.
+  Market research synthesis, competitor analysis,
+  risk identification, "what to do next" — grounded
+  in the founder's type, stage, and current inputs.
 
-- **Plan export** — download your full roadmap as a PDF
-  for investors or co-founders.
+- **Gamification** — the core motivation engine.
+  Founding is a long, lonely grind; progress feels
+  invisible. Streaks, XP, levels, badges, and the
+  leaderboard are one coherent motivation loop.
 
-Everything else in the template (ecommerce, video, gallery,
-wiki, blog, live streaming, IMAP sync) is available
-infrastructure but is **not planned for LaunchPad's UI**.
+- **Community** — forum organised by startup type,
+  progress feed, peer accountability.
+
+- **Plan export** — full roadmap as a PDF.
+
+Template backends not surfaced in LaunchPad's UI:
+ecommerce, video, gallery, blog, live streaming,
+IMAP sync.
 
 ---
 
@@ -123,9 +140,8 @@ infrastructure but is **not planned for LaunchPad's UI**.
 | Package repo | C++/Next.js       | ✅ running at `/repo`        |
 | Message bus  | Kafka (KRaft)     | 🔧 stub only — no broker yet |
 
-Kafka runs gracefully in stub mode. The product can ship
-without a live broker; it becomes relevant when real-time
-notification fan-out matters (Phase 5).
+Kafka runs gracefully in stub mode. It becomes relevant
+when real-time notification fan-out matters (Phase 6).
 
 ---
 
@@ -147,12 +163,8 @@ notification fan-out matters (Phase 5).
 The motivation engine is the product's defining feature —
 without it LaunchPad is just another to-do list. All five
 subsystems (streaks, XP/levels, badges, leaderboard,
-progress) share service logic in the backend but have
-**no HTTP controllers and no migrations** yet.
-
-The leaderboard is part of gamification, not a separate
-feature. Seeing where you rank against other founders is
-a powerful social nudge that amplifies every other signal.
+progress) share backend service logic but have **no HTTP
+controllers and no migrations** yet.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
@@ -164,20 +176,18 @@ a powerful social nudge that amplifies every other signal.
 | 1.6 | Frontend: badge cabinet page                      | ⬜     |
 | 1.7 | Frontend: leaderboard page (opt-in, D3)           | ⬜     |
 | 1.8 | Wire planner step completion → XP + streak events | ⬜     |
+| 1.9 | Wire weekly review completion → streak event      | ⬜     |
 
-### Phase 2 — Startup type framework (architectural foundation)
+### Phase 2 — Startup type framework + knowledge base
 
-Everything else in the product — planner steps, AI advice,
-market research prompts, path recommendations — depends on
-knowing what kind of startup the founder is building.
-This is the bedrock phase.
+Everything else in the product depends on knowing what
+kind of startup the founder is building. The knowledge
+base is powered by the existing wiki backend (D15):
+full revision history, admin editor, tree nav, and
+markdown rendering — all already built.
 
 New service: `services/startup-types/`
-
-This phase builds both the knowledge layer (what each
-startup type is, its typical path, its failure modes)
-and the interactive layer (a dynamic planner that adapts
-to the founder's type).
+Repurposed service: `services/wiki/` → knowledge base
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
@@ -187,107 +197,138 @@ to the founder's type).
 | 2.2 | Per-type: stages, common traps, funding paths     | ⬜     |
 | 2.3 | Onboarding: startup type selector UI              | ⬜     |
 | 2.4 | Dynamic planner: steps adapt to selected type     | ⬜     |
-| 2.5 | Per-type stage gates (what to validate before     | ⬜     |
-|     | moving to the next stage)                         |        |
-| 2.6 | Knowledge base: startup guide per type            | ⬜     |
-|     | (inline reference, browsable, searchable)         |        |
-| 2.7 | Launch playbook library: go-to-market,            | ⬜     |
-|     | fundraising, hiring — per startup type            |        |
-| 2.8 | Industry benchmarks per type (CAC, LTV, churn,    | ⬜     |
-|     | time-to-revenue) — used for comparison in Phase 3 |        |
+| 2.5 | Per-type stage gates                              | ⬜     |
+| 2.6 | Wiki migration: add kb_type, startup_type, stage, | ⬜     |
+|     | tags columns to wiki_pages (D15)                  |        |
+| 2.7 | `/knowledge` read-only frontend route wrapping    | ⬜     |
+|     | wiki backend; tree nav + search                   |        |
+| 2.8 | Seed knowledge base: startup guides, playbooks,   | ⬜     |
+|     | benchmarks per type via wiki admin panel          |        |
 
-### Phase 3 — Market research tools
+### Phase 3 — Legal, compliance & team foundations
 
-Founders need instruments to validate before spending.
-All calculators in this phase are **live**: inputs update
-outputs in real time with no page reload. Saved values
-persist to the backend; computation runs client-side.
+One of the biggest unknown unknowns for first-time
+founders. Gets its own phase because it is foundational
+knowledge that should come before spending money on
+market research or product.
+
+Content lives in the wiki knowledge base. Interactive
+tools (calculators) live in a new `services/legal-team/`
+domain.
+
+| ID  | Item                                              | Status |
+|-----|---------------------------------------------------|--------|
+| 3.1 | Business structure guide: sole trader, LLP, Ltd,  | ⬜     |
+|     | C-Corp — pros/cons, tax implications, per type    |        |
+| 3.2 | Company registration checklist (per jurisdiction) | ⬜     |
+| 3.3 | IP primer: trademark, patent, copyright, trade    | ⬜     |
+|     | secret — what applies to each startup type        |        |
+| 3.4 | Founder agreement checklist + template            | ⬜     |
+| 3.5 | Equity split calculator (role, contribution,      | ⬜     |
+|     | risk weighting)                                   |        |
+| 3.6 | Founder vesting schedule calculator               | ⬜     |
+|     | (cliff, total period, acceleration)               |        |
+| 3.7 | Advisor equity guide + typical ranges             | ⬜     |
+| 3.8 | GDPR / privacy basics for product builders        | ⬜     |
+| 3.9 | Industry-specific regulatory guides: fintech      | ⬜     |
+|     | (FCA/SEC), health (MHRA/FDA), food, proptech      |        |
+| 3.10| Team role planner: when to hire what, in order    | ⬜     |
+
+### Phase 4 — Market research tools
+
+Founders validate before spending. All calculators are
+**live** — inputs update outputs with no page reload.
 
 New service: `services/market-research/`
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 3.1 | TAM / SAM / SOM live calculator                   | ⬜     |
-| 3.2 | Competitor tracker (name, stage, strengths/gaps)  | ⬜     |
-| 3.3 | Customer persona builder                          | ⬜     |
-| 3.4 | Customer discovery log (interviews + findings)    | ⬜     |
-| 3.5 | Benchmark comparison: your TAM vs. industry       | ⬜     |
-|     | averages for your startup type (from Phase 2.8)   |        |
-| 3.6 | Market research dashboard page                    | ⬜     |
-| 3.7 | AI synthesis: summarise research findings,        | ⬜     |
-|     | compare against benchmarks, surface blind spots   |        |
+| 4.1 | TAM / SAM / SOM live calculator                   | ⬜     |
+| 4.2 | Competitor tracker (name, stage, strengths/gaps)  | ⬜     |
+| 4.3 | Customer persona builder                          | ⬜     |
+| 4.4 | Customer discovery log (interviews + findings)    | ⬜     |
+| 4.5 | Interview script templates per startup type       | ⬜     |
+| 4.6 | Benchmark comparison: your TAM vs. industry       | ⬜     |
+|     | averages for your type (from Phase 2 seed data)   |        |
+| 4.7 | Market research dashboard page                    | ⬜     |
+| 4.8 | AI synthesis: summarise findings, compare to      | ⬜     |
+|     | benchmarks, surface blind spots                   |        |
 
-### Phase 4 — Path analysis + financial planning
+### Phase 5 — Financial planning + funding readiness
 
 "Which path wastes less money" is a calculation. All
-financial tools are **live calculators** — change your
-monthly burn and the runway updates instantly. The path
-comparison tool is AI-generated from your specific
-context, not a static table.
+financial tools are **live calculators**. Funding
+readiness is included here — the two are inseparable.
 
 New service: `services/financials/`
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 4.1 | Burn rate + runway live calculator                | ⬜     |
-| 4.2 | Unit economics live model (CAC, LTV, payback)     | ⬜     |
-| 4.3 | Path comparison: lean vs bootstrapped vs funded   | ⬜     |
-|     | — AI-generated pros/cons given your type +        |        |
-|     | capital + market data                             |        |
-| 4.4 | Kill criteria / pivot signals per startup type    | ⬜     |
-| 4.5 | Hypothesis tracker (assumption → test → result)   | ⬜     |
-| 4.6 | "What to do next" engine: reads stage, progress,  | ⬜     |
-|     | gaps, surfaces single most important next action  |        |
-| 4.7 | Financial planning dashboard page                 | ⬜     |
+| 5.1 | Burn rate + runway live calculator                | ⬜     |
+| 5.2 | Unit economics live model (CAC, LTV, payback)     | ⬜     |
+| 5.3 | Path comparison: lean vs bootstrapped vs funded   | ⬜     |
+|     | — AI-generated pros/cons per context              |        |
+| 5.4 | Kill criteria / pivot signals per startup type    | ⬜     |
+| 5.5 | Hypothesis tracker (assumption → test → result)   | ⬜     |
+| 5.6 | Startup health score: composite signal from       | ⬜     |
+|     | planner progress + research + runway + team       |        |
+| 5.7 | Financial planning dashboard page                 | ⬜     |
+| 5.8 | Funding stage guide: bootstrapped → pre-seed →    | ⬜     |
+|     | seed → Series A — what each stage requires        |        |
+| 5.9 | Investor type guide: angel, VC, crowdfunding,     | ⬜     |
+|     | grants — what suits each startup type             |        |
+| 5.10| Pitch deck structure guide + section template     | ⬜     |
+| 5.11| Investor readiness checklist                      | ⬜     |
+| 5.12| Cap table basics + simple simulator               | ⬜     |
+| 5.13| SEIS / EIS eligibility guide (UK) + grant finder  | ⬜     |
 
-### Phase 5 — Notifications
+### Phase 6 — Notifications
 
 Founders need reminders to maintain streaks and alerts
-when stage gates unlock. Backend is fully implemented
-(controllers + migrations ✅).
+when stage gates unlock. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 5.1 | `/notifications` inbox page                       | ⬜     |
-| 5.2 | Notification bell badge in Navbar (live count)    | ⬜     |
-| 5.3 | Planner events → notification triggers            | ⬜     |
-| 5.4 | Email digest (daily planner reminder)             | ⬜     |
+| 6.1 | `/notifications` inbox page                       | ⬜     |
+| 6.2 | Notification bell badge in Navbar (live count)    | ⬜     |
+| 6.3 | Planner events → notification triggers            | ⬜     |
+| 6.4 | Email digest (daily planner reminder)             | ⬜     |
 
-### Phase 6 — Community
+### Phase 7 — Community
 
-Founders helping founders. Backend (comments/forum,
-social) is fully implemented with controllers +
-migrations ✅.
+Founders helping founders. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 6.1 | `/community` forum page (boards + threads)        | ⬜     |
-| 6.2 | Startup-type boards (SaaS, marketplace, etc.)     | ⬜     |
-| 6.3 | Inline comments on planner milestones             | ⬜     |
-| 6.4 | `/feed` — progress feed (follows + activity)      | ⬜     |
-| 6.5 | Follow / unfollow other founders                  | ⬜     |
+| 7.1 | `/community` forum page (boards + threads)        | ⬜     |
+| 7.2 | Startup-type boards (SaaS, marketplace, etc.)     | ⬜     |
+| 7.3 | Inline comments on planner milestones             | ⬜     |
+| 7.4 | `/feed` — progress feed (follows + activity)      | ⬜     |
+| 7.5 | Follow / unfollow other founders                  | ⬜     |
+| 7.6 | Mentor opt-in: experienced founders mark          | ⬜     |
+|     | themselves available; badge + feed signal         |        |
 
-### Phase 7 — Plan export and AI enhancements
-
-| ID  | Item                                              | Status |
-|-----|---------------------------------------------------|--------|
-| 7.1 | Export plan as PDF (backend: pdf domain ✅)        | ⬜     |
-| 7.2 | AI suggestions per planner step (prompt tuning)   | ⬜     |
-| 7.3 | Save AI chat threads to planner steps             | ⬜     |
-| 7.4 | AI risk report: blind spots in the current plan   | ⬜     |
-
-### Phase 8 — Ops and quality
+### Phase 8 — Plan export + AI enhancements
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 8.1 | Impersonation hardening (DB-backed session)       | ⬜     |
-| 8.2 | `CookieAuthFilter` reject refresh tokens for API  | ⬜     |
-| 8.3 | `usePlannerProgress.ts` threshold tuning          | ⬜     |
-| 8.4 | Admin analytics dashboard                         | ⬜     |
-| 8.5 | CSP + security headers middleware                 | ⬜     |
-| 8.6 | Frontend test coverage: 60% of organisms          | ⬜     |
-| 8.7 | Backend GTest: badges, leaderboards, streaks, xp  | ⬜     |
-| 8.8 | Playwright suites for each new page above         | ⬜     |
+| 8.1 | Export plan as PDF (backend: pdf domain ✅)        | ⬜     |
+| 8.2 | AI suggestions per planner step (prompt tuning)   | ⬜     |
+| 8.3 | Save AI chat threads to planner steps             | ⬜     |
+| 8.4 | AI risk report: blind spots in the current plan   | ⬜     |
+
+### Phase 9 — Ops and quality
+
+| ID  | Item                                              | Status |
+|-----|---------------------------------------------------|--------|
+| 9.1 | Impersonation hardening (DB-backed session)       | ⬜     |
+| 9.2 | `CookieAuthFilter` reject refresh tokens for API  | ⬜     |
+| 9.3 | `usePlannerProgress.ts` threshold tuning          | ⬜     |
+| 9.4 | Admin analytics dashboard                         | ⬜     |
+| 9.5 | CSP + security headers middleware                 | ⬜     |
+| 9.6 | Frontend test coverage: 60% of organisms          | ⬜     |
+| 9.7 | Backend GTest: badges, leaderboards, streaks, xp  | ⬜     |
+| 9.8 | Playwright suites for each new page above         | ⬜     |
 
 ### Cross-cutting
 
@@ -296,12 +337,18 @@ migrations ✅.
 | X1  | Real-time WebSocket bus (chat + streak alerts + feed)|
 | X2  | Feature flags for gradual rollout of community      |
 | X3  | External data integrations (Crunchbase, SimilarWeb) |
-| X4  | Advisor mode: AI asks structured diagnostic         |
-|     | questions and assembles a personalised plan from    |
-|     | scratch — entry point for new founders              |
-| X5  | Knowledge base search: Elasticsearch indexes all    |
-|     | guides, playbooks, and benchmarks; surfaced in the  |
-|     | existing `/search` page                             |
+| X4  | Advisor mode: AI diagnostic → personalised plan     |
+| X5  | Knowledge base search via existing `/search` page   |
+| X6  | Decision log: record decisions + rationale,         |
+|     | searchable, linked to planner steps                 |
+| X7  | Weekly review prompts: structured reflection form   |
+|     | that drives the daily streak                        |
+| X8  | Launch execution checklist: Product Hunt, HN Show,  |
+|     | press, social — per startup type                    |
+| X9  | Product scoping canvas: MVP cut list, ICE/RICE      |
+|     | feature prioritisation tool                         |
+| X10 | Resource library: downloadable templates (NDA,      |
+|     | founder agreement, cap table, pitch deck skeleton)  |
 
 ---
 
@@ -312,8 +359,9 @@ migrations ✅.
 | D1  | Gamification is the core motivation engine — streaks, XP,  |
 |     | levels, badges, and leaderboard are one system, not five   |
 |     | separate features                                          |
-| D2  | Gamification events triggered by planner step completion,  |
-|     | not arbitrary actions — keeps motivation tied to product   |
+| D2  | Gamification events triggered by planner step completion   |
+|     | and weekly review completion — keeps motivation tied to    |
+|     | real progress, not arbitrary actions                       |
 | D3  | Leaderboard is opt-in (founders can hide from ranking)     |
 | D4  | Planner steps are dynamic per startup type — no single     |
 |     | hardcoded step list; type catalogue drives the path        |
@@ -330,12 +378,26 @@ migrations ✅.
 | D12 | Interactive calculators compute client-side (React         |
 |     | state); backend only stores saved inputs — no round-trip   |
 |     | per keystroke                                              |
-| D13 | Knowledge base content is admin-curated JSON/markdown      |
-|     | per startup type — not a user-editable wiki                |
+| D13 | Knowledge base content is admin-curated, not               |
+|     | user-editable — only admins can create/edit KB pages       |
 | D14 | AI advisor has access to both the knowledge base context   |
 |     | for the founder's type and their live inputs/progress —    |
 |     | answers are grounded in curated best practice AND          |
 |     | specific to the founder's situation                        |
+| D15 | Knowledge base is powered by the wiki backend: same        |
+|     | wiki_pages table + revision history + admin editor.        |
+|     | A migration adds kb_type, startup_type, stage, tags        |
+|     | columns. The `/knowledge` frontend route reads the wiki    |
+|     | API in read-only mode. No new CMS service needed.          |
+| D16 | Legal & compliance content lives in the knowledge base     |
+|     | (wiki-powered); interactive calculators (equity split,     |
+|     | vesting) live in services/legal-team/                      |
+| D17 | Weekly review is the primary streak-driver (D2). The       |
+|     | weekly review form lives on the dashboard; skipping a      |
+|     | week breaks the streak.                                    |
+| D18 | Decision log entries are linked to planner steps by        |
+|     | optional step_id FK; they are always private to the        |
+|     | founder unless explicitly shared                           |
 
 ---
 
@@ -356,55 +418,52 @@ migrations ✅.
 
 ### 🔧 Backend done, no frontend page yet
 
-| Domain        | Notes                                  |
-|---------------|----------------------------------------|
-| gamification  | Service logic only — no controllers    |
-| notifications | Full backend ✅ — no inbox page        |
-| forum         | Full backend ✅ — no `/community` page |
-| social        | Full backend ✅ — no `/feed` page      |
-| pdf           | Full backend ✅ — no export trigger UI |
-| ai-chat       | Full backend ✅ — chat UI exists but   |
-|               | not yet linked to planner steps        |
-| search        | Infrastructure retooled for LaunchPad: |
-|               | 4 new indexes (launchpad-kb, -planner, |
-|               | -community, -founders); frontend tabs  |
-|               | updated. Content feeds in as Phase 2-4 |
-|               | services land.                         |
+| Domain        | Notes                                        |
+|---------------|----------------------------------------------|
+| gamification  | Service logic only — no controllers yet      |
+| notifications | Full backend ✅ — no inbox page              |
+| forum/comments| Full backend ✅ — no `/community` page       |
+| social        | Full backend ✅ — no `/feed` page            |
+| pdf           | Full backend ✅ — no export trigger UI       |
+| ai-chat       | Full backend ✅ — not yet linked to planner  |
+| wiki          | Full backend ✅ — repurposed as KB (D15);    |
+|               | needs metadata migration (2.6) + /knowledge  |
+|               | frontend route (2.7)                         |
+| search        | Retooled: 4 LaunchPad indexes; frontend tabs |
+|               | updated. Content feeds in from Phase 2 on.   |
 
 ### ❌ Out of scope for LaunchPad
 
-These template backends exist and run but will not be
-surfaced in LaunchPad's UI:
+Template backends that will not appear in the UI:
 
 - `blog` — not a blogging platform
 - `gallery` — no photo albums
 - `ecommerce` — no storefront
 - `video` / `streaming` — no media platform
-- `wiki` — LaunchPad's knowledge base is admin-curated
-  content per startup type (D13), not a user-editable
-  wiki; the wiki service is not used
 - `imap-sync` — no email inbox
 
 ---
 
 ## 7. Open questions
 
-| #  | Question                                               | Default            |
-|----|--------------------------------------------------------|--------------------|
-| Q1 | Startup types: fixed catalogue or founder can add      | Fixed v1           |
-|    | custom type?                                           |                    |
-| Q2 | Market research: public (visible to community) or      | Private by default |
-|    | private per founder?                                   |                    |
-| Q3 | Path comparison: show all paths or only the top 2-3   | Top 3              |
-|    | most relevant to the founder's type?                   |                    |
-| Q4 | Financial planning: simple burn/runway only, or full  | Simple v1          |
-|    | P&L / cap table?                                       |                    |
-| Q5 | Community v1: forum only, or also DMs?                 | Forum only         |
-| Q6 | PDF export: full plan only, or per-section too?        | Full plan first    |
-| Q7 | AI suggestions: on-demand button or auto-generated?    | On-demand          |
-| Q8 | Planner steps: locked until previous done, or free?    | Free (any order)   |
-| Q9 | Leaderboard: opt-in ranking or always visible?         | Opt-in (D3)        |
-| Q10| Knowledge base content: seed via admin UI or bake      | Baked JSON v1      |
-|    | into startup-types service as static JSON at deploy?   |                    |
-| Q11| Advisor mode: gated behind completing the startup      | Gated              |
-|    | type selector, or available from the start?            |                    |
+| #   | Question                                              | Default            |
+|-----|-------------------------------------------------------|--------------------|
+| Q1  | Startup types: fixed catalogue or founder can add     | Fixed v1           |
+|     | custom type?                                          |                    |
+| Q2  | Market research: visible to community or private?     | Private by default |
+| Q3  | Path comparison: all paths or top 3 per context?      | Top 3              |
+| Q4  | Financial planning: burn/runway only, or full P&L?    | Simple v1          |
+| Q5  | Community v1: forum only, or also DMs?                | Forum only         |
+| Q6  | PDF export: full plan only, or per-section too?       | Full plan first    |
+| Q7  | AI suggestions: on-demand or auto-generated?          | On-demand          |
+| Q8  | Planner steps: locked until previous done, or free?   | Free (any order)   |
+| Q9  | Leaderboard: opt-in or always visible?                | Opt-in (D3)        |
+| Q10 | KB content: seed via wiki admin or static JSON?       | Wiki admin         |
+| Q11 | Advisor mode: gated behind type selector or open?     | Gated              |
+| Q12 | Legal content: generic or jurisdiction-specific?      | Generic + UK/US    |
+|     | (UK/US covers the majority of target users)           |                    |
+| Q13 | Equity calculator: simple split or weighted scoring?  | Weighted scoring   |
+|     | (role, time commitment, capital contribution, risk)   |                    |
+| Q14 | Weekly review: mandatory for streak or optional?      | Mandatory (D17)    |
+| Q15 | Decision log: private always, or shareable with       | Private (D18)      |
+|     | investors/co-founders via link?                       |                    |
