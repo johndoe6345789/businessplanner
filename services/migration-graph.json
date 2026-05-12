@@ -26,5 +26,6 @@
   "social": ["users", "notifications"],
   "image": ["users"],
   "analytics": ["users"],
+  "gamification": ["users"],
   "migration-runner": []
 }

@@ -29,30 +29,32 @@ void StreakService::updateStreak(const std::string& userId, Callback onSuccess,
                                  ErrCallback onError)
 {
     const std::string sql = R"(
-        WITH last_activity AS (
-            SELECT last_active_date
-            FROM users WHERE id = $1
-        ),
-        streak_calc AS (
-            SELECT CASE
-                WHEN la.last_active_date = CURRENT_DATE
-                    THEN u.current_streak
-                WHEN la.last_active_date
+        INSERT INTO streaks
+            (user_id, current_streak,
+             longest_streak, last_activity_date)
+        VALUES ($1, 1, 1, CURRENT_DATE)
+        ON CONFLICT (user_id) DO UPDATE
+        SET current_streak = CASE
+                WHEN streaks.last_activity_date
+                     = CURRENT_DATE
+                    THEN streaks.current_streak
+                WHEN streaks.last_activity_date
                      = CURRENT_DATE - 1
-                    THEN u.current_streak + 1
+                    THEN streaks.current_streak + 1
                 ELSE 1
-            END AS new_streak
-            FROM users u, last_activity la
-            WHERE u.id = $1
-        )
-        UPDATE users
-        SET current_streak =
-                (SELECT new_streak FROM streak_calc),
-            longest_streak = GREATEST(longest_streak,
-                (SELECT new_streak FROM streak_calc)),
-            last_active_date = CURRENT_DATE,
-            updated_at = NOW()
-        WHERE id = $1
+            END,
+            longest_streak = GREATEST(
+                streaks.longest_streak,
+                CASE
+                    WHEN streaks.last_activity_date
+                         = CURRENT_DATE
+                        THEN streaks.current_streak
+                    WHEN streaks.last_activity_date
+                         = CURRENT_DATE - 1
+                        THEN streaks.current_streak + 1
+                    ELSE 1
+                END),
+            last_activity_date = CURRENT_DATE
         RETURNING current_streak, longest_streak
     )";
 

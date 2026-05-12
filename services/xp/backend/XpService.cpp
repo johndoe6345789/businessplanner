@@ -33,7 +33,7 @@ void XpService::awardPoints(const std::string& userId, std::int64_t amount,
     auto dbClient = db();
     const std::string sql = R"(
         WITH inserted AS (
-            INSERT INTO point_transactions
+            INSERT INTO points_log
                 (user_id, amount, reason,
                  source, created_at)
             VALUES ($1, $2, $3, $4, NOW())
