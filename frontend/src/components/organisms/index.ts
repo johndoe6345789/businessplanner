@@ -72,3 +72,11 @@ export type {
 } from './LeaderboardTable';
 
 export { KnowledgeBase } from './KnowledgeBase';
+
+export {
+  EquityCalculator,
+} from './EquityCalculator';
+
+export {
+  VestingCalculator,
+} from './VestingCalculator';

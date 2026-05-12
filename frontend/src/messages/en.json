@@ -693,6 +693,21 @@
     "marketResearch": "Understanding my market",
     "stayingMotivated": "Staying motivated"
   },
+  "legal": {
+    "title": "Legal & Equity Tools",
+    "equityTitle": "Equity Split Calculator",
+    "equityDesc": "Calculate a fair equity split based on role, time, and contribution.",
+    "vestingTitle": "Vesting Schedule Calculator",
+    "vestingDesc": "Model a founder vesting schedule with cliff and acceleration.",
+    "addFounder": "Add founder",
+    "totalEquity": "Total equity",
+    "score": "Score",
+    "cliffShares": "Cliff shares",
+    "monthlyVest": "Monthly vest",
+    "month": "Month",
+    "sharesVested": "Shares vested",
+    "knowledgeBaseNote": "Legal guides (structures, IP, GDPR) are in the Knowledge Base."
+  },
   "alerts": {
     "pageTitle": "Alerts",
     "noneOpen": "No alerts right now",

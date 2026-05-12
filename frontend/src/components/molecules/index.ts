@@ -138,3 +138,4 @@ export type { WizardNavButtonsProps }
 
 export * from './index.social';
 export * from './index.auth';
+export * from './index.legal';
