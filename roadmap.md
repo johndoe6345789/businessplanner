@@ -377,11 +377,11 @@ Founders helping founders. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 8.1 | Export plan as PDF (backend: pdf domain ✅)        | ⬜     |
-| 8.2 | AI suggestions per planner step (prompt tuning)   | ⬜     |
-| 8.3 | Save AI chat threads to planner steps             | ⬜     |
-| 8.4 | AI risk report: blind spots in the current plan   | ⬜     |
-| 8.5 | AI document drafting: generate pitch deck outline,| ⬜     |
+| 8.1 | Export plan as PDF (backend: pdf domain ✅)        | ✅     |
+| 8.2 | AI suggestions per planner step (prompt tuning)   | ✅     |
+| 8.3 | Save AI chat threads to planner steps             | ❌ v2  |
+| 8.4 | AI risk report: blind spots in the current plan   | ❌ v2  |
+| 8.5 | AI document drafting: generate pitch deck outline,| ❌ v2  |
 |     | investor update, NDA draft, job description —     |        |
 |     | seeded from the founder's own plan data           |        |
 
