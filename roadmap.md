@@ -347,13 +347,13 @@ when stage gates unlock. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 6.1 | `/notifications` inbox page                       | ⬜     |
-| 6.2 | Notification bell badge in Navbar (live count)    | ⬜     |
-| 6.3 | Notification event catalogue (D28) → triggers     | ⬜     |
+| 6.1 | `/notifications` inbox page                       | ✅     |
+| 6.2 | Notification bell badge in Navbar (live count)    | ✅     |
+| 6.3 | Notification event catalogue (D28) → triggers     | ✅     |
 |     | stage gate reached, streak at-risk (23 h warning),|        |
 |     | co-founder joined, milestone declared, weekly      |        |
 |     | review due, planner step commented on              |        |
-| 6.4 | Email digest (daily planner reminder)             | ⬜     |
+| 6.4 | Email digest (daily planner reminder)             | ❌ v2  |
 
 ### Phase 7 — Community
 
