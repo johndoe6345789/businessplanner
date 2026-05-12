@@ -16,9 +16,7 @@
     { "level": 5, "xpRequired": 1000, "title": "Expert" },
     { "level": 6, "xpRequired": 1500, "title": "Master" },
     { "level": 7, "xpRequired": 2500, "title": "Legend" },
-    { "level": 8, "xpRequired": 4000, "title": "Champion" },
-    { "level": 9, "xpRequired": 6000, "title": "Grandmaster" },
-    { "level": 10, "xpRequired": 10000, "title": "Transcendent" }
+    { "level": 8, "xpRequired": 10000, "title": "Mythic" }
   ],
   "streakMilestones": [3, 7, 14, 30, 60, 90, 180, 365],
   "leaderboard": {
