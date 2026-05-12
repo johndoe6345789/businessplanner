@@ -35,17 +35,48 @@ they don't know what to validate first, waste money on the
 wrong path, and run out of runway before finding
 product-market fit. LaunchPad fixes that.
 
+**LaunchPad is simultaneously a knowledge base and an
+interactive tool.** These are not the same thing and both
+are required:
+
+- A *knowledge base* tells you what a SaaS startup is,
+  what its common failure modes are, what a typical CAC
+  looks like, and what a go-to-market playbook contains.
+  It is reference material you browse and search.
+
+- An *interactive tool* takes your actual numbers, your
+  market, your skills, and your current stage, and tells
+  you what *you specifically* should do next. It computes
+  live as you type. It surfaces gaps in your plan. It
+  asks you questions and builds a personalised path.
+
+The AI is the bridge: it reads the knowledge base context
+for your startup type *and* your live inputs, then
+synthesises both into advice that is grounded in curated
+best practice and specific to your situation.
+
 **Core capabilities:**
 
 - **Startup type framework** — SaaS, marketplace,
   e-commerce, hardware, services, fintech, health, content,
   and platform startups all have different critical paths,
   cost curves, and failure modes. The planner is dynamic:
-  steps, stage gates, and advice adapt to the founder's type.
+  steps, stage gates, and advice adapt to the founder's
+  type.
 
-- **Market research tools** — TAM/SAM/SOM calculator,
-  competitor tracker, customer persona builder, customer
-  discovery log. Founders validate before spending.
+- **Knowledge base** — curated guides per startup type,
+  launch playbooks (go-to-market, fundraising, hiring),
+  industry benchmarks (typical CAC/LTV/churn by type),
+  common failure patterns, and stage-by-stage checklists.
+  Fully indexed and searchable. Admin-maintained, not
+  user-generated.
+
+- **Interactive research tools** — live calculators for
+  TAM/SAM/SOM, burn rate, unit economics, and runway.
+  Inputs update outputs in real time — no page reload.
+  Competitor tracker, customer persona builder, customer
+  discovery log. Your numbers compared against benchmarks
+  for your startup type.
 
 - **Path analysis + financial planning** — burn rate,
   runway, unit economics (CAC / LTV / payback period),
@@ -53,10 +84,12 @@ product-market fit. LaunchPad fixes that.
   launch paths. "Which path wastes less money" becomes a
   calculation, not a guess.
 
-- **AI planning assistant** — Claude-powered suggestions,
-  market research synthesis, competitor analysis, risk
-  identification, and personalised next steps — all
-  grounded in the founder's type and current stage.
+- **AI planning assistant** — Claude-powered advisor mode
+  that asks structured questions and builds a personalised
+  plan. Market research synthesis, competitor analysis,
+  risk identification, and "what to do next" — all
+  grounded in the founder's type, stage, and current
+  inputs.
 
 - **Gamification** — the core motivation engine. Founding
   a startup is a long, lonely grind; progress feels
@@ -141,6 +174,11 @@ This is the bedrock phase.
 
 New service: `services/startup-types/`
 
+This phase builds both the knowledge layer (what each
+startup type is, its typical path, its failure modes)
+and the interactive layer (a dynamic planner that adapts
+to the founder's type).
+
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
 | 2.1 | Startup type catalogue (backend + migration)      | ⬜     |
@@ -151,40 +189,56 @@ New service: `services/startup-types/`
 | 2.4 | Dynamic planner: steps adapt to selected type     | ⬜     |
 | 2.5 | Per-type stage gates (what to validate before     | ⬜     |
 |     | moving to the next stage)                         |        |
+| 2.6 | Knowledge base: startup guide per type            | ⬜     |
+|     | (inline reference, browsable, searchable)         |        |
+| 2.7 | Launch playbook library: go-to-market,            | ⬜     |
+|     | fundraising, hiring — per startup type            |        |
+| 2.8 | Industry benchmarks per type (CAC, LTV, churn,    | ⬜     |
+|     | time-to-revenue) — used for comparison in Phase 3 |        |
 
 ### Phase 3 — Market research tools
 
 Founders need instruments to validate before spending.
-These are the core research primitives.
+All calculators in this phase are **live**: inputs update
+outputs in real time with no page reload. Saved values
+persist to the backend; computation runs client-side.
 
 New service: `services/market-research/`
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 3.1 | TAM / SAM / SOM calculator                        | ⬜     |
+| 3.1 | TAM / SAM / SOM live calculator                   | ⬜     |
 | 3.2 | Competitor tracker (name, stage, strengths/gaps)  | ⬜     |
 | 3.3 | Customer persona builder                          | ⬜     |
 | 3.4 | Customer discovery log (interviews + findings)    | ⬜     |
-| 3.5 | Market research dashboard page                    | ⬜     |
-| 3.6 | AI synthesis: summarise research findings to      | ⬜     |
-|     | date and surface blind spots                      |        |
+| 3.5 | Benchmark comparison: your TAM vs. industry       | ⬜     |
+|     | averages for your startup type (from Phase 2.8)   |        |
+| 3.6 | Market research dashboard page                    | ⬜     |
+| 3.7 | AI synthesis: summarise research findings,        | ⬜     |
+|     | compare against benchmarks, surface blind spots   |        |
 
 ### Phase 4 — Path analysis + financial planning
 
-"Which path wastes less money" is a calculation. This
-phase gives founders the instruments to make it.
+"Which path wastes less money" is a calculation. All
+financial tools are **live calculators** — change your
+monthly burn and the runway updates instantly. The path
+comparison tool is AI-generated from your specific
+context, not a static table.
 
 New service: `services/financials/`
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 4.1 | Burn rate + runway calculator                     | ⬜     |
-| 4.2 | Unit economics model (CAC, LTV, payback period)   | ⬜     |
-| 4.3 | Path comparison tool: lean vs bootstrapped        | ⬜     |
-|     | vs funded — AI-generated pros/cons per context    |        |
+| 4.1 | Burn rate + runway live calculator                | ⬜     |
+| 4.2 | Unit economics live model (CAC, LTV, payback)     | ⬜     |
+| 4.3 | Path comparison: lean vs bootstrapped vs funded   | ⬜     |
+|     | — AI-generated pros/cons given your type +        |        |
+|     | capital + market data                             |        |
 | 4.4 | Kill criteria / pivot signals per startup type    | ⬜     |
 | 4.5 | Hypothesis tracker (assumption → test → result)   | ⬜     |
-| 4.6 | Financial planning dashboard page                 | ⬜     |
+| 4.6 | "What to do next" engine: reads stage, progress,  | ⬜     |
+|     | gaps, surfaces single most important next action  |        |
+| 4.7 | Financial planning dashboard page                 | ⬜     |
 
 ### Phase 5 — Notifications
 
@@ -242,6 +296,12 @@ migrations ✅.
 | X1  | Real-time WebSocket bus (chat + streak alerts + feed)|
 | X2  | Feature flags for gradual rollout of community      |
 | X3  | External data integrations (Crunchbase, SimilarWeb) |
+| X4  | Advisor mode: AI asks structured diagnostic         |
+|     | questions and assembles a personalised plan from    |
+|     | scratch — entry point for new founders              |
+| X5  | Knowledge base search: Elasticsearch indexes all    |
+|     | guides, playbooks, and benchmarks; surfaced in the  |
+|     | existing `/search` page                             |
 
 ---
 
@@ -267,6 +327,15 @@ migrations ✅.
 | D9  | PDF export uses template's Gotenberg sidecar               |
 | D10 | Package repo auth = self-contained JWT (not Keycloak SSO)  |
 | D11 | Package repo blob store = MinIO (`packagerepo` bucket)     |
+| D12 | Interactive calculators compute client-side (React         |
+|     | state); backend only stores saved inputs — no round-trip   |
+|     | per keystroke                                              |
+| D13 | Knowledge base content is admin-curated JSON/markdown      |
+|     | per startup type — not a user-editable wiki                |
+| D14 | AI advisor has access to both the knowledge base context   |
+|     | for the founder's type and their live inputs/progress —    |
+|     | answers are grounded in curated best practice AND          |
+|     | specific to the founder's situation                        |
 
 ---
 
@@ -306,7 +375,9 @@ surfaced in LaunchPad's UI:
 - `gallery` — no photo albums
 - `ecommerce` — no storefront
 - `video` / `streaming` — no media platform
-- `wiki` — no knowledge base
+- `wiki` — LaunchPad's knowledge base is admin-curated
+  content per startup type (D13), not a user-editable
+  wiki; the wiki service is not used
 - `imap-sync` — no email inbox
 
 ---
@@ -328,3 +399,7 @@ surfaced in LaunchPad's UI:
 | Q7 | AI suggestions: on-demand button or auto-generated?    | On-demand          |
 | Q8 | Planner steps: locked until previous done, or free?    | Free (any order)   |
 | Q9 | Leaderboard: opt-in ranking or always visible?         | Opt-in (D3)        |
+| Q10| Knowledge base content: seed via admin UI or bake      | Baked JSON v1      |
+|    | into startup-types service as static JSON at deploy?   |                    |
+| Q11| Advisor mode: gated behind completing the startup      | Gated              |
+|    | type selector, or available from the start?            |                    |
