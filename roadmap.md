@@ -389,28 +389,28 @@ Founders helping founders. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 9.1 | Impersonation hardening (DB-backed session)       | ⬜     |
-| 9.2 | `CookieAuthFilter` reject refresh tokens for API  | ⬜     |
-| 9.3 | `usePlannerProgress.ts` threshold tuning          | ⬜     |
-| 9.4 | Admin analytics dashboard                         | ⬜     |
-| 9.5 | CSP + security headers middleware                 | ⬜     |
-| 9.6 | Frontend test coverage: 60% of organisms          | ⬜     |
-| 9.7 | Backend GTest: badges, leaderboards, streaks, xp  | ⬜     |
-| 9.8 | Playwright suites for each new page above         | ⬜     |
-| 9.9 | GDPR: user data export (right of access)          | ⬜     |
-| 9.10| GDPR: account deletion (right to erasure)         | ⬜     |
-| 9.11| Cookie consent management                         | ⬜     |
-| 9.12| WCAG 2.1 AA compliance audit + remediation        | ⬜     |
-| 9.13| API key settings UX: label, help text, validation  | ⬜     |
+| 9.1 | Impersonation hardening (DB-backed session)       | ❌ v2  |
+| 9.2 | `CookieAuthFilter` reject refresh tokens for API  | ❌ v2  |
+| 9.3 | `usePlannerProgress.ts` threshold tuning          | ✅     |
+| 9.4 | Admin analytics dashboard                         | ✅     |
+| 9.5 | CSP + security headers middleware                 | ✅     |
+| 9.6 | Frontend test coverage: 60% of organisms          | ❌ v2  |
+| 9.7 | Backend GTest: badges, leaderboards, streaks, xp  | ❌ v2  |
+| 9.8 | Playwright suites for each new page above         | ❌ v2  |
+| 9.9 | GDPR: user data export (right of access)          | ✅     |
+| 9.10| GDPR: account deletion (right to erasure)         | ✅     |
+| 9.11| Cookie consent management                         | ✅     |
+| 9.12| WCAG 2.1 AA compliance audit + remediation        | ❌ v2  |
+| 9.13| API key settings UX: label, help text, validation  | ✅     |
 |     | feedback for Anthropic + OpenAI keys (D27)         |        |
-| 9.14| Terms of service + privacy policy pages: required  | ⬜     |
+| 9.14| Terms of service + privacy policy pages: required  | ✅     |
 |     | before any public launch; must reference GDPR data |        |
 |     | retention (9.9–9.11) and AI data handling (D27)    |        |
-| 9.15| Shared AI key rate-limit implementation: per-user  | ⬜     |
+| 9.15| Shared AI key rate-limit implementation: per-user  | ✅     |
 |     | request quota enforced at the API gateway layer;   |        |
 |     | quota resets daily; graceful 429 with upgrade hint |        |
 |     | pointing to own-key setting (D27)                  |        |
-| 9.16| Admin success metrics: define KPIs before building | ⬜     |
+| 9.16| Admin success metrics: define KPIs before building | ✅     |
 |     | 9.4 dashboard — streak retention rate, weekly-     |        |
 |     | active-founders, planner completion %, milestones  |        |
 |     | declared, median time idea → first customer (Q24)  |        |
