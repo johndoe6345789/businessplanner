@@ -27,3 +27,13 @@ export type { SearchInputProps } from './SearchInput';
 export { SkillTag } from './SkillTag';
 export type { SkillTagProps } from './SkillTag';
 
+export { StreakCounter } from './StreakCounter';
+export type { StreakCounterProps }
+  from './StreakCounter';
+
+export { XPBar } from './XPBar';
+export type { XPBarProps } from './XPBar';
+
+export { LevelBadge } from './LevelBadge';
+export type { LevelBadgeProps } from './LevelBadge';
+
