@@ -1,24 +1,26 @@
 # `search.reindex` Kafka event shape
 
-Producers (forum, wiki, blog, shop, gallery, users) emit
-JSON messages to the Kafka topic `search.reindex`. The
-search-indexer daemon consumes them and applies upserts /
-deletes against the corresponding Elasticsearch index.
+LaunchPad services (startup-types, planner, community,
+users) emit JSON messages to the Kafka topic
+`search.reindex`. The search-indexer daemon consumes
+them and applies upserts / deletes against the
+corresponding Elasticsearch index.
 
 ## Wire format
 
 ```json
 {
   "op":    "upsert",
-  "index": "forum_posts",
-  "id":    "12345",
+  "index": "kb_content",
+  "id":    "42",
   "doc": {
-    "target_type": "forum_thread",
-    "target_id":   "abc-slug",
-    "author_id":   "uuid...",
-    "body":        "post body markdown...",
-    "title":       "thread title (only for forum_board rows)",
-    "created_at":  "2026-05-02T10:00:00Z"
+    "content_type": "guide",
+    "startup_type": "saas",
+    "stage":        "validate",
+    "title":        "Finding your first 10 customers",
+    "body_md":      "...",
+    "tags":         ["gtm", "sales"],
+    "updated_at":   "2026-05-12T10:00:00Z"
   }
 }
 ```
@@ -28,21 +30,20 @@ deletes against the corresponding Elasticsearch index.
 - `op` — required. One of:
   - `"upsert"` — index or replace the document at `id`.
   - `"delete"` — remove the document at `id`.
-- `index` — logical index name. Must match a
-  `name` from `services/search/constants.json`
-  (`forum_posts`, `wiki_pages`, `articles`,
-  `products`, `gallery_items`, `users`).
-- `id` — document id as a **string**. The indexer
-  uses this verbatim as the Elasticsearch `_id`.
-- `doc` — required for `upsert`, ignored on
-  `delete`. The shape mirrors the per-index mapping
-  in `SearchIndexMappings.h`. Unknown fields are
-  ignored by Elasticsearch dynamic mapping.
+- `index` — logical index name. Must match a `name`
+  from `services/search/constants.json`:
+  `kb_content`, `planner_steps`,
+  `community_posts`, `founders`.
+- `id` — document id as a **string**. Used verbatim
+  as the Elasticsearch `_id`.
+- `doc` — required for `upsert`, ignored on `delete`.
+  Shape mirrors the per-index mapping in
+  `SearchIndexMappings.h`. Unknown fields are ignored.
 
-## Phase 1 status
+## Current status
 
-The current `KafkaConsumerStub` logs receipts but
-does not yet apply them. The full upsert/delete
-dispatcher lands in Phase 2 once producers exist.
-Boot-time backfill (`reindexAll`) and the periodic
-resync timer keep the indexes warm in the meantime.
+The `KafkaConsumerStub` logs receipts but does not yet
+apply them. Boot-time backfill (`reindexAll`) and the
+periodic resync timer keep indexes warm. Full event
+dispatch lands once Phase 2 (startup-types) and Phase
+3 (market-research) producers exist.

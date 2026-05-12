@@ -25,7 +25,7 @@ class UrlBuilder
     /**
      * @brief Build a frontend URL for one hit.
      * @param esIndex The ES index name
-     *                (e.g. "nextra-forum").
+     *                (e.g. "launchpad-kb").
      * @param id      Document id as string.
      * @param src     The hit's `_source` JSON, used
      *                when the URL needs a slug or

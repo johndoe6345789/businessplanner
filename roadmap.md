@@ -365,6 +365,11 @@ migrations ✅.
 | pdf           | Full backend ✅ — no export trigger UI |
 | ai-chat       | Full backend ✅ — chat UI exists but   |
 |               | not yet linked to planner steps        |
+| search        | Infrastructure retooled for LaunchPad: |
+|               | 4 new indexes (launchpad-kb, -planner, |
+|               | -community, -founders); frontend tabs  |
+|               | updated. Content feeds in as Phase 2-4 |
+|               | services land.                         |
 
 ### ❌ Out of scope for LaunchPad
 

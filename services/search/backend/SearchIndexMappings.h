@@ -1,17 +1,15 @@
 #pragma once
 /**
  * @file SearchIndexMappings.h
- * @brief Per-index Elasticsearch mappings for the
- *        6 authoritative indexes managed by the
- *        search-indexer daemon. Kept in their own
- *        translation unit so SearchIndexInit.cpp
- *        stays under the 100-LOC cap.
+ * @brief LaunchPad Elasticsearch index mappings
+ *        for the 4 content domains indexed by the
+ *        search-indexer daemon.
  *
  * Names are kept in lock-step with
  * services/search/constants.json — the indexer
- * itself reads constants.json at runtime; this
- * header is only consulted at boot to ensure each
- * ES index exists with the right mapping shape.
+ * reads constants.json at runtime; this header is
+ * only consulted at boot to ensure each ES index
+ * exists with the correct mapping shape.
  */
 
 #include <nlohmann/json.hpp>
@@ -28,62 +26,71 @@ using json = nlohmann::json;
 using IndexMapping = std::pair<std::string, json>;
 
 /**
- * @brief Authoritative mappings for the 6 indexes.
+ * @brief Authoritative mappings for the 4
+ *        LaunchPad indexes.
  *
- * `text` for searchable strings, `keyword` for
- * IDs/enums/slugs, `date` for timestamps. Other
- * scalars (booleans) are mapped explicitly so ES
- * does not infer surprising types.
+ * `text` for searchable prose, `keyword` for
+ * IDs/enums/slugs used in filters, `date` for
+ * timestamps. Title fields get 2x boost weight
+ * via copy_to so callers can boost by field name
+ * without duplicating the boost logic everywhere.
  */
 inline std::vector<IndexMapping> allIndexMappings()
 {
     return {
-      {"nextra-forum",
+      // --------------------------------------------------
+      // Knowledge base: guides, playbooks, benchmarks.
+      // Admin-curated content per startup type.
+      // --------------------------------------------------
+      {"launchpad-kb",
        {{"properties", {
-         {"target_type", {{"type", "keyword"}}},
-         {"target_id",   {{"type", "keyword"}}},
-         {"author_id",   {{"type", "keyword"}}},
-         {"title",       {{"type", "text"}}},
-         {"body",        {{"type", "text"}}},
-         {"created_at",  {{"type", "date"}}}
+         {"content_type",  {{"type", "keyword"}}},
+         {"startup_type",  {{"type", "keyword"}}},
+         {"stage",         {{"type", "keyword"}}},
+         {"title",         {{"type", "text"}}},
+         {"body_md",       {{"type", "text"}}},
+         {"tags",          {{"type", "keyword"}}},
+         {"updated_at",    {{"type", "date"}}}
        }}}},
-      {"nextra-wiki",
+      // --------------------------------------------------
+      // Planner steps: dynamic per startup type.
+      // Lets founders search for a step by name.
+      // --------------------------------------------------
+      {"launchpad-planner",
        {{"properties", {
-         {"slug",       {{"type", "keyword"}}},
-         {"title",      {{"type", "text"}}},
-         {"body_md",    {{"type", "text"}}},
-         {"updated_at", {{"type", "date"}}}
+         {"step_id",       {{"type", "keyword"}}},
+         {"startup_type",  {{"type", "keyword"}}},
+         {"stage",         {{"type", "keyword"}}},
+         {"title",         {{"type", "text"}}},
+         {"description",   {{"type", "text"}}},
+         {"tags",          {{"type", "keyword"}}}
        }}}},
-      {"nextra-blog",
+      // --------------------------------------------------
+      // Community forum posts + milestone comments.
+      // Scoped by startup_type for type-specific boards.
+      // --------------------------------------------------
+      {"launchpad-community",
        {{"properties", {
-         {"slug",         {{"type", "keyword"}}},
-         {"title",        {{"type", "text"}}},
-         {"body_md",      {{"type", "text"}}},
+         {"target_type",  {{"type", "keyword"}}},
+         {"target_id",    {{"type", "keyword"}}},
          {"author_id",    {{"type", "keyword"}}},
-         {"status",       {{"type", "keyword"}}},
-         {"published_at", {{"type", "date"}}}
+         {"startup_type", {{"type", "keyword"}}},
+         {"title",        {{"type", "text"}}},
+         {"body",         {{"type", "text"}}},
+         {"created_at",   {{"type", "date"}}}
        }}}},
-      {"nextra-products",
-       {{"properties", {
-         {"sku",         {{"type", "keyword"}}},
-         {"name",        {{"type", "text"}}},
-         {"description", {{"type", "text"}}},
-         {"active",      {{"type", "keyword"}}}
-       }}}},
-      {"nextra-gallery",
-       {{"properties", {
-         {"slug",        {{"type", "keyword"}}},
-         {"title",       {{"type", "text"}}},
-         {"description", {{"type", "text"}}},
-         {"owner_id",    {{"type", "keyword"}}},
-         {"created_at",  {{"type", "date"}}}
-       }}}},
-      {"nextra-users",
+      // --------------------------------------------------
+      // Founder profiles: username, display name,
+      // startup type and current stage — so founders
+      // can find peers at the same stage.
+      // --------------------------------------------------
+      {"launchpad-founders",
        {{"properties", {
          {"username",     {{"type", "text"}}},
-         {"email",        {{"type", "text"}}},
          {"display_name", {{"type", "text"}}},
-         {"role",         {{"type", "keyword"}}}
+         {"startup_type", {{"type", "keyword"}}},
+         {"stage",        {{"type", "keyword"}}},
+         {"bio",          {{"type", "text"}}}
        }}}}
     };
 }

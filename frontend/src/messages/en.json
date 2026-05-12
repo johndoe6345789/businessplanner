@@ -485,12 +485,10 @@
     "next": "Next",
     "tabs": {
       "all": "All",
-      "forum": "Forum",
-      "wiki": "Wiki",
-      "blog": "Blog",
-      "shop": "Shop",
-      "gallery": "Gallery",
-      "people": "People"
+      "knowledge": "Knowledge",
+      "planner": "Planner",
+      "community": "Community",
+      "founders": "Founders"
     }
   },
   "planner": {

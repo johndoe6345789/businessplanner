@@ -8,54 +8,39 @@
   "httpPort": 8086,
   "indexes": [
     {
-      "name": "forum_posts",
+      "name": "kb_content",
+      "targetTable": "kb_content",
+      "esIndex": "launchpad-kb",
+      "fields": ["id", "content_type",
+                 "startup_type", "stage",
+                 "title", "body_md",
+                 "tags", "updated_at"],
+      "idField": "id"
+    },
+    {
+      "name": "planner_steps",
+      "targetTable": "planner_steps",
+      "esIndex": "launchpad-planner",
+      "fields": ["id", "step_id",
+                 "startup_type", "stage",
+                 "title", "description", "tags"],
+      "idField": "id"
+    },
+    {
+      "name": "community_posts",
       "targetTable": "comments_v2",
-      "esIndex": "nextra-forum",
+      "esIndex": "launchpad-community",
       "fields": ["id", "target_type", "target_id",
-                 "author_id", "body", "title",
-                 "created_at"],
+                 "author_id", "startup_type",
+                 "title", "body", "created_at"],
       "idField": "id"
     },
     {
-      "name": "wiki_pages",
-      "targetTable": "wiki_pages",
-      "esIndex": "nextra-wiki",
-      "fields": ["id", "slug", "title", "body_md",
-                 "updated_at"],
-      "idField": "id"
-    },
-    {
-      "name": "articles",
-      "targetTable": "articles",
-      "esIndex": "nextra-blog",
-      "fields": ["id", "slug", "title", "body_md",
-                 "author_id", "status",
-                 "published_at"],
-      "idField": "id"
-    },
-    {
-      "name": "products",
-      "targetTable": "products",
-      "esIndex": "nextra-products",
-      "fields": ["id", "sku", "name", "description",
-                 "active"],
-      "idField": "id"
-    },
-    {
-      "name": "gallery_items",
-      "targetTable": "galleries",
-      "esIndex": "nextra-gallery",
-      "fields": ["id", "slug", "title",
-                 "description", "owner_id",
-                 "created_at"],
-      "idField": "id"
-    },
-    {
-      "name": "users",
+      "name": "founders",
       "targetTable": "users",
-      "esIndex": "nextra-users",
-      "fields": ["id", "username", "email",
-                 "display_name", "role"],
+      "esIndex": "launchpad-founders",
+      "fields": ["id", "username", "display_name",
+                 "startup_type", "stage", "bio"],
       "idField": "id"
     }
   ]

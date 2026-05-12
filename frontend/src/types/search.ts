@@ -1,19 +1,21 @@
 /**
  * Search domain types shared between the suggest
- * dropdown, the full results page and the RTK
+ * dropdown, the full results page, and the RTK
  * Query API.
  *
  * @module types/search
  */
 
-/** Possible entity types in suggest results. */
+/**
+ * Logical entity types returned by the search
+ * and suggest endpoints — one per LaunchPad
+ * Elasticsearch index.
+ */
 export type SearchItemType =
-  | 'forum_posts'
-  | 'wiki_pages'
-  | 'articles'
-  | 'products'
-  | 'gallery_items'
-  | 'users';
+  | 'kb_content'
+  | 'planner_steps'
+  | 'community_posts'
+  | 'founders';
 
 /** A single suggest dropdown item. */
 export interface SearchSuggestItem {

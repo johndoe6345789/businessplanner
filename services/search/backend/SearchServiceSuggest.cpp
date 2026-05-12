@@ -19,9 +19,8 @@ constexpr std::int32_t kSuggestMax = 50;
 constexpr std::int32_t kSuggestDefault = 5;
 
 const std::vector<std::string> kSuggestIndices = {
-    "nextra-forum", "nextra-wiki", "nextra-blog",
-    "nextra-products", "nextra-gallery",
-    "nextra-users"};
+    "launchpad-kb", "launchpad-planner",
+    "launchpad-community", "launchpad-founders"};
 
 std::string indexList()
 {
@@ -53,12 +52,12 @@ void SearchService::suggest(
         {"query", {
             {"multi_match", {
                 {"query", query},
-                {"fields", {"title^3", "name^3",
-                            "username^2",
+                {"fields", {"title^3",
                             "display_name^2",
-                            "sku^2", "slug",
-                            "description", "body",
-                            "body_md"}},
+                            "username^2",
+                            "description^2",
+                            "body_md", "body",
+                            "bio", "tags"}},
                 {"type", "best_fields"},
                 {"fuzziness", "AUTO"}
             }}
