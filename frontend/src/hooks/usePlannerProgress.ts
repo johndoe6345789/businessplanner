@@ -1,18 +1,13 @@
 'use client';
 
 import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector }
-  from '@/store/hooks';
-import { toggleStep, resetPlan }
-  from '@/store/slices/plannerSlice';
-import roadmap
-  from '@/constants/startup-roadmap.json';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { toggleStep, resetPlan } from '@/store/slices/plannerSlice';
+import { useCompleteStepMutation } from '@/store/api/gamificationApi';
+import roadmap from '@/constants/startup-roadmap.json';
 
 /** Completion status of a roadmap phase. */
-export type PhaseStatus =
-  | 'todo'
-  | 'in-progress'
-  | 'complete';
+export type PhaseStatus = 'todo' | 'in-progress' | 'complete';
 
 /** Per-phase progress summary. */
 export interface PhaseProgress {
@@ -26,27 +21,11 @@ export interface PhaseProgress {
 
 /**
  * Determine the display status of a phase.
- *
- * TODO — Your decision: what thresholds feel right?
- *
- * Options to consider:
- *  - 'complete' only at 100%? Or at 75%+?
- *  - Add a 4th 'nearly-done' status for 75–99%?
- *  - Should 'in-progress' start at step 1 or
- *    only after completing the first third?
- *
- * The default below is the simplest correct logic.
- * Edit it to match how you want founders to feel
- * about their progress.
- *
  * @param done - Completed step count.
  * @param total - Total steps in the phase.
  * @returns Phase display status.
  */
-export function getPhaseStatus(
-  done: number,
-  total: number,
-): PhaseStatus {
+export function getPhaseStatus(done: number, total: number): PhaseStatus {
   if (done === 0) return 'todo';
   if (done >= total) return 'complete';
   return 'in-progress';
@@ -54,6 +33,9 @@ export function getPhaseStatus(
 
 /**
  * Hook providing planner progress state and actions.
+ * When a step transitions from incomplete to complete the
+ * gamification step-complete event is fired as a side effect;
+ * the optimistic UI toggle is not blocked.
  *
  * @returns Completed steps, per-phase progress,
  *   overall percentage, toggle, and reset actions.
@@ -63,10 +45,17 @@ export function usePlannerProgress() {
   const completedSteps = useAppSelector(
     (s) => s.planner.completedSteps,
   );
+  const [completeStep] = useCompleteStepMutation();
 
   const toggle = useCallback(
-    (stepId: string) => dispatch(toggleStep(stepId)),
-    [dispatch],
+    (stepId: string) => {
+      const wasComplete = Boolean(completedSteps[stepId]);
+      dispatch(toggleStep(stepId));
+      if (!wasComplete) {
+        void completeStep(stepId);
+      }
+    },
+    [dispatch, completedSteps, completeStep],
   );
 
   const reset = useCallback(
@@ -74,30 +63,22 @@ export function usePlannerProgress() {
     [dispatch],
   );
 
-  const phases: PhaseProgress[] = roadmap.phases.map(
-    (phase) => {
-      const done = phase.steps.filter(
-        (s) => completedSteps[s.id],
-      ).length;
-      const total = phase.steps.length;
-      return {
-        id: phase.id,
-        done,
-        total,
-        pct: total > 0
-          ? Math.round((done / total) * 100)
-          : 0,
-        status: getPhaseStatus(done, total),
-      };
-    },
-  );
+  const phases: PhaseProgress[] = roadmap.phases.map((phase) => {
+    const done = phase.steps.filter(
+      (s) => completedSteps[s.id],
+    ).length;
+    const total = phase.steps.length;
+    return {
+      id: phase.id,
+      done,
+      total,
+      pct: total > 0 ? Math.round((done / total) * 100) : 0,
+      status: getPhaseStatus(done, total),
+    };
+  });
 
-  const totalDone = phases.reduce(
-    (s, p) => s + p.done, 0,
-  );
-  const totalSteps = phases.reduce(
-    (s, p) => s + p.total, 0,
-  );
+  const totalDone = phases.reduce((s, p) => s + p.done, 0);
+  const totalSteps = phases.reduce((s, p) => s + p.total, 0);
 
   return {
     completedSteps,
