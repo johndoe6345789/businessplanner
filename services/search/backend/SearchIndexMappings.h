@@ -42,15 +42,17 @@ inline std::vector<IndexMapping> allIndexMappings()
       // Knowledge base: guides, playbooks, benchmarks.
       // Admin-curated content per startup type.
       // --------------------------------------------------
+      // Backed by wiki_pages + 002_kb_metadata cols.
+      // Only rows WHERE kb_type IS NOT NULL are indexed.
       {"launchpad-kb",
        {{"properties", {
-         {"content_type",  {{"type", "keyword"}}},
-         {"startup_type",  {{"type", "keyword"}}},
-         {"stage",         {{"type", "keyword"}}},
-         {"title",         {{"type", "text"}}},
-         {"body_md",       {{"type", "text"}}},
-         {"tags",          {{"type", "keyword"}}},
-         {"updated_at",    {{"type", "date"}}}
+         {"kb_type",      {{"type", "keyword"}}},
+         {"startup_type", {{"type", "keyword"}}},
+         {"stage",        {{"type", "keyword"}}},
+         {"title",        {{"type", "text"}}},
+         {"body_md",      {{"type", "text"}}},
+         {"tags",         {{"type", "keyword"}}},
+         {"updated_at",   {{"type", "date"}}}
        }}}},
       // --------------------------------------------------
       // Planner steps: dynamic per startup type.

@@ -22,8 +22,8 @@ void SearchService::indexKbContent(
     Callback onOk, ErrCallback onErr)
 {
     json doc = {
-        {"content_type", data.value(
-             "content_type", "guide")},
+        {"kb_type",      data.value(
+             "kb_type", "guide")},
         {"startup_type", data.value(
              "startup_type", "")},
         {"stage",        data.value("stage", "")},

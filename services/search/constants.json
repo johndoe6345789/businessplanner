@@ -9,13 +9,14 @@
   "indexes": [
     {
       "name": "kb_content",
-      "targetTable": "kb_content",
+      "targetTable": "wiki_pages",
       "esIndex": "launchpad-kb",
-      "fields": ["id", "content_type",
+      "fields": ["id", "kb_type",
                  "startup_type", "stage",
                  "title", "body_md",
                  "tags", "updated_at"],
-      "idField": "id"
+      "idField": "id",
+      "filter": "kb_type IS NOT NULL"
     },
     {
       "name": "planner_steps",

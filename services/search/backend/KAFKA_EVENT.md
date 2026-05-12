@@ -14,7 +14,7 @@ corresponding Elasticsearch index.
   "index": "kb_content",
   "id":    "42",
   "doc": {
-    "content_type": "guide",
+    "kb_type":      "playbook",
     "startup_type": "saas",
     "stage":        "validate",
     "title":        "Finding your first 10 customers",
@@ -24,6 +24,11 @@ corresponding Elasticsearch index.
   }
 }
 ```
+
+Note: `kb_content` is sourced from `wiki_pages` WHERE
+`kb_type IS NOT NULL`. The wiki admin panel is the
+authoring interface; the search daemon reindexes on the
+standard hourly schedule.
 
 ## Fields
 

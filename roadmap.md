@@ -441,6 +441,9 @@ Template backends that will not appear in the UI:
 - `ecommerce` — no storefront
 - `video` / `streaming` — no media platform
 - `imap-sync` — no email inbox
+- `wiki` (user-facing wiki UI) — the wiki **backend**
+  is repurposed as the knowledge base CMS (D15); the
+  public wiki UI is not used
 
 ---
 
