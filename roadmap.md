@@ -345,7 +345,10 @@ when stage gates unlock. Backend ✅.
 |-----|---------------------------------------------------|--------|
 | 6.1 | `/notifications` inbox page                       | ⬜     |
 | 6.2 | Notification bell badge in Navbar (live count)    | ⬜     |
-| 6.3 | Planner events → notification triggers            | ⬜     |
+| 6.3 | Notification event catalogue (D28) → triggers     | ⬜     |
+|     | stage gate reached, streak at-risk (23 h warning),|        |
+|     | co-founder joined, milestone declared, weekly      |        |
+|     | review due, planner step commented on              |        |
 | 6.4 | Email digest (daily planner reminder)             | ⬜     |
 
 ### Phase 7 — Community
@@ -361,6 +364,10 @@ Founders helping founders. Backend ✅.
 | 7.5 | Follow / unfollow other founders                  | ⬜     |
 | 7.6 | Mentor opt-in: experienced founders mark          | ⬜     |
 |     | themselves available; badge + feed signal         |        |
+| 7.7 | Community moderation: report button on posts +    | ⬜     |
+|     | threads; admin review queue; auto-hide on         |        |
+|     | threshold flag count. Community is unshippable    |        |
+|     | without this.                                     |        |
 
 ### Phase 8 — Plan export + AI enhancements
 
@@ -392,6 +399,17 @@ Founders helping founders. Backend ✅.
 | 9.12| WCAG 2.1 AA compliance audit + remediation        | ⬜     |
 | 9.13| API key settings UX: label, help text, validation  | ⬜     |
 |     | feedback for Anthropic + OpenAI keys (D27)         |        |
+| 9.14| Terms of service + privacy policy pages: required  | ⬜     |
+|     | before any public launch; must reference GDPR data |        |
+|     | retention (9.9–9.11) and AI data handling (D27)    |        |
+| 9.15| Shared AI key rate-limit implementation: per-user  | ⬜     |
+|     | request quota enforced at the API gateway layer;   |        |
+|     | quota resets daily; graceful 429 with upgrade hint |        |
+|     | pointing to own-key setting (D27)                  |        |
+| 9.16| Admin success metrics: define KPIs before building | ⬜     |
+|     | 9.4 dashboard — streak retention rate, weekly-     |        |
+|     | active-founders, planner completion %, milestones  |        |
+|     | declared, median time idea → first customer (Q24)  |        |
 
 ### Cross-cutting
 
@@ -436,6 +454,23 @@ Founders helping founders. Backend ✅.
 | X17 | KB content feedback: thumbs up/down on knowledge    |
 |     | base articles — surfaces low-quality content to     |
 |     | admins; improves KB over time                       |
+| X18 | Founder public profile page `/u/{username}`:        |
+|     | referenced in search UrlBuilder but never built.    |
+|     | Shows display name, startup type, stage, bio, and   |
+|     | public milestone timeline. Linked from community,   |
+|     | leaderboard, and progress feed.                     |
+| X19 | PWA offline cache for the two mobile-first flows    |
+|     | (D24): streak check-in and weekly review should     |
+|     | queue to IndexedDB when offline and sync on         |
+|     | reconnect. The service worker is already shipped;   |
+|     | this wires the specific routes into the cache       |
+|     | strategy.                                           |
+| X20 | Skills profile → planner connection: the skills     |
+|     | form is shipped (localStorage) but disconnected     |
+|     | from the startup type framework. Either wire it     |
+|     | into AI personalisation (skills gap analysis per    |
+|     | type) or deprecate it in favour of the onboarding   |
+|     | wizard (Q25).                                       |
 
 ---
 
@@ -522,11 +557,25 @@ Founders helping founders. Backend ✅.
 |     | gating. Revenue comes from the businesses founders build   |
 |     | using it, not from the tool itself.                        |
 | D27 | AI features run on the built-in shared API key by default  |
-|     | (rate-limited). Founders who add their own Anthropic or    |
-|     | OpenAI key in profile settings use their own quota — more  |
-|     | AI calls, faster responses, choice of model. The settings  |
-|     | API key store is already built; this needs UX polish       |
-|     | only (label, help text, key validation feedback).          |
+|     | (rate-limited). Shared quota: 20 AI requests per user per  |
+|     | day. Founders who add their own Anthropic or OpenAI key in |
+|     | profile settings use their own quota — no daily cap, faster|
+|     | responses, choice of model. The settings API key store is  |
+|     | already built; 9.13 adds UX polish; 9.15 implements the    |
+|     | per-user quota enforcement at the gateway layer.           |
+| D28 | Notification event catalogue — authoritative list of       |
+|     | events that can trigger notifications. Defined here so     |
+|     | 6.3 has a concrete scope:                                  |
+|     | • streak_at_risk — 23 h before break                       |
+|     | • streak_broken — streak ended                             |
+|     | • stage_gate_unlocked — all steps in stage complete        |
+|     | • weekly_review_due — Monday morning                       |
+|     | • co_founder_joined — invite accepted                      |
+|     | • milestone_declared — any team member marks milestone     |
+|     | • planner_step_commented — comment on a step               |
+|     | • level_up — XP threshold crossed                          |
+|     | Channels: in-app inbox (always), email (digest or         |
+|     | immediate per user preference).                            |
 
 ---
 
@@ -616,3 +665,12 @@ Template backends that will not appear in the UI:
 |     | declaring a milestone, or manual share button only?   |                    |
 | Q23 | Real-data integrations (Stripe, Xero): Phase 5 or     | Post-launch phase  |
 |     | deferred until post-launch KPI tools land?            |                    |
+| Q24 | Admin analytics (9.16): which KPIs define LaunchPad   | TBD before 9.4     |
+|     | success? Streak retention rate? weekly active          |                    |
+|     | founders? median time to first customer? Define        |                    |
+|     | before building the dashboard.                         |                    |
+| Q25 | Skills profile (shipped, in localStorage): wire it    | TBD — risk of      |
+|     | into AI personalisation (skills gap analysis per      | feature bloat      |
+|     | startup type) or deprecate in favour of onboarding    |                    |
+|     | wizard? The wizard already captures stage + type;     |                    |
+|     | skills adds a third dimension.                        |                    |
