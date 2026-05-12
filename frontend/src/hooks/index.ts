@@ -43,6 +43,11 @@ export { useSuggestFetch } from './useSuggestFetch';
 export { useGamification } from './useGamification';
 export type { UseGamificationReturn } from './useGamification';
 
+export { useNotifications } from './useNotifications';
+export type {
+  UseNotificationsReturn,
+} from './useNotifications';
+
 export { useBurnCompute } from './useBurnCompute';
 export { useUnitEconCompute } from './useUnitEconCompute';
 export { usePricingCompute } from './usePricingCompute';

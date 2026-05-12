@@ -32,8 +32,10 @@
   },
   "notifications": {
     "list": "/api/notifications",
+    "unreadCount": "/api/notifications/unread-count",
     "markRead": "/api/notifications/:id/read",
-    "markAllRead": "/api/notifications/read-all",
+    "markAllRead": "/api/notifications/mark-all-read",
+    "delete": "/api/notifications/:id",
     "preferences": "/api/notifications/preferences"
   },
   "startupTypes": "/api/startup-types",

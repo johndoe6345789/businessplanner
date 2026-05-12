@@ -122,9 +122,20 @@
   },
   "notifications": {
     "title": "Notifications",
+    "inboxTitle": "Notification Inbox",
+    "bellLabel": "Open notifications",
+    "panelLabel": "Notifications panel",
     "markAllRead": "Mark all as read",
+    "viewAll": "View all notifications",
     "noNotifications": "No new notifications",
-    "clearAll": "Clear all"
+    "clearAll": "Clear all",
+    "loading": "Loading notifications...",
+    "unread": "Unread",
+    "pagination": "Notification pages",
+    "justNow": "Just now",
+    "minutesAgo": "{n}m ago",
+    "hoursAgo": "{n}h ago",
+    "daysAgo": "{n}d ago"
   },
   "chat": {
     "placeholder": "Type a message...",

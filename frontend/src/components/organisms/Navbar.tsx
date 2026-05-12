@@ -16,6 +16,8 @@ import { MobileDrawer } from './MobileDrawer';
 import {
   GamificationSummary,
 } from '../molecules/GamificationSummary';
+import NotificationBell
+  from '../molecules/NotificationBell';
 import navLinks from '@/constants/nav-links.json';
 
 /** Props for the Navbar organism. */
@@ -69,9 +71,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <NavbarLogo label={tCommon('appName')} />
           <div className="spacer" />
           <DesktopActions />
-          {isAuthenticated && (
-            <GamificationSummary compact />
-          )}
+          {isAuthenticated && <GamificationSummary compact />}
+          {isAuthenticated && <NotificationBell />}
           {isAuthenticated ? (
             <AvatarMenu user={user} onLogout={logout} />
           ) : (

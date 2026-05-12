@@ -84,3 +84,6 @@ export {
 export * from './index.market-research';
 
 export * from './index.financials';
+
+export { default as NotificationInbox }
+  from './NotificationInbox';

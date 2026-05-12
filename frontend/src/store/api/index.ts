@@ -19,3 +19,4 @@ export * from './marketResearchCompetitorApi';
 export * from './marketResearchPersonaApi';
 export * from './marketResearchDiscoveryApi';
 export * from './marketResearchBmcApi';
+export * from './notificationsApi';
