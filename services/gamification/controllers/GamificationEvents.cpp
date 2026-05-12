@@ -44,10 +44,8 @@ void GamificationController::stepComplete(
         "stepComplete userId={} step={}",
         userId, stepId);
 
-    constexpr std::int64_t kPointsPerStep = 25;
-
     svc_.awardPoints(
-        userId, kPointsPerStep,
+        userId, pointsPerStep_,
         "planner_step_complete", "planner",
         [this, userId, stepId, cb](const json& pts) {
             svc_.updateStreak(

@@ -2,7 +2,9 @@
 ALTER TABLE badges
     ADD COLUMN IF NOT EXISTS slug VARCHAR(100) UNIQUE;
 
-UPDATE badges SET slug = LOWER(REPLACE(name, ' ', '_'))
+UPDATE badges
+    SET slug = TRIM('_' FROM
+        REGEXP_REPLACE(LOWER(name), '[^a-z0-9]+', '_', 'g'))
     WHERE slug IS NULL;
 
 ALTER TABLE users

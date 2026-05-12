@@ -25,17 +25,20 @@ void BadgeInserter::insertOne(const std::string& userId, const json& badge,
 {
     auto name = badge["name"].get<std::string>();
     auto desc = badge["description"].get<std::string>();
+    auto icon = badge.value("icon_url", std::string{});
 
     const std::string ins = R"(
-        INSERT INTO badges (name, description)
-        VALUES ($1, $2)
+        INSERT INTO badges (name, description, icon_url)
+        VALUES ($1, $2, $3)
         ON CONFLICT (name) DO UPDATE
-            SET name = EXCLUDED.name
+            SET description = EXCLUDED.description,
+                icon_url    = EXCLUDED.icon_url
         RETURNING id
     )";
 
     auto dbClient = db();
-    *dbClient << ins << name << desc >> [dbClient, userId, badge,
+    *dbClient << ins << name << desc << icon >>
+        [dbClient, userId, badge,
                                                  remaining, result,
                                                  onSuccess](const Result& br) {
         if (br.empty()) {

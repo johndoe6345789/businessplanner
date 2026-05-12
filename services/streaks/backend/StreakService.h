@@ -46,6 +46,19 @@ class StreakService
     void updateStreak(const std::string& userId, Callback onSuccess,
                       ErrCallback onError);
 
+    /**
+     * @brief Read current streak without side effects.
+     *
+     * Returns {currentStreak:0, longestStreak:0} when
+     * no streak row exists for the user.
+     *
+     * @param userId    Target user ID.
+     * @param onSuccess Callback with StreakInfo JSON.
+     * @param onError   Callback on failure.
+     */
+    void getStreak(const std::string& userId, Callback onSuccess,
+                   ErrCallback onError);
+
   private:
     [[nodiscard]] static auto db() -> DbClientPtr;
 

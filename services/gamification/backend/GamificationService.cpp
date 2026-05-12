@@ -55,6 +55,17 @@ void GamificationService::updateStreak(
         std::move(onError));
 }
 
+void GamificationService::getStreak(
+    const std::string& userId,
+    Callback onSuccess,
+    ErrCallback onError)
+{
+    streak_.getStreak(
+        userId,
+        std::move(onSuccess),
+        std::move(onError));
+}
+
 void GamificationService::getLeaderboard(
     const std::string& period,
     std::int32_t limit,

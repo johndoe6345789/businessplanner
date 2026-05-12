@@ -54,6 +54,12 @@ class GamificationService
         Callback onSuccess,
         ErrCallback onError);
 
+    /** @brief Read streak without side effects. */
+    void getStreak(
+        const std::string& userId,
+        Callback onSuccess,
+        ErrCallback onError);
+
     /** @brief Retrieve top-N leaderboard. */
     void getLeaderboard(
         const std::string& period,

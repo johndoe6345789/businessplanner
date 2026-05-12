@@ -26,7 +26,7 @@ void GamificationController::myStreaks(
         ->get<std::string>("user_id");
     spdlog::debug("myStreaks userId={}", userId);
 
-    svc_.updateStreak(
+    svc_.getStreak(
         userId,
         [cb](const json& data) {
             cb(::utils::jsonOk(data));

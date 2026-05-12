@@ -6,7 +6,9 @@
  */
 
 #include "gamification/backend/GamificationService.h"
+#include "gamification/backend/gamification_config.h"
 
+#include <cstdint>
 #include <drogon/HttpController.h>
 
 namespace controllers
@@ -16,6 +18,14 @@ class GamificationController
     : public drogon::HttpController<GamificationController>
 {
   public:
+    GamificationController()
+    {
+        auto cfg = services::loadGamificationConfig();
+        pointsPerStep_ =
+            cfg.value("/points/planner_step"_json_pointer,
+                      std::int64_t{25});
+    }
+
     METHOD_LIST_BEGIN
     ADD_METHOD_TO(GamificationController::listBadges,
                   "/api/gamification/badges",
@@ -80,6 +90,7 @@ class GamificationController
 
   private:
     services::GamificationService svc_;
+    std::int64_t pointsPerStep_{25};
 };
 
 } // namespace controllers
