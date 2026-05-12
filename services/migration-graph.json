@@ -29,5 +29,6 @@
   "gamification": ["users"],
   "startup-types": [],
   "legal-team": [],
+  "market-research": ["users"],
   "migration-runner": []
 }
