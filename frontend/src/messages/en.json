@@ -643,7 +643,10 @@
     },
     "personalised": "Your {type} Planner",
     "completeSetup": "Complete your setup to personalise your planner",
-    "completeSetupCta": "Set Up Now"
+    "completeSetupCta": "Set Up Now",
+    "currentStage": "Current stage",
+    "advanceStage": "Mark stage complete →",
+    "finalStage": "You have reached the final stage"
   },
   "knowledge": {
     "title": "Knowledge Base",

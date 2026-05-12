@@ -115,6 +115,19 @@ export type { StageSelectorProps } from './StageSelector';
 
 export { OnboardingCta } from './OnboardingCta';
 
+export { StageGateBar } from './StageGateBar';
+export type { StageGateBarProps } from './StageGateBar';
+
+export { StageAdvanceButton }
+  from './StageAdvanceButton';
+export type { StageAdvanceButtonProps }
+  from './StageAdvanceButton';
+
+export { PlannerProgressBar }
+  from './PlannerProgressBar';
+export type { PlannerProgressBarProps }
+  from './PlannerProgressBar';
+
 export { WizardStepContent } from './WizardStepContent';
 export type { WizardStepContentProps }
   from './WizardStepContent';

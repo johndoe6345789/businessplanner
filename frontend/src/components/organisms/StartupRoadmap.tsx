@@ -2,14 +2,16 @@
 
 import React from 'react';
 import Box from '@shared/m3/Box';
-import Typography from '@shared/m3/Typography';
-import LinearProgress from '@shared/m3/LinearProgress';
 import { useTranslations } from 'next-intl';
 import { usePlannerProgress } from '@/hooks';
-import { PlanPhaseCard } from '@/components/molecules';
-import { PlannerResetButton } from '@/components/molecules/PlannerResetButton';
-import { PlannerHeader } from '@/components/molecules/PlannerHeader';
-import { PriorityBadge } from '@/components/molecules/PriorityBadge';
+import {
+  PlanPhaseCard, PlannerHeader, PlannerResetButton,
+  PriorityBadge,
+} from '@/components/molecules';
+import { StageGateBar }
+  from '@/components/molecules/StageGateBar';
+import { PlannerProgressBar }
+  from '@/components/molecules/PlannerProgressBar';
 import { useAppSelector } from '@/store/hooks';
 import roadmap from '@/constants/startup-roadmap.json';
 
@@ -42,10 +44,10 @@ export const StartupRoadmap: React.FC<
     overallPct, totalDone, totalSteps,
   } = usePlannerProgress();
 
-  const { selectedSlug, onboardingComplete,
-    biggestChallenge } = useAppSelector(
-    (s) => s.startupType,
-  );
+  const {
+    selectedSlug, onboardingComplete,
+    biggestChallenge, selectedStage,
+  } = useAppSelector((s) => s.startupType);
   const highlightedPhase = biggestChallenge
     ? (CHALLENGE_PHASE[biggestChallenge] ?? null)
     : null;
@@ -56,26 +58,18 @@ export const StartupRoadmap: React.FC<
         selectedSlug={selectedSlug}
         onboardingComplete={onboardingComplete}
       />
-      <Box sx={{ mb: 3 }}>
-        <Box sx={{ display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline', mb: 0.5 }}>
-          <Typography variant="body2"
-            sx={{ fontWeight: 600 }}>
-            {t('overallProgress')}
-          </Typography>
-          <Typography variant="caption"
-            color="text.secondary">
-            {t('stepsOf', {
-              done: totalDone, total: totalSteps,
-            })}
-          </Typography>
-        </Box>
-        <LinearProgress variant="determinate"
-          value={overallPct}
-          aria-label="Overall startup progress"
-          sx={{ height: 10, borderRadius: 5 }} />
-      </Box>
+      {onboardingComplete && selectedSlug &&
+        selectedStage && (
+        <StageGateBar
+          typeSlug={selectedSlug}
+          currentStage={selectedStage}
+        />
+      )}
+      <PlannerProgressBar
+        pct={overallPct}
+        done={totalDone}
+        total={totalSteps}
+      />
       {roadmap.phases.map((phase, i) => (
         <Box key={phase.id}>
           {phase.id === highlightedPhase && (
