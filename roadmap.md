@@ -275,7 +275,8 @@ New service: `services/market-research/`
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
 | 4.1 | TAM / SAM / SOM live calculator                   | ⬜     |
-| 4.2 | Competitor tracker (name, stage, strengths/gaps)  | ⬜     |
+| 4.2 | Competitor tracker: name, stage, strengths/gaps   | ⬜     |
+|     | + feature matrix grid for positioning decisions   |        |
 | 4.3 | Customer persona builder                          | ⬜     |
 | 4.4 | Customer discovery log (interviews + findings)    | ⬜     |
 | 4.5 | Interview script templates per startup type       | ⬜     |
@@ -576,6 +577,18 @@ Founders helping founders. Backend ✅.
 |     | • level_up — XP threshold crossed                          |
 |     | Channels: in-app inbox (always), email (digest or         |
 |     | immediate per user preference).                            |
+| D29 | Financial tools must accept zero revenue as valid.         |
+|     | A free tool has real costs (hosting, ES, AI API) but no   |
+|     | revenue streams. Burn rate and cost-per-active-user are   |
+|     | meaningful; LTV/CAC are not. Revenue projection baseline  |
+|     | defaults to £0; tools must not treat this as an error.    |
+|     | Affects 4.7 (BMC), 5.1–5.2, 5.14–5.16.                  |
+| D30 | Onboarding answers must visibly change the UI. The        |
+|     | "biggest challenge" and "current stage" inputs (2.9)      |
+|     | must alter: dashboard widget order, planner step          |
+|     | prominence, and first AI suggestion topic. Collecting      |
+|     | these inputs without acting on them destroys trust in     |
+|     | personalisation. Specify the mapping in Phase 2 build.   |
 
 ---
 
@@ -674,3 +687,100 @@ Template backends that will not appear in the UI:
 |     | startup type) or deprecate in favour of onboarding    |                    |
 |     | wizard? The wizard already captures stage + type;     |                    |
 |     | skills adds a third dimension.                        |                    |
+| Q26 | KB content volume: what is the minimum useful         | 5 articles per     |
+|     | threshold per startup type? Below this, the KB        | type before launch |
+|     | cannot fulfil its promise. 9 types × 5 articles = 45  |                    |
+|     | articles minimum before Phase 2.8 is "done". Who      |                    |
+|     | writes them, and how long does that take?             |                    |
+| Q27 | PMF for a free tool: the Sean Ellis 40% threshold     | Streak retention   |
+|     | still applies (disappointment ≠ payment). But which   | rate as proxy      |
+|     | engagement signal confirms PMF for LaunchPad?         |                    |
+|     | Options: streak retention rate ≥ 30%, weekly-active   |                    |
+|     | founders ≥ 40% of sign-ups, or milestones declared   |                    |
+|     | per cohort ≥ 1 within 30 days.                      |                    |
+
+---
+
+## 8. Real-business validation track
+
+LaunchPad is itself a startup (platform type). Before
+shipping each phase, the same phase must be walkable on
+paper for a real business. Two passes are required:
+
+**Pass 1 — LaunchPad through LaunchPad (now)**
+The tool's own business is the first test subject. Any
+step that cannot be completed = a feature gap.
+
+**Pass 2 — Target revenue business (define before Phase 2)**
+The business the founder actually wants to make money
+from. Until defined, the type-specific critical path
+is unvalidated and v1 scope is provisional.
+
+### Per-phase validation gates
+
+A phase is not marked done until the founder can answer
+"yes" using only LaunchPad's own tools and KB content.
+
+| Phase | Gate — founder must be able to:                   |
+|-------|---------------------------------------------------|
+| 2     | Input type, get a personalised planner            |
+| 3     | Make an informed business structure decision      |
+| 4     | Size their market and name top 3 competitors      |
+| 4     | Complete a full business model canvas (£0 ok)     |
+| 5     | Know monthly burn, runway, and break-even         |
+| 5     | Choose a revenue model with written reasoning     |
+| 6     | Receive a reminder 24 h before streak breaks      |
+| 8     | Export a readable PDF summary of their plan       |
+
+### Dogfooding gaps found (Pass 1 — LaunchPad)
+
+1. **Financial tools assume revenue** — cost structure
+   without revenue streams must be valid (D29).
+2. **Onboarding answers not wired to UI** — biggest
+   challenge and stage inputs must change dashboard
+   layout and planner step order (D30).
+3. **Competitor tracker needs feature matrix** — name
+   + strengths/gaps does not support positioning
+   decisions; a grid is needed (4.2 extended scope).
+4. **KB volume threshold undefined** — 9 types × 5
+   articles minimum = 45 articles before Phase 2.8
+   is useful (Q26). This is a content sprint, not a
+   feature sprint.
+5. **PMF signal undefined for free tool** — Sean Ellis
+   survey still applies but the proxy engagement metric
+   needs to be chosen before building 5.17 (Q27).
+
+### Pass 2 — target revenue business
+
+⬜ **Not yet defined.** Define it before Phase 2 build
+begins. It sets the type-specific planner critical path
+and will reveal gaps that Pass 1 cannot.
+
+---
+
+## 9. v1 scope
+
+v1 = solo founder, idea to investor-ready plan.
+Community, full AI suite, post-launch KPIs = v2+.
+
+| Phase             | v1       | Notes                         |
+|-------------------|----------|-------------------------------|
+| 1 Gamification    | ✅ Full  | Defining feature — must ship  |
+| 2 Type + KB       | ✅ 2.1–2.9 | Co-founder workspace = v2   |
+| 3 Legal           | ✅ 3.1–3.8 | Industry-specific (3.9) = v2|
+| 4 Market research | ✅ Full  | Core validation tools         |
+| 5 Financials      | ✅ 5.1–5.7, 5.14–5.16 | Funding/PMF/KPIs = v2       |
+| 6 Notifications   | ✅ Full  | Streak retention needs this   |
+| 7 Community       | ❌ v2   | Needs moderation infra first  |
+| 8 Export + AI     | ✅ 8.1–8.2 | Full AI drafting = v2       |
+| 9 Ops + quality   | ✅ 9.1–9.5, 9.9–9.14 | Minimum before launch  |
+| Cross-cutting     | ✅ X6–X10 | Decision log, weekly review, |
+|                   |          | launch checklist, scoping,    |
+|                   |          | resource library              |
+
+**Deferred to v2:** co-founder workspace (2.10–2.12),
+industry-specific legal (3.9), team role planner (3.10),
+funding guide (5.8–5.13), PMF widget (5.17), post-launch
+KPIs (5.18–5.22), all of Phase 7, full AI drafting
+(8.3–8.5), advanced ops (9.6–9.8, 9.15–9.16), X1–X5
+(real-time bus, feature flags, external integrations).
