@@ -276,20 +276,21 @@ New service: `services/market-research/`
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 4.1 | TAM / SAM / SOM live calculator                   | ⬜     |
-| 4.2 | Competitor tracker: name, stage, strengths/gaps   | ⬜     |
+| 4.1 | TAM / SAM / SOM live calculator                   | ✅     |
+| 4.2 | Competitor tracker: name, stage, strengths/gaps   | ✅     |
 |     | + feature matrix grid for positioning decisions   |        |
-| 4.3 | Customer persona builder                          | ⬜     |
-| 4.4 | Customer discovery log (interviews + findings)    | ⬜     |
-| 4.5 | Interview script templates per startup type       | ⬜     |
-| 4.6 | Benchmark comparison: your TAM vs. industry       | ⬜     |
-|     | averages for your type (from Phase 2 seed data)   |        |
-| 4.7 | Business model canvas: problem, solution, UVP,    | ⬜     |
+| 4.3 | Customer persona builder                          | ✅     |
+| 4.4 | Customer discovery log (interviews + findings)    | ✅     |
+| 4.5 | Interview script templates per startup type       | 🔧     |
+|     | Infrastructure ✅ — KB article authoring pending  |        |
+| 4.6 | Benchmark comparison: your TAM vs. industry       | 🔧     |
+|     | averages — pending benchmark seed data            |        |
+| 4.7 | Business model canvas: problem, solution, UVP,    | ✅     |
 |     | channels, customer segments, cost structure,      |        |
 |     | revenue streams — one-page live overview          |        |
-| 4.8 | Market research dashboard page                    | ⬜     |
-| 4.9 | AI synthesis: summarise findings, compare to      | ⬜     |
-|     | benchmarks, surface blind spots                   |        |
+| 4.8 | Market research dashboard page                    | ✅     |
+| 4.9 | AI synthesis: summarise findings, compare to      | ❌ v2  |
+|     | benchmarks, surface blind spots (Phase 8)         |        |
 
 ### Phase 5 — Financial planning + funding readiness
 
