@@ -88,6 +88,9 @@ COPY --from=build /src/services/video/constants.json \
     ./constants/video-transcoder.json
 COPY --from=build /src/services/webhooks/constants.json \
     ./constants/webhook-dispatcher.json
+COPY --from=build \
+    /src/services/http-filters/constants/security-headers.json \
+    ./constants/security-headers.json
 
 RUN mkdir -p logs public uploads && \
     chown -R nextra:nextra /app

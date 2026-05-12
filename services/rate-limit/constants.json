@@ -25,6 +25,15 @@
       "prefixes": [
         "/api/"
       ]
+    },
+    "ai": {
+      "capacity": 20,
+      "refill_per_sec": 0.000231,
+      "comment": "20 req/day = 0.000231/sec (D27 shared quota)",
+      "prefixes": [
+        "/api/chat/",
+        "/api/ai/"
+      ]
     }
   }
 }

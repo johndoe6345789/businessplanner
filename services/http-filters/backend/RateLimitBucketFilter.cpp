@@ -30,6 +30,10 @@ std::string RateLimitFilter::classifyGroup(
         path.rfind("/api/auth/token", 0) == 0) {
         return "auth";
     }
+    if (path.rfind("/api/chat/", 0) == 0 ||
+        path.rfind("/api/ai/", 0) == 0) {
+        return "ai";
+    }
     return "public";
 }
 
@@ -50,13 +54,17 @@ std::string RateLimitFilter::tenantOf(
 BucketSpec RateLimitFilter::specFor(
     const std::string& group)
 {
-    // Limits match constants/rate-limit.json; hard-coded here
+    // Limits mirror constants/rate-limit.json; kept here
     // so the filter has no startup IO dependency.
     if (group == "admin") {
         return {60, 1.0};
     }
     if (group == "auth") {
         return {10, 0.1666};
+    }
+    // 20 req/day shared AI quota (D27).
+    if (group == "ai") {
+        return {20, 0.000231};
     }
     return {600, 10.0};
 }
