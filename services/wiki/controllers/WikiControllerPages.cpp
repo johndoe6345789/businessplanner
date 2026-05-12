@@ -1,8 +1,8 @@
 /**
  * @file WikiControllerPages.cpp
- * @brief Read + create handlers for
- *        /api/wiki/pages. Update/delete split
- *        into WikiControllerPagesWrite.cpp.
+ * @brief createPage handler for /api/wiki/pages.
+ *        getPage lives in WikiControllerPageRead.cpp.
+ *        Update/delete in WikiControllerPagesWrite.cpp.
  */
 
 #include "WikiController.h"
@@ -25,22 +25,14 @@ static std::string tenantOf(
         : t;
 }
 
-void WikiController::getPage(
-    const drogon::HttpRequestPtr&,
-    std::function<void(
-        const drogon::HttpResponsePtr&)>&& cb,
-    const std::string& id)
+static std::optional<std::string> optField(
+    const json& body, const std::string& key)
 {
-    WikiStore store;
-    store.getPage(
-        std::stoll(id),
-        [cb](const json& data) {
-            cb(::utils::jsonOk(data));
-        },
-        [cb](drogon::HttpStatusCode code,
-             const std::string& msg) {
-            cb(::utils::jsonError(code, msg));
-        });
+    if (body.contains(key)
+        && body[key].is_string()
+        && !body[key].get<std::string>().empty())
+        return body[key].get<std::string>();
+    return std::nullopt;
 }
 
 void WikiController::createPage(
@@ -63,6 +55,14 @@ void WikiController::createPage(
         parent =
             body["parentId"].get<std::int64_t>();
     }
+    std::vector<std::string> tags;
+    if (body.contains("tags")
+        && body["tags"].is_array()) {
+        for (const auto& t : body["tags"])
+            if (t.is_string())
+                tags.push_back(
+                    t.get<std::string>());
+    }
     WikiStore store;
     store.createPage(
         tenantOf(req), parent,
@@ -70,6 +70,10 @@ void WikiController::createPage(
         body.value("title", std::string{}),
         body.value("bodyMd", std::string{}),
         req->getHeader("X-User-Id"),
+        optField(body, "kbType"),
+        optField(body, "startupType"),
+        optField(body, "stage"),
+        tags,
         [cb](const json& d) {
             const auto idStr = d.contains("id")
                 ? std::to_string(
@@ -77,7 +81,8 @@ void WikiController::createPage(
                 : std::string{};
             if (!idStr.empty())
                 nextra::search::SearchEventPublisher
-                    ::publish("upsert", "wiki_pages",
+                    ::publish("upsert",
+                              "wiki_pages",
                               idStr, d);
             cb(::utils::jsonCreated(d));
         },

@@ -5,6 +5,7 @@
  */
 
 #include "WikiStore.h"
+#include "wiki_store_insert_helpers.h"
 #include <spdlog/spdlog.h>
 
 namespace services::wiki
@@ -15,6 +16,10 @@ void WikiStore::updatePage(
     const std::string& title,
     const std::string& bodyMd,
     const std::string& authorId,
+    const std::optional<std::string>& kbType,
+    const std::optional<std::string>& startupType,
+    const std::optional<std::string>& stage,
+    const std::vector<std::string>& tags,
     Callback ok, ErrCallback err)
 {
     static const std::string kUpd = R"(
@@ -22,7 +27,11 @@ void WikiStore::updatePage(
         SET title = $2,
             body_md = $3,
             updated_by = NULLIF($4,'')::uuid,
-            updated_at = NOW()
+            updated_at = NOW(),
+            kb_type = NULLIF($5,''),
+            startup_type = NULLIF($6,''),
+            stage = NULLIF($7,''),
+            tags = $8::text[]
         WHERE id = $1
         RETURNING id
     )";
@@ -39,8 +48,13 @@ void WikiStore::updatePage(
            NULLIF($4,'')::uuid)
         RETURNING rev
     )";
+    auto tagsArr = tagsToArray(tags);
     *db() << kUpd << id << title << bodyMd
-          << authorId >>
+          << authorId
+          << optOrEmpty(kbType)
+          << optOrEmpty(startupType)
+          << optOrEmpty(stage)
+          << tagsArr >>
         [=, this](const drogon::orm::Result& r) {
             if (r.empty()) {
                 err(drogon::k404NotFound,
@@ -67,32 +81,17 @@ void WikiStore::updatePage(
                         e.base().what());
                     err(
                         drogon::
-                            k500InternalServerError,
+                        k500InternalServerError,
                         "Revision insert failed");
                 };
         } >>
-        [err](const drogon::orm::DrogonDbException& e) {
+        [err](
+            const drogon::orm::
+                DrogonDbException& e) {
             spdlog::error("wiki update: {}",
                           e.base().what());
             err(drogon::k500InternalServerError,
                 "Failed to update page");
-        };
-}
-
-void WikiStore::deletePage(
-    std::int64_t id, Callback ok, ErrCallback err)
-{
-    static const std::string kDel =
-        "DELETE FROM wiki_pages WHERE id = $1";
-    *db() << kDel << id >>
-        [ok](const drogon::orm::Result&) {
-            ok({{"ok", true}});
-        } >>
-        [err](const drogon::orm::DrogonDbException& e) {
-            spdlog::error("wiki delete: {}",
-                          e.base().what());
-            err(drogon::k500InternalServerError,
-                "Failed to delete page");
         };
 }
 

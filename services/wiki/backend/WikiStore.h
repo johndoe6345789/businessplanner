@@ -39,6 +39,13 @@ class WikiStore
     void getRevision(std::int64_t pageId, int rev,
                      Callback ok, ErrCallback err);
 
+    /** @brief List KB pages with optional filters. */
+    void listKbPages(
+        const std::optional<std::string>& startupType,
+        const std::optional<std::string>& stage,
+        const std::optional<std::string>& kbType,
+        Callback ok, ErrCallback err);
+
     /** @brief Create a new page under a parent. */
     void createPage(const std::string& tenantId,
                     std::optional<std::int64_t> parent,
@@ -46,6 +53,10 @@ class WikiStore
                     const std::string& title,
                     const std::string& bodyMd,
                     const std::string& authorId,
+                    const std::optional<std::string>& kbType,
+                    const std::optional<std::string>& startupType,
+                    const std::optional<std::string>& stage,
+                    const std::vector<std::string>& tags,
                     Callback ok, ErrCallback err);
 
     /** @brief Update a page + write revision. */
@@ -53,6 +64,10 @@ class WikiStore
                     const std::string& title,
                     const std::string& bodyMd,
                     const std::string& authorId,
+                    const std::optional<std::string>& kbType,
+                    const std::optional<std::string>& startupType,
+                    const std::optional<std::string>& stage,
+                    const std::vector<std::string>& tags,
                     Callback ok, ErrCallback err);
 
     /** @brief Delete a page (cascades children). */

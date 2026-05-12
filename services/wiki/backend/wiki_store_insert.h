@@ -21,6 +21,10 @@ struct InsertArgs
     std::string path;
     int depth{0};
     std::string authorId;
+    std::optional<std::string> kbType;
+    std::optional<std::string> startupType;
+    std::optional<std::string> stage;
+    std::vector<std::string> tags;
 };
 
 /**

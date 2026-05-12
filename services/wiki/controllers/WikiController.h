@@ -2,10 +2,8 @@
 /**
  * @file WikiController.h
  * @brief REST endpoints for the collaborative wiki.
- *        Implemented in three .cpp files:
- *        - WikiControllerTree.cpp
- *        - WikiControllerPages.cpp
- *        - WikiControllerRevisions.cpp
+ *        Split across Tree, Pages, Revisions, and
+ *        Kb .cpp files.
  */
 
 #include <drogon/HttpController.h>
@@ -41,6 +39,9 @@ class WikiController
                   drogon::Get);
     ADD_METHOD_TO(WikiController::diffRevisions,
                   "/api/wiki/pages/{id}/diff",
+                  drogon::Get);
+    ADD_METHOD_TO(WikiController::listKbPages,
+                  "/api/wiki/kb",
                   drogon::Get);
     METHOD_LIST_END
 
@@ -83,6 +84,17 @@ class WikiController
         std::function<void(
             const drogon::HttpResponsePtr&)>&& cb,
         const std::string& id);
+
+    /**
+     * @brief GET /api/wiki/kb
+     *        Filtered knowledge-base page listing.
+     *        Query params: startup_type, stage,
+     *        kb_type (all optional).
+     */
+    void listKbPages(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
 };
 
 } // namespace controllers

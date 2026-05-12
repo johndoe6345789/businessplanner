@@ -27,6 +27,10 @@ void WikiStore::createPage(
     const std::string& title,
     const std::string& bodyMd,
     const std::string& authorId,
+    const std::optional<std::string>& kbType,
+    const std::optional<std::string>& startupType,
+    const std::optional<std::string>& stage,
+    const std::vector<std::string>& tags,
     Callback ok, ErrCallback err)
 {
     auto c = db();
@@ -34,7 +38,8 @@ void WikiStore::createPage(
         insertPageRow(
             c,
             {tenantId, parent, slug, title,
-             bodyMd, slug, 0, authorId},
+             bodyMd, slug, 0, authorId,
+             kbType, startupType, stage, tags},
             ok, err);
         return;
     }
@@ -57,11 +62,14 @@ void WikiStore::createPage(
                 c,
                 {tenantId, parent, slug, title,
                  bodyMd, childPath(pp, slug),
-                 depth, authorId},
+                 depth, authorId,
+                 kbType, startupType, stage,
+                 tags},
                 ok, err);
         } >>
         [err](
-            const drogon::orm::DrogonDbException& e) {
+            const drogon::orm::
+                DrogonDbException& e) {
             spdlog::error("wiki parent: {}",
                           e.base().what());
             err(drogon::k500InternalServerError,
