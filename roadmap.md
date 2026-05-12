@@ -177,25 +177,20 @@ when real-time notification fan-out matters (Phase 6).
 
 ## 4. Phased roadmap
 
-### Phase 1 — Gamification loop (build next)
-
-The motivation engine is the product's defining feature —
-without it LaunchPad is just another to-do list. All five
-subsystems (streaks, XP/levels, badges, leaderboard,
-progress) share backend service logic but have **no HTTP
-controllers and no migrations** yet.
+### Phase 1 — Gamification loop ✅ (mostly done)
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 1.1 | Streaks: controllers + migration                  | ⬜     |
-| 1.2 | XP + levels + progress: controllers + migrations  | ⬜     |
-| 1.3 | Badges: controllers + migration                   | ⬜     |
-| 1.4 | Leaderboard: controllers + migration              | ⬜     |
-| 1.5 | Frontend: streak counter, XP bar, level badge     | ⬜     |
-| 1.6 | Frontend: badge cabinet page                      | ⬜     |
-| 1.7 | Frontend: leaderboard page (opt-in, D3)           | ⬜     |
-| 1.8 | Wire planner step completion → XP + streak events | ⬜     |
+| 1.1 | Streaks: controllers + migration                  | ✅     |
+| 1.2 | XP + levels + progress: controllers + migrations  | ✅     |
+| 1.3 | Badges: controllers + migration                   | ✅     |
+| 1.4 | Leaderboard: controllers + migration              | ✅     |
+| 1.5 | Frontend: streak counter, XP bar, level badge     | ✅     |
+| 1.6 | Frontend: badge cabinet page                      | ✅     |
+| 1.7 | Frontend: leaderboard page (opt-in, D3)           | ✅     |
+| 1.8 | Wire planner step completion → XP + streak events | ✅     |
 | 1.9 | Wire weekly review completion → streak event      | ⬜     |
+|     | Blocked — weekly review built in Phase 5          |        |
 
 ### Phase 2 — Startup type framework + knowledge base
 
@@ -598,14 +593,20 @@ Founders helping founders. Backend ✅.
 
 - Auth: email/password, JWT, Keycloak OIDC, passkeys,
   TOTP, OAuth (Google/GitHub)
-- Planner: startup roadmap with step toggle + Redux
+- Planner: startup roadmap with step toggle + Redux;
+  step completion fires XP + streak events (1.8)
 - Profile: skills form with localStorage
-- Search: full-text via Elasticsearch
+- Search: full-text via Elasticsearch (4 LaunchPad
+  indexes retooled)
 - Dashboard: draggable widget grid
 - Settings: theme, prefs, API keys, admin controls
 - Admin: live translation editor, debug panel
 - PWA: manifest, service worker, install prompt
 - i18n: 8 locales
+- **Gamification (Phase 1)**: streak counter, XP bar,
+  level badge in Navbar; badge cabinet (/badges);
+  leaderboard (/leaderboard); all controllers wired;
+  schema fixes + Phase 1 migration applied
 
 ### 🔧 Backend done, no frontend page yet
 
