@@ -93,7 +93,8 @@
     "review": "Weekly Review",
     "launch": "Launch Checklist",
     "resources": "Resources",
-    "decisions": "Decision Log"
+    "decisions": "Decision Log",
+    "scoping": "Product Scoping"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -965,5 +966,19 @@
     "plannerStep": "Planner step",
     "outcome": "Outcome",
     "noDecisions": "No decisions recorded yet."
+  },
+  "scoping": {
+    "title": "Product Scoping",
+    "addFeature": "Add Feature",
+    "impact": "Impact",
+    "confidence": "Confidence",
+    "ease": "Ease",
+    "iceScore": "ICE Score",
+    "inMvp": "In MVP",
+    "later": "Later",
+    "cut": "Cut",
+    "considering": "Considering",
+    "noFeatures": "No features here yet.",
+    "description": "Description"
   }
 }

@@ -64,3 +64,9 @@ export { useAiSuggestion } from './useAiSuggestion';
 export type {
   UseAiSuggestionReturn,
 } from './useAiSuggestion';
+
+export { useIceCompute } from './useIceCompute';
+export { useScopingCanvas } from './useScopingCanvas';
+export type {
+  UseScopingCanvasReturn,
+} from './useScopingCanvas';

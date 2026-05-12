@@ -112,3 +112,9 @@ export { ResourceLibrary }
   from './ResourceLibrary';
 
 export { DecisionLog } from './DecisionLog';
+
+export { ProductScopingCanvas }
+  from './ProductScopingCanvas';
+export { ScopingLane } from './ScopingLane';
+export type { ScopingLaneProps }
+  from './ScopingLane';

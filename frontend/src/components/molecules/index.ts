@@ -192,3 +192,11 @@ export { DecisionCard } from './DecisionCard';
 export type {
   DecisionCardProps,
 } from './DecisionCard';
+
+export { FeatureCard } from './FeatureCard';
+export type { FeatureCardProps }
+  from './FeatureCard';
+
+export { FeatureForm } from './FeatureForm';
+export type { FeatureFormProps }
+  from './FeatureForm';
