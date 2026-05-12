@@ -91,5 +91,15 @@ export type {
   GamificationSummaryFullProps,
 } from './GamificationSummaryFull';
 
+export { KbArticleCard } from './KbArticleCard';
+export type { KbArticleCardProps }
+  from './KbArticleCard';
+
+export { KbFilterChips } from './KbFilterChips';
+export type {
+  KbFilterChipsProps,
+  KbFilter,
+} from './KbFilterChips';
+
 export * from './index.social';
 export * from './index.auth';

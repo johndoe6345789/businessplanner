@@ -638,6 +638,18 @@
       }
     }
   },
+  "knowledge": {
+    "title": "Knowledge Base",
+    "filterAll": "All",
+    "filterGuide": "Guides",
+    "filterPlaybook": "Playbooks",
+    "filterBenchmark": "Benchmarks",
+    "filterLegal": "Legal",
+    "filterTemplate": "Templates",
+    "filterChecklist": "Checklists",
+    "empty": "No articles yet for this filter.",
+    "emptyType": "No articles yet for your startup type."
+  },
   "pwa": {
     "installPrompt": "Install LaunchPad as an app?",
     "installLabel": "Install LaunchPad app"
