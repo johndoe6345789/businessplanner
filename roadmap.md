@@ -33,8 +33,14 @@
 - Step-by-step startup **planner** with milestone tracking.
 - **Skills profile** — what you bring to the table.
 - **AI planning assistant** — Claude-powered suggestions.
-- **Gamification** — streaks, XP, levels, badges tied to
-  planning progress (motivation loop).
+- **Gamification** — the core motivation engine. Founding a
+  startup is a long, lonely grind; most people quit because
+  progress feels invisible. Streaks keep founders coming back
+  daily. XP + levels make incremental progress tangible.
+  Badges celebrate real milestones. The **leaderboard** adds
+  social proof and healthy competition — seeing peers advance
+  is one of the strongest behavioural nudges known. All five
+  systems are one coherent loop, not separate features.
 - **Community** — forum for founder Q&A, progress feed.
 - **Plan export** — download your roadmap as a PDF.
 
@@ -77,20 +83,27 @@ notification fan-out matters (Phase 3).
 
 ### Phase 1 — Gamification loop (highest-impact gap)
 
-The motivation loop is core to the product. Backend service
-logic exists (`badges`, `leaderboards`, `levels`, `streaks`,
-`xp`, `progress`) but has **no HTTP controllers and no
-migrations** yet.
+The motivation engine is the product's defining feature —
+without it LaunchPad is just another to-do list. All five
+subsystems (streaks, XP/levels, badges, leaderboard,
+progress) share service logic in the backend but have
+**no HTTP controllers and no migrations** yet.
+
+The leaderboard is part of gamification, not a separate
+feature. Seeing where you rank against other founders is
+a powerful social nudge that amplifies every other
+gamification signal.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
 | 1.1 | Streaks: controllers + migration                  | ⬜     |
 | 1.2 | XP + levels + progress: controllers + migrations  | ⬜     |
 | 1.3 | Badges: controllers + migration                   | ⬜     |
-| 1.4 | Frontend: streak counter, XP bar, level badge     | ⬜     |
-| 1.5 | Frontend: badge cabinet page                      | ⬜     |
-| 1.6 | Wire planner step completion → XP + streak events | ⬜     |
-| 1.7 | Leaderboard: controllers + migration + page       | ⬜     |
+| 1.4 | Leaderboard: controllers + migration              | ⬜     |
+| 1.5 | Frontend: streak counter, XP bar, level badge     | ⬜     |
+| 1.6 | Frontend: badge cabinet page                      | ⬜     |
+| 1.7 | Frontend: leaderboard page (opt-in, D4)           | ⬜     |
+| 1.8 | Wire planner step completion → XP + streak events | ⬜     |
 
 ### Phase 2 — Notifications
 
@@ -151,13 +164,16 @@ is fully implemented with controllers + migrations ✅.
 
 | #   | Decision                                                    |
 |-----|-------------------------------------------------------------|
-| D1  | Gamification events triggered by planner step completion,  |
+| D1  | Gamification is the core motivation engine — streaks, XP,  |
+|     | levels, badges, and leaderboard are one system, not five   |
+|     | separate features                                          |
+| D2  | Gamification events triggered by planner step completion,  |
 |     | not arbitrary actions — keeps motivation tied to product   |
-| D2  | Forum is founder Q&A only (no off-topic boards v1)         |
-| D3  | PDF export uses template's Gotenberg sidecar               |
-| D4  | Leaderboard is opt-in (founders can hide from ranking)     |
-| D5  | Package repo auth = self-contained JWT (not Keycloak SSO)  |
-| D6  | Package repo blob store = MinIO (`packagerepo` bucket)     |
+| D3  | Leaderboard is opt-in (founders can hide from ranking)     |
+| D4  | Forum is founder Q&A only (no off-topic boards v1)         |
+| D5  | PDF export uses template's Gotenberg sidecar               |
+| D6  | Package repo auth = self-contained JWT (not Keycloak SSO)  |
+| D7  | Package repo blob store = MinIO (`packagerepo` bucket)     |
 
 ---
 
