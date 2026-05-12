@@ -417,23 +417,23 @@ Founders helping founders. Backend ✅.
 
 ### Cross-cutting
 
-| ID  | Item                                                |
-|-----|-----------------------------------------------------|
-| X1  | Real-time WebSocket bus (chat + streak alerts + feed)|
-| X2  | Feature flags for gradual rollout of community      |
-| X3  | External data integrations (Crunchbase, SimilarWeb) |
-| X4  | Advisor mode: AI diagnostic → personalised plan     |
-| X5  | Knowledge base search via existing `/search` page   |
-| X6  | Decision log: record decisions + rationale,         |
-|     | searchable, linked to planner steps                 |
-| X7  | Weekly review prompts: structured reflection form   |
-|     | that drives the daily streak                        |
-| X8  | Launch execution checklist: Product Hunt, HN Show,  |
-|     | press, social — per startup type                    |
-| X9  | Product scoping canvas: MVP cut list, ICE/RICE      |
-|     | feature prioritisation tool                         |
-| X10 | Resource library: downloadable templates (NDA,      |
-|     | founder agreement, cap table, pitch deck skeleton)  |
+| ID  | Item                                                | Status |
+|-----|-----------------------------------------------------|--------|
+| X1  | Real-time WebSocket bus (chat + streak alerts + feed)| ❌ v2 |
+| X2  | Feature flags for gradual rollout of community      | ❌ v2  |
+| X3  | External data integrations (Crunchbase, SimilarWeb) | ❌ v2  |
+| X4  | Advisor mode: AI diagnostic → personalised plan     | ❌ v2  |
+| X5  | Knowledge base search via existing `/search` page   | ❌ v2  |
+| X6  | Decision log: record decisions + rationale,         | ✅     |
+|     | searchable, linked to planner steps                 |        |
+| X7  | Weekly review prompts: structured reflection form   | ✅     |
+|     | that drives the daily streak                        |        |
+| X8  | Launch execution checklist: Product Hunt, HN Show,  | ✅     |
+|     | press, social — per startup type                    |        |
+| X9  | Product scoping canvas: MVP cut list, ICE/RICE      | ✅     |
+|     | feature prioritisation tool                         |        |
+| X10 | Resource library: downloadable templates (NDA,      | ✅     |
+|     | founder agreement, cap table, pitch deck skeleton)  |        |
 | X11 | Pivot tracker: formal record of direction changes   |
 |     | — original idea, what changed, why, plan impact.   |
 |     | Distinct from hypothesis tracker; linked to         |
@@ -597,44 +597,40 @@ Founders helping founders. Backend ✅.
 
 ## 6. Current progress
 
-### ✅ Shipped end-to-end
+### ✅ Shipped end-to-end (v1 complete)
 
 - Auth: email/password, JWT, Keycloak OIDC, passkeys,
   TOTP, OAuth (Google/GitHub)
-- Planner: startup roadmap with step toggle + Redux;
-  step completion fires XP + streak events (1.8)
-- Profile: skills form with localStorage
-- Search: full-text via Elasticsearch (4 LaunchPad
-  indexes retooled)
-- Dashboard: draggable widget grid
-- Settings: theme, prefs, API keys, admin controls
-- Admin: live translation editor, debug panel
-- PWA: manifest, service worker, install prompt
-- i18n: 8 locales
-- **Gamification (Phase 1)**: streak counter, XP bar,
-  level badge in Navbar; badge cabinet (/badges);
-  leaderboard (/leaderboard); all controllers wired;
-  schema fixes + Phase 1 migration applied
-- **Startup type framework (Phase 2 v1)**: 9 types with
-  stages + traps seeded; onboarding wizard (/onboarding);
-  dynamic planner with type header + priority phase;
-  stage gate bar; /knowledge route; wiki admin KB fields
+- Planner: startup roadmap + step toggle + Redux;
+  step completion fires XP + streak events; PDF export
+  button; per-step AI suggestions (Phase 1, 8.1, 8.2)
+- **Gamification** (Phase 1): streak counter, XP bar,
+  level badge in Navbar; badge cabinet; leaderboard
+- **Startup type + KB** (Phase 2): 9 types seeded;
+  onboarding wizard; dynamic planner; /knowledge route
+- **Legal tools** (Phase 3): equity split + vesting
+  calculators; /legal pages
+- **Market research** (Phase 4): TAM/SAM/SOM, competitor
+  tracker, persona builder, discovery log, BMC, dashboard
+- **Financials** (Phase 5): burn rate, unit economics,
+  path comparison, kill criteria, hypothesis tracker,
+  health score, revenue modelling, pricing, projections
+- **Notifications** (Phase 6): bell + inbox + D28 events
+- **Plan export + AI** (Phase 8): PDF export, step hints
+- **Ops/quality** (Phase 9): CSP headers, AI rate limit,
+  GDPR export/delete, cookie consent, ToS/privacy pages,
+  API key UX, admin KPI dashboard
+- **Cross-cutting**: decision log (X6), weekly review (X7),
+  launch checklist (X8), product scoping/ICE (X9),
+  resource library (X10)
+- Profile, search, dashboard, settings, admin, PWA, i18n
 
-### 🔧 Backend done, no frontend page yet
+### 🔧 Backend done, frontend built (v2 items)
 
 | Domain        | Notes                                        |
 |---------------|----------------------------------------------|
-| gamification  | Service logic only — no controllers yet      |
-| notifications | Full backend ✅ — no inbox page              |
-| forum/comments| Full backend ✅ — no `/community` page       |
-| social        | Full backend ✅ — no `/feed` page            |
-| pdf           | Full backend ✅ — no export trigger UI       |
-| ai-chat       | Full backend ✅ — not yet linked to planner  |
-| wiki          | Full backend ✅ — repurposed as KB (D15);    |
-|               | needs metadata migration (2.6) + /knowledge  |
-|               | frontend route (2.7)                         |
-| search        | Retooled: 4 LaunchPad indexes; frontend tabs |
-|               | updated. Content feeds in from Phase 2 on.   |
+| forum/comments| Full backend ✅ — Phase 7 (community) = v2  |
+| social        | Full backend ✅ — feed = v2                 |
 
 ### ❌ Out of scope for LaunchPad
 
