@@ -1,0 +1,21 @@
+{
+  "equity": {
+    "roleWeights": {
+      "ceo": 40,
+      "cto": 35,
+      "cmo": 25,
+      "coo": 25,
+      "other": 20
+    },
+    "experienceWeights": {
+      "high": 15,
+      "medium": 10,
+      "low": 5
+    },
+    "maxTimeWeight": 50,
+    "timeWeightPerMonth": 1.5,
+    "maxCapitalWeight": 20,
+    "capitalWeightPer1000": 1,
+    "ideaWeight": 10
+  }
+}
