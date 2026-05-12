@@ -27,5 +27,6 @@
   "image": ["users"],
   "analytics": ["users"],
   "gamification": ["users"],
+  "startup-types": [],
   "migration-runner": []
 }
