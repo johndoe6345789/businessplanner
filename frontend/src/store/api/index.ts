@@ -20,3 +20,5 @@ export * from './marketResearchPersonaApi';
 export * from './marketResearchDiscoveryApi';
 export * from './marketResearchBmcApi';
 export * from './notificationsApi';
+export * from './pdfApi';
+export * from './aiApi';

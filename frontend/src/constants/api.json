@@ -61,5 +61,12 @@
     "hypotheses": "/api/financials/hypotheses",
     "hypothesis": "/api/financials/hypotheses/:id",
     "killCriteria": "/api/financials/kill-criteria"
+  },
+  "pdf": {
+    "render": "/api/pdf/render",
+    "status": "/api/pdf/:id"
+  },
+  "ai": {
+    "stepSuggestion": "/api/ai/step-suggestion"
   }
 }

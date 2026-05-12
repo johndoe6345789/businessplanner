@@ -854,6 +854,18 @@
       "funded": "Funded"
     }
   },
+  "export": {
+    "exportPlan": "Export Plan as PDF",
+    "generating": "Generating…",
+    "downloadPdf": "Download PDF",
+    "exportFailed": "Export Failed — Retry"
+  },
+  "ai": {
+    "getAiTip": "💡 Get AI Tip",
+    "loading": "Getting AI tip…",
+    "unavailable": "AI unavailable",
+    "dismiss": "Dismiss"
+  },
   "alerts": {
     "pageTitle": "Alerts",
     "noneOpen": "No alerts right now",

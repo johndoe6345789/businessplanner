@@ -155,3 +155,13 @@ export * from './index.social';
 export * from './index.auth';
 export * from './index.legal';
 export * from './index.market-research';
+
+export { PlanExportButton }
+  from './PlanExportButton';
+export type { PlanExportButtonProps }
+  from './PlanExportButton';
+
+export { AiSuggestionCard }
+  from './AiSuggestionCard';
+export type { AiSuggestionCardProps }
+  from './AiSuggestionCard';

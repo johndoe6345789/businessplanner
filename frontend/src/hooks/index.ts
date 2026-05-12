@@ -53,3 +53,14 @@ export { useUnitEconCompute } from './useUnitEconCompute';
 export { usePricingCompute } from './usePricingCompute';
 export type { PricingComputeResult } from './usePricingCompute';
 export { useHealthScore } from './useHealthScore';
+
+export { usePlanExport } from './usePlanExport';
+export type {
+  UsePlanExportReturn,
+  ExportState,
+} from './usePlanExport';
+
+export { useAiSuggestion } from './useAiSuggestion';
+export type {
+  UseAiSuggestionReturn,
+} from './useAiSuggestion';

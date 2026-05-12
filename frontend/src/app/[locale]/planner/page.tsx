@@ -13,6 +13,13 @@ const StartupRoadmap = nextDynamic(
   ) },
 );
 
+const PlanExportButton = nextDynamic(
+  () => import(
+    '@/components/molecules/PlanExportButton'
+  ),
+  { ssr: false },
+);
+
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
 
@@ -41,14 +48,21 @@ export default async function PlannerPage({
       aria-label={t('pageTitle')}
       sx={{ maxWidth: 720, mx: 'auto', width: '100%' }}
     >
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{ fontWeight: 800 }}
+      <Box
+        sx={{ display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          mb: 1, flexWrap: 'wrap', gap: 1 }}
       >
-        {t('pageTitle')}
-      </Typography>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{ fontWeight: 800 }}
+        >
+          {t('pageTitle')}
+        </Typography>
+        <PlanExportButton />
+      </Box>
       <Typography
         variant="body1"
         color="text.secondary"
