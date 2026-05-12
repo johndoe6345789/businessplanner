@@ -63,3 +63,5 @@ export {
 } from './SkillsProfileForm';
 
 export { ContactForm } from './ContactForm';
+
+export { BadgeCabinet } from './BadgeCabinet';

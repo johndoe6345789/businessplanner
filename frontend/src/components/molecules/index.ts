@@ -69,6 +69,9 @@ export type {
   PlannerResetButtonProps,
 } from './PlannerResetButton';
 
+export { BadgeCard } from './BadgeCard';
+export type { BadgeCardProps } from './BadgeCard';
+
 export {
   GamificationSummary,
 } from './GamificationSummary';
