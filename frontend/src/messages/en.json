@@ -88,7 +88,8 @@
     "guest": "Guest",
     "knowledge": "Knowledge",
     "features": "Features",
-    "marketResearch": "Market Research"
+    "marketResearch": "Market Research",
+    "financials": "Financial Planning"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -763,6 +764,84 @@
     "notStarted": "Not started",
     "samLabel": "SAM",
     "somLabel": "SOM"
+  },
+  "financials": {
+    "nav": {
+      "financials": "Financial Planning",
+      "burn": "Burn Rate",
+      "unitEcon": "Unit Economics",
+      "paths": "Funding Paths",
+      "killCriteria": "Kill Criteria",
+      "hypotheses": "Hypotheses",
+      "revenue": "Revenue Model",
+      "pricing": "Pricing Calculator",
+      "projections": "Revenue Projections",
+      "health": "Financial Health",
+      "dashboard": "Financial Dashboard"
+    },
+    "burn": {
+      "title": "Burn Rate Calculator",
+      "monthlyBurn": "Monthly burn",
+      "cashInBank": "Cash in bank",
+      "monthlyRevenue": "Monthly revenue",
+      "netBurn": "Net burn",
+      "runway": "Runway",
+      "save": "Save"
+    },
+    "unitEcon": {
+      "title": "Unit Economics",
+      "cac": "Customer acquisition cost (CAC)",
+      "arpu": "Avg revenue per user (ARPU)",
+      "churn": "Monthly churn",
+      "cogs": "Cost of goods sold (COGS)",
+      "ltv": "Lifetime value (LTV)",
+      "ltvCac": "LTV : CAC ratio",
+      "payback": "Payback period",
+      "grossMargin": "Gross margin"
+    },
+    "pricing": {
+      "title": "Pricing Calculator",
+      "model": "Revenue model",
+      "price": "Price per customer",
+      "targetMrr": "Target MRR",
+      "customersNeeded": "Customers needed"
+    },
+    "projections": {
+      "title": "Revenue Projections",
+      "initialCustomers": "Initial customers",
+      "growthPct": "Monthly growth",
+      "month": "Month",
+      "customers": "Customers",
+      "mrr": "MRR"
+    },
+    "hypotheses": {
+      "title": "Financial Hypotheses",
+      "assumption": "Assumption",
+      "testMethod": "Test method",
+      "result": "Result",
+      "status": "Status",
+      "add": "Add hypothesis"
+    },
+    "health": {
+      "title": "Financial Health Score",
+      "score": "Score",
+      "healthy": "Healthy",
+      "caution": "Caution",
+      "atRisk": "At Risk"
+    },
+    "killCriteria": {
+      "title": "Kill Criteria",
+      "runwayMin": "Min runway (months)",
+      "ltvCacMin": "Min LTV : CAC ratio",
+      "wauMin": "Min weekly active users",
+      "save": "Save criteria"
+    },
+    "paths": {
+      "title": "Funding Path Comparison",
+      "lean": "Lean",
+      "bootstrap": "Bootstrap",
+      "funded": "Funded"
+    }
   },
   "alerts": {
     "pageTitle": "Alerts",

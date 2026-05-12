@@ -4,5 +4,7 @@
   { "labelKey": "knowledge", "href": "/knowledge" },
   { "labelKey": "profile", "href": "/profile" },
   { "labelKey": "marketResearch",
-    "href": "/market-research" }
+    "href": "/market-research" },
+  { "labelKey": "financials",
+    "href": "/financials" }
 ]

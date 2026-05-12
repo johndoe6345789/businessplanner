@@ -1,0 +1,27 @@
+{
+  "subscription": {
+    "name": "Subscription",
+    "description": "Customers pay a recurring fee (monthly or annually) for continued access to your product or service. Predictable MRR makes forecasting and fundraising easier.",
+    "examples": ["SaaS tools", "Newsletter", "Membership communities"]
+  },
+  "freemium": {
+    "name": "Freemium",
+    "description": "A free tier drives user acquisition; a paid tier unlocks advanced features. Requires a compelling upgrade trigger and low marginal cost per free user.",
+    "examples": ["Dropbox", "Slack", "Spotify"]
+  },
+  "usage": {
+    "name": "Usage-Based",
+    "description": "Customers pay in proportion to what they consume — API calls, data processed, seats, or transactions. Revenue scales naturally with customer growth.",
+    "examples": ["AWS", "Stripe", "Twilio"]
+  },
+  "transactional": {
+    "name": "Transactional",
+    "description": "Revenue is earned each time a discrete transaction or sale occurs, with no ongoing commitment. Works well for high-frequency or high-value single purchases.",
+    "examples": ["E-commerce stores", "Booking platforms", "One-time software licences"]
+  },
+  "marketplace": {
+    "name": "Marketplace",
+    "description": "A platform connects buyers and sellers; you take a percentage of each transaction (take rate). Network effects are the moat — both sides must be acquired.",
+    "examples": ["Airbnb", "Etsy", "Upwork"]
+  }
+}

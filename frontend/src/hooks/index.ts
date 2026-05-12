@@ -42,3 +42,9 @@ export { useSearchPageState } from './useSearchPageState';
 export { useSuggestFetch } from './useSuggestFetch';
 export { useGamification } from './useGamification';
 export type { UseGamificationReturn } from './useGamification';
+
+export { useBurnCompute } from './useBurnCompute';
+export { useUnitEconCompute } from './useUnitEconCompute';
+export { usePricingCompute } from './usePricingCompute';
+export type { PricingComputeResult } from './usePricingCompute';
+export { useHealthScore } from './useHealthScore';

@@ -82,3 +82,5 @@ export {
 } from './VestingCalculator';
 
 export * from './index.market-research';
+
+export * from './index.financials';

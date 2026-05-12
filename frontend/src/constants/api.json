@@ -51,5 +51,13 @@
     "discovery": "/api/market-research/discovery",
     "discoveryEntry": "/api/market-research/discovery/:id",
     "bmc": "/api/market-research/bmc"
+  },
+  "financials": {
+    "burn": "/api/financials/burn",
+    "unitEcon": "/api/financials/unit-econ",
+    "pricing": "/api/financials/pricing",
+    "hypotheses": "/api/financials/hypotheses",
+    "hypothesis": "/api/financials/hypotheses/:id",
+    "killCriteria": "/api/financials/kill-criteria"
   }
 }
