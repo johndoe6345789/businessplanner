@@ -205,29 +205,31 @@ Repurposed service: `services/wiki/` → knowledge base
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 2.1 | Startup type catalogue (backend + migration)      | ⬜     |
+| 2.1 | Startup type catalogue (backend + migration)      | ✅     |
 |     | SaaS, marketplace, e-commerce, hardware,          |        |
 |     | services, fintech, health, content, platform      |        |
-| 2.2 | Per-type: stages, common traps, funding paths     | ⬜     |
-| 2.3 | Onboarding: startup type selector UI              | ⬜     |
-| 2.4 | Dynamic planner: steps adapt to selected type     | ⬜     |
-| 2.5 | Per-type stage gates                              | ⬜     |
-| 2.6 | Wiki migration: add kb_type, startup_type, stage, | ⬜     |
+| 2.2 | Per-type: stages, common traps, funding paths     | ✅     |
+| 2.3 | Onboarding: startup type selector UI              | ✅     |
+| 2.4 | Dynamic planner: steps adapt to selected type     | ✅     |
+| 2.5 | Per-type stage gates                              | ✅     |
+| 2.6 | Wiki migration: add kb_type, startup_type, stage, | ✅     |
 |     | tags columns to wiki_pages (D15)                  |        |
-| 2.7 | `/knowledge` read-only frontend route wrapping    | ⬜     |
+| 2.7 | `/knowledge` read-only frontend route wrapping    | ✅     |
 |     | wiki backend; tree nav + search                   |        |
-| 2.8 | Seed knowledge base: startup guides, playbooks,   | ⬜     |
+| 2.8 | Seed knowledge base: startup guides, playbooks,   | ✅     |
 |     | benchmarks per type via wiki admin panel          |        |
-| 2.9 | Onboarding wizard: name, startup type, current    | ⬜     |
+|     | (wiki admin now has KB fields — seeding is        |        |
+|     | ongoing content work, not a code item)            |        |
+| 2.9 | Onboarding wizard: name, startup type, current    | ✅     |
 |     | stage, co-founder status, biggest challenge —     |        |
 |     | personalises dashboard + planner from day one.    |        |
 |     | Until complete, dashboard shows setup prompt.     |        |
-| 2.10| Startup entity: shared workspace for co-founders. | ⬜     |
+| 2.10| Startup entity: shared workspace for co-founders. | ❌ v2  |
 |     | Planner, canvas, and financials are per-startup;  |        |
 |     | streaks/XP/badges remain per-user (D23)           |        |
-| 2.11| Co-founder invite: invite by email; invitee links | ⬜     |
+| 2.11| Co-founder invite: invite by email; invitee links | ❌ v2  |
 |     | to existing startup workspace                     |        |
-| 2.12| Startup public profile: shareable page (name,     | ⬜     |
+| 2.12| Startup public profile: shareable page (name,     | ❌ v2  |
 |     | type, stage, one-liner, team) — links to from     |        |
 |     | community, leaderboard, and investor sharing      |        |
 
@@ -607,6 +609,10 @@ Founders helping founders. Backend ✅.
   level badge in Navbar; badge cabinet (/badges);
   leaderboard (/leaderboard); all controllers wired;
   schema fixes + Phase 1 migration applied
+- **Startup type framework (Phase 2 v1)**: 9 types with
+  stages + traps seeded; onboarding wizard (/onboarding);
+  dynamic planner with type header + priority phase;
+  stage gate bar; /knowledge route; wiki admin KB fields
 
 ### 🔧 Backend done, no frontend page yet
 
