@@ -31,5 +31,6 @@
   "legal-team": [],
   "market-research": ["users"],
   "financials": ["users"],
-  "migration-runner": []
+  "migration-runner": [],
+  "gdpr": ["users", "market-research", "financials"]
 }
