@@ -16,6 +16,11 @@ const DashboardGrid = nextDynamic(
   { loading: () => <div data-testid="dashboard-loading" /> },
 );
 
+const OnboardingCta = nextDynamic(
+  () => import('@/components/molecules/OnboardingCta'),
+  { loading: () => null },
+);
+
 /** Skip static prerendering for this page. */
 export const dynamic = 'force-dynamic';
 /** Props for the dashboard home page. */
@@ -46,6 +51,7 @@ export default async function DashboardPage({
       >
         {t('title')}
       </Typography>
+      <OnboardingCta />
       <DashboardGrid />
     </Box>
   );

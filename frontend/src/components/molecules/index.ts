@@ -101,6 +101,11 @@ export type {
   KbFilter,
 } from './KbFilterChips';
 
+export { PlannerHeader } from './PlannerHeader';
+export type { PlannerHeaderProps } from './PlannerHeader';
+
+export { PriorityBadge } from './PriorityBadge';
+
 export { StartupTypeSelector } from './StartupTypeSelector';
 export type { StartupTypeSelectorProps }
   from './StartupTypeSelector';
