@@ -28,8 +28,8 @@
 
 ## 1. What this product is
 
-**LaunchPad** is a structured guide from idea to paying
-customers for any type of startup.
+**LaunchPad** is a free, structured guide from idea to
+paying customers for any type of startup.
 
 Most startups fail not because founders lack ideas but
 because they don't know what to validate first, waste
@@ -390,6 +390,8 @@ Founders helping founders. Backend ✅.
 | 9.10| GDPR: account deletion (right to erasure)         | ⬜     |
 | 9.11| Cookie consent management                         | ⬜     |
 | 9.12| WCAG 2.1 AA compliance audit + remediation        | ⬜     |
+| 9.13| API key settings UX: label, help text, validation  | ⬜     |
+|     | feedback for Anthropic + OpenAI keys (D27)         |        |
 
 ### Cross-cutting
 
@@ -516,6 +518,15 @@ Founders helping founders. Backend ✅.
 |     | launch day) are founder-declared, not system-detected.     |
 |     | The founder marks them; the system celebrates. Badges      |
 |     | and XP awards fire on declaration.                         |
+| D26 | LaunchPad is free — no subscription tiers, no feature      |
+|     | gating. Revenue comes from the businesses founders build   |
+|     | using it, not from the tool itself.                        |
+| D27 | AI features run on the built-in shared API key by default  |
+|     | (rate-limited). Founders who add their own Anthropic or    |
+|     | OpenAI key in profile settings use their own quota — more  |
+|     | AI calls, faster responses, choice of model. The settings  |
+|     | API key store is already built; this needs UX polish       |
+|     | only (label, help text, key validation feedback).          |
 
 ---
 
@@ -588,7 +599,7 @@ Template backends that will not appear in the UI:
 | Q14 | Weekly review: mandatory for streak or optional?      | Mandatory (D17)    |
 | Q15 | Decision log: private always, or shareable with       | Private (D18)      |
 |     | investors/co-founders via link?                       |                    |
-| Q16 | LaunchPad monetisation: free, freemium, or paid       | Undecided          |
+| Q16 | LaunchPad monetisation: free, freemium, or paid       | ✅ Free (D26)      |
 |     | subscription? Which features are gated?               |                    |
 | Q17 | Planner step versioning: when the type catalogue is   | Additive only v1   |
 |     | updated, how do existing founders' plans migrate?     |                    |
