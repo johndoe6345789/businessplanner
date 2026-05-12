@@ -7,7 +7,10 @@
 
 import { useState } from 'react'
 import { useWikiTree } from '@/hooks/useWikiTree'
-import { useWikiPage } from '@/hooks/useWikiPage'
+import {
+  useWikiPage,
+} from '@/hooks/useWikiPage'
+import type { KbMeta } from '@/hooks/useWikiPage'
 import {
   useRevisions,
 } from '@/hooks/useRevisions'
@@ -28,9 +31,11 @@ export default function WikiPage() {
     useRevisions(activeId)
 
   const handleSave = async (
-    title: string, body: string,
+    title: string,
+    body: string,
+    kbMeta: KbMeta,
   ) => {
-    await save(title, body)
+    await save(title, body, kbMeta)
     await refreshTree()
   }
 

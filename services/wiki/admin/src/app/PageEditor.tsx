@@ -8,12 +8,25 @@
  */
 
 import { useEffect, useState } from 'react'
-import type { WikiPage } from '@/hooks/useWikiPage'
+import type {
+  WikiPage, KbMeta,
+} from '@/hooks/useWikiPage'
+import KbMetaFields from './KbMetaFields'
+
+const EMPTY_META: KbMeta = {
+  kbType: null,
+  startupType: null,
+  stage: null,
+  tags: [],
+}
 
 interface Props {
   page: WikiPage | null
-  onSave: (title: string, bodyMd: string)
-    => Promise<void>
+  onSave: (
+    title: string,
+    bodyMd: string,
+    kbMeta: KbMeta,
+  ) => Promise<void>
 }
 
 export default function PageEditor({
@@ -21,10 +34,18 @@ export default function PageEditor({
 }: Props) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
+  const [meta, setMeta] =
+    useState<KbMeta>(EMPTY_META)
 
   useEffect(() => {
     setTitle(page?.title ?? '')
     setBody(page?.bodyMd ?? '')
+    setMeta({
+      kbType: page?.kbType ?? null,
+      startupType: page?.startupType ?? null,
+      stage: page?.stage ?? null,
+      tags: page?.tags ?? [],
+    })
   }, [page])
 
   if (!page) {
@@ -60,10 +81,14 @@ export default function PageEditor({
         aria-label="Page body (markdown)"
         data-testid="wiki-editor-body"
       />
+      <KbMetaFields
+        meta={meta}
+        onChange={setMeta}
+      />
       <button
         type="button"
         onClick={() =>
-          void onSave(title, body)}
+          void onSave(title, body, meta)}
         aria-label="Save page"
         data-testid="wiki-editor-save"
       >
