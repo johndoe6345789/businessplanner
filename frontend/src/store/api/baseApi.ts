@@ -27,7 +27,7 @@ export const baseApi = createApi({
     'Translation', 'Preferences',
     'ApiKeys', 'SystemKeys', 'Admin',
     'Social',
-    'Analytics', 'Flags',
+    'Analytics', 'AdminAnalytics', 'Flags',
     'ShopProducts', 'Cart', 'Orders',
     'ForumBoards', 'Wiki', 'Gallery',
     'StartupTypes', 'Knowledge',

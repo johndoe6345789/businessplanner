@@ -417,7 +417,17 @@
     "guestVisibleTip": "Listed and readable without signing in",
     "minPosts": "Min posts",
     "minPostsTip": "Member must have this many posts to access",
-    "board": "Board"
+    "board": "Board",
+    "analytics": {
+      "title": "LaunchPad Analytics",
+      "weeklyActive": "Weekly Active Founders",
+      "streakRetention": "Streak Retention",
+      "totalFounders": "Total Founders",
+      "hypothesesTracked": "Hypotheses Tracked",
+      "hypothesesValidated": "Hypotheses Validated",
+      "loading": "Loading metrics…",
+      "generatedAt": "Generated at:"
+    }
   },
   "social": {
     "follow": "Follow",

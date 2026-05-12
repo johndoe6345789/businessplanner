@@ -68,5 +68,9 @@
   },
   "ai": {
     "stepSuggestion": "/api/ai/step-suggestion"
+  },
+  "analytics": {
+    "summary": "/api/analytics/summary",
+    "launchpad": "/api/analytics/launchpad"
   }
 }

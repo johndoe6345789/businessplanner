@@ -4,12 +4,13 @@
  * @brief Admin analytics HTTP controller.
  *
  * Routes:
- *   POST /api/analytics/events  — ingest event
- *   GET  /api/analytics/summary — metric totals
- *   GET  /api/analytics/series  — daily series
+ *   POST /api/analytics/events   — ingest event
+ *   GET  /api/analytics/summary  — metric totals
+ *   GET  /api/analytics/series   — daily series
+ *   GET  /api/analytics/launchpad — LaunchPad KPIs
  *
- * summary/series require role=admin; events
- * requires any valid JWT.
+ * summary/series/launchpad require role=admin;
+ * events requires any valid JWT.
  */
 
 #include <drogon/HttpController.h>
@@ -38,6 +39,11 @@ class AnalyticsController
         "/api/analytics/series",
         drogon::Get,
         "filters::JwtAuthFilter");
+    ADD_METHOD_TO(
+        AnalyticsController::launchpadMetrics,
+        "/api/analytics/launchpad",
+        drogon::Get,
+        "filters::JwtAuthFilter");
     METHOD_LIST_END
 
     /** @brief Ingest a client analytics event. */
@@ -54,6 +60,16 @@ class AnalyticsController
 
     /** @brief Return a single metric's daily series. */
     void series(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&)>&& cb);
+
+    /**
+     * @brief Return LaunchPad-specific KPI metrics.
+     * @param req HTTP request (must be admin role).
+     * @param cb  Response callback.
+     */
+    void launchpadMetrics(
         const drogon::HttpRequestPtr& req,
         std::function<void(
             const drogon::HttpResponsePtr&)>&& cb);

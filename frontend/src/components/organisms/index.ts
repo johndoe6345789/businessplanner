@@ -90,3 +90,12 @@ export { default as NotificationInbox }
 
 export { default as CookieConsentBanner }
   from './CookieConsentBanner';
+
+export { default as AdminAnalyticsDashboard }
+  from './AdminAnalyticsDashboard';
+export {
+  LaunchPadKpiGrid,
+} from './LaunchPadKpiGrid';
+export type {
+  LaunchPadKpiGridProps,
+} from './LaunchPadKpiGrid';

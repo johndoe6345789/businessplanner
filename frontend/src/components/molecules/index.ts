@@ -170,3 +170,9 @@ export { default as ApiKeyHelpText }
   from './ApiKeyHelpText';
 export type { ApiKeyHelpTextProps }
   from './ApiKeyHelpText';
+
+export { KpiCard } from './KpiCard';
+export type {
+  KpiCardProps,
+  KpiCardIntent,
+} from './KpiCard';
