@@ -1,8 +1,8 @@
 'use client';
 
 /**
- * Business Model Canvas (Lean Canvas) organism.
- * Nine text areas, auto-saved on blur via useBmcAutosave.
+ * Business Model Canvas organism.
+ * Nine text areas, auto-saved on blur.
  * @module components/organisms/BusinessModelCanvas
  */
 import React, { useState, useEffect } from 'react';
@@ -18,41 +18,35 @@ import { useBmcAutosave }
   from '@/hooks/useBmcAutosave';
 import type { BmcCanvas } from '@/types/marketResearch';
 
-const EMPTY_CANVAS: BmcCanvas = {
+const EMPTY: BmcCanvas = {
   problem: '', solution: '', uvp: '',
   channels: '', customerSegments: '',
   costStructure: '', revenueStreams: '',
   keyMetrics: '', unfairAdvantage: '',
 };
 
-/** A single canvas field descriptor. */
-interface CanvasField {
-  key: keyof BmcCanvas;
-  labelKey: string;
-  testId: string;
-}
+type BmcKey = keyof BmcCanvas;
 
-const FIELDS: CanvasField[] = [
-  { key: 'problem', labelKey: 'problem',
-    testId: 'bmc-problem' },
-  { key: 'solution', labelKey: 'solution',
-    testId: 'bmc-solution' },
-  { key: 'uvp', labelKey: 'uvp',
-    testId: 'bmc-uvp' },
-  { key: 'channels', labelKey: 'channels',
-    testId: 'bmc-channels' },
+const FIELDS: { key: BmcKey; lk: string;
+  tid: string }[] = [
+  { key: 'problem', lk: 'problem',
+    tid: 'bmc-problem' },
+  { key: 'solution', lk: 'solution',
+    tid: 'bmc-solution' },
+  { key: 'uvp', lk: 'uvp', tid: 'bmc-uvp' },
+  { key: 'channels', lk: 'channels',
+    tid: 'bmc-channels' },
   { key: 'customerSegments',
-    labelKey: 'customerSegments',
-    testId: 'bmc-customer-segments' },
-  { key: 'costStructure', labelKey: 'costStructure',
-    testId: 'bmc-cost-structure' },
-  { key: 'revenueStreams', labelKey: 'revenueStreams',
-    testId: 'bmc-revenue-streams' },
-  { key: 'keyMetrics', labelKey: 'keyMetrics',
-    testId: 'bmc-key-metrics' },
-  { key: 'unfairAdvantage',
-    labelKey: 'unfairAdvantage',
-    testId: 'bmc-unfair-advantage' },
+    lk: 'customerSegments',
+    tid: 'bmc-customer-segments' },
+  { key: 'costStructure', lk: 'costStructure',
+    tid: 'bmc-cost-structure' },
+  { key: 'revenueStreams', lk: 'revenueStreams',
+    tid: 'bmc-revenue-streams' },
+  { key: 'keyMetrics', lk: 'keyMetrics',
+    tid: 'bmc-key-metrics' },
+  { key: 'unfairAdvantage', lk: 'unfairAdvantage',
+    tid: 'bmc-unfair-advantage' },
 ];
 
 /**
@@ -64,12 +58,9 @@ export const BusinessModelCanvas: React.FC = () => {
   const tc = useTranslations('common');
   const { data, isLoading } = useGetBmcQuery();
   const { scheduleAutosave } = useBmcAutosave();
-  const [canvas, setCanvas] =
-    useState<BmcCanvas>(EMPTY_CANVAS);
+  const [canvas, setCanvas] = useState<BmcCanvas>(EMPTY);
 
-  useEffect(() => {
-    if (data) setCanvas(data);
-  }, [data]);
+  useEffect(() => { if (data) setCanvas(data); }, [data]);
 
   if (isLoading) {
     return (
@@ -81,16 +72,8 @@ export const BusinessModelCanvas: React.FC = () => {
     );
   }
 
-  const handleChange = (
-    key: keyof BmcCanvas,
-    value: string,
-  ) => {
-    setCanvas((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleBlur = () => {
-    scheduleAutosave(canvas);
-  };
+  const handleChange = (k: BmcKey, v: string) =>
+    setCanvas((p) => ({ ...p, [k]: v }));
 
   return (
     <Box data-testid="business-model-canvas"
@@ -99,18 +82,17 @@ export const BusinessModelCanvas: React.FC = () => {
         {FIELDS.map((f) => (
           <Grid item xs={12} sm={6} md={4} key={f.key}>
             <TextField
-              label={t(f.labelKey as Parameters<
-                typeof t>[0])}
+              label={t(f.lk as Parameters<typeof t>[0])}
               multiline rows={4}
               value={canvas[f.key]}
               onChange={(e) =>
                 handleChange(f.key, e.target.value)}
-              onBlur={handleBlur}
+              onBlur={() => scheduleAutosave(canvas)}
               inputProps={{
-                'aria-label': t(f.labelKey as Parameters<
-                  typeof t>[0]),
+                'aria-label': t(
+                  f.lk as Parameters<typeof t>[0]),
               }}
-              data-testid={f.testId}
+              data-testid={f.tid}
               fullWidth
             />
           </Grid>

@@ -17,4 +17,5 @@ export * from './legalApi';
 export * from './marketResearchTamApi';
 export * from './marketResearchCompetitorApi';
 export * from './marketResearchPersonaApi';
+export * from './marketResearchDiscoveryApi';
 export * from './marketResearchBmcApi';

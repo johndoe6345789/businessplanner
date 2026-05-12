@@ -1,13 +1,11 @@
 /**
- * Market Research Persona & Discovery RTK Query endpoints.
+ * Market Research Persona RTK Query endpoints.
  * @module store/api/marketResearchPersonaApi
  */
 import { baseApi } from './baseApi';
 import type {
   Persona,
   CreatePersonaInput,
-  DiscoveryEntry,
-  CreateDiscoveryInput,
 } from '@/types/marketResearch';
 import apiConstants from '@/constants/api.json';
 
@@ -19,7 +17,7 @@ export interface UpdatePersonaArgs {
   data: Partial<CreatePersonaInput>;
 }
 
-/** Persona and Discovery endpoints injected into baseApi. */
+/** Persona endpoints injected into baseApi. */
 export const marketResearchPersonaApi =
   baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -27,7 +25,8 @@ export const marketResearchPersonaApi =
        * List all personas for the current user.
        */
       listPersonas: build.query<Persona[], void>({
-        query: () => apiConstants.marketResearch.personas,
+        query: () =>
+          apiConstants.marketResearch.personas,
         providesTags: ['MarketResearch'],
       }),
 
@@ -76,43 +75,6 @@ export const marketResearchPersonaApi =
         }),
         invalidatesTags: ['MarketResearch'],
       }),
-
-      /**
-       * List all discovery log entries for the current user.
-       */
-      listDiscovery: build.query<DiscoveryEntry[], void>({
-        query: () => apiConstants.marketResearch.discovery,
-        providesTags: ['MarketResearch'],
-      }),
-
-      /**
-       * Create a new discovery log entry.
-       * @param data - Discovery entry creation payload.
-       */
-      createDiscoveryEntry: build.mutation<
-        DiscoveryEntry,
-        CreateDiscoveryInput
-      >({
-        query: (data) => ({
-          url: apiConstants.marketResearch.discovery,
-          method: 'POST',
-          body: data,
-        }),
-        invalidatesTags: ['MarketResearch'],
-      }),
-
-      /**
-       * Delete a discovery entry by ID.
-       * @param id - Discovery entry record ID.
-       */
-      deleteDiscoveryEntry: build.mutation<void, string>({
-        query: (id) => ({
-          url: apiConstants.marketResearch.discoveryEntry
-            .replace(':id', id),
-          method: 'DELETE',
-        }),
-        invalidatesTags: ['MarketResearch'],
-      }),
     }),
     overrideExisting: false,
   });
@@ -122,7 +84,4 @@ export const {
   useCreatePersonaMutation,
   useUpdatePersonaMutation,
   useDeletePersonaMutation,
-  useListDiscoveryQuery,
-  useCreateDiscoveryEntryMutation,
-  useDeleteDiscoveryEntryMutation,
 } = marketResearchPersonaApi;

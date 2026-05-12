@@ -80,3 +80,5 @@ export {
 export {
   VestingCalculator,
 } from './VestingCalculator';
+
+export * from './index.market-research';
