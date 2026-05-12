@@ -32,5 +32,8 @@
   "market-research": ["users"],
   "financials": ["users"],
   "migration-runner": [],
-  "gdpr": ["users", "market-research", "financials"]
+  "decisions": ["users"],
+  "scoping": ["users"],
+  "gdpr": ["users", "market-research", "financials"],
+  "weekly-review": ["users"]
 }

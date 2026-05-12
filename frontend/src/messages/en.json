@@ -89,7 +89,10 @@
     "knowledge": "Knowledge",
     "features": "Features",
     "marketResearch": "Market Research",
-    "financials": "Financial Planning"
+    "financials": "Financial Planning",
+    "review": "Weekly Review",
+    "launch": "Launch Checklist",
+    "resources": "Resources"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -919,5 +922,47 @@
     "helpTitle": "API key help",
     "helpGeneric": "API key stored securely. Never shared with third parties.",
     "prefixWarning": "This key does not start with the expected prefix. Please double-check it."
+  },
+  "review": {
+    "title": "Weekly Review",
+    "wins": "Wins this week",
+    "challenges": "Challenges this week",
+    "nextGoals": "Goals for next week",
+    "morale": "Morale",
+    "save": "Save review",
+    "saved": "Review saved! Your streak is maintained.",
+    "historyTitle": "Review history",
+    "noHistory": "No past reviews yet.",
+    "weekOf": "Week of"
+  },
+  "launch": {
+    "title": "Launch Checklist",
+    "subtitle": "Everything you need to execute a successful launch day.",
+    "progress": "{done} of {total} tasks completed",
+    "categories": {
+      "distribution": "Distribution",
+      "product": "Product",
+      "marketing": "Marketing",
+      "ops": "Operations"
+    }
+  },
+  "resources": {
+    "title": "Resource Library",
+    "subtitle": "Templates and tools for every stage",
+    "download": "Download",
+    "allCategories": "All"
+  },
+  "decisions": {
+    "title": "Decision Log",
+    "search": "Search decisions",
+    "add": "Add Decision",
+    "formLabel": "Decision form",
+    "context": "Background context",
+    "options": "Options considered",
+    "decision": "Decision made",
+    "rationale": "Rationale",
+    "plannerStep": "Planner step",
+    "outcome": "Outcome",
+    "noDecisions": "No decisions recorded yet."
   }
 }

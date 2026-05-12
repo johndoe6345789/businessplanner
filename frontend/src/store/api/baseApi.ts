@@ -33,6 +33,9 @@ export const baseApi = createApi({
     'StartupTypes', 'Knowledge',
     'MarketResearch',
     'Financials', 'FinancialHypotheses',
+    'WeeklyReview',
+    'Decisions',
+    'Scoping',
   ],
   endpoints: () => ({}),
 });

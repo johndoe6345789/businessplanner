@@ -176,3 +176,9 @@ export type {
   KpiCardProps,
   KpiCardIntent,
 } from './KpiCard';
+
+export { ResourceCard } from './ResourceCard';
+export type {
+  ResourceCardProps,
+  ResourceEntry,
+} from './ResourceCard';

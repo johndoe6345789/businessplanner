@@ -72,5 +72,18 @@
   "analytics": {
     "summary": "/api/analytics/summary",
     "launchpad": "/api/analytics/launchpad"
+  },
+  "weeklyReview": {
+    "list": "/api/reviews",
+    "thisWeek": "/api/reviews/this-week",
+    "submit": "/api/reviews"
+  },
+  "decisions": {
+    "list": "/api/decisions",
+    "detail": "/api/decisions/:id"
+  },
+  "scoping": {
+    "features": "/api/scoping/features",
+    "feature": "/api/scoping/features/:id"
   }
 }

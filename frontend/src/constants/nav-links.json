@@ -6,5 +6,9 @@
   { "labelKey": "marketResearch",
     "href": "/market-research" },
   { "labelKey": "financials",
-    "href": "/financials" }
+    "href": "/financials" },
+  { "labelKey": "review",
+    "href": "/review" },
+  { "labelKey": "launch", "href": "/launch" },
+  { "labelKey": "resources", "href": "/resources" }
 ]
