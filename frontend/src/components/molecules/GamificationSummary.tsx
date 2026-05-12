@@ -24,6 +24,7 @@ const CompactSkeleton: React.FC = () => (
   <Box
     sx={{ display: 'flex', gap: 1 }}
     component="span"
+    data-testid="gamification-summary"
   >
     <Skeleton variant="circular" width={28} height={28} />
     <Skeleton variant="text" width={48} />

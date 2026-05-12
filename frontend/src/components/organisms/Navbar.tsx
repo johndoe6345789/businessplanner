@@ -61,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <AppBar
         position="sticky"
         role="navigation"
-        aria-label="Main navigation"
+        aria-label={tA11y('mainNav')}
         data-testid={testId}
       >
         <Toolbar>
