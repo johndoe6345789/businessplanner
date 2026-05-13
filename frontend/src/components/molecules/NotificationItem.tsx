@@ -6,9 +6,7 @@ import {
   Box, Typography,
 } from '@shared/m3';
 import NotificationsIcon
-  from '@mui/icons-material/Notifications';
-import FiberManualRecordIcon
-  from '@mui/icons-material/FiberManualRecord';
+  from '@shared/icons/react/m3/Notifications';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import type { Notification }
@@ -86,8 +84,11 @@ const NotificationItem: React.FC<
         }
       />
       {!n.is_read && (
-        <FiberManualRecordIcon sx={{
-          fontSize: 10, color: 'primary.main', mt: 1,
+        <Box component="span" sx={{
+          width: 8, height: 8, flexShrink: 0,
+          borderRadius: '50%',
+          bgcolor: 'primary.main', mt: 1,
+          display: 'inline-block',
         }} aria-label={t('unread')} />
       )}
     </ListItem>

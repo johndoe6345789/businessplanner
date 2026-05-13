@@ -3,7 +3,7 @@
 import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from '@shared/icons/react/m3/Star';
 
 /**
  * Small "Priority" label with a star icon, shown above
@@ -19,7 +19,7 @@ export const PriorityBadge: React.FC = () => (
     data-testid="priority-badge"
   >
     <StarIcon
-      sx={{ color: 'warning.main', fontSize: 18 }}
+      style={{ color: 'var(--mui-palette-warning-main, #ed6c02)', fontSize: 18 }}
       aria-hidden="true"
     />
     <Typography

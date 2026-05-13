@@ -8,7 +8,7 @@ import React from 'react';
 import Button from '@shared/m3/Button';
 import CircularProgress
   from '@shared/m3/CircularProgress';
-import DownloadIcon from '@mui/icons-material/Download';
+import DownloadIcon from '@shared/icons/react/m3/Download';
 import { useTranslations } from 'next-intl';
 import { usePlanExport } from '@/hooks/usePlanExport';
 

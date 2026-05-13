@@ -7,13 +7,12 @@
 import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from
-  '@mui/material/AccordionSummary';
-import AccordionDetails from
-  '@mui/material/AccordionDetails';
-import ExpandMoreIcon from
-  '@mui/icons-material/ExpandMore';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  ExpandMoreIcon,
+} from '@shared/m3/surfaces';
 import { useTranslations } from 'next-intl';
 import { useListReviewsQuery } from
   '@/store/api/weeklyReviewApi';

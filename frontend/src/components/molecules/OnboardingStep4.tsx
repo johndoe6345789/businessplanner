@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Box from '@shared/m3/Box';
-import Button from '@mui/material/Button';
-import PersonIcon from '@mui/icons-material/Person';
-import GroupIcon from '@mui/icons-material/Group';
+import Button from '@shared/m3/Button';
+import PersonIcon from '@shared/icons/react/m3/Person';
+import GroupIcon from '@shared/icons/react/m3/Users';
 import { useTranslations } from 'next-intl';
 import type { CoFounderStatus }
   from '@/store/slices/startupTypeSlice';
