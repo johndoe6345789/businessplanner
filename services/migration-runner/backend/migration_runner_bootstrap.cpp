@@ -38,17 +38,22 @@ static void applyBootstrap(
     std::function<void()> then,
     services::ErrCallback onError)
 {
+    // execSqlAsync with 0 params uses PQsendQuery
+    // (simple-query protocol) which supports
+    // multi-statement SQL — unlike the << operator
+    // which always uses prepared statements.
     auto db = services::MigrationStateStore::db();
-    *db << bootstrapSql
-        >> [then, onError](const Result&) {
+    db->execSqlAsync(
+        bootstrapSql,
+        [then, onError](const Result&) {
             retroStamp(then, onError);
-        }
-        >> [onError](const DrogonDbException& e) {
+        },
+        [onError](const DrogonDbException& e) {
             spdlog::error("bootstrap sql: {}",
                           e.base().what());
             onError(k500InternalServerError,
                     "Failed to apply bootstrap SQL");
-        };
+        });
 }
 
 void MigrationRunnerBootstrap::run(
