@@ -2,11 +2,20 @@
    - HTML navigations: NETWORK-FIRST (timeout, cache fallback)
    - Static assets:    SWR (filenames are hashed)
    - API:              always network, never cached
-   Bump CACHE name on changes to evict stale entries. */
-const CACHE = 'launchpad-shell-v1';
+   Bump CACHE name on changes to evict stale entries.
+
+   X19 precache additions:
+     /app/en/review   — weekly review (offline sync)
+     /app/en/dashboard — streak widget (offline read)
+     /app/en/offline  — explicit offline fallback page
+*/
+const CACHE = 'launchpad-shell-v2';
 const NAV_TIMEOUT_MS = 1500;
 const SHELL = [
   '/app/en',
+  '/app/en/review',
+  '/app/en/dashboard',
+  '/app/en/offline',
   '/app/manifest.webmanifest',
   '/app/icon.svg',
 ];
@@ -86,7 +95,15 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   if (isNavigation(req)) {
-    event.respondWith(networkFirst(req));
+    event.respondWith(
+      networkFirst(req).then(
+        (res) => res || caches.open(CACHE).then(
+          (c) => c.match('/app/en/offline'),
+        ),
+      ).catch(() => caches.open(CACHE).then(
+        (c) => c.match('/app/en/offline'),
+      )),
+    );
     return;
   }
   event.respondWith(swr(req));

@@ -37,3 +37,8 @@ export type { XPBarProps } from './XPBar';
 export { LevelBadge } from './LevelBadge';
 export type { LevelBadgeProps } from './LevelBadge';
 
+export { default as MentorBadge }
+  from './MentorBadge';
+export type { MentorBadgeProps }
+  from './MentorBadge';
+

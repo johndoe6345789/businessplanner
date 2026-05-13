@@ -14,6 +14,8 @@ import { PlannerProgressBar }
   from '@/components/molecules/PlannerProgressBar';
 import { useAppSelector } from '@/store/hooks';
 import roadmap from '@/constants/startup-roadmap.json';
+import SkillsGapBanner
+  from '@/components/molecules/SkillsGapBanner';
 
 /** Map of biggest-challenge slug → highlighted phase id. */
 const CHALLENGE_PHASE: Record<string, string> = {
@@ -54,6 +56,7 @@ export const StartupRoadmap: React.FC<
 
   return (
     <Box data-testid={testId} aria-label={t('pageTitle')}>
+      <SkillsGapBanner />
       <PlannerHeader
         selectedSlug={selectedSlug}
         onboardingComplete={onboardingComplete}

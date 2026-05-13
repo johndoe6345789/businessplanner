@@ -11,6 +11,7 @@ import { Chip } from '@shared/m3';
 import Typography from '@shared/m3/Typography';
 import Box from '@shared/m3/Box';
 import type { KbArticle } from '@/types/knowledge';
+import KbFeedbackBar from './KbFeedbackBar';
 
 /** Props for KbArticleCard. */
 export interface KbArticleCardProps {
@@ -79,6 +80,7 @@ export const KbArticleCard: React.FC<
             ))}
           </Box>
         )}
+        <KbFeedbackBar articleId={article.id} />
       </CardContent>
     </CardActionArea>
   </Card>

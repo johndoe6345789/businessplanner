@@ -11,6 +11,9 @@ import {
 } from './SettingsCard';
 import SettingsAdminCard from './SettingsAdminCard';
 import SettingsPreferences from './SettingsPreferences';
+import SettingsEmailPrefs from './SettingsEmailPrefs';
+import SettingsMentor from
+  '@/components/molecules/SettingsMentor';
 
 /**
  * Settings page with account, appearance,
@@ -61,6 +64,8 @@ const SettingsContent: React.FC = () => {
       </SettingsCard>
 
       <SettingsPreferences />
+      <SettingsEmailPrefs />
+      <SettingsMentor />
       {isAdmin && <SettingsAdminCard />}
     </Box>
   );

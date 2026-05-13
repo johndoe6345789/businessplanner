@@ -12,5 +12,7 @@
   { "labelKey": "launch", "href": "/launch" },
   { "labelKey": "resources", "href": "/resources" },
   { "labelKey": "decisions", "href": "/decisions" },
-  { "labelKey": "scoping", "href": "/scoping" }
+  { "labelKey": "scoping", "href": "/scoping" },
+  { "labelKey": "community", "href": "/community" },
+  { "labelKey": "feed", "href": "/feed" }
 ]

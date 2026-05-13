@@ -1,0 +1,21 @@
+{
+  "welcomeDrip": [
+    {
+      "day": 1,
+      "subject": "Your LaunchPad journey starts now",
+      "templateKey": "welcome_day1"
+    },
+    {
+      "day": 3,
+      "subject": "How's your startup idea taking shape?",
+      "templateKey": "welcome_day3"
+    },
+    {
+      "day": 7,
+      "subject": "One week in — let's check your progress",
+      "templateKey": "welcome_day7"
+    }
+  ],
+  "reengagementDormantDays": 30,
+  "reengagementSubject": "We miss you! Your startup plan is waiting"
+}
