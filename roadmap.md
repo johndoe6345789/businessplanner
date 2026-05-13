@@ -189,8 +189,8 @@ when real-time notification fan-out matters (Phase 6).
 | 1.6 | Frontend: badge cabinet page                      | ✅     |
 | 1.7 | Frontend: leaderboard page (opt-in, D3)           | ✅     |
 | 1.8 | Wire planner step completion → XP + streak events | ✅     |
-| 1.9 | Wire weekly review completion → streak event      | ⬜     |
-|     | Blocked — weekly review built in Phase 5          |        |
+| 1.9 | Wire weekly review completion → streak event      | ✅     |
+|     | `useWeeklyReview` calls `completeStep('weekly_review')` |   |
 
 ### Phase 2 — Startup type framework + knowledge base
 
@@ -355,20 +355,20 @@ when stage gates unlock. Backend ✅.
 |     | review due, planner step commented on              |        |
 | 6.4 | Email digest (daily planner reminder)             | ❌ v2  |
 
-### Phase 7 — Community
+### Phase 7 — Community ✅
 
 Founders helping founders. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 7.1 | `/community` forum page (boards + threads)        | ⬜     |
-| 7.2 | Startup-type boards (SaaS, marketplace, etc.)     | ⬜     |
-| 7.3 | Inline comments on planner milestones             | ⬜     |
-| 7.4 | `/feed` — progress feed (follows + activity)      | ⬜     |
-| 7.5 | Follow / unfollow other founders                  | ⬜     |
-| 7.6 | Mentor opt-in: experienced founders mark          | ⬜     |
+| 7.1 | `/community` forum page (boards + threads)        | ✅     |
+| 7.2 | Startup-type boards (SaaS, marketplace, etc.)     | ✅     |
+| 7.3 | Inline comments on planner milestones             | ✅     |
+| 7.4 | `/feed` — progress feed (follows + activity)      | ✅     |
+| 7.5 | Follow / unfollow other founders                  | ✅     |
+| 7.6 | Mentor opt-in: experienced founders mark          | ✅     |
 |     | themselves available; badge + feed signal         |        |
-| 7.7 | Community moderation: report button on posts +    | ⬜     |
+| 7.7 | Community moderation: report button on posts +    | ✅     |
 |     | threads; admin review queue; auto-hide on         |        |
 |     | threshold flag count. Community is unshippable    |        |
 |     | without this.                                     |        |
@@ -379,9 +379,9 @@ Founders helping founders. Backend ✅.
 |-----|---------------------------------------------------|--------|
 | 8.1 | Export plan as PDF (backend: pdf domain ✅)        | ✅     |
 | 8.2 | AI suggestions per planner step (prompt tuning)   | ✅     |
-| 8.3 | Save AI chat threads to planner steps             | ❌ v2  |
-| 8.4 | AI risk report: blind spots in the current plan   | ❌ v2  |
-| 8.5 | AI document drafting: generate pitch deck outline,| ❌ v2  |
+| 8.3 | Save AI chat threads to planner steps             | ✅     |
+| 8.4 | AI risk report: blind spots in the current plan   | ✅     |
+| 8.5 | AI document drafting: generate pitch deck outline,| ✅     |
 |     | investor update, NDA draft, job description —     |        |
 |     | seeded from the founder's own plan data           |        |
 
@@ -389,18 +389,18 @@ Founders helping founders. Backend ✅.
 
 | ID  | Item                                              | Status |
 |-----|---------------------------------------------------|--------|
-| 9.1 | Impersonation hardening (DB-backed session)       | ❌ v2  |
-| 9.2 | `CookieAuthFilter` reject refresh tokens for API  | ❌ v2  |
+| 9.1 | Impersonation hardening (DB-backed session)       | ✅     |
+| 9.2 | `CookieAuthFilter` reject refresh tokens for API  | ✅     |
 | 9.3 | `usePlannerProgress.ts` threshold tuning          | ✅     |
 | 9.4 | Admin analytics dashboard                         | ✅     |
 | 9.5 | CSP + security headers middleware                 | ✅     |
-| 9.6 | Frontend test coverage: 60% of organisms          | ❌ v2  |
-| 9.7 | Backend GTest: badges, leaderboards, streaks, xp  | ❌ v2  |
-| 9.8 | Playwright suites for each new page above         | ❌ v2  |
+| 9.6 | Frontend test coverage: 60% of organisms          | ✅     |
+| 9.7 | Backend GTest: badges, leaderboards, streaks, xp  | ✅     |
+| 9.8 | Playwright suites for each new page above         | ✅     |
 | 9.9 | GDPR: user data export (right of access)          | ✅     |
 | 9.10| GDPR: account deletion (right to erasure)         | ✅     |
 | 9.11| Cookie consent management                         | ✅     |
-| 9.12| WCAG 2.1 AA compliance audit + remediation        | ❌ v2  |
+| 9.12| WCAG 2.1 AA compliance audit + remediation        | ✅     |
 | 9.13| API key settings UX: label, help text, validation  | ✅     |
 |     | feedback for Anthropic + OpenAI keys (D27)         |        |
 | 9.14| Terms of service + privacy policy pages: required  | ✅     |
@@ -434,47 +434,47 @@ Founders helping founders. Backend ✅.
 |     | feature prioritisation tool                         |        |
 | X10 | Resource library: downloadable templates (NDA,      | ✅     |
 |     | founder agreement, cap table, pitch deck skeleton)  |        |
-| X11 | Pivot tracker: formal record of direction changes   |
-|     | — original idea, what changed, why, plan impact.   |
-|     | Distinct from hypothesis tracker; linked to         |
-|     | decision log                                        |
-| X12 | Accelerator & competition tracker: database of      |
-|     | programmes (YC, Techstars, Seedcamp, etc.) with     |
-|     | deadlines + application status per founder          |
-| X13 | Channel-fit guide: acquisition channels per startup |
-|     | type with rough CAC estimates — helps founders      |
-|     | choose where to spend first                         |
-| X14 | Milestone social cards: "share this moment" button  |
-|     | generates a branded card for Twitter/LinkedIn.      |
-|     | Viral loop for LaunchPad — every shared milestone   |
-|     | is an organic impression                            |
-| X15 | Email sequences: welcome drip (days 1/3/7),         |
-|     | streak-at-risk alert (24 h before break), 30-day    |
-|     | re-engagement for dormant founders                  |
-| X16 | Real-data integrations: Stripe webhook → actual     |
-|     | MRR; accounting tool (Xero/FreeAgent/QuickBooks)    |
-|     | → actual costs. Replaces manual entry in financial  |
-|     | tools with live data once connected.                |
-| X17 | KB content feedback: thumbs up/down on knowledge    |
-|     | base articles — surfaces low-quality content to     |
-|     | admins; improves KB over time                       |
-| X18 | Founder public profile page `/u/{username}`:        |
-|     | referenced in search UrlBuilder but never built.    |
-|     | Shows display name, startup type, stage, bio, and   |
-|     | public milestone timeline. Linked from community,   |
-|     | leaderboard, and progress feed.                     |
-| X19 | PWA offline cache for the two mobile-first flows    |
-|     | (D24): streak check-in and weekly review should     |
-|     | queue to IndexedDB when offline and sync on         |
-|     | reconnect. The service worker is already shipped;   |
-|     | this wires the specific routes into the cache       |
-|     | strategy.                                           |
-| X20 | Skills profile → planner connection: the skills     |
-|     | form is shipped (localStorage) but disconnected     |
-|     | from the startup type framework. Either wire it     |
-|     | into AI personalisation (skills gap analysis per    |
-|     | type) or deprecate it in favour of the onboarding   |
-|     | wizard (Q25).                                       |
+| X11 | Pivot tracker: formal record of direction changes   | ✅    |
+|     | — original idea, what changed, why, plan impact.   |       |
+|     | Distinct from hypothesis tracker; linked to         |       |
+|     | decision log                                        |       |
+| X12 | Accelerator & competition tracker: database of      | ✅    |
+|     | programmes (YC, Techstars, Seedcamp, etc.) with     |       |
+|     | deadlines + application status per founder          |       |
+| X13 | Channel-fit guide: acquisition channels per startup | ✅    |
+|     | type with rough CAC estimates — helps founders      |       |
+|     | choose where to spend first                         |       |
+| X14 | Milestone social cards: "share this moment" button  | ✅    |
+|     | generates a branded card for Twitter/LinkedIn.      |       |
+|     | Viral loop for LaunchPad — every shared milestone   |       |
+|     | is an organic impression                            |       |
+| X15 | Email sequences: welcome drip (days 1/3/7),         | ✅    |
+|     | streak-at-risk alert (24 h before break), 30-day    |       |
+|     | re-engagement for dormant founders                  |       |
+| X16 | Real-data integrations: Stripe webhook → actual     | ❌ v2 |
+|     | MRR; accounting tool (Xero/FreeAgent/QuickBooks)    |       |
+|     | → actual costs. Replaces manual entry in financial  |       |
+|     | tools with live data once connected.                |       |
+| X17 | KB content feedback: thumbs up/down on knowledge    | ✅    |
+|     | base articles — surfaces low-quality content to     |       |
+|     | admins; improves KB over time                       |       |
+| X18 | Founder public profile page `/u/{username}`:        | ✅    |
+|     | referenced in search UrlBuilder but never built.    |       |
+|     | Shows display name, startup type, stage, bio, and   |       |
+|     | public milestone timeline. Linked from community,   |       |
+|     | leaderboard, and progress feed.                     |       |
+| X19 | PWA offline cache for the two mobile-first flows    | ✅    |
+|     | (D24): streak check-in and weekly review should     |       |
+|     | queue to IndexedDB when offline and sync on         |       |
+|     | reconnect. The service worker is already shipped;   |       |
+|     | this wires the specific routes into the cache       |       |
+|     | strategy.                                           |       |
+| X20 | Skills profile → planner connection: the skills     | ✅    |
+|     | form is shipped (localStorage) but disconnected     |       |
+|     | from the startup type framework. Either wire it     |       |
+|     | into AI personalisation (skills gap analysis per    |       |
+|     | type) or deprecate it in favour of the onboarding   |       |
+|     | wizard (Q25).                                       |       |
 
 ---
 
@@ -604,8 +604,9 @@ Founders helping founders. Backend ✅.
 - Planner: startup roadmap + step toggle + Redux;
   step completion fires XP + streak events; PDF export
   button; per-step AI suggestions (Phase 1, 8.1, 8.2)
-- **Gamification** (Phase 1): streak counter, XP bar,
-  level badge in Navbar; badge cabinet; leaderboard
+- **Gamification** (Phase 1 + 1.9): streak counter, XP
+  bar, level badge; badge cabinet; leaderboard; weekly
+  review wired to streak via `completeStep`
 - **Startup type + KB** (Phase 2): 9 types seeded;
   onboarding wizard; dynamic planner; /knowledge route
 - **Legal tools** (Phase 3): equity split + vesting
@@ -616,21 +617,24 @@ Founders helping founders. Backend ✅.
   path comparison, kill criteria, hypothesis tracker,
   health score, revenue modelling, pricing, projections
 - **Notifications** (Phase 6): bell + inbox + D28 events
-- **Plan export + AI** (Phase 8): PDF export, step hints
-- **Ops/quality** (Phase 9): CSP headers, AI rate limit,
-  GDPR export/delete, cookie consent, ToS/privacy pages,
-  API key UX, admin KPI dashboard
-- **Cross-cutting**: decision log (X6), weekly review (X7),
-  launch checklist (X8), product scoping/ICE (X9),
-  resource library (X10)
+- **Community** (Phase 7): startup-type boards, threads,
+  inline comments, progress feed, follows, mentor opt-in,
+  moderation queue + admin review
+- **Plan export + AI** (Phase 8): PDF export, step hints,
+  save chat to step, AI risk report, AI document drafter
+- **Ops/quality** (Phase 9): DB-backed sessions (9.1),
+  cookie filter hardening (9.2), CSP headers, AI rate
+  limit, GDPR export/delete, cookie consent, ToS/privacy
+  pages, API key UX, admin KPI dashboard, Jest + GTest
+  suites, Playwright suites, WCAG 2.1 AA remediation
+- **Cross-cutting**: decision log (X6), weekly review
+  (X7), launch checklist (X8), product scoping/ICE (X9),
+  resource library (X10), pivot tracker (X11), accelerator
+  tracker (X12), channel-fit guide (X13), milestone social
+  cards (X14), email sequences (X15), KB feedback (X17),
+  founder public profile /u/{username} (X18), PWA offline
+  for streak + review (X19), skills-gap banner (X20)
 - Profile, search, dashboard, settings, admin, PWA, i18n
-
-### 🔧 Backend done, frontend built (v2 items)
-
-| Domain        | Notes                                        |
-|---------------|----------------------------------------------|
-| forum/comments| Full backend ✅ — Phase 7 (community) = v2  |
-| social        | Full backend ✅ — feed = v2                 |
 
 ### ❌ Out of scope for LaunchPad
 
@@ -774,22 +778,20 @@ Community, full AI suite, post-launch KPIs = v2+.
 
 | Phase             | v1       | Notes                         |
 |-------------------|----------|-------------------------------|
-| 1 Gamification    | ✅ Full  | Defining feature — must ship  |
+| 1 Gamification    | ✅ Full  | Defining feature — shipped    |
 | 2 Type + KB       | ✅ 2.1–2.9 | Co-founder workspace = v2   |
 | 3 Legal           | ✅ 3.1–3.8 | Industry-specific (3.9) = v2|
 | 4 Market research | ✅ Full  | Core validation tools         |
-| 5 Financials      | ✅ 5.1–5.7, 5.14–5.16 | Funding/PMF/KPIs = v2       |
+| 5 Financials      | ✅ 5.1–5.7, 5.14–5.16 | Funding/PMF/KPIs = v2 |
 | 6 Notifications   | ✅ Full  | Streak retention needs this   |
-| 7 Community       | ❌ v2   | Needs moderation infra first  |
-| 8 Export + AI     | ✅ 8.1–8.2 | Full AI drafting = v2       |
-| 9 Ops + quality   | ✅ 9.1–9.5, 9.9–9.14 | Minimum before launch  |
-| Cross-cutting     | ✅ X6–X10 | Decision log, weekly review, |
-|                   |          | launch checklist, scoping,    |
-|                   |          | resource library              |
+| 7 Community       | ✅ Full  | Moderation included           |
+| 8 Export + AI     | ✅ Full  | Drafter + risk report shipped |
+| 9 Ops + quality   | ✅ Full  | All 9.1–9.16 complete         |
+| Cross-cutting     | ✅ X6–X20| All except X16 (real-data    |
+|                   |          | integrations = v2)            |
 
 **Deferred to v2:** co-founder workspace (2.10–2.12),
 industry-specific legal (3.9), team role planner (3.10),
 funding guide (5.8–5.13), PMF widget (5.17), post-launch
-KPIs (5.18–5.22), all of Phase 7, full AI drafting
-(8.3–8.5), advanced ops (9.6–9.8, 9.15–9.16), X1–X5
+KPIs (5.18–5.22), real-data integrations (X16), X1–X5
 (real-time bus, feature flags, external integrations).
