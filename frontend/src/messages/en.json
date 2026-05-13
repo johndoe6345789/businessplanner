@@ -14,7 +14,8 @@
     "submit": "Submit",
     "edit": "Edit",
     "view": "View",
-    "retry": "Retry"
+    "retry": "Retry",
+    "moveTo": "Move to"
   },
   "auth": {
     "login": "Sign In",
@@ -94,7 +95,9 @@
     "launch": "Launch Checklist",
     "resources": "Resources",
     "decisions": "Decision Log",
-    "scoping": "Product Scoping"
+    "scoping": "Product Scoping",
+    "community": "Community",
+    "feed": "Activity Feed"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -980,5 +983,31 @@
     "considering": "Considering",
     "noFeatures": "No features here yet.",
     "description": "Description"
+  },
+  "community": {
+    "boards": "Community Boards",
+    "threads": "Threads",
+    "newThread": "New Thread",
+    "reply": "Reply",
+    "report": "Report",
+    "reported": "Reported",
+    "noThreads": "No threads yet. Be the first to post.",
+    "noBoards": "No boards available."
+  },
+  "feed": {
+    "title": "Activity Feed",
+    "noActivity": "No activity yet."
+  },
+  "moderation": {
+    "title": "Moderation Queue",
+    "hide": "Hide",
+    "clearFlags": "Clear Flags",
+    "noFlagged": "No flagged content.",
+    "hidden": "Hidden"
+  },
+  "mentor": {
+    "optIn": "Become a mentor",
+    "optOut": "Leave mentor programme",
+    "badge": "Mentor"
   }
 }

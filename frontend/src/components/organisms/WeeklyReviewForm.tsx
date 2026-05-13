@@ -84,6 +84,8 @@ const WeeklyReviewForm: React.FC = () => {
           onChange={(_, v) =>
             setMorale(v as number)}
           aria-label={t('morale')}
+          aria-valuemin={1}
+          aria-valuemax={5}
           data-testid="review-morale" />
       </Box>
       <Button variant="contained"

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://metabuilder.dev/schemas/package-playwright.schema.json",
+  "package": "community",
+  "description": "Community forum page tests",
+  "tests": [
+    {
+      "name": "community page loads with board list",
+      "tags": ["@smoke", "@community"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/community"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "text": "Founders General",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "clicking board shows thread list",
+      "tags": ["@community"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/community"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "click",
+          "text": "Founders General"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "thread-list",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    }
+  ]
+}

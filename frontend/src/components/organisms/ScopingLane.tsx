@@ -39,6 +39,7 @@ export const ScopingLane: React.FC<ScopingLaneProps> = (
 ) => (
   <Paper variant="outlined"
     data-testid={testId}
+    role="region"
     aria-label={title}
     sx={{
       flex: '1 1 220px',

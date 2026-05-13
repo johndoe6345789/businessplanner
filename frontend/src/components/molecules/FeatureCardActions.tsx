@@ -60,7 +60,7 @@ export const FeatureCardActions: React.FC<
                 ? 'filled' : 'outlined'
             }
             onClick={() => onStatus(feature.id, s)}
-            aria-label={label[s]}
+            aria-label={`${tc('moveTo')} ${label[s]}`}
             data-testid={
               `feature-card-${feature.id}-${s}`
             }
