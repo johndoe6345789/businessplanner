@@ -8,8 +8,9 @@ import React from 'react';
 import Box from '@shared/m3/Box';
 import Chip from '@shared/m3/Chip';
 import IconButton from '@shared/m3/IconButton';
-import EditIcon from '@shared/icons/react/m3/Edit';
-import DeleteIcon from '@shared/icons/react/m3/Delete';
+import { Edit as EditIcon } from '@shared/icons/Edit';
+import { Delete as DeleteIcon }
+  from '@shared/icons/Delete';
 import { useTranslations } from 'next-intl';
 import type {
   ScopedFeature,

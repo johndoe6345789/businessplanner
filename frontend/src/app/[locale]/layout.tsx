@@ -1,5 +1,4 @@
 import { ReactNode, type ReactElement } from 'react';
-import dynamicImport from 'next/dynamic';
 import { setRequestLocale } from 'next-intl/server';
 import { Box } from '@shared/m3';
 import { IntlProvider } from
@@ -22,13 +21,8 @@ import { DashboardShortcuts } from
   '@/components/organisms/DashboardShortcuts';
 import { PwaHead } from './pwa-head';
 import { loadMessages } from './loadMessages';
-
-const CookieConsentBanner = dynamicImport(
-  () => import(
-    '@/components/organisms/CookieConsentBanner'
-  ),
-  { ssr: false },
-);
+import ClientCookieBanner from
+  '@/components/atoms/ClientCookieBanner';
 
 /** All locale pages are dynamic. */
 export const dynamic = 'force-dynamic';
@@ -93,7 +87,7 @@ export default async function LocaleLayout({
         </AppShell>
         {process.env.NEXT_PUBLIC_DEBUG_BAR
           === '1' && <DebugBar />}
-        <CookieConsentBanner />
+        <ClientCookieBanner />
       </LinkAdapter>
     </IntlProvider>
   );

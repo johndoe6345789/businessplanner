@@ -4,8 +4,9 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import { Box, Typography, Card,
-  CardActionArea, CardContent } from '@shared/m3';
-import { Link } from '@/i18n/navigation';
+  CardContent } from '@shared/m3';
+import LinkedCardActionArea from
+  '@/components/atoms/LinkedCardActionArea';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -64,8 +65,7 @@ export default async function LegalPage({
           <Card key={c.testId}
             data-testid={c.testId}
             sx={{ width: 280 }}>
-            <CardActionArea
-              component={Link}
+            <LinkedCardActionArea
               href={c.href}
               aria-label={c.title}
             >
@@ -81,7 +81,7 @@ export default async function LegalPage({
                   {c.desc}
                 </Typography>
               </CardContent>
-            </CardActionArea>
+            </LinkedCardActionArea>
           </Card>
         ))}
       </Box>

@@ -3,14 +3,10 @@ import {
   setRequestLocale,
   getTranslations,
 } from 'next-intl/server';
-import { Box, Typography } from '@shared/m3';
-import Link from 'next/link';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton
-  from '@mui/material/ListItemButton';
-import ListItemText
-  from '@mui/material/ListItemText';
+import { Box, Typography, List } from '@shared/m3';
+import ListItemText from '@shared/m3/ListItemText';
+import LinkedListItemButton from
+  '@/components/atoms/LinkedListItemButton';
 
 /** Skip static prerendering for this page. */
 export const dynamic = 'force-dynamic';
@@ -63,18 +59,16 @@ export default async function AdminPage({
       </Typography>
       <List aria-label="Admin sections">
         {sections.map(({ href, label }) => (
-          <ListItem key={href} disablePadding>
-            <ListItemButton
-              component={Link}
-              href={href}
-              aria-label={label}
-              data-testid={
-                `admin-nav-${href.split('/').pop()}`
-              }
-            >
-              <ListItemText primary={label} />
-            </ListItemButton>
-          </ListItem>
+          <LinkedListItemButton
+            key={href}
+            href={href}
+            aria-label={label}
+            data-testid={
+              `admin-nav-${href.split('/').pop()}`
+            }
+          >
+            <ListItemText primary={label} />
+          </LinkedListItemButton>
         ))}
       </List>
     </Box>

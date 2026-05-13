@@ -6,9 +6,9 @@ import {
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
 import Card from '@shared/m3/Card';
-import CardActionArea from '@shared/m3/CardActionArea';
 import CardContent from '@shared/m3/CardContent';
-import { Link } from '@/i18n/navigation';
+import LinkedCardActionArea from
+  '@/components/atoms/LinkedCardActionArea';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -79,7 +79,7 @@ export default async function FinancialsPage({
         {cards.map((c) => (
           <Card key={c.testId}
             data-testid={c.testId} sx={{ width: 280 }}>
-            <CardActionArea component={Link}
+            <LinkedCardActionArea
               href={c.href} aria-label={c.title}>
               <CardContent>
                 <Typography variant="h6" gutterBottom
@@ -87,7 +87,7 @@ export default async function FinancialsPage({
                   {c.title}
                 </Typography>
               </CardContent>
-            </CardActionArea>
+            </LinkedCardActionArea>
           </Card>
         ))}
       </Box>

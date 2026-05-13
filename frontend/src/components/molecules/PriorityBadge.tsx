@@ -3,7 +3,7 @@
 import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import StarIcon from '@shared/icons/react/m3/Star';
+import StarIcon from '@shared/icons/Star';
 
 /**
  * Small "Priority" label with a star icon, shown above

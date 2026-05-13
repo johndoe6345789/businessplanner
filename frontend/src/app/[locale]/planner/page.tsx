@@ -5,19 +5,14 @@ import {
 } from 'next-intl/server';
 import { Box, Typography } from '@shared/m3';
 import nextDynamic from 'next/dynamic';
+import ClientPlanExportButton from
+  '@/components/atoms/ClientPlanExportButton';
 
 const StartupRoadmap = nextDynamic(
   () => import('@/components/organisms/StartupRoadmap'),
   { loading: () => (
     <div data-testid="planner-loading" />
   ) },
-);
-
-const PlanExportButton = nextDynamic(
-  () => import(
-    '@/components/molecules/PlanExportButton'
-  ),
-  { ssr: false },
 );
 
 /** Skip static prerendering. */
@@ -61,7 +56,7 @@ export default async function PlannerPage({
         >
           {t('pageTitle')}
         </Typography>
-        <PlanExportButton />
+        <ClientPlanExportButton />
       </Box>
       <Typography
         variant="body1"

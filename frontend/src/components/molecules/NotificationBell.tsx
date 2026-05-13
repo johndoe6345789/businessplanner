@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { IconButton, Badge } from '@shared/m3';
 import NotificationsIcon
-  from '@shared/icons/react/m3/Notifications';
+  from '@shared/icons/Notifications';
 import { useTranslations } from 'next-intl';
 import { useNotifications }
   from '@/hooks/useNotifications';

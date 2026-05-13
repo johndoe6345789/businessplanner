@@ -4,17 +4,11 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import { Box, Typography } from '@shared/m3';
-import nextDynamic from 'next/dynamic';
+import ClientOfflineStreakDisplay from
+  '@/components/atoms/ClientOfflineStreakDisplay';
 
 /** Skip static prerendering (uses localStorage). */
 export const dynamic = 'force-dynamic';
-
-const OfflineStreakDisplay = nextDynamic(
-  () => import(
-    '@/components/molecules/OfflineStreakDisplay'
-  ),
-  { ssr: false },
-);
 
 /** Props for the offline fallback page. */
 interface OfflinePageProps {
@@ -67,7 +61,7 @@ export default async function OfflinePage({
       >
         {t('message')}
       </Typography>
-      <OfflineStreakDisplay />
+      <ClientOfflineStreakDisplay />
     </Box>
   );
 }

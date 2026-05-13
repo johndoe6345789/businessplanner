@@ -6,10 +6,10 @@ import {
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
 import Card from '@shared/m3/Card';
-import CardActionArea from '@shared/m3/CardActionArea';
 import CardContent from '@shared/m3/CardContent';
 import Chip from '@shared/m3/Chip';
-import { Link } from '@/i18n/navigation';
+import LinkedCardActionArea from
+  '@/components/atoms/LinkedCardActionArea';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -81,8 +81,7 @@ export default async function MarketResearchPage({
           <Card key={c.testId}
             data-testid={c.testId}
             sx={{ width: 280 }}>
-            <CardActionArea
-              component={Link}
+            <LinkedCardActionArea
               href={c.href}
               aria-label={c.title}>
               <CardContent>
@@ -101,7 +100,7 @@ export default async function MarketResearchPage({
                   data-testid={`${c.testId}-status`}
                 />
               </CardContent>
-            </CardActionArea>
+            </LinkedCardActionArea>
           </Card>
         ))}
       </Box>

@@ -5,14 +5,8 @@ import {
 } from 'next-intl/server';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import nextDynamic from 'next/dynamic';
-
-const AiDocumentDrafter = nextDynamic(
-  () => import(
-    '@/components/organisms/AiDocumentDrafter'
-  ),
-  { ssr: false },
-);
+import ClientAiDocumentDrafter from
+  '@/components/atoms/ClientAiDocumentDrafter';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -49,7 +43,7 @@ export default async function AiDocsPage({
         gutterBottom sx={{ fontWeight: 800 }}>
         {t('title')}
       </Typography>
-      <AiDocumentDrafter />
+      <ClientAiDocumentDrafter />
     </Box>
   );
 }

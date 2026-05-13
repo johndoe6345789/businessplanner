@@ -4,17 +4,11 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import { Box } from '@shared/m3';
-import nextDynamic from 'next/dynamic';
+import ClientFounderProfilePage from
+  '@/components/atoms/ClientFounderProfilePage';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
-
-const FounderProfilePage = nextDynamic(
-  () => import(
-    '@/components/organisms/FounderProfilePageClient'
-  ),
-  { ssr: false },
-);
 
 /** Props for the founder public profile page. */
 interface ProfileRouteProps {
@@ -46,7 +40,7 @@ export default async function FounderPublicPage({
       aria-label={t('pageLabel')}
       sx={{ maxWidth: 600, mx: 'auto', py: 4 }}
     >
-      <FounderProfilePage username={username} />
+      <ClientFounderProfilePage username={username} />
     </Box>
   );
 }

@@ -38,6 +38,12 @@ const nextConfig: NextConfig = {
     '@shared/service-adapters',
     '@shared/scss',
     '@shared/theme',
+    '@mui/material',
+    '@mui/icons-material',
+    '@mui/system',
+    '@mui/base',
+    '@emotion/react',
+    '@emotion/styled',
   ],
   // optimizePackageImports for @shared/* barrels was disabled:
   // in Turbopack dev it produced chunk explosion that left the

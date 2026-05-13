@@ -6,7 +6,7 @@ import {
   Box, Typography,
 } from '@shared/m3';
 import NotificationsIcon
-  from '@shared/icons/react/m3/Notifications';
+  from '@shared/icons/Notifications';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import type { Notification }

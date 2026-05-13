@@ -5,14 +5,8 @@ import {
 } from 'next-intl/server';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import nextDynamic from 'next/dynamic';
-
-const AiRiskReport = nextDynamic(
-  () => import(
-    '@/components/organisms/AiRiskReport'
-  ),
-  { ssr: false },
-);
+import ClientAiRiskReport from
+  '@/components/atoms/ClientAiRiskReport';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -48,7 +42,7 @@ export default async function RiskReportPage({
         gutterBottom sx={{ fontWeight: 800 }}>
         {t('title')}
       </Typography>
-      <AiRiskReport />
+      <ClientAiRiskReport />
     </Box>
   );
 }
