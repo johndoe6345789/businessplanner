@@ -7,7 +7,7 @@
  */
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import Switch from '@shared/m3/Switch';
+import { Switch } from '@shared/m3/Switch';
 import Typography from '@shared/m3/Typography';
 import { SettingsCard, SettingsRow } from './SettingsCard';
 import {
@@ -25,11 +25,11 @@ const SettingsEmailPrefs: React.FC = () => {
   const [subscribed, setSubscribed] = useState(true);
   const [optOut] = useOptOutMutation();
 
-  const handleToggle = async () => {
+  const handleToggle = () => {
     const next = !subscribed;
     setSubscribed(next);
     if (!next) {
-      try { await optOut(); } catch { /* no-op */ }
+      void optOut().catch(() => { /* no-op */ });
     }
   };
 
@@ -45,9 +45,7 @@ const SettingsEmailPrefs: React.FC = () => {
         <Switch
           checked={subscribed}
           onChange={handleToggle}
-          inputProps={{
-            'aria-label': t('emailDripLabel'),
-          }}
+          aria-label={t('emailDripLabel')}
           data-testid="email-drip-toggle"
         />
       </SettingsRow>

@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import Card from '@shared/m3/Card';
+import CardContent from '@shared/m3/CardContent';
 import Typography from '@shared/m3/Typography';
-import Button from '@mui/material/Button';
+import Button from '@shared/m3/Button';
 import Box from '@shared/m3/Box';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useAppSelector } from '@/store/hooks';
 
 /**

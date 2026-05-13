@@ -45,6 +45,7 @@ export default function DraggableWidgetHeader({
         aria-label="Drag to reorder"
         data-testid={`${testId}-drag`}
         sx={{ cursor: 'grab' }}
+        suppressHydrationWarning
       >
         <DragIndicatorIcon size={18} />
       </IconButton>

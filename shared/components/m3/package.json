@@ -62,6 +62,7 @@
     "./MenuItem": "./navigation/MenuItem.tsx",
     "./Paper": "./surfaces/Paper.tsx",
     "./Select": "./inputs/Select.tsx",
+    "./Switch": "./inputs/Switch.tsx",
     "./Skeleton": "./feedback/Skeleton.tsx",
     "./Stack": "./layout/Stack.tsx",
     "./Table": "./data-display/Table.tsx",

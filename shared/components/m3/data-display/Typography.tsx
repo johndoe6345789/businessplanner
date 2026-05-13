@@ -1,5 +1,6 @@
 import React from 'react'
 import { sxToStyle } from '../utils/sx'
+import { sxToCssMap } from '../utils/sxMaps'
 import styles
   from '../../../scss/atoms/typography.module.scss'
 import { TypographyProps }
@@ -7,6 +8,8 @@ import { TypographyProps }
 import {
   variantMap, colorMap, alignMap,
 } from './typographyMaps'
+
+const SX_KEYS = new Set(Object.keys(sxToCssMap))
 
 export type {
   TypographyVariant, TypographyProps,
@@ -20,8 +23,15 @@ export const Typography: React.FC<
   gutterBottom, noWrap, paragraph,
   testId, className = '',
   fontWeight,
-  as, component, sx, style, ...props
+  as, component, sx, style, ...allRest
 }) => {
+  // Partition: known shorthand → styles; rest → DOM
+  const shorthands: Record<string, unknown> = {}
+  const props: Record<string, unknown> = {}
+  for (const [k, v] of Object.entries(allRest)) {
+    if (SX_KEYS.has(k)) { shorthands[k] = v }
+    else { props[k] = v }
+  }
   const isHeading =
     variant === 'h1' || variant === 'h2'
     || variant === 'h3' || variant === 'h4'
@@ -44,7 +54,7 @@ export const Typography: React.FC<
     <Tag className={classes}
       style={{
         fontWeight,
-        ...sxToStyle(sx),
+        ...sxToStyle({ ...shorthands, ...sx }),
         ...style,
       }}
       data-testid={testId} {...props}>

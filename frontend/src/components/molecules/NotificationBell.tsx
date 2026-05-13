@@ -44,7 +44,7 @@ const NotificationBell: React.FC<
         size="medium"
       >
         <Badge
-          badgeContent={unreadCount}
+          content={unreadCount}
           color="error"
           max={99}
         >
