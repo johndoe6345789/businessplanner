@@ -1,3 +1,5 @@
+'use client';
+
 import type { ReactElement } from 'react';
 import Link from 'next/link';
 import Box from '@shared/m3/Box';
@@ -7,7 +9,8 @@ import Stack from '@shared/m3/Stack';
 
 /**
  * Root-level 404 — compiled as /_not-found/page.
- * No IntlProvider dependency; strings are hardcoded.
+ * Client component so Link can be passed as a prop to
+ * Button without a server→client function boundary error.
  * @returns On-brand not-found page.
  */
 export default function NotFound(): ReactElement {
