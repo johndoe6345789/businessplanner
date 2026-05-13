@@ -26,3 +26,7 @@ export * from './adminApi';
 export * from './weeklyReviewApi';
 export * from './scopingApi';
 export * from './decisionsApi';
+export * from './forumApi';
+export * from './forumModerationApi';
+export * from './followsApi';
+export * from './chatStepApi';

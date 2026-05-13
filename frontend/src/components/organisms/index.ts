@@ -118,3 +118,11 @@ export { ProductScopingCanvas }
 export { ScopingLane } from './ScopingLane';
 export type { ScopingLaneProps }
   from './ScopingLane';
+
+export * from './index.community';
+
+export { AiRiskReport }
+  from './AiRiskReport';
+
+export { AiDocumentDrafter }
+  from './AiDocumentDrafter';

@@ -5,9 +5,12 @@
  * @module components/molecules/AiSuggestionResult
  */
 import React from 'react';
+import Box from '@shared/m3/Box';
 import Button from '@shared/m3/Button';
 import Alert from '@shared/m3/Alert';
 import { useTranslations } from 'next-intl';
+import { SaveChatToStepButton }
+  from './SaveChatToStepButton';
 
 /** Props for AiSuggestionResult. */
 interface AiSuggestionResultProps {
@@ -22,7 +25,8 @@ interface AiSuggestionResultProps {
 }
 
 /**
- * Renders the AI suggestion or error alert.
+ * Renders the AI suggestion or error alert with
+ * optional save-to-step action.
  */
 const AiSuggestionResult: React.FC<
   AiSuggestionResultProps
@@ -37,13 +41,21 @@ const AiSuggestionResult: React.FC<
       severity={severity}
       data-testid={`ai-suggestion-${stepId}`}
       action={
-        <Button
-          size="small"
-          onClick={onDismiss}
-          aria-label={t('dismiss')}
-        >
-          {t('dismiss')}
-        </Button>
+        <Box sx={{ display: 'flex', gap: 0.5 }}>
+          {!error && suggestion && (
+            <SaveChatToStepButton
+              stepId={stepId}
+              context={suggestion}
+            />
+          )}
+          <Button
+            size="small"
+            onClick={onDismiss}
+            aria-label={t('dismiss')}
+          >
+            {t('dismiss')}
+          </Button>
+        </Box>
       }
       sx={{ mt: 0.5, py: 0.25 }}
     >

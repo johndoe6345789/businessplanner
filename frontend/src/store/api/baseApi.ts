@@ -36,6 +36,13 @@ export const baseApi = createApi({
     'WeeklyReview',
     'Decisions',
     'Scoping',
+    'Forum',
+    'Follows',
+    'Pivots',
+    'Accelerators',
+    'ChatStepLinks',
+    'KbFeedback',
+    'PublicProfile',
   ],
   endpoints: () => ({}),
 });

@@ -1,27 +1,27 @@
 /**
- * AI step-suggestion RTK Query endpoints.
+ * AI RTK Query endpoints.
  * @module store/api/aiApi
  */
 import { baseApi } from './baseApi';
 import apiConstants from '@/constants/api.json';
+import type {
+  StepSuggestionBody,
+  StepSuggestionResponse,
+  RiskReportBody,
+  RiskReportResponse,
+  DraftDocumentBody,
+  DraftDocumentResponse,
+} from './aiTypes';
 
-/** Body for the step-suggestion mutation. */
-export interface StepSuggestionBody {
-  /** Human-readable title of the planner step. */
-  step_title: string;
-  /** Optional longer description of the step. */
-  step_description?: string;
-  /** Startup archetype slug from Redux. */
-  startup_type?: string | null;
-  /** Current stage slug from Redux. */
-  stage?: string | null;
-}
-
-/** Response from the step-suggestion endpoint. */
-export interface StepSuggestionResponse {
-  /** AI-generated suggestion text. */
-  suggestion: string;
-}
+export type {
+  StepSuggestionBody,
+  StepSuggestionResponse,
+  RiskReportBody,
+  RiskReportResponse,
+  DraftDocumentBody,
+  DraftDocumentResponse,
+} from './aiTypes';
+export type { DocumentType } from './aiTypes';
 
 /** AI API endpoints injected into baseApi. */
 export const aiApi = baseApi.injectEndpoints({
@@ -40,10 +40,42 @@ export const aiApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+
+    /**
+     * Generate a risk report for the founder's plan.
+     * @returns Numbered list of blind spots/risks.
+     */
+    getRiskReport: build.mutation<
+      RiskReportResponse,
+      RiskReportBody
+    >({
+      query: (body) => ({
+        url: apiConstants.ai.riskReport,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    /**
+     * Generate a document draft via AI.
+     * @returns Generated content string.
+     */
+    draftDocument: build.mutation<
+      DraftDocumentResponse,
+      DraftDocumentBody
+    >({
+      query: (body) => ({
+        url: apiConstants.ai.draftDocument,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
 export const {
   useGetAiStepSuggestionMutation,
+  useGetRiskReportMutation,
+  useDraftDocumentMutation,
 } = aiApi;

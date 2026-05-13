@@ -299,7 +299,9 @@
     "save": "Save",
     "comingSoon": "More settings coming soon.",
     "testEmail": "Test Email",
-    "forumBoards": "Forum Boards"
+    "forumBoards": "Forum Boards",
+    "emailPrefsTitle": "Email Preferences",
+    "emailDripLabel": "Receive onboarding and re-engagement emails"
   },
   "blog": {
     "title": "Blog",
@@ -689,7 +691,10 @@
     "filterTemplate": "Templates",
     "filterChecklist": "Checklists",
     "empty": "No articles yet for this filter.",
-    "emptyType": "No articles yet for your startup type."
+    "emptyType": "No articles yet for your startup type.",
+    "feedbackPrompt": "Was this helpful?",
+    "feedbackHelpful": "Mark helpful",
+    "feedbackUnhelpful": "Mark unhelpful"
   },
   "pwa": {
     "installPrompt": "Install LaunchPad as an app?",
@@ -1009,5 +1014,46 @@
     "optIn": "Become a mentor",
     "optOut": "Leave mentor programme",
     "badge": "Mentor"
+  },
+  "founderProfile": {
+    "pageLabel": "Founder public profile",
+    "cardLabel": "Profile of {name}",
+    "loading": "Loading profile...",
+    "notFound": "This founder profile does not exist.",
+    "mentorBadge": "Mentor",
+    "streak": "Day streak",
+    "badges": "Badges",
+    "follow": "Follow",
+    "followLabel": "Follow {name}"
+  },
+  "offline": {
+    "title": "You are offline",
+    "message": "Your weekly review will sync when you reconnect.",
+    "streakLabel": "Day streak (cached)"
+  },
+  "skillsGap": {
+    "bannerLabel": "Skills gap warning",
+    "message": "You are missing: {skills} for a {type} startup. Consider a co-founder with these skills."
+  },
+  "chatStep": {
+    "save": "Save to step",
+    "saved": "Saved to this step"
+  },
+  "riskReport": {
+    "title": "AI Risk Report",
+    "generate": "Generate Risk Report",
+    "generating": "Analysing your plan…",
+    "noRisks": "No risks identified."
+  },
+  "aiDocs": {
+    "title": "AI Document Drafter",
+    "pitchDeck": "Pitch Deck",
+    "investorUpdate": "Investor Update",
+    "nda": "NDA",
+    "jobDescription": "Job Description",
+    "generate": "Generate",
+    "generating": "Generating…",
+    "copy": "Copy",
+    "copied": "Copied!"
   }
 }

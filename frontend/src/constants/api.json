@@ -67,7 +67,11 @@
     "status": "/api/pdf/:id"
   },
   "ai": {
-    "stepSuggestion": "/api/ai/step-suggestion"
+    "stepSuggestion": "/api/ai/step-suggestion",
+    "riskReport": "/api/ai/risk-report",
+    "draftDocument": "/api/ai/draft-document",
+    "stepLinks": "/api/chat/step-links",
+    "stepLink": "/api/chat/step-links/:step_id"
   },
   "analytics": {
     "summary": "/api/analytics/summary",
@@ -85,5 +89,20 @@
   "scoping": {
     "features": "/api/scoping/features",
     "feature": "/api/scoping/features/:id"
-  }
+  },
+  "forum": {
+    "boards": "/api/forum/boards",
+    "threads": "/api/forum/threads",
+    "thread": "/api/forum/threads/:id",
+    "posts": "/api/forum/threads/:id/posts",
+    "flag": "/api/comments/v2/:id/flag",
+    "flagged": "/api/comments/v2/flagged",
+    "hide": "/api/comments/v2/:id/hide",
+    "clearFlags": "/api/comments/v2/:id/clear-flags"
+  },
+  "follows": {
+    "follow": "/api/social/follows/:user",
+    "following": "/api/social/follows/:user/following"
+  },
+  "mentor": "/api/users/me/mentor"
 }

@@ -35,5 +35,7 @@
   "decisions": ["users"],
   "scoping": ["users"],
   "gdpr": ["users", "market-research", "financials"],
-  "weekly-review": ["users"]
+  "weekly-review": ["users"],
+  "ai-chat": ["users"],
+  "email-sequences": ["users"]
 }

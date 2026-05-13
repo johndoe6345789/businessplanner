@@ -200,3 +200,20 @@ export type { FeatureCardProps }
 export { FeatureForm } from './FeatureForm';
 export type { FeatureFormProps }
   from './FeatureForm';
+
+export * from './index.community';
+
+export { SaveChatToStepButton }
+  from './SaveChatToStepButton';
+export type { SaveChatToStepButtonProps }
+  from './SaveChatToStepButton';
+
+export { AiDraftSelector }
+  from './AiDraftSelector';
+export type { AiDraftSelectorProps }
+  from './AiDraftSelector';
+
+export { AiDraftResult }
+  from './AiDraftResult';
+export type { AiDraftResultProps }
+  from './AiDraftResult';
