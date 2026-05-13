@@ -96,6 +96,27 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # ---- DB migrations (runs once, then exits) ----------------
+  backend-migrate:
+    build:
+      context: .
+      dockerfile: docker/nextra-api.Dockerfile
+      args:
+        BASE_IMAGE: debian:sid
+        RUNTIME_IMAGE: debian:sid-slim
+        SRC_BUST: ${SRC_BUST:-0}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: nextra_db
+      DB_USER: nextra
+      DB_PASSWORD: nextra_dev
+    command: ["migrate", "--up"]
+    restart: "no"
+
   # ---- C++ Drogon API ---------------------------------------
   backend:
     build:
@@ -112,6 +133,8 @@ services:
         condition: service_healthy
       elasticsearch:
         condition: service_healthy
+      backend-migrate:
+        condition: service_completed_successfully
     environment:
       DB_HOST: db
       DB_PORT: "5432"
