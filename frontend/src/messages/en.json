@@ -704,9 +704,13 @@
   },
   "NotFound": {
     "statusCode": "404",
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist.",
-    "homeLink": "Go Home"
+    "title": "You've gone off the map",
+    "description": "This page doesn't exist — but your startup journey doesn't have to stop here.",
+    "dashboardLink": "Go to Dashboard",
+    "homeLink": "Go Home",
+    "plannerLink": "Planner",
+    "resourcesLink": "Resources",
+    "knowledgeLink": "Knowledge"
   },
   "onboarding": {
     "title": "Set Up Your LaunchPad",
