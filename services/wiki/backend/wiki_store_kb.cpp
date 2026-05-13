@@ -17,11 +17,11 @@ static const std::string kKbQuery = R"(
            tags::text AS tags_raw, updated_at
     FROM wiki_pages
     WHERE kb_type IS NOT NULL
-      AND ($1::text IS NULL
+      AND (NULLIF($1, '') IS NULL
            OR startup_type = $1)
-      AND ($2::text IS NULL
+      AND (NULLIF($2, '') IS NULL
            OR stage = $2)
-      AND ($3::text IS NULL
+      AND (NULLIF($3, '') IS NULL
            OR kb_type = $3)
     ORDER BY path
 )";
@@ -38,15 +38,12 @@ void WikiStore::listKbPages(
         stage.value_or(std::string{});
     const std::string kbArg =
         kbType.value_or(std::string{});
-    // Drogon sends an empty string for NULL params
-    // via NULLIF in the SQL.
+    // Pass strings directly; SQL uses NULLIF($N,'')
+    // to treat empty string as NULL in the filter.
     *db() << kKbQuery
-          << (stArg.empty()
-              ? std::string{} : stArg)
-          << (stgArg.empty()
-              ? std::string{} : stgArg)
-          << (kbArg.empty()
-              ? std::string{} : kbArg) >>
+          << stArg
+          << stgArg
+          << kbArg >>
         [ok](const drogon::orm::Result& r) {
             auto arr = json::array();
             for (const auto& row : r) {

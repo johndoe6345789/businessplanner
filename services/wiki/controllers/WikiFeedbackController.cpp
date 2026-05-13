@@ -51,7 +51,7 @@ void WikiFeedbackController::submitFeedback(
                 drogon::k500InternalServerError,
                 "DB error"));
         },
-        id, userId, helpful);
+        std::stoll(id), userId, helpful);
 }
 
 void WikiFeedbackController::getFeedbackSummary(
@@ -84,7 +84,7 @@ void WikiFeedbackController::getFeedbackSummary(
                 drogon::k500InternalServerError,
                 "DB error"));
         },
-        id);
+        std::stoll(id));
 }
 
 } // namespace controllers
