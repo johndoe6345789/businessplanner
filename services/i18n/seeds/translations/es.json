@@ -499,5 +499,45 @@
       "acknowledged": "Reconocida",
       "resolved": "Resuelta"
     }
+  },
+  "pivot": {
+    "title": "Registro de Pivotes",
+    "originalIdea": "Idea original",
+    "newDirection": "Nueva dirección",
+    "trigger": "Evento desencadenante",
+    "rationale": "Justificación",
+    "planImpact": "Impacto en el plan",
+    "pivotDate": "Fecha del pivote",
+    "add": "Registrar pivote",
+    "noEntries": "Ningún pivote registrado aún."
+  },
+  "accelerators": {
+    "title": "Seguimiento de Aceleradoras y Concursos",
+    "name": "Nombre del programa",
+    "type": "Tipo",
+    "deadline": "Fecha límite",
+    "status": "Estado",
+    "equity": "Equity %",
+    "funding": "Financiación (£)",
+    "add": "Añadir programa",
+    "noEntries": "Ningún programa registrado aún.",
+    "prefill": "Rellenar desde programas conocidos",
+    "website": "Sitio web",
+    "notes": "Notas"
+  },
+  "channels": {
+    "title": "Guía de Canales",
+    "cac": "Rango CAC",
+    "timeToROI": "Tiempo hasta ROI",
+    "bestFor": "Mejor para",
+    "allTypes": "Todos los tipos",
+    "noChannels": "Ningún canal coincide."
+  },
+  "milestones": {
+    "title": "Tarjetas de Hitos",
+    "share": "Compartir este hito",
+    "copyLink": "Copiar enlace",
+    "copied": "¡Copiado!",
+    "download": "Descargar como PNG"
   }
 }

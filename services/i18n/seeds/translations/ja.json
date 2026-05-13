@@ -522,5 +522,45 @@
       "acknowledged": "確認済み",
       "resolved": "解決済み"
     }
+  },
+  "pivot": {
+    "title": "ピボット記録",
+    "originalIdea": "元のアイデア",
+    "newDirection": "新しい方向性",
+    "trigger": "きっかけとなった出来事",
+    "rationale": "理由",
+    "planImpact": "プランへの影響",
+    "pivotDate": "ピボット日",
+    "add": "ピボットを記録",
+    "noEntries": "まだピボットが記録されていません。"
+  },
+  "accelerators": {
+    "title": "アクセラレーター・コンテスト管理",
+    "name": "プログラム名",
+    "type": "種類",
+    "deadline": "締め切り",
+    "status": "状況",
+    "equity": "エクイティ %",
+    "funding": "資金調達 (£)",
+    "add": "プログラムを追加",
+    "noEntries": "まだプログラムが登録されていません。",
+    "prefill": "既知のプログラムから入力",
+    "website": "ウェブサイト",
+    "notes": "メモ"
+  },
+  "channels": {
+    "title": "チャンネル適合ガイド",
+    "cac": "CAC範囲",
+    "timeToROI": "ROIまでの期間",
+    "bestFor": "最適な業種",
+    "allTypes": "すべての種類",
+    "noChannels": "一致するチャンネルがありません。"
+  },
+  "milestones": {
+    "title": "マイルストーンカード",
+    "share": "このマイルストーンをシェア",
+    "copyLink": "リンクをコピー",
+    "copied": "コピーしました！",
+    "download": "PNGとしてダウンロード"
   }
 }

@@ -104,5 +104,13 @@
     "follow": "/api/social/follows/:user",
     "following": "/api/social/follows/:user/following"
   },
-  "mentor": "/api/users/me/mentor"
+  "mentor": "/api/users/me/mentor",
+  "pivots": {
+    "list": "/api/pivots",
+    "detail": "/api/pivots/:id"
+  },
+  "accelerators": {
+    "list": "/api/accelerators",
+    "detail": "/api/accelerators/:id"
+  }
 }

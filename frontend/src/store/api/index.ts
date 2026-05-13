@@ -30,3 +30,5 @@ export * from './forumApi';
 export * from './forumModerationApi';
 export * from './followsApi';
 export * from './chatStepApi';
+export * from './pivotApi';
+export * from './acceleratorsApi';

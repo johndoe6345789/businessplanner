@@ -1055,5 +1055,45 @@
     "generating": "Generating…",
     "copy": "Copy",
     "copied": "Copied!"
+  },
+  "pivot": {
+    "title": "Pivot Tracker",
+    "originalIdea": "Original idea",
+    "newDirection": "New direction",
+    "trigger": "Trigger event",
+    "rationale": "Rationale",
+    "planImpact": "Impact on plan",
+    "pivotDate": "Date of pivot",
+    "add": "Record Pivot",
+    "noEntries": "No pivots recorded yet."
+  },
+  "accelerators": {
+    "title": "Accelerator & Competition Tracker",
+    "name": "Programme name",
+    "type": "Type",
+    "deadline": "Deadline",
+    "status": "Status",
+    "equity": "Equity %",
+    "funding": "Funding (£)",
+    "add": "Add Programme",
+    "noEntries": "No programmes tracked yet.",
+    "prefill": "Prefill from known programmes",
+    "website": "Website",
+    "notes": "Notes"
+  },
+  "channels": {
+    "title": "Channel-Fit Guide",
+    "cac": "CAC range",
+    "timeToROI": "Time to ROI",
+    "bestFor": "Best for",
+    "allTypes": "All startup types",
+    "noChannels": "No channels match this filter."
+  },
+  "milestones": {
+    "title": "Milestone Social Cards",
+    "share": "Share this milestone",
+    "copyLink": "Copy share link",
+    "copied": "Copied!",
+    "download": "Download as PNG"
   }
 }

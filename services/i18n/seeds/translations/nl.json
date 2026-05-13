@@ -522,5 +522,45 @@
       "acknowledged": "Bevestigd",
       "resolved": "Opgelost"
     }
+  },
+  "pivot": {
+    "title": "Pivot-register",
+    "originalIdea": "Oorspronkelijk idee",
+    "newDirection": "Nieuwe richting",
+    "trigger": "Aanleiding",
+    "rationale": "Motivering",
+    "planImpact": "Impact op plan",
+    "pivotDate": "Datum van pivot",
+    "add": "Pivot vastleggen",
+    "noEntries": "Nog geen pivots vastgelegd."
+  },
+  "accelerators": {
+    "title": "Accelerator en Competitie Tracker",
+    "name": "Programmanaam",
+    "type": "Type",
+    "deadline": "Deadline",
+    "status": "Status",
+    "equity": "Equity %",
+    "funding": "Financiering (£)",
+    "add": "Programma toevoegen",
+    "noEntries": "Nog geen programma's gevolgd.",
+    "prefill": "Invullen vanuit bekende programma's",
+    "website": "Website",
+    "notes": "Notities"
+  },
+  "channels": {
+    "title": "Kanaal-fit Gids",
+    "cac": "CAC-bereik",
+    "timeToROI": "Tijd tot ROI",
+    "bestFor": "Beste voor",
+    "allTypes": "Alle typen",
+    "noChannels": "Geen kanalen gevonden."
+  },
+  "milestones": {
+    "title": "Mijlpaalkaarten",
+    "share": "Deel dit mijlpaal",
+    "copyLink": "Kopieer link",
+    "copied": "Gekopieerd!",
+    "download": "Downloaden als PNG"
   }
 }

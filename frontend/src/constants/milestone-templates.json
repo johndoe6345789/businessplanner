@@ -1,0 +1,29 @@
+{
+  "templates": [
+    {
+      "id": "first-step",
+      "text": "Just completed my first step on LaunchPad",
+      "emoji": "🚀"
+    },
+    {
+      "id": "launched",
+      "text": "We just launched! Find us at",
+      "emoji": "🎉"
+    },
+    {
+      "id": "first-customer",
+      "text": "We just got our first customer!",
+      "emoji": "💰"
+    },
+    {
+      "id": "validated",
+      "text": "Hypothesis validated. We're building something people want.",
+      "emoji": "✅"
+    },
+    {
+      "id": "funding",
+      "text": "We raised our first round!",
+      "emoji": "🏦"
+    }
+  ]
+}

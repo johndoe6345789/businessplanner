@@ -126,3 +126,11 @@ export { AiRiskReport }
 
 export { AiDocumentDrafter }
   from './AiDocumentDrafter';
+
+export { PivotTracker } from './PivotTracker';
+
+export { AcceleratorTracker }
+  from './AcceleratorTracker';
+
+export { ChannelFitGuide }
+  from './ChannelFitGuide';

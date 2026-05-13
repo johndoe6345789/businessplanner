@@ -499,5 +499,45 @@
       "acknowledged": "Cydnabyddedig",
       "resolved": "Datryswyd"
     }
+  },
+  "pivot": {
+    "title": "Cofnod Pivot",
+    "originalIdea": "Syniad gwreiddiol",
+    "newDirection": "Cyfeiriad newydd",
+    "trigger": "Digwyddiad sbardun",
+    "rationale": "Rhesymeg",
+    "planImpact": "Effaith ar y cynllun",
+    "pivotDate": "Dyddiad y pivot",
+    "add": "Cofnodi Pivot",
+    "noEntries": "Dim pivots wedi'u cofnodi eto."
+  },
+  "accelerators": {
+    "title": "Traciwr Cyflyswyr a Chystadlaethau",
+    "name": "Enw'r rhaglen",
+    "type": "Math",
+    "deadline": "Dyddiad cau",
+    "status": "Statws",
+    "equity": "Ecwiti %",
+    "funding": "Cyllido (£)",
+    "add": "Ychwanegu Rhaglen",
+    "noEntries": "Dim rhaglenni wedi'u tracio eto.",
+    "prefill": "Llenwi o raglenni adnabyddus",
+    "website": "Gwefan",
+    "notes": "Nodiadau"
+  },
+  "channels": {
+    "title": "Canllaw Ffit Sianel",
+    "cac": "Ystod CAC",
+    "timeToROI": "Amser i ROI",
+    "bestFor": "Gorau ar gyfer",
+    "allTypes": "Pob math",
+    "noChannels": "Dim sianeli cyfatebol."
+  },
+  "milestones": {
+    "title": "Cardiau Carreg Filltir",
+    "share": "Rhannu'r garreg filltir hon",
+    "copyLink": "Copïo dolen",
+    "copied": "Copïwyd!",
+    "download": "Lawrlwytho fel PNG"
   }
 }

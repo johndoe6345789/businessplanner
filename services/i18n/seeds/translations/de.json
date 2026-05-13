@@ -466,5 +466,45 @@
       "acknowledged": "Bestätigt",
       "resolved": "Behoben"
     }
+  },
+  "pivot": {
+    "title": "Pivot-Protokoll",
+    "originalIdea": "Ursprüngliche Idee",
+    "newDirection": "Neue Richtung",
+    "trigger": "Auslöseereignis",
+    "rationale": "Begründung",
+    "planImpact": "Auswirkung auf den Plan",
+    "pivotDate": "Datum des Pivots",
+    "add": "Pivot erfassen",
+    "noEntries": "Noch keine Pivots erfasst."
+  },
+  "accelerators": {
+    "title": "Accelerator- und Wettbewerbs-Tracker",
+    "name": "Programmname",
+    "type": "Typ",
+    "deadline": "Frist",
+    "status": "Status",
+    "equity": "Equity %",
+    "funding": "Förderung (£)",
+    "add": "Programm hinzufügen",
+    "noEntries": "Noch keine Programme erfasst.",
+    "prefill": "Aus bekannten Programmen ausfüllen",
+    "website": "Webseite",
+    "notes": "Notizen"
+  },
+  "channels": {
+    "title": "Kanal-Fit-Leitfaden",
+    "cac": "CAC-Bereich",
+    "timeToROI": "Zeit bis ROI",
+    "bestFor": "Am besten für",
+    "allTypes": "Alle Typen",
+    "noChannels": "Keine Kanäle gefunden."
+  },
+  "milestones": {
+    "title": "Meilenstein-Karten",
+    "share": "Meilenstein teilen",
+    "copyLink": "Link kopieren",
+    "copied": "Kopiert!",
+    "download": "Als PNG herunterladen"
   }
 }

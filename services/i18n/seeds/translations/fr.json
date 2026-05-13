@@ -499,5 +499,45 @@
       "acknowledged": "Confirmée",
       "resolved": "Résolue"
     }
+  },
+  "pivot": {
+    "title": "Journal des Pivots",
+    "originalIdea": "Idée originale",
+    "newDirection": "Nouvelle direction",
+    "trigger": "Événement déclencheur",
+    "rationale": "Justification",
+    "planImpact": "Impact sur le plan",
+    "pivotDate": "Date du pivot",
+    "add": "Enregistrer un pivot",
+    "noEntries": "Aucun pivot enregistré."
+  },
+  "accelerators": {
+    "title": "Suivi Accélérateurs et Concours",
+    "name": "Nom du programme",
+    "type": "Type",
+    "deadline": "Date limite",
+    "status": "Statut",
+    "equity": "Equity %",
+    "funding": "Financement (£)",
+    "add": "Ajouter un programme",
+    "noEntries": "Aucun programme suivi.",
+    "prefill": "Remplir depuis les programmes connus",
+    "website": "Site web",
+    "notes": "Notes"
+  },
+  "channels": {
+    "title": "Guide des Canaux",
+    "cac": "Plage CAC",
+    "timeToROI": "Délai de ROI",
+    "bestFor": "Idéal pour",
+    "allTypes": "Tous les types",
+    "noChannels": "Aucun canal correspondant."
+  },
+  "milestones": {
+    "title": "Cartes de Jalons",
+    "share": "Partager ce jalon",
+    "copyLink": "Copier le lien",
+    "copied": "Copié !",
+    "download": "Télécharger en PNG"
   }
 }

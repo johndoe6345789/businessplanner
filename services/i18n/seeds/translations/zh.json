@@ -522,5 +522,45 @@
       "acknowledged": "已确认",
       "resolved": "已解决"
     }
+  },
+  "pivot": {
+    "title": "转型记录",
+    "originalIdea": "最初的想法",
+    "newDirection": "新方向",
+    "trigger": "触发事件",
+    "rationale": "原因",
+    "planImpact": "对计划的影响",
+    "pivotDate": "转型日期",
+    "add": "记录转型",
+    "noEntries": "暂无转型记录。"
+  },
+  "accelerators": {
+    "title": "加速器与竞赛追踪",
+    "name": "项目名称",
+    "type": "类型",
+    "deadline": "截止日期",
+    "status": "状态",
+    "equity": "股权 %",
+    "funding": "资金 (£)",
+    "add": "添加项目",
+    "noEntries": "暂无跟踪项目。",
+    "prefill": "从已知项目填写",
+    "website": "网站",
+    "notes": "备注"
+  },
+  "channels": {
+    "title": "渠道适配指南",
+    "cac": "CAC范围",
+    "timeToROI": "回报周期",
+    "bestFor": "适合类型",
+    "allTypes": "所有类型",
+    "noChannels": "没有匹配的渠道。"
+  },
+  "milestones": {
+    "title": "里程碑分享卡",
+    "share": "分享此里程碑",
+    "copyLink": "复制链接",
+    "copied": "已复制！",
+    "download": "下载为PNG"
   }
 }

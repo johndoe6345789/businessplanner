@@ -14,5 +14,11 @@
   { "labelKey": "decisions", "href": "/decisions" },
   { "labelKey": "scoping", "href": "/scoping" },
   { "labelKey": "community", "href": "/community" },
-  { "labelKey": "feed", "href": "/feed" }
+  { "labelKey": "feed", "href": "/feed" },
+  { "labelKey": "pivots", "href": "/pivots" },
+  { "labelKey": "accelerators",
+    "href": "/accelerators" },
+  { "labelKey": "channels", "href": "/channels" },
+  { "labelKey": "milestones",
+    "href": "/milestones" }
 ]

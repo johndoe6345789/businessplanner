@@ -37,5 +37,7 @@
   "gdpr": ["users", "market-research", "financials"],
   "weekly-review": ["users"],
   "ai-chat": ["users"],
-  "email-sequences": ["users"]
+  "email-sequences": ["users"],
+  "pivot": ["users"],
+  "accelerators": ["users"]
 }
