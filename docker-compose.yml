@@ -114,7 +114,8 @@ services:
       DB_NAME: nextra_db
       DB_USER: nextra
       DB_PASSWORD: nextra_dev
-    command: ["migrate", "--up"]
+    command: ["migrate", "--up",
+              "--config", "config/config.prod.json"]
     restart: "no"
 
   # ---- C++ Drogon API ---------------------------------------
