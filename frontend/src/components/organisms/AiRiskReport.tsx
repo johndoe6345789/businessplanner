@@ -54,11 +54,6 @@ export const AiRiskReport: React.FC = () => {
       aria-label={t('title')}
       sx={{ maxWidth: 680 }}
     >
-      <Typography variant="h5" gutterBottom
-        sx={{ fontWeight: 700 }}>
-        {t('title')}
-      </Typography>
-
       <Button
         variant="contained"
         onClick={handleGenerate}

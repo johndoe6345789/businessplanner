@@ -56,11 +56,6 @@ export const AiDocumentDrafter: React.FC = () => {
 
   return (
     <Box data-testid="ai-document-drafter">
-      <Typography variant="h5" gutterBottom
-        sx={{ fontWeight: 700 }}>
-        {t('title')}
-      </Typography>
-
       <AiDraftSelector
         selected={selected}
         onSelect={setSelected}

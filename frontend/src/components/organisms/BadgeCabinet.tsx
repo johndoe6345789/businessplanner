@@ -60,7 +60,7 @@ export const BadgeCabinet: React.FC = () => {
     return (
       <Box data-testid="badge-cabinet">
         <Typography color="text.secondary">
-          {t('badges')}
+          {t('noBadgesYet')}
         </Typography>
       </Box>
     );

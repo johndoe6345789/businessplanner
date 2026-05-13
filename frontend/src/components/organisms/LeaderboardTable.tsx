@@ -1,7 +1,5 @@
 'use client';
 
-// D3 opt-in: PATCH /api/users/me/leaderboard-opt-in
-// not yet implemented — placeholder UI only.
 import React, { useState } from 'react';
 import Table from '@shared/m3/Table';
 import { TableHead, TableBody, TableRow,
@@ -17,9 +15,8 @@ import {
 import { useAppSelector } from '@/store/hooks';
 import type { LeaderboardPeriod }
   from '@/types/gamification';
-import {
-  LeaderboardRow,
-} from '../molecules/LeaderboardRow';
+import { LeaderboardRow }
+  from '../molecules/LeaderboardRow';
 
 const PERIODS: LeaderboardPeriod[] =
   ['all', 'weekly', 'monthly'];
@@ -51,6 +48,7 @@ export const LeaderboardTable: React.FC<
     all: t('allTime'), weekly: t('thisWeek'),
     monthly: t('thisMonth'),
   };
+  const rows = data ?? [];
 
   return (
     <Box
@@ -61,8 +59,7 @@ export const LeaderboardTable: React.FC<
         {PERIODS.map((p) => (
           <Chip key={p} label={labels[p]} clickable
             onClick={() => setPeriod(p)}
-            variant={period === p
-              ? 'filled' : 'outlined'}
+            variant={period === p ? 'filled' : 'outlined'}
             aria-pressed={period === p}
           />
         ))}
@@ -75,20 +72,23 @@ export const LeaderboardTable: React.FC<
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>{t('rankCol')}</TableCell>
-                <TableCell>{t('player')}</TableCell>
-                <TableCell>{t('level')}</TableCell>
-                <TableCell>{t('xp')}</TableCell>
-                <TableCell>{t('streak')}</TableCell>
-                <TableCell>{t('badges')}</TableCell>
+                {['rankCol','player','level','xp',
+                  'streak','badges'].map((k) => (
+                  <TableCell key={k}>{t(k)}</TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {(data ?? []).map((e) => (
-                <LeaderboardRow key={e.id}
-                  entry={e}
-                  isCurrentUser={e.id === userId}
-                />
+              {rows.length === 0 && (
+                <TableRow><TableCell colSpan={6}
+                  sx={{ textAlign: 'center',
+                    color: 'text.secondary', py: 4 }}>
+                  {t('noEntriesYet')}
+                </TableCell></TableRow>
+              )}
+              {rows.map((e) => (
+                <LeaderboardRow key={e.id} entry={e}
+                  isCurrentUser={e.id === userId} />
               ))}
             </TableBody>
           </Table>

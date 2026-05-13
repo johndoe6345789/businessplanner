@@ -126,7 +126,9 @@
     "player": "Player",
     "xp": "XP",
     "optInLeaderboard": "Opt in to leaderboard",
-    "rankCol": "Rank"
+    "rankCol": "Rank",
+    "noBadgesYet": "No badges yet — complete tasks to unlock your first badge!",
+    "noEntriesYet": "No entries yet — be the first on the leaderboard!"
   },
   "notifications": {
     "title": "Notifications",
