@@ -6,14 +6,21 @@
  * Phase 4 of the Keycloak migration once all consumers
  * had migrated.
  *
+ * After signature verification the token's `jti` claim is
+ * validated against the user_sessions table so revoked
+ * tokens are rejected immediately (9.1 session hardening).
+ *
  * On success, exposes `user_id` and `user_role` in the
  * request attributes for downstream controllers.
  */
 #include "JwtAuthFilter.h"
+#include "session_check.h"
 #include "drogon-host/backend/utils/JsonResponse.h"
 #include "auth/backend/keycloak/KeycloakVerifier.h"
 #include "auth/backend/keycloak/UserProvision.h"
 
+#define JWT_DISABLE_PICOJSON
+#include <jwt-cpp/traits/nlohmann-json/defaults.h>
 #include <drogon/drogon.h>
 #include <string>
 #include <string_view>
@@ -64,16 +71,30 @@ void JwtAuthFilter::doFilter(
         return;
     }
 
+    // Extract jti for DB session validation. Tokens
+    // without a jti bypass the session check — they are
+    // still cryptographically valid but cannot be revoked.
+    std::string jti;
+    try {
+        auto decoded = jwt::decode(token);
+        if (decoded.has_id())
+            jti = decoded.get_id();
+    } catch (...) {}
+
     req->attributes()->insert("user_id", kc->sub);
     const std::string role =
         kc->roles.empty() ? std::string{"user"}
                           : kc->roles.front();
     req->attributes()->insert("user_role", role);
-    // JIT-provision the in-house users row for new
-    // Keycloak identities (e.g. self-registered or
-    // federated). Idempotent + cached per process.
     services::auth::keycloak::ensureUserRow(*kc);
-    ccb();
+
+    if (jti.empty()) {
+        // No jti claim — skip session store check.
+        ccb();
+        return;
+    }
+    // DB session check (9.1). v2: cache in Redis.
+    checkSession(jti, std::move(cb), std::move(ccb));
 }
 
 }  // namespace filters

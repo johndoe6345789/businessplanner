@@ -5,7 +5,6 @@
 
 #include <drogon/drogon.h>
 #include <spdlog/spdlog.h>
-#include <string>
 #include <string_view>
 
 namespace filters
@@ -68,10 +67,12 @@ void CookieAuthFilter::doFilter(
         return;
     }
 
+    // 9.2: Reject refresh tokens on API routes.
     if (claims.isRefresh) {
         cb(::utils::jsonError(
             drogon::k401Unauthorized,
-            "Refresh token not allowed",
+            "Refresh tokens cannot be used for API "
+            "access. Use /api/auth/token.",
             "AUTH_007"));
         return;
     }
