@@ -1,5 +1,7 @@
+'use client';
+
 import type { ReactElement } from 'react';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
@@ -7,13 +9,12 @@ import Button from '@shared/m3/Button';
 import Stack from '@shared/m3/Stack';
 
 /**
- * On-brand 404 page. Server component — getTranslations
- * resolves at SSR time, no IntlProvider hydration needed.
+ * Locale-aware 404 for explicit notFound() calls.
+ * 'use client' so Link is safe as a component prop.
  * @returns Not-found page with navigation shortcuts.
  */
-export default async function NotFound(
-): Promise<ReactElement> {
-  const t = await getTranslations('NotFound');
+export default function NotFound(): ReactElement {
+  const t = useTranslations('NotFound');
 
   return (
     <Box
