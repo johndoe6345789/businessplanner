@@ -18,6 +18,9 @@ export const startupTypeApi = baseApi.injectEndpoints({
      */
     listStartupTypes: build.query<StartupType[], void>({
       query: () => apiConstants.startupTypes,
+      transformResponse: (
+        res: { types: StartupType[] },
+      ) => res.types,
       providesTags: ['StartupTypes'],
     }),
 
