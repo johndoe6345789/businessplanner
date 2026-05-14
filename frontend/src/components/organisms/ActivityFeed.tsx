@@ -8,7 +8,7 @@ import FeedItem from '@/components/molecules/FeedItem';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { useListThreadsQuery } from '@/store/api/forumApi';
-import SparkleIcon from '@shared/icons/Sparkle';
+import { Sparkle as SparkleIcon } from '@shared/icons/Sparkle';
 
 /**
  * Activity feed showing recent threads across all

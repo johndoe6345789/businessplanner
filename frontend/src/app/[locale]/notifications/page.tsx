@@ -42,14 +42,14 @@ export default async function NotificationsPage({
   const t = await getTranslations('notifications');
 
   return (
-    <Box aria-label={t('inboxTitle')}>
+    <Box aria-label={t('title')}>
       <Typography
         variant="h4"
         component="h1"
         mb={3}
         data-testid="notifications-page-title"
       >
-        {t('inboxTitle')}
+        {t('title')}
       </Typography>
       <NotificationInbox />
     </Box>
