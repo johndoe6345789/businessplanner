@@ -1,3 +1,4 @@
+'use client';
 // components/cards/TemplateCard.tsx
 
 import React from 'react'

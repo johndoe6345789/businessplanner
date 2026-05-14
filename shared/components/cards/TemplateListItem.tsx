@@ -1,3 +1,4 @@
+'use client';
 // components/cards/TemplateListItem.tsx
 
 import React from 'react'
