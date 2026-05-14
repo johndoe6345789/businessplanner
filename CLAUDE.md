@@ -19,13 +19,13 @@ Nextra is a full-stack gamified web application with AI chat integration.
 ### Architecture
 
 ```
-Browser --> Nginx portal (port 8889) --> Next.js (port 3100)
+Browser --> Nginx portal (port 8892) --> Next.js (port 3100)
                                      --> Drogon C++ API (port 8080)
                                                |
                                          PostgreSQL (port 5432)
 ```
 
-The app is accessed at **`http://localhost:8889/app/en`** (not port 3000
+The app is accessed at **`http://localhost:8892/app/en`** (not port 3000
 directly). Nginx reverse-proxies `/app` to the Next.js container and
 `/api` to the Drogon container.
 
@@ -373,7 +373,7 @@ After the build the `manager` binary appears in
 
 ```bash
 docker compose up --build        # All services
-# App available at http://localhost:8889/app/en
+# App available at http://localhost:8892/app/en
 ```
 
 Or to run services individually:

@@ -6,7 +6,8 @@
     "refresh": "/api/auth/refresh",
     "forgotPassword": "/api/auth/forgot-password",
     "resetPassword": "/api/auth/reset-password",
-    "me": "/api/auth/me"
+    "me": "/api/auth/me",
+    "sessionRegister": "/api/auth/session"
   },
   "users": {
     "list": "/api/users",
@@ -112,5 +113,9 @@
   "accelerators": {
     "list": "/api/accelerators",
     "detail": "/api/accelerators/:id"
+  },
+  "riskAssessment": {
+    "list": "/api/risk-assessment",
+    "detail": "/api/risk-assessment/:id"
   }
 }

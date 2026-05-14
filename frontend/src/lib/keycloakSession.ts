@@ -1,8 +1,9 @@
 /**
  * @file keycloakSession.ts
- * @brief Logout URL builder + JWT parser.
+ * @brief Logout URL builder, JWT parser, session register.
  */
 import cfg from '@/constants/keycloak.json';
+import apiCfg from '@/constants/api.json';
 import type { KeycloakJwtPayload } from './keycloakTypes';
 
 /**
@@ -38,5 +39,29 @@ export function parseJwt(
     return JSON.parse(json) as KeycloakJwtPayload;
   } catch {
     return null;
+  }
+}
+
+/**
+ * Register a fresh access token's JTI with the backend
+ * session store so JwtAuthFilter lets the token through.
+ * Fire-and-forget — failures are silently ignored since
+ * the next request will surface the 401 naturally.
+ *
+ * @param accessToken - JWT access token string
+ */
+export async function registerSession(
+  accessToken: string,
+): Promise<void> {
+  try {
+    await fetch(apiCfg.auth.sessionRegister, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } catch {
+    // Network error — the next API call will 401
+    // and trigger re-auth.
   }
 }

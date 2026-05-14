@@ -70,4 +70,26 @@ auto MigrationFileUtils::extractDown(const std::string& sql) -> std::string
     return sql.substr(lineEnd + 1);
 }
 
+auto MigrationFileUtils::splitStatements(const std::string& sql)
+    -> std::vector<std::string>
+{
+    std::vector<std::string> stmts;
+    std::string cur;
+    for (const char c : sql) {
+        if (c == ';') {
+            auto s = cur.find_first_not_of(" \t\r\n");
+            if (s != std::string::npos)
+                stmts.push_back(cur.substr(s));
+            cur.clear();
+        } else {
+            cur += c;
+        }
+    }
+    // Handle any trailing content without a semicolon
+    auto s = cur.find_first_not_of(" \t\r\n");
+    if (s != std::string::npos)
+        stmts.push_back(cur.substr(s));
+    return stmts;
+}
+
 } // namespace services

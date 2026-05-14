@@ -18,11 +18,11 @@ namespace controllers
 inline drogon::HttpResponsePtr passkeyKeycloakRedirect()
 {
     static constexpr const char* kUrl =
-        "http://localhost:8889/sso/realms/nextra"
+        "http://localhost:8892/sso/realms/nextra"
         "/protocol/openid-connect/auth"
         "?client_id=nextra-app&response_type=code"
         "&scope=openid"
-        "&redirect_uri=http%3A%2F%2Flocalhost%3A8889"
+        "&redirect_uri=http%3A%2F%2Flocalhost%3A8892"
         "%2Fapp%2Fen%2Fauth%2Fcallback"
         "&kc_action=webauthn-register-passwordless";
     return drogon::HttpResponse::newRedirectionResponse(

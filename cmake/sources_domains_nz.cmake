@@ -19,6 +19,8 @@ list(APPEND NEXTRA_DOMAIN_DIRS
     progress/backend
     rate-limit/backend
     rate-limit/controllers
+    risk-assessment/backend
+    risk-assessment/controllers
     search/backend
     search/backend/commands
     search/controllers

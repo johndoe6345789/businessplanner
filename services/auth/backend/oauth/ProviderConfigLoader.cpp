@@ -76,7 +76,7 @@ std::string defaultPortalOrigin()
     auto root = loadRoot();
     return root.value(
         "defaultPortalOrigin",
-        std::string{"http://localhost:8889"});
+        std::string{"http://localhost:8892"});
 }
 
 } // namespace services::auth::oauth

@@ -28,14 +28,14 @@ void AuthController::login(
     const drogon::HttpRequestPtr&, Cb&& cb)
 {
     static const std::string kTarget =
-        "http://localhost:8889"
+        "http://localhost:8892"
         "/sso/realms/nextra/"
         "protocol/openid-connect/auth"
         "?client_id=nextra-app"
         "&response_type=code"
         "&scope=openid+profile+email"
         "&redirect_uri="
-        "http%3A%2F%2Flocalhost%3A8889"
+        "http%3A%2F%2Flocalhost%3A8892"
         "%2Fapp%2Fen%2Fauth%2Fcallback";
     auto resp = drogon::HttpResponse::
         newRedirectionResponse(kTarget,

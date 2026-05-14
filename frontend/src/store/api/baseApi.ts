@@ -39,6 +39,7 @@ export const baseApi = createApi({
     'Forum',
     'Follows',
     'Pivots',
+    'RiskAssessment',
     'Accelerators',
     'ChatStepLinks',
     'KbFeedback',

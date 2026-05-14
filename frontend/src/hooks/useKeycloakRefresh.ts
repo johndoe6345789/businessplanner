@@ -5,6 +5,8 @@
  */
 import { useEffect } from 'react';
 import { refresh } from '@/lib/keycloakClient';
+import { registerSession }
+  from '@/lib/keycloakSession';
 import {
   COOKIE, readCookie, writeCookie,
 } from '@/lib/keycloakCookies';
@@ -32,13 +34,16 @@ export function useKeycloakRefresh(
       if (!rt) return;
       try {
         const tok = await refresh(rt);
+        await registerSession(tok.access_token);
         writeCookie(
-          COOKIE.access, tok.access_token, tok.expires_in,
+          COOKIE.access, tok.access_token,
+          tok.expires_in,
         );
         if (tok.refresh_token) {
           writeCookie(
             COOKIE.refresh, tok.refresh_token,
-            tok.refresh_expires_in ?? tok.expires_in,
+            tok.refresh_expires_in
+              ?? tok.expires_in,
           );
         }
         setAccess(tok.access_token);

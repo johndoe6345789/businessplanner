@@ -95,6 +95,7 @@
     "launch": "Launch Checklist",
     "resources": "Resources",
     "decisions": "Decision Log",
+    "riskAssessment": "Risk Assessment",
     "scoping": "Product Scoping",
     "community": "Community",
     "feed": "Activity Feed"
@@ -1141,5 +1142,52 @@
     "copyLink": "Copy share link",
     "copied": "Copied!",
     "download": "Download as PNG"
+  },
+  "riskAssessment": {
+    "pageTitle": "Risk Assessment",
+    "pageDescription": "Identify, score and mitigate the risks facing your startup.",
+    "registerTitle": "Risk Register",
+    "matrixTitle": "Risk Matrix",
+    "matrixHint": "Probability (Y) × Impact (X). Score = P × I.",
+    "axisX": "Impact →",
+    "axisY": "Probability",
+    "addRisk": "Add Risk",
+    "deleteRisk": "Delete risk",
+    "noRisks": "No risks logged yet. Add your first risk above.",
+    "scoreLabel": "Risk score",
+    "fields": {
+      "title": "Risk title",
+      "category": "Category",
+      "probability": "Probability (P)",
+      "impact": "Impact (I)",
+      "owner": "Owner"
+    },
+    "category": {
+      "market": "Market",
+      "financial": "Financial",
+      "operational": "Operational",
+      "legal": "Legal",
+      "technical": "Technical"
+    },
+    "status": {
+      "open": "Open",
+      "mitigating": "Mitigating",
+      "closed": "Closed"
+    },
+    "severity": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    },
+    "cols": {
+      "category": "Category",
+      "title": "Risk",
+      "p": "P",
+      "i": "I",
+      "score": "Score",
+      "owner": "Owner",
+      "status": "Status"
+    }
   }
 }

@@ -5,7 +5,9 @@
  */
 export { buildAuthUrl } from './keycloakAuthUrl';
 export { exchangeCode, refresh } from './keycloakToken';
-export { logout, parseJwt } from './keycloakSession';
+export {
+  logout, parseJwt, registerSession,
+} from './keycloakSession';
 export type {
   KeycloakTokenResponse,
   KeycloakJwtPayload,

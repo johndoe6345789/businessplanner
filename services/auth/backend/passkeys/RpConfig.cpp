@@ -26,7 +26,7 @@ RpConfig::RpConfig()
     : id_(envOr("NEXTRA_RP_ID", "localhost")),
       name_(envOr("NEXTRA_RP_NAME", "Nextra")),
       origin_(envOr(
-          "NEXTRA_RP_ORIGIN", "http://localhost:8889"))
+          "NEXTRA_RP_ORIGIN", "http://localhost:8892"))
 {
 }
 

@@ -26,7 +26,7 @@ RpConfig loadFromEnv()
     const char* orig = std::getenv("NEXTRA_RP_ORIGIN");
     r.rpId = id ? id : "localhost";
     r.rpName = name ? name : "Nextra";
-    r.origin = orig ? orig : "http://localhost:8889";
+    r.origin = orig ? orig : "http://localhost:8892";
     return r;
 }
 
@@ -48,7 +48,7 @@ TEST_F(RpConfigTest, DefaultsWhenUnset)
     auto r = loadFromEnv();
     EXPECT_EQ(r.rpId, "localhost");
     EXPECT_EQ(r.rpName, "Nextra");
-    EXPECT_EQ(r.origin, "http://localhost:8889");
+    EXPECT_EQ(r.origin, "http://localhost:8892");
 }
 
 TEST_F(RpConfigTest, ReadsEnvOverrides)

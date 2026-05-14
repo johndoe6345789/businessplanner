@@ -33,6 +33,7 @@
   "financials": ["users"],
   "migration-runner": [],
   "decisions": ["users"],
+  "risk-assessment": ["users"],
   "scoping": ["users"],
   "gdpr": ["users", "market-research", "financials"],
   "weekly-review": ["users"],

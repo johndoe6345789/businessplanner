@@ -106,6 +106,9 @@ COPY services/drogon-host/config ./config
 
 # Migration SQL files (needed by `nextra-api migrate`)
 COPY --from=migration-files /out/services ./services
+# Migration dependency graph (required by the runner)
+COPY services/migration-graph.json \
+    ./services/migration-graph.json
 
 COPY --from=build \
     /src/services/audit/constants.json \

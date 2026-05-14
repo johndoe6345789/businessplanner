@@ -23,7 +23,7 @@ void OAuthController::callback(
     const std::string& /*provider*/)
 {
     cb(drogon::HttpResponse::newRedirectionResponse(
-        "http://localhost:8889/app/en/login",
+        "http://localhost:8892/app/en/login",
         drogon::k302Found));
 }
 

@@ -3,7 +3,7 @@
         "rpId": "localhost",
         "rpName": "NextExtra",
         "challengeTtlSeconds": 300,
-        "origin": "http://localhost:8889"
+        "origin": "http://localhost:8892"
     },
     "totp": {
         "issuer": "NextExtra",
