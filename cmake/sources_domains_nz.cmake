@@ -31,6 +31,8 @@ list(APPEND NEXTRA_DOMAIN_DIRS
     social/backend/presence
     social/backend/reactions
     social/controllers
+    startup-types/backend
+    startup-types/controllers
     streaks/backend
     streaming/backend
     streaming/backend/commands
