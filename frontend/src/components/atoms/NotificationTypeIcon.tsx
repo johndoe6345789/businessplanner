@@ -3,10 +3,14 @@
 import React from 'react';
 import NotificationsIcon
   from '@shared/icons/Notifications';
-import ChatIcon from '@shared/icons/Chat';
+import { Chat as ChatIcon } from '@shared/icons/Chat';
 import StarIcon from '@shared/icons/Star';
-import TrendUpIcon from '@shared/icons/TrendUp';
-import UserPlusIcon from '@shared/icons/UserPlus';
+import {
+  TrendUp as TrendUpIcon,
+} from '@shared/icons/TrendUp';
+import {
+  UserPlus as UserPlusIcon,
+} from '@shared/icons/UserPlus';
 
 /** Props for NotificationTypeIcon. */
 export interface NotificationTypeIconProps {
