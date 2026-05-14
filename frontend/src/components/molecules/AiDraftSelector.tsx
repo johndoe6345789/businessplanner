@@ -45,6 +45,7 @@ export const AiDraftSelector: React.FC<
 
   return (
     <Box
+      aria-live="polite"
       sx={{
         display: 'grid',
         gridTemplateColumns:

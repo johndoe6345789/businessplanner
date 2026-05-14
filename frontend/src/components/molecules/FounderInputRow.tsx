@@ -1,9 +1,8 @@
 'use client';
 
 /**
- * Founder input row — name, role, idea flag,
- * and a remove button. Right-side inputs are in
- * FounderInputRowRight.
+ * Founder input row: name, role, idea flag,
+ * remove button. Right side in FounderInputRowRight.
  * @module components/molecules/FounderInputRow
  */
 import React from 'react';
@@ -13,6 +12,7 @@ import {
   Select, Switch, FormControlLabel, MenuItem,
 } from '@shared/m3';
 import Button from '@shared/m3/Button';
+import { useTranslations } from 'next-intl';
 import { FounderInputRowRight }
   from './FounderInputRowRight';
 import type { FounderInput } from '@/types/legal';
@@ -37,7 +37,6 @@ const ROLES = [
 
 /**
  * Single founder row with left-side inputs.
- *
  * @param props - Row props.
  * @returns Founder row element.
  */
@@ -45,6 +44,7 @@ export const FounderInputRow: React.FC<
   FounderInputRowProps
 > = ({ founder, index, onChange,
   onRemove, removeLabel }) => {
+  const t = useTranslations('legal');
   const tid = `founder-row-${index}`;
   return (
     <Box data-testid={tid}
@@ -53,13 +53,13 @@ export const FounderInputRow: React.FC<
         p: 1.5, borderRadius: 2,
         bgcolor: 'background.paper' }}>
       <Box sx={{ minWidth: 130 }}>
-        <TextField label="Name"
+        <TextField label={t('founderName')}
           value={founder.name}
           onChange={(e) => onChange(
             { ...founder, name: e.target.value })}
           testId={`${tid}-name`} size="small" />
       </Box>
-      <Select label="Role" size="small"
+      <Select label={t('founderRole')} size="small"
         value={founder.role}
         onChange={(e) => onChange({ ...founder,
           role: e.target.value as
@@ -67,18 +67,19 @@ export const FounderInputRow: React.FC<
         testId={`${tid}-role`}>
         {ROLES.map((r) => (
           <MenuItem key={r} value={r}>
-            {r.toUpperCase()}
+            {t(`role_${r}`)}
           </MenuItem>
         ))}
       </Select>
-      <FormControlLabel label="Idea originator"
+      <FormControlLabel
+        label={t('ideaOriginator')}
         control={
           <Switch checked={founder.ideaOriginator}
             onChange={(e) => onChange({
               ...founder,
               ideaOriginator: e.target.checked })}
             inputProps={{
-              'aria-label': 'Idea originator',
+              'aria-label': t('ideaOriginator'),
               'data-testid': `${tid}-idea` }}
           />
         }

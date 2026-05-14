@@ -28,6 +28,7 @@ const ThreadRow: React.FC<ThreadRowProps> = ({
   const t = useTranslations('community');
   const date = new Date(thread.created_at)
     .toLocaleDateString();
+  const replyCount = thread.post_count;
 
   return (
     <Box
@@ -59,7 +60,11 @@ const ThreadRow: React.FC<ThreadRowProps> = ({
       >
         {thread.author_name}
         {' · '}
-        {thread.post_count} {t('reply')}
+        <span
+          aria-label={`${replyCount} replies`}
+        >
+          {t('replyCount', { count: replyCount })}
+        </span>
         {' · '}
         {date}
       </Typography>

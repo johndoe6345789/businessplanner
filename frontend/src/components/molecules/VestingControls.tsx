@@ -48,7 +48,7 @@ export const VestingControls: React.FC<
     <Box sx={{ display: 'flex',
       flexDirection: 'column', gap: 2, mb: 3 }}>
       <Box sx={{ maxWidth: 280 }}>
-        <TextField label="Total shares"
+        <TextField label={t('totalShares')}
           value={String(totalShares)} type="number"
           onChange={(e) => onShares(
             Math.max(1, Number(e.target.value)))}
@@ -69,24 +69,24 @@ export const VestingControls: React.FC<
       <Box sx={{ maxWidth: 320 }}>
         <Typography variant="caption"
           component="label" htmlFor="vest-slider">
-          Total vesting: {vestingMonths}m
+          {t('totalVesting')}: {vestingMonths}m
         </Typography>
         <Slider id="vest-slider" min={12} max={60}
           step={1} value={vestingMonths}
           onChange={(_, v) =>
             onVesting(v as number)}
-          aria-label="Total vesting months"
+          aria-label={t('totalVesting')}
           data-testid="vesting-months-slider"
           size="small" sx={{ display: 'block' }} />
       </Box>
       <FormControlLabel
-        label="Double-trigger acceleration"
+        label={t('doubleTrigger')}
         control={
           <Switch checked={accelerationOnChange}
             onChange={(e) =>
               onAcceleration(e.target.checked)}
             inputProps={{
-              'aria-label': 'Acceleration on change',
+              'aria-label': t('doubleTrigger'),
               'data-testid': 'vesting-accel' }} />
         }
       />

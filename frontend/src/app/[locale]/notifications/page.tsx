@@ -4,6 +4,7 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import { Box } from '@shared/m3';
+import Typography from '@shared/m3/Typography';
 import nextDynamic from 'next/dynamic';
 
 /** Skip static prerendering — data is live. */
@@ -42,6 +43,14 @@ export default async function NotificationsPage({
 
   return (
     <Box aria-label={t('inboxTitle')}>
+      <Typography
+        variant="h4"
+        component="h1"
+        mb={3}
+        data-testid="notifications-page-title"
+      >
+        {t('inboxTitle')}
+      </Typography>
       <NotificationInbox />
     </Box>
   );

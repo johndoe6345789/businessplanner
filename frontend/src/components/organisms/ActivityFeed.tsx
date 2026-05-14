@@ -3,14 +3,17 @@
 import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
+import Skeleton from '@shared/m3/Skeleton';
 import FeedItem from '@/components/molecules/FeedItem';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { useListThreadsQuery } from '@/store/api/forumApi';
+import SparkleIcon from '@shared/icons/Sparkle';
 
 /**
- * Activity feed showing recent threads across all boards.
- * Loads from /api/forum/threads with no board filter (v1).
- * A proper follows-based feed is v2.
+ * Activity feed showing recent threads across all
+ * boards. Loads from /api/forum/threads with no
+ * board filter (v1). A follows-based feed is v2.
  *
  * @returns Activity feed organism.
  */
@@ -25,20 +28,54 @@ const ActivityFeed: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Typography
+      <Box
         data-testid="feed-loading"
         aria-live="polite"
+        aria-busy="true"
       >
-        {t('title')}…
-      </Typography>
+        {[0, 1, 2].map((i) => (
+          <Skeleton
+            key={i}
+            variant="rectangular"
+            height={72}
+            sx={{ borderRadius: 2, mb: 1 }}
+          />
+        ))}
+      </Box>
     );
   }
 
   if (!threads.length) {
     return (
-      <Typography data-testid="feed-empty">
-        {t('noActivity')}
-      </Typography>
+      <Box
+        data-testid="feed-empty"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        py={6}
+        gap={2}
+      >
+        <SparkleIcon
+          size={48}
+          aria-hidden="true"
+          style={{ opacity: 0.4 }}
+        />
+        <Typography variant="h6" fontWeight={700}>
+          {t('emptyTitle')}
+        </Typography>
+        <Link
+          href="/community"
+          data-testid="feed-empty-cta"
+          aria-label={t('emptyCta')}
+        >
+          <Typography
+            variant="body2"
+            color="primary"
+          >
+            {t('emptyCta')}
+          </Typography>
+        </Link>
+      </Box>
     );
   }
 

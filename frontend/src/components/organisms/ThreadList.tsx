@@ -69,7 +69,7 @@ const ThreadList: React.FC<ThreadListProps> = ({
       )}
       {isLoading && (
         <Typography aria-live="polite">
-          {t('threads')}…
+          {t('loadingThreads')}
         </Typography>
       )}
       {!isLoading && !threads.length && (

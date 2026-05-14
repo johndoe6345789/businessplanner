@@ -5,8 +5,6 @@ import {
   ListItem, ListItemText, ListItemIcon,
   Box, Typography,
 } from '@shared/m3';
-import NotificationsIcon
-  from '@shared/icons/Notifications';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import type { Notification }
@@ -16,6 +14,8 @@ import {
 } from '@/store/api/notificationsApi';
 import { formatRelativeTime }
   from '@/utils/relativeTime';
+import NotificationTypeIcon
+  from '@/components/atoms/NotificationTypeIcon';
 
 /** Props for NotificationItem. */
 export interface NotificationItemProps {
@@ -24,9 +24,12 @@ export interface NotificationItemProps {
 }
 
 /**
- * Single notification row with icon, title, body,
- * timestamp and an unread-dot indicator.
- * Clicking marks read and navigates to action link.
+ * Single notification row with type icon, title,
+ * body, timestamp and an unread-dot indicator.
+ * Clicking marks read and navigates to the link.
+ *
+ * @param props - Component props.
+ * @returns Notification list item element.
  */
 const NotificationItem: React.FC<
   NotificationItemProps
@@ -56,7 +59,7 @@ const NotificationItem: React.FC<
       }}
     >
       <ListItemIcon sx={{ minWidth: 32, mt: 0.5 }}>
-        <NotificationsIcon fontSize="small" />
+        <NotificationTypeIcon type={n.type} />
       </ListItemIcon>
       <ListItemText
         primary={
@@ -71,7 +74,7 @@ const NotificationItem: React.FC<
             display="flex" flexDirection="column"
           >
             <Typography variant="caption" noWrap
-              sx={{ maxWidth: 220 }}
+              sx={{ maxWidth: '60%' }}
             >
               {n.body}
             </Typography>
@@ -94,5 +97,4 @@ const NotificationItem: React.FC<
     </ListItem>
   );
 };
-
 export default NotificationItem;

@@ -6,6 +6,8 @@ import {
 import { Box, Typography } from '@shared/m3';
 import { SkillsProfileForm }
   from '@/components/organisms/SkillsProfileForm';
+import ProfileAccountCard
+  from '@/components/molecules/ProfileAccountCard';
 
 /** Skip static prerendering for this page. */
 export const dynamic = 'force-dynamic';
@@ -17,8 +19,8 @@ interface ProfilePageProps {
 }
 
 /**
- * User profile page — shows skills & qualifications
- * form backed by localStorage.
+ * User profile page — shows account info,
+ * skills & qualifications form.
  *
  * @param props - Page props with locale params.
  * @returns Profile page UI.
@@ -44,6 +46,10 @@ export default async function ProfilePage({
       >
         {t('title')}
       </Typography>
+      <ProfileAccountCard
+        nameLabel={t('name')}
+        emailLabel={t('email')}
+      />
       <Typography
         variant="h6" component="h2"
         sx={{ mt: 3, mb: 1 }}

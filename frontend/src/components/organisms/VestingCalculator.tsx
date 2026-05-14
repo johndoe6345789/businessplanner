@@ -65,7 +65,7 @@ export const VestingCalculator: React.FC = () => {
         <SummaryCard label={t('monthlyVest')}
           value={monthlyVest.toLocaleString()}
           testId="vesting-monthly-val" />
-        <SummaryCard label="Total months"
+        <SummaryCard label={t('totalMonths')}
           value={String(vestingMonths)}
           testId="vesting-total-months" />
       </Box>
@@ -73,8 +73,7 @@ export const VestingCalculator: React.FC = () => {
         <Typography variant="body2"
           color="text.secondary" sx={{ mb: 2 }}
           data-testid="vesting-accel-note">
-          Double-trigger acceleration applies on
-          change of control.
+          {t('accelNote')}
         </Typography>
       )}
       <VestingScheduleTable schedule={schedule} />

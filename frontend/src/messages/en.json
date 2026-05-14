@@ -222,6 +222,8 @@
   },
   "profile": {
     "title": "Profile",
+    "name": "Name",
+    "email": "Email",
     "userInfo": "User Information",
     "userInfoDesc": "Name, email, and account details will appear here.",
     "badges": "Badges",
@@ -748,7 +750,26 @@
     "monthlyVest": "Monthly vest",
     "month": "Month",
     "sharesVested": "Shares vested",
-    "knowledgeBaseNote": "Legal guides (structures, IP, GDPR) are in the Knowledge Base."
+    "knowledgeBaseNote": "Legal guides (structures, IP, GDPR) are in the Knowledge Base.",
+    "timeCommitment": "Time commitment",
+    "capitalLabel": "Capital ($)",
+    "experienceLabel": "Experience",
+    "exp_high": "High",
+    "exp_medium": "Medium",
+    "exp_low": "Low",
+    "founderName": "Name",
+    "founderRole": "Role",
+    "ideaOriginator": "Idea originator",
+    "role_ceo": "CEO",
+    "role_cto": "CTO",
+    "role_cmo": "CMO",
+    "role_coo": "COO",
+    "role_other": "Other",
+    "totalShares": "Total shares",
+    "totalVesting": "Total vesting",
+    "doubleTrigger": "Double-trigger acceleration",
+    "totalMonths": "Total months",
+    "accelNote": "Double-trigger acceleration applies on change of control."
   },
   "marketResearch": {
     "title": "Market Research",
@@ -1003,11 +1024,22 @@
     "report": "Report",
     "reported": "Reported",
     "noThreads": "No threads yet. Be the first to post.",
-    "noBoards": "No boards available."
+    "noBoards": "No boards available.",
+    "breadcrumbCommunity": "Community",
+    "boardNotFound": "Board not found",
+    "loadingBoards": "Loading boards…",
+    "loadingThreads": "Loading threads…",
+    "threadTitle": "Thread title",
+    "threadBody": "Content",
+    "flagPost": "Flag post",
+    "replyCount": "{count} replies"
   },
   "feed": {
     "title": "Activity Feed",
-    "noActivity": "No activity yet."
+    "noActivity": "No activity yet.",
+    "startedThread": "started a new thread:",
+    "emptyTitle": "Nothing here yet",
+    "emptyCta": "Browse community"
   },
   "moderation": {
     "title": "Moderation Queue",
@@ -1049,7 +1081,13 @@
     "title": "AI Risk Report",
     "generate": "Generate Risk Report",
     "generating": "Analysing your plan…",
-    "noRisks": "No risks identified."
+    "noRisks": "No risks identified.",
+    "resultsHeading": "Risk Analysis",
+    "generateError": "Unable to generate risk report. Please try again.",
+    "generatedAt": "Generated",
+    "hint": "We'll analyse your completed planner steps, startup type, and stage to identify key risks.",
+    "copy": "Copy",
+    "copied": "Copied!"
   },
   "aiDocs": {
     "title": "AI Document Drafter",
@@ -1060,7 +1098,9 @@
     "generate": "Generate",
     "generating": "Generating…",
     "copy": "Copy",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "selectHint": "Select a document type above, then click Generate.",
+    "generateError": "Something went wrong generating your document. Please try again."
   },
   "pivot": {
     "title": "Pivot Tracker",

@@ -27,6 +27,10 @@ export type { SearchInputProps } from './SearchInput';
 export { SkillTag } from './SkillTag';
 export type { SkillTagProps } from './SkillTag';
 
+export { SkillTagList } from './SkillTagList';
+export type { SkillTagListProps }
+  from './SkillTagList';
+
 export { StreakCounter } from './StreakCounter';
 export type { StreakCounterProps }
   from './StreakCounter';
@@ -41,4 +45,7 @@ export { default as MentorBadge }
   from './MentorBadge';
 export type { MentorBadgeProps }
   from './MentorBadge';
+
+export { AiErrorCard } from './AiErrorCard';
+export type { AiErrorCardProps } from './AiErrorCard';
 

@@ -4,9 +4,10 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import Box from '@shared/m3/Box';
-import Typography from '@shared/m3/Typography';
 import ThreadList from
   '@/components/organisms/ThreadList';
+import BoardHeader from
+  '@/components/molecules/BoardHeader';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -40,14 +41,7 @@ export default async function BoardPage({
       aria-label={t('threads')}
       sx={{ maxWidth: 800, mx: 'auto', width: '100%' }}
     >
-      <Typography
-        variant="h5"
-        component="h1"
-        gutterBottom
-        sx={{ fontWeight: 800 }}
-      >
-        {board}
-      </Typography>
+      <BoardHeader boardSlug={board} />
       <ThreadList boardSlug={board} />
     </Box>
   );

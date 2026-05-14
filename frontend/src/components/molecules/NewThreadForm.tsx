@@ -57,18 +57,18 @@ const NewThreadForm: React.FC<NewThreadFormProps> = ({
         flexDirection: 'column', gap: 2 }}
     >
       <TextField
-        label={t('threads')}
+        label={t('threadTitle')}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
         fullWidth
         inputProps={{
           'data-testid': 'thread-title-input',
-          'aria-label': t('threads'),
+          'aria-label': t('threadTitle'),
         }}
       />
       <TextField
-        label={t('reply')}
+        label={t('threadBody')}
         value={content}
         onChange={(e) => setContent(e.target.value)}
         required
@@ -77,7 +77,7 @@ const NewThreadForm: React.FC<NewThreadFormProps> = ({
         minRows={3}
         inputProps={{
           'data-testid': 'thread-content-input',
-          'aria-label': t('reply'),
+          'aria-label': t('threadBody'),
         }}
       />
       <Button

@@ -7,20 +7,22 @@
 import React from 'react';
 import Box from '@shared/m3/Box';
 import Button from '@shared/m3/Button';
-import Alert from '@shared/m3/Alert';
 import Typography from '@shared/m3/Typography';
 import CircularProgress
   from '@shared/m3/CircularProgress';
 import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
-import {
-  useGetRiskReportMutation,
-} from '@/store/api/aiApi';
+import { useGetRiskReportMutation }
+  from '@/store/api/aiApi';
+import { AiRiskResult }
+  from '@/components/molecules/AiRiskResult';
+import { AiErrorCard }
+  from '@/components/atoms/AiErrorCard';
 
 /**
  * Displays a "Generate Risk Report" button,
- * loading indicator, and the resulting risk list.
+ * loading indicator, error state, and results.
  */
 export const AiRiskReport: React.FC = () => {
   const t = useTranslations('riskReport');
@@ -37,7 +39,7 @@ export const AiRiskReport: React.FC = () => {
     (s: RootState) => s.startupType.selectedStage,
   );
 
-  const [generate, { data, isLoading }] =
+  const [generate, { data, isLoading, isError }] =
     useGetRiskReportMutation();
 
   const handleGenerate = () => {
@@ -54,6 +56,16 @@ export const AiRiskReport: React.FC = () => {
       aria-label={t('title')}
       sx={{ maxWidth: 680 }}
     >
+      {!data && (
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mb: 2 }}
+        >
+          {t('hint')}
+        </Typography>
+      )}
+
       <Button
         variant="contained"
         onClick={handleGenerate}
@@ -71,14 +83,15 @@ export const AiRiskReport: React.FC = () => {
         {isLoading ? t('generating') : t('generate')}
       </Button>
 
+      {isError && (
+        <AiErrorCard message={t('generateError')} />
+      )}
+
       {data && (
-        <Alert
-          severity="warning"
-          aria-live="polite"
-          sx={{ whiteSpace: 'pre-wrap' }}
-        >
-          {data.risks || t('noRisks')}
-        </Alert>
+        <AiRiskResult
+          risks={data.risks || t('noRisks')}
+          generatedAt={data.generated_at}
+        />
       )}
     </Box>
   );

@@ -2,24 +2,20 @@
 
 /**
  * @file SkillsProfileForm.tsx
- * @brief Form for role, skills tags, and qualifications
- *        text. Persists to localStorage via
- *        useSkillsProfile.
+ * @brief Role + skills + background form backed by
+ *        localStorage via useSkillsProfile.
  */
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import Box from '@shared/m3/Box';
+import { TextField } from '@/components/atoms';
+import Button from '@shared/m3/Button';
 import { useSkillsProfile }
   from '@/hooks/useSkillsProfile';
 import { SkillTagInput }
   from '../molecules/SkillTagInput';
-import {
-  FIELD, LABEL, TEXT_INPUT, SAVE_BTN,
-} from './SkillsProfileForm.styles';
 
-/**
- * Role + skills + background form backed by
- * localStorage.
- */
+/** Role + skills + background form. */
 export const SkillsProfileForm: React.FC = () => {
   const t = useTranslations('profile.skills');
   const { profile, save, addSkill, removeSkill }
@@ -40,22 +36,32 @@ export const SkillsProfileForm: React.FC = () => {
   };
 
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', gap: 20 }}
+    <Box
+      sx={{ display: 'flex',
+        flexDirection: 'column', gap: 2.5 }}
       data-testid="skills-profile-form"
     >
-      <div style={FIELD}>
-        <label style={LABEL}>{t('roleLabel')}</label>
-        <input
-          style={TEXT_INPUT}
-          value={role}
-          onChange={e => setRole(e.target.value)}
-          placeholder={t('rolePlaceholder')}
-          data-testid="skills-role-input"
-        />
-      </div>
-      <div style={FIELD}>
-        <label style={LABEL}>{t('skillsLabel')}</label>
+      <TextField
+        label={t('roleLabel')}
+        value={role}
+        onChange={(e) => setRole(e.target.value)}
+        placeholder={t('rolePlaceholder')}
+        testId="skills-role-input"
+        inputProps={{
+          'aria-label': t('roleLabel'),
+        }}
+      />
+      <Box sx={{ display: 'flex',
+        flexDirection: 'column', gap: 0.5 }}>
+        <Box
+          component="label"
+          sx={{ fontSize: 13, fontWeight: 600,
+            color: 'text.secondary',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em' }}
+        >
+          {t('skillsLabel')}
+        </Box>
         <SkillTagInput
           skills={profile.skills}
           onAdd={addSkill}
@@ -63,25 +69,27 @@ export const SkillsProfileForm: React.FC = () => {
           placeholder={t('skillsPlaceholder')}
           label={t('skillsLabel')}
         />
-      </div>
-      <div style={FIELD}>
-        <label style={LABEL}>{t('backgroundLabel')}</label>
-        <textarea
-          style={{ ...TEXT_INPUT, resize: 'vertical' as const, minHeight: 100 }}
-          value={background}
-          onChange={e => setBackground(e.target.value)}
-          placeholder={t('backgroundPlaceholder')}
-          data-testid="skills-background-input"
-        />
-      </div>
-      <button
-        type="button" style={SAVE_BTN}
-        onClick={handleSave}
+      </Box>
+      <TextField
+        label={t('backgroundLabel')}
+        value={background}
+        onChange={(e) =>
+          setBackground(e.target.value)}
+        placeholder={t('backgroundPlaceholder')}
+        testId="skills-background-input"
+        multiline
+        minRows={4}
+        inputProps={{
+          'aria-label': t('backgroundLabel'),
+        }}
+      />
+      <Button variant="filled" onClick={handleSave}
         data-testid="skills-save-btn"
-      >
+        aria-label={
+          saved ? t('saved') : t('saveButton')}>
         {saved ? t('saved') : t('saveButton')}
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 

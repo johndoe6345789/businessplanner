@@ -6,7 +6,8 @@
  *        Press Enter or comma to confirm a tag.
  */
 import React, { useState, useRef } from 'react';
-import { SkillTag } from '../atoms/SkillTag';
+import { SkillTagList }
+  from '../atoms/SkillTagList';
 
 /** Props for SkillTagInput. */
 export interface SkillTagInputProps {
@@ -24,14 +25,15 @@ export interface SkillTagInputProps {
   testId?: string;
 }
 
+const BG =
+  'color-mix(in srgb,'
+  + ' var(--mat-sys-on-surface) 4%, transparent)';
 const WRAP: React.CSSProperties = {
   display: 'flex', flexWrap: 'wrap' as const,
   gap: '6px', alignItems: 'center',
   padding: '8px 12px', borderRadius: 8,
   border: '1px solid var(--mat-sys-outline-variant)',
-  background:
-    'color-mix(in srgb, var(--mat-sys-on-surface) 4%, transparent)',
-  minHeight: 44,
+  background: BG, minHeight: 44,
 };
 
 const INPUT: React.CSSProperties = {
@@ -43,7 +45,6 @@ const INPUT: React.CSSProperties = {
 
 /**
  * Tag input: type a skill, press Enter or comma.
- *
  * @param props - SkillTagInputProps.
  */
 export const SkillTagInput: React.FC<
@@ -78,15 +79,13 @@ export const SkillTagInput: React.FC<
       style={WRAP}
       onClick={() => ref.current?.focus()}
     >
-      {skills.map(s => (
-        <SkillTag key={s} label={s}
-          onRemove={onRemove} />
-      ))}
+      <SkillTagList skills={skills}
+        onRemove={onRemove} />
       <input
         ref={ref}
         style={INPUT}
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKey}
         onBlur={commit}
         placeholder={skills.length ? '' : placeholder}

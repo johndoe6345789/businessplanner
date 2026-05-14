@@ -19,7 +19,7 @@ export interface AiDraftResultProps {
 
 /**
  * Renders the document draft inside a Paper with
- * a one-click copy-to-clipboard button.
+ * paragraph formatting and a copy-to-clipboard button.
  */
 export const AiDraftResult: React.FC<
   AiDraftResultProps
@@ -36,6 +36,8 @@ export const AiDraftResult: React.FC<
       });
   };
 
+  const paragraphs = content.split('\n\n').filter(Boolean);
+
   return (
     <Paper
       variant="outlined"
@@ -51,19 +53,21 @@ export const AiDraftResult: React.FC<
           size="small"
           variant="outlined"
           onClick={handleCopy}
-          aria-label={
-            copied ? t('copied') : t('copy')
-          }
+          data-testid="ai-draft-copy-btn"
+          aria-label={copied ? t('copied') : t('copy')}
         >
           {copied ? t('copied') : t('copy')}
         </Button>
       </Box>
-      <Typography
-        variant="body2"
-        sx={{ whiteSpace: 'pre-wrap' }}
-      >
-        {content}
-      </Typography>
+      {paragraphs.map((para, i) => (
+        <Typography
+          key={i}
+          variant="body2"
+          sx={{ mb: 1 }}
+        >
+          {para}
+        </Typography>
+      ))}
     </Paper>
   );
 };

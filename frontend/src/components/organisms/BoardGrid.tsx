@@ -29,7 +29,7 @@ const BoardGrid: React.FC = () => {
         data-testid="board-grid-loading"
         aria-live="polite"
       >
-        {t('boards')}…
+        {t('loadingBoards')}
       </Typography>
     );
   }

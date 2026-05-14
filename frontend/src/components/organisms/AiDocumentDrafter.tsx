@@ -8,8 +8,7 @@ import React, { useState } from 'react';
 import Box from '@shared/m3/Box';
 import Button from '@shared/m3/Button';
 import Typography from '@shared/m3/Typography';
-import CircularProgress
-  from '@shared/m3/CircularProgress';
+import CircularProgress from '@shared/m3/CircularProgress';
 import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store/store';
@@ -21,6 +20,8 @@ import { AiDraftSelector }
   from '@/components/molecules/AiDraftSelector';
 import { AiDraftResult }
   from '@/components/molecules/AiDraftResult';
+import { AiErrorCard }
+  from '@/components/atoms/AiErrorCard';
 
 /**
  * Lets the founder choose a document type, generate
@@ -41,7 +42,7 @@ export const AiDocumentDrafter: React.FC = () => {
     (s: RootState) => s.startupType.selectedStage,
   );
 
-  const [draft, { data, isLoading }] =
+  const [draft, { data, isLoading, isError }] =
     useDraftDocumentMutation();
 
   const handleGenerate = () => {
@@ -54,32 +55,40 @@ export const AiDocumentDrafter: React.FC = () => {
     });
   };
 
+  const btnLabel = isLoading ? t('generating') : t('generate');
+
   return (
     <Box data-testid="ai-document-drafter">
       <AiDraftSelector
         selected={selected}
         onSelect={setSelected}
       />
-
+      {!selected && (
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mb: 2 }}
+        >
+          {t('selectHint')}
+        </Typography>
+      )}
       {selected && (
         <Button
           variant="contained"
           onClick={handleGenerate}
           disabled={isLoading}
-          aria-label={
-            isLoading ? t('generating') : t('generate')
-          }
+          aria-label={btnLabel}
           startIcon={
-            isLoading
-              ? <CircularProgress size={16} />
-              : null
+            isLoading ? <CircularProgress size={16} /> : null
           }
           sx={{ mb: 2 }}
         >
-          {isLoading ? t('generating') : t('generate')}
+          {btnLabel}
         </Button>
       )}
-
+      {isError && (
+        <AiErrorCard message={t('generateError')} />
+      )}
       {data?.content && (
         <AiDraftResult content={data.content} />
       )}

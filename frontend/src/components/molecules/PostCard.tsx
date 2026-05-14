@@ -3,8 +3,9 @@
 import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import IconButton from '@/components/atoms/IconButton';
+import IconButton from '@shared/m3/IconButton';
 import { useTranslations } from 'next-intl';
+import MoreVertIcon from '@shared/icons/MoreVert';
 import type { ForumPost } from '@/types/forum';
 
 /** Props for PostCard. */
@@ -64,11 +65,11 @@ const PostCard: React.FC<PostCardProps> = ({
           </Typography>
           <IconButton
             size="small"
-            aria-label={t('report')}
+            aria-label={t('flagPost')}
             data-testid={`flag-btn-${post.id}`}
             onClick={() => onFlag?.(post.id)}
           >
-            🚩
+            <MoreVertIcon size={18} />
           </IconButton>
         </Box>
       </Box>
