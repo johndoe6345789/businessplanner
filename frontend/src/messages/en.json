@@ -98,7 +98,12 @@
     "riskAssessment": "Risk Assessment",
     "scoping": "Product Scoping",
     "community": "Community",
-    "feed": "Activity Feed"
+    "feed": "Activity Feed",
+    "pivots": "Pivots",
+    "accelerators": "Accelerators",
+    "channels": "Channels",
+    "milestones": "Milestones",
+    "companies": "Company Registry"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -1191,5 +1196,22 @@
       "owner": "Owner",
       "status": "Status"
     }
+  },
+  "companies": {
+    "title": "Company Registry",
+    "subtitle": "A unified record of every company you track — competitors, accelerators, investors, and more.",
+    "search": "Search companies",
+    "addOrg": "Add Company",
+    "editOrg": "Edit Company",
+    "noEntries": "No companies registered yet.",
+    "name": "Company name",
+    "website": "Website",
+    "description": "Description",
+    "types": "Entity types",
+    "notes": "Notes",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

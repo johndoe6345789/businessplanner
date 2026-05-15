@@ -40,5 +40,7 @@
   "ai-chat": ["users"],
   "email-sequences": ["users"],
   "pivot": ["users"],
-  "accelerators": ["users"]
+  "organisations": ["users"],
+  "accelerators": ["users", "organisations"],
+  "market-research": ["users", "organisations"]
 }

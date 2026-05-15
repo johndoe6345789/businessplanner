@@ -114,6 +114,10 @@
     "list": "/api/accelerators",
     "detail": "/api/accelerators/:id"
   },
+  "organisations": {
+    "list": "/api/organisations",
+    "detail": "/api/organisations/:id"
+  },
   "riskAssessment": {
     "list": "/api/risk-assessment",
     "detail": "/api/risk-assessment/:id"

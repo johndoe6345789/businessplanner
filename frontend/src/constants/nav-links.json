@@ -20,6 +20,8 @@
   { "labelKey": "pivots", "href": "/pivots" },
   { "labelKey": "accelerators",
     "href": "/accelerators" },
+  { "labelKey": "companies",
+    "href": "/companies" },
   { "labelKey": "channels", "href": "/channels" },
   { "labelKey": "milestones",
     "href": "/milestones" }

@@ -41,6 +41,7 @@ export const baseApi = createApi({
     'Pivots',
     'RiskAssessment',
     'Accelerators',
+    'Organisations',
     'ChatStepLinks',
     'KbFeedback',
     'PublicProfile',
