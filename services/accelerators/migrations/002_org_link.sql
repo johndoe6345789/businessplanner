@@ -1,6 +1,6 @@
 -- Soft link: accelerator_programmes →
 -- organisations registry.
--- Nullable; existing rows are unaffected.
+-- Nullable. Existing rows are unaffected.
 ALTER TABLE accelerator_programmes
     ADD COLUMN organisation_id UUID
         REFERENCES organisations(id)

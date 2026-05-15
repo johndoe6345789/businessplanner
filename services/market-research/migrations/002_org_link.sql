@@ -1,5 +1,5 @@
 -- Soft link: competitors → organisations registry.
--- Nullable; existing rows are unaffected.
+-- Nullable. Existing rows are unaffected.
 ALTER TABLE competitors
     ADD COLUMN organisation_id UUID
         REFERENCES organisations(id)
