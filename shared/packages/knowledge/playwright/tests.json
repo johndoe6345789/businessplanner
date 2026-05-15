@@ -1,0 +1,64 @@
+{
+  "$schema": "https://metabuilder.dev/schemas/package-playwright.schema.json",
+  "package": "knowledge",
+  "description": "Knowledge base page smoke tests",
+  "tests": [
+    {
+      "name": "knowledge page loads",
+      "tags": ["@smoke", "@knowledge"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/knowledge"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "knowledge-page",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "knowledge base component renders",
+      "tags": ["@knowledge"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/knowledge"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "knowledge-base",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "knowledge page has h1 heading",
+      "tags": ["@knowledge"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/knowledge"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "role": "heading",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    }
+  ]
+}
