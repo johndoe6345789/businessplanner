@@ -11,9 +11,7 @@
 namespace services::hoshin
 {
 
-/**
- * @brief CRUD store for Hoshin Kanri data.
- */
+/** @brief Async CRUD store for Hoshin Kanri data. */
 class HoshinStore
 {
   public:
@@ -95,9 +93,7 @@ class HoshinStore
 
   private:
     static auto db()
-    {
-        return drogon::app().getDbClient();
-    }
+        { return drogon::app().getDbClient(); }
 };
 
 } // namespace services::hoshin
