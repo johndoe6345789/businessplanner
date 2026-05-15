@@ -7,6 +7,8 @@ import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
 import { StartupCompareBoard }
   from '@/components/organisms/StartupCompareBoard';
+import { CompoundChain }
+  from '@/components/organisms/CompoundChain';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -48,6 +50,7 @@ export default async function StartupComparePage({
         {t('pageDescription')}
       </Typography>
       <StartupCompareBoard />
+      <CompoundChain />
     </Box>
   );
 }

@@ -265,3 +265,18 @@ export { MilestoneShareDialog }
   from './MilestoneShareDialog';
 export type { MilestoneShareDialogProps }
   from './MilestoneShareDialog';
+
+export { StartupScoreCard }
+  from './StartupScoreCard';
+export type { StartupScoreCardProps }
+  from './StartupScoreCard';
+
+export { StartupStepsPanel }
+  from './StartupStepsPanel';
+export type { StartupStepsPanelProps }
+  from './StartupStepsPanel';
+
+export { ChainNodeView }
+  from './ChainNodeView';
+export type { ChainNode, ChainNodeViewProps }
+  from './ChainNodeView';

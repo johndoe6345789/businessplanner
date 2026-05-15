@@ -10,13 +10,13 @@ import {
 } from '@/hooks/useStartupComparison';
 import { StartupScoreCard }
   from '@/components/molecules/StartupScoreCard';
+import { StartupStepsPanel }
+  from '@/components/molecules/StartupStepsPanel';
 
 /**
- * Renders the full startup comparison board.
- * Shows a "Best Pick" banner for the lowest-risk
- * company and a ranked list of score cards.
- *
- * @returns Comparison board UI.
+ * Renders the full startup comparison board with
+ * "Best Pick" banner, ranked score cards, and
+ * expandable startup playbook steps per company.
  */
 export const StartupCompareBoard: React.FC = () => {
   const t = useTranslations('startupCompare');
@@ -66,13 +66,22 @@ export const StartupCompareBoard: React.FC = () => {
         </Typography>
         <StartupScoreCard
           profile={best} isBest />
+        <Box sx={{ mt: 1 }}>
+          <StartupStepsPanel
+            orgId={best.org.id} />
+        </Box>
       </Box>
       {rest.length > 0 && (
         <Box sx={{ display: 'flex',
           flexDirection: 'column', gap: 2 }}>
           {rest.map((p) => (
-            <StartupScoreCard
-              key={p.org.id} profile={p} />
+            <Box key={p.org.id}>
+              <StartupScoreCard profile={p} />
+              <Box sx={{ mt: 1 }}>
+                <StartupStepsPanel
+                  orgId={p.org.id} />
+              </Box>
+            </Box>
           ))}
         </Box>
       )}
