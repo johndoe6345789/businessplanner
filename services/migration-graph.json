@@ -41,5 +41,6 @@
   "pivot": ["users"],
   "organisations": ["users"],
   "accelerators": ["users", "organisations"],
-  "market-research": ["users", "organisations"]
+  "market-research": ["users", "organisations"],
+  "hoshin": ["users", "organisations"]
 }
