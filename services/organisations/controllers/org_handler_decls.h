@@ -37,5 +37,11 @@
         const drogon::HttpRequestPtr& req, \
         std::function<void( \
             const drogon::HttpResponsePtr&)>&& cb, \
+        std::string id); \
+    /** @brief GET /api/organisations/{id}/steps */ \
+    void listSteps( \
+        const drogon::HttpRequestPtr& req, \
+        std::function<void( \
+            const drogon::HttpResponsePtr&)>&& cb, \
         std::string id);
 // clang-format on

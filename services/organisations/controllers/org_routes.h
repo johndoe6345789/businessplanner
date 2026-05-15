@@ -19,5 +19,8 @@
         drogon::Put, "filters::JwtAuthFilter"); \
     ADD_METHOD_TO(C::deleteOrg, \
         "/api/organisations/{id}", \
-        drogon::Delete, "filters::JwtAuthFilter");
+        drogon::Delete, "filters::JwtAuthFilter"); \
+    ADD_METHOD_TO(C::listSteps, \
+        "/api/organisations/{id}/steps", \
+        drogon::Get, "filters::JwtAuthFilter");
 // clang-format on

@@ -8,6 +8,8 @@ list(APPEND NEXTRA_DOMAIN_DIRS
     notifications/backend
     notifications/backend/commands
     notifications/controllers
+    organisations/backend
+    organisations/controllers
     orm-models/backend
     pdf/backend
     pdf/backend/commands

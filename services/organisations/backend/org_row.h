@@ -44,7 +44,7 @@ inline std::string jsonArrToPg(const json& arr)
 inline json orgRowToJson(
     const drogon::orm::Row& r)
 {
-    return {
+    json out = {
         {"id",   r["id"].as<std::string>()},
         {"user_id",
          r["user_id"].as<std::string>()},
@@ -64,7 +64,19 @@ inline json orgRowToJson(
          r["created_at"].as<std::string>()},
         {"updated_at",
          r["updated_at"].as<std::string>()},
+        {"initial_investment_gbp",
+         r["initial_investment_gbp"].as<int>()},
+        {"weeks_to_bootstrap",
+         r["weeks_to_bootstrap"].as<int>()},
+        {"monthly_revenue_gbp",
+         r["monthly_revenue_gbp"].as<int>()},
     };
+    if (r["parent_org_id"].isNull())
+        out["parent_org_id"] = nullptr;
+    else
+        out["parent_org_id"] =
+            r["parent_org_id"].as<std::string>();
+    return out;
 }
 
 } // namespace services::organisations

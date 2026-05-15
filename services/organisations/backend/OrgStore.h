@@ -71,6 +71,17 @@ class OrgStore
         Callback ok,
         ErrCallback err);
 
+    /**
+     * @brief List startup steps for an organisation.
+     * @param orgId  UUID of the organisation.
+     * @param ok     Called with JSON array of steps.
+     * @param err    Called with status + message.
+     */
+    void listSteps(
+        const std::string& orgId,
+        Callback ok,
+        ErrCallback err);
+
   private:
     /** @brief Convenience DB accessor. */
     static auto db()

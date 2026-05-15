@@ -16,9 +16,15 @@ using drogon::orm::Result;
 static const std::string kCreateSql =
     "INSERT INTO organisations"
     " (user_id,name,website,description,"
-    "  entity_types,tags,notes)"
+    "  entity_types,tags,notes,"
+    "  initial_investment_gbp,"
+    "  weeks_to_bootstrap,"
+    "  monthly_revenue_gbp,"
+    "  parent_org_id)"
     " VALUES ($1::uuid,$2,$3,$4,"
-    "  $5::text[],$6::text[],$7)"
+    "  $5::text[],$6::text[],$7,"
+    "  $8::int,$9::int,$10::int,"
+    "  NULLIF($11,'')::uuid)"
     " RETURNING id::text, user_id::text,"
     "  name, website, description,"
     "  COALESCE(ARRAY_TO_JSON("
@@ -26,7 +32,11 @@ static const std::string kCreateSql =
     "  COALESCE(ARRAY_TO_JSON("
     "    tags)::text,'[]') AS tags_json,"
     "  notes, created_at::text,"
-    "  updated_at::text";
+    "  updated_at::text,"
+    "  initial_investment_gbp,"
+    "  weeks_to_bootstrap,"
+    "  monthly_revenue_gbp,"
+    "  parent_org_id::text";
 
 void OrgStore::createOrg(
     const std::string& userId,
@@ -34,8 +44,7 @@ void OrgStore::createOrg(
     Callback ok,
     ErrCallback err)
 {
-    auto name  = data.value("name",
-                            std::string{});
+    auto name  = data.value("name", std::string{});
     auto web   = data.value("website",
                             std::string{});
     auto desc  = data.value("description",
@@ -44,7 +53,14 @@ void OrgStore::createOrg(
         data.value("entity_types", json::array()));
     auto tags  = jsonArrToPg(
         data.value("tags", json::array()));
-    auto notes = data.value("notes",
+    auto notes = data.value("notes", std::string{});
+    auto inv   = data.value(
+        "initial_investment_gbp", 0);
+    auto wks   = data.value(
+        "weeks_to_bootstrap", 0);
+    auto rev   = data.value(
+        "monthly_revenue_gbp", 0);
+    auto par   = data.value("parent_org_id",
                             std::string{});
     db()->execSqlAsync(
         kCreateSql,
@@ -65,7 +81,8 @@ void OrgStore::createOrg(
                 e.base().what());
         },
         userId, name, web,
-        desc, types, tags, notes);
+        desc, types, tags, notes,
+        inv, wks, rev, par);
 }
 
 } // namespace services::organisations
