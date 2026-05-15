@@ -25,6 +25,8 @@ export interface RiskFormState {
   setImpact: (v: RiskRating) => void;
   owner: string;
   setOwner: (v: string) => void;
+  orgId: string | null;
+  setOrgId: (v: string | null) => void;
   isLoading: boolean;
   handleSubmit: (
     e: React.FormEvent,
@@ -47,6 +49,8 @@ export function useRiskForm(): RiskFormState {
   const [impact, setImpact] =
     useState<RiskRating>(3);
   const [owner, setOwner] = useState('');
+  const [orgId, setOrgId] =
+    useState<string | null>(null);
 
   const handleSubmit = async (
     e: React.FormEvent,
@@ -60,6 +64,7 @@ export function useRiskForm(): RiskFormState {
       mitigation_strategy: '',
       owner,
       status: 'open' as RiskStatus,
+      organisation_id: orgId,
     });
     setTitle('');
     setOwner('');
@@ -69,6 +74,6 @@ export function useRiskForm(): RiskFormState {
     title, setTitle, category, setCategory,
     probability, setProbability,
     impact, setImpact, owner, setOwner,
-    isLoading, handleSubmit,
+    orgId, setOrgId, isLoading, handleSubmit,
   };
 }

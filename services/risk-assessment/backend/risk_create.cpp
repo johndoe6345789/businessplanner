@@ -40,6 +40,8 @@ void RiskAssessmentService::createRisk(
                             std::string{});
     auto stat  = data.value("status",
                             std::string{"open"});
+    auto orgId = data.value("organisation_id",
+                            std::string{});
     if (!VALID_CATEGORIES.count(cat)) {
         err(drogon::k400BadRequest,
             "invalid category");
@@ -58,15 +60,17 @@ void RiskAssessmentService::createRisk(
     const auto sql =
         "INSERT INTO risks"
         " (user_id, category, title, description,"
-        "  probability, impact,"
-        "  mitigation_strategy, owner, status)"
+        "  probability, impact, mitigation_strategy,"
+        "  owner, status, organisation_id)"
         " VALUES"
-        " ($1::uuid,$2,$3,$4,$5::int,$6::int,$7,$8,$9)"
+        " ($1::uuid,$2,$3,$4,$5::int,$6::int,"
+        "  $7,$8,$9,NULLIF($10,'')::uuid)"
         " RETURNING id::text, user_id::text,"
         "  category, title, description,"
         "  probability, impact, risk_score,"
         "  mitigation_strategy, owner, status,"
-        "  created_at::text, updated_at::text";
+        "  created_at::text, updated_at::text,"
+        "  organisation_id::text";
     db()->execSqlAsync(
         sql,
         [ok, err](const Result& res) {
@@ -85,7 +89,7 @@ void RiskAssessmentService::createRisk(
                 e.base().what());
         },
         userId, cat, title, desc,
-        prob, imp, mit, owner, stat);
+        prob, imp, mit, owner, stat, orgId);
 }
 
 } // namespace services::risk_assessment

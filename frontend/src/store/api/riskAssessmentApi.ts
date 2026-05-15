@@ -23,9 +23,6 @@ export const riskAssessmentApi =
        */
       listRisks: build.query<Risk[], void>({
         query: () => BASE,
-        transformResponse: (
-          res: { risks: Risk[] },
-        ) => res.risks,
         providesTags: ['RiskAssessment'],
       }),
 

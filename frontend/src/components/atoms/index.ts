@@ -49,3 +49,13 @@ export type { MentorBadgeProps }
 export { AiErrorCard } from './AiErrorCard';
 export type { AiErrorCardProps } from './AiErrorCard';
 
+export { default as RiskRatingInput }
+  from './RiskRatingInput';
+export type { RiskRatingInputProps }
+  from './RiskRatingInput';
+
+export { default as RiskLevelChip }
+  from './RiskLevelChip';
+export type { RiskLevelChipProps }
+  from './RiskLevelChip';
+

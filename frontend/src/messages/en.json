@@ -103,7 +103,8 @@
     "accelerators": "Accelerators",
     "channels": "Channels",
     "milestones": "Milestones",
-    "companies": "Company Registry"
+    "companies": "Company Registry",
+    "startupCompare": "Startup Comparison"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -1214,5 +1215,27 @@
     "cancel": "Cancel",
     "save": "Save",
     "linkOrg": "Link to company registry"
+  },
+  "startupCompare": {
+    "pageTitle": "Startup Comparison",
+    "pageDescription": "Rank your startup ideas by risk score to find the safest bet.",
+    "bestPick": "Best Pick",
+    "bestPickSub": "Lowest aggregate risk across all categories.",
+    "empty": "No companies with risk data yet. Add risks and link them to a company.",
+    "totalScore": "Total risk score",
+    "riskCount": "{{count}} risk(s) logged",
+    "level": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    },
+    "category": {
+      "market": "Market",
+      "financial": "Financial",
+      "operational": "Operational",
+      "legal": "Legal",
+      "technical": "Technical"
+    }
   }
 }

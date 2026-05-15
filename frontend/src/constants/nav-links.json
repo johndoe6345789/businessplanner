@@ -22,6 +22,8 @@
     "href": "/accelerators" },
   { "labelKey": "companies",
     "href": "/companies" },
+  { "labelKey": "startupCompare",
+    "href": "/startup-compare" },
   { "labelKey": "channels", "href": "/channels" },
   { "labelKey": "milestones",
     "href": "/milestones" }

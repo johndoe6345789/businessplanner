@@ -9,12 +9,15 @@ import Button from '@shared/m3/Button';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useTranslations } from 'next-intl';
-import type { RiskCategory, RiskRating } from '@/types/riskAssessment';
+import type { RiskCategory } from '@/types/riskAssessment';
 import { useRiskForm } from '@/hooks/useRiskForm';
+import RiskRatingInput
+  from '@/components/atoms/RiskRatingInput';
+import { OrgSearchSelect }
+  from '@/components/molecules/OrgSearchSelect';
 
 const CATS: RiskCategory[] =
   ['market','financial','operational','legal','technical'];
-const RATINGS: RiskRating[] = [1, 2, 3, 4, 5];
 
 /**
  * Inline form for adding a new risk to the register.
@@ -56,30 +59,14 @@ const RiskAddForm: React.FC = () => {
         </FormControl>
       </Grid>
       <Grid item xs={3} sm={1}>
-        <FormControl fullWidth size="small">
-          <InputLabel>P</InputLabel>
-          <Select value={f.probability} label="P"
-            onChange={(e) =>
-              f.setProbability(
-                Number(e.target.value) as RiskRating)}>
-            {RATINGS.map((r) => (
-              <MenuItem key={r} value={r}>{r}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <RiskRatingInput label="P"
+          value={f.probability}
+          onChange={f.setProbability} />
       </Grid>
       <Grid item xs={3} sm={1}>
-        <FormControl fullWidth size="small">
-          <InputLabel>I</InputLabel>
-          <Select value={f.impact} label="I"
-            onChange={(e) =>
-              f.setImpact(
-                Number(e.target.value) as RiskRating)}>
-            {RATINGS.map((r) => (
-              <MenuItem key={r} value={r}>{r}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <RiskRatingInput label="I"
+          value={f.impact}
+          onChange={f.setImpact} />
       </Grid>
       <Grid item xs={12} sm={2}>
         <TextField label={t('fields.owner')}
@@ -88,8 +75,13 @@ const RiskAddForm: React.FC = () => {
           size="small" />
       </Grid>
       <Grid item xs={12} sm={2}>
+        <OrgSearchSelect
+          value={f.orgId}
+          onChange={f.setOrgId} />
+      </Grid>
+      <Grid item xs={12}>
         <Button type="submit" variant="contained"
-          fullWidth disabled={f.isLoading}
+          disabled={f.isLoading}
           data-testid="risk-add-submit"
         >{t('addRisk')}</Button>
       </Grid>

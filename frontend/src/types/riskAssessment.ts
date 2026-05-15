@@ -50,6 +50,8 @@ export interface Risk {
   created_at: string;
   /** ISO timestamp of last update. */
   updated_at: string;
+  /** Linked company registry entry, if any. */
+  organisation_id?: string | null;
 }
 
 /**
@@ -64,6 +66,7 @@ export interface CreateRiskInput {
   mitigation_strategy: string;
   owner: string;
   status: RiskStatus;
+  organisation_id?: string | null;
 }
 
 /**

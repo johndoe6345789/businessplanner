@@ -41,6 +41,11 @@ inline json riskRowToJson(
         r["created_at"].as<std::string>();
     out["updated_at"] =
         r["updated_at"].as<std::string>();
+    if (r["organisation_id"].isNull())
+        out["organisation_id"] = nullptr;
+    else
+        out["organisation_id"] =
+            r["organisation_id"].as<std::string>();
     return out;
 }
 

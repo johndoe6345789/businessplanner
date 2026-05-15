@@ -21,19 +21,16 @@ void RiskAssessmentService::updateRisk(
     Callback ok,
     ErrCallback err)
 {
-    auto cat   = data.value("category",
-                            std::string{});
-    auto title = data.value("title",
-                            std::string{});
-    auto desc  = data.value("description",
-                            std::string{});
+    auto cat  = data.value("category", std::string{});
+    auto title = data.value("title", std::string{});
+    auto desc  = data.value("description", std::string{});
     auto prob  = data.value("probability", 0);
     auto imp   = data.value("impact", 0);
     auto mit   = data.value("mitigation_strategy",
                             std::string{});
-    auto owner = data.value("owner",
-                            std::string{});
-    auto stat  = data.value("status",
+    auto owner = data.value("owner", std::string{});
+    auto stat  = data.value("status", std::string{});
+    auto orgId = data.value("organisation_id",
                             std::string{});
     const auto sql =
         "UPDATE risks SET"
@@ -42,13 +39,15 @@ void RiskAssessmentService::updateRisk(
         "  probability=$6::int, impact=$7::int,"
         "  mitigation_strategy=$8,"
         "  owner=$9, status=$10,"
+        "  organisation_id=NULLIF($11,'')::uuid,"
         "  updated_at=NOW()"
         " WHERE id=$1::uuid AND user_id=$2::uuid"
         " RETURNING id::text, user_id::text,"
         "  category, title, description,"
         "  probability, impact, risk_score,"
         "  mitigation_strategy, owner, status,"
-        "  created_at::text, updated_at::text";
+        "  created_at::text, updated_at::text,"
+        "  organisation_id::text";
     db()->execSqlAsync(
         sql,
         [ok, err](const Result& res) {
@@ -67,7 +66,7 @@ void RiskAssessmentService::updateRisk(
                 e.base().what());
         },
         id, userId, cat, title, desc,
-        prob, imp, mit, owner, stat);
+        prob, imp, mit, owner, stat, orgId);
 }
 
 void RiskAssessmentService::deleteRisk(
