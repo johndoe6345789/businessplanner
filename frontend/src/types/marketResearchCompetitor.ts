@@ -23,6 +23,8 @@ export interface Competitor {
   features: Record<string, boolean>;
   /** Free-text notes. */
   notes: string;
+  /** Linked organisation registry id, if any. */
+  organisation_id?: string | null;
 }
 
 /** Input payload for creating a competitor. */
@@ -41,4 +43,6 @@ export interface CreateCompetitorInput {
   features: Record<string, boolean>;
   /** Free-text notes. */
   notes: string;
+  /** Linked organisation registry id, if any. */
+  organisation_id?: string | null;
 }

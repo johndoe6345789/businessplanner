@@ -1212,6 +1212,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "linkOrg": "Link to company registry"
   }
 }

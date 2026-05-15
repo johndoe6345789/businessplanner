@@ -46,6 +46,8 @@ export interface Accelerator {
   created_at: string;
   /** ISO timestamp of last update. */
   updated_at: string;
+  /** Linked organisation registry id, if any. */
+  organisation_id?: string | null;
 }
 
 /**

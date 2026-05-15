@@ -17,6 +17,8 @@ import known
   from '@/constants/known-accelerators.json';
 import { AcceleratorFormFields }
   from './AcceleratorFormFields';
+import { OrgSearchSelect }
+  from './OrgSearchSelect';
 
 /** Props for AcceleratorForm. */
 export interface AcceleratorFormProps {
@@ -68,6 +70,10 @@ export const AcceleratorForm: React.FC<
         inputProps={{
           'data-testid': 'accel-name',
         }} />
+      <OrgSearchSelect
+        value={value.organisation_id ?? null}
+        onChange={(id) =>
+          set('organisation_id', id)} />
       <AcceleratorFormFields value={value}
         onChange={onChange} />
     </Box>
