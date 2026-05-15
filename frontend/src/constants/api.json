@@ -122,5 +122,11 @@
   "riskAssessment": {
     "list": "/api/risk-assessment",
     "detail": "/api/risk-assessment/:id"
+  },
+  "hoshin": {
+    "objectives": "/api/hoshin/objectives",
+    "objectiveById": "/api/hoshin/objectives/:id",
+    "links": "/api/hoshin/links",
+    "linkById": "/api/hoshin/links/:id"
   }
 }

@@ -24,6 +24,8 @@
     "href": "/companies" },
   { "labelKey": "startupCompare",
     "href": "/startup-compare" },
+  { "labelKey": "hoshin",
+    "href": "/hoshin" },
   { "labelKey": "channels", "href": "/channels" },
   { "labelKey": "milestones",
     "href": "/milestones" }

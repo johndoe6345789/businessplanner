@@ -104,7 +104,8 @@
     "channels": "Channels",
     "milestones": "Milestones",
     "companies": "Company Registry",
-    "startupCompare": "Startup Comparison"
+    "startupCompare": "Startup Comparison",
+    "hoshin": "Strategy Matrix"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -1244,6 +1245,22 @@
       "operational": "Operational",
       "legal": "Legal",
       "technical": "Technical"
+    }
+  },
+  "hoshin": {
+    "pageTitle": "Strategy Matrix",
+    "pageDescription": "Hoshin Kanri — align objectives to startups across three horizons.",
+    "vision": "5-Year Vision",
+    "breakthrough": "Breakthrough Objectives",
+    "annual": "Annual Objectives",
+    "noObjectives": "No objectives defined yet.",
+    "linkedStartups": "Linked startups",
+    "noLinks": "No startups linked.",
+    "target": "Target",
+    "strength": {
+      "strong": "Strong",
+      "medium": "Medium",
+      "weak": "Weak"
     }
   }
 }

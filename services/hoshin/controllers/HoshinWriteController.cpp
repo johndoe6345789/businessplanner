@@ -82,7 +82,8 @@ void HoshinController::createLink(
         },
         [cb](drogon::HttpStatusCode c,
              const std::string& m) {
-            spdlog::warn("createLink err: {}", m);
+            spdlog::warn(
+                "createLink err: {}", m);
             cb(::utils::jsonError(c, m));
         });
 }
@@ -100,7 +101,8 @@ void HoshinController::deleteLink(
         },
         [cb](drogon::HttpStatusCode c,
              const std::string& m) {
-            spdlog::warn("deleteLink err: {}", m);
+            spdlog::warn(
+                "deleteLink err: {}", m);
             cb(::utils::jsonError(c, m));
         });
 }
