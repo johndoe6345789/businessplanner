@@ -9,6 +9,8 @@ import { StartupCompareBoard }
   from '@/components/organisms/StartupCompareBoard';
 import { CompoundChain }
   from '@/components/organisms/CompoundChain';
+import AccountingKpiBar
+  from '@/components/molecules/AccountingKpiBar';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -49,6 +51,7 @@ export default async function StartupComparePage({
         color="text.secondary" sx={{ mb: 3 }}>
         {t('pageDescription')}
       </Typography>
+      <AccountingKpiBar />
       <StartupCompareBoard />
       <CompoundChain />
     </Box>

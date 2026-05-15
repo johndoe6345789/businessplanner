@@ -8,15 +8,9 @@
 import React, { useState } from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import Collapse from '@mui/material/Collapse';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText
-  from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
-import CircularProgress
-  from '@mui/material/CircularProgress';
+import { Collapse, List, ListItem, ListItemText,
+         Divider, Button, CircularProgress }
+  from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import { useListStartupStepsQuery }
   from '@/store/api/organisationsApi';

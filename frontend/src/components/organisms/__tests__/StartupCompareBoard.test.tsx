@@ -5,23 +5,23 @@ jest.mock('next-intl', () => ({
   useTranslations: () => (k: string) => k,
 }));
 
-type CardProps = {
-  profile: { org: { name: string } };
-  isBest?: boolean;
-};
-jest.mock(
-  '@/components/molecules/StartupScoreCard',
-  () => ({
-    StartupScoreCard: ({ profile, isBest }: CardProps) => (
-      <div data-testid={isBest ? 'best-card' : 'other-card'}>
-        {profile.org.name}
-      </div>
-    ),
-  }),
-);
+jest.mock('@/components/molecules/StartupScoreCard', () => ({
+  StartupScoreCard: ({ profile, isBest }: {
+    profile: { org: { name: string } }; isBest?: boolean;
+  }) => (
+    <div data-testid={isBest ? 'best-card' : 'other-card'}>
+      {profile.org.name}
+    </div>
+  ),
+}));
+
+jest.mock('@/components/molecules/StartupStepsPanel', () => ({
+  StartupStepsPanel: ({ orgId }: { orgId: string }) => (
+    <div data-testid={`steps-${orgId}`} />
+  ),
+}));
 
 const hookMock = jest.fn();
-
 jest.mock('@/hooks/useStartupComparison', () => ({
   useStartupComparison: () => hookMock(),
 }));
@@ -29,7 +29,7 @@ jest.mock('@/hooks/useStartupComparison', () => ({
 import { StartupCompareBoard }
   from '../StartupCompareBoard';
 
-const baseHook = () =>
+const base = () =>
   ({ profiles: [], isLoading: false, isError: false });
 const mkP = (name: string) =>
   ({ org: { id: name, name }, totalScore: 10,
@@ -37,58 +37,41 @@ const mkP = (name: string) =>
 
 describe('StartupCompareBoard', () => {
   it('shows loading skeletons', () => {
-    hookMock.mockReturnValue({
-      ...baseHook(), isLoading: true,
-    });
+    hookMock.mockReturnValue({ ...base(), isLoading: true });
     render(<StartupCompareBoard />);
-    expect(
-      screen.getByTestId('compare-board-loading'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('compare-board-loading'))
+      .toBeInTheDocument();
   });
 
   it('shows empty state when no profiles', () => {
-    hookMock.mockReturnValue(baseHook());
+    hookMock.mockReturnValue(base());
     render(<StartupCompareBoard />);
-    expect(
-      screen.getByTestId('compare-board-empty'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('compare-board-empty'))
+      .toBeInTheDocument();
   });
 
   it('shows empty state on error', () => {
-    hookMock.mockReturnValue({
-      ...baseHook(), isError: true,
-    });
+    hookMock.mockReturnValue({ ...base(), isError: true });
     render(<StartupCompareBoard />);
-    expect(
-      screen.getByTestId('compare-board-empty'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('compare-board-empty'))
+      .toBeInTheDocument();
   });
 
   it('renders best-card for first profile', () => {
     hookMock.mockReturnValue({
-      ...baseHook(),
-      profiles: [
-        mkP('Alpha'),
-        mkP('Beta'),
-      ],
-    });
+      ...base(), profiles: [mkP('Alpha'), mkP('Beta')] });
     render(<StartupCompareBoard />);
-    expect(
-      screen.getByTestId('best-card'),
-    ).toHaveTextContent('Alpha');
-    expect(
-      screen.getByTestId('other-card'),
-    ).toHaveTextContent('Beta');
+    expect(screen.getByTestId('best-card'))
+      .toHaveTextContent('Alpha');
+    expect(screen.getByTestId('other-card'))
+      .toHaveTextContent('Beta');
   });
 
   it('renders board testid with data', () => {
     hookMock.mockReturnValue({
-      ...baseHook(),
-      profiles: [mkP('Solo')],
-    });
+      ...base(), profiles: [mkP('Solo')] });
     render(<StartupCompareBoard />);
-    expect(
-      screen.getByTestId('compare-board'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('compare-board'))
+      .toBeInTheDocument();
   });
 });
