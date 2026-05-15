@@ -13,6 +13,7 @@ set(NEXTRA_TEST_DIRS
     ecommerce/tests
     feature-flags/tests
     gallery/tests
+    hoshin/tests
     image/tests
     infra/tests
     notifications/tests
