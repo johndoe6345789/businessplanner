@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardActions,
-         Typography, Button, Chip } from '@mui/material';
+         Typography, Button, Chip } from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import { useXeroStatusQuery,
          useXeroDisconnectMutation }

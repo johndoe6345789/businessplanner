@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Box, Grid, Typography, Divider } from '@mui/material';
+import { Box, Grid, Typography, Divider } from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import { useAccountingDashboard }
   from '@/hooks/useAccountingDashboard';

@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardActions,
          Typography, Button, Chip,
-         TextField } from '@mui/material';
+         TextField } from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import { useZeltStatusQuery, useZeltConnectMutation,
          useZeltDisconnectMutation }

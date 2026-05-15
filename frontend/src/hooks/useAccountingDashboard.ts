@@ -12,6 +12,8 @@ import { useXeroStatusQuery, useXeroInvoicesQuery,
 import { useZeltStatusQuery, useZeltPayrollQuery,
          useZeltEmployeesQuery }
   from '@/store/api/zeltApi';
+import { extractReportRow }
+  from '@/utils/xeroReportUtils';
 
 /** @brief Dashboard summary returned by the hook. */
 export interface AccountingKpis {
@@ -61,7 +63,7 @@ export function useAccountingDashboard(): AccountingKpis {
       : null;
 
     return {
-      totalRevenue:   xPL   ? null : null,
+      totalRevenue:   extractReportRow(xPL, 'Total Income'),
       cashOnHand:     null,
       monthlyPayroll: latestRun?.totalCost ?? null,
       headcount:      zEmp  ? zEmp.length  : null,

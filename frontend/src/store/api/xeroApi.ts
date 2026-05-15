@@ -5,7 +5,7 @@
 import { baseApi } from './baseApi';
 import type {
   XeroStatus, XeroInvoice,
-  XeroBankTransaction, XeroReport,
+  XeroBankTransaction, XeroReportResponse,
 } from '@/types/xero';
 import api from '@/constants/api.json';
 
@@ -37,19 +37,19 @@ export const xeroApi = baseApi.injectEndpoints({
     }),
 
     /** P&L report. */
-    xeroProfitLoss: build.query<XeroReport, void>({
+    xeroProfitLoss: build.query<XeroReportResponse, void>({
       query: () => X.profitLoss,
       providesTags: ['Xero'],
     }),
 
     /** Balance sheet report. */
-    xeroBalanceSheet: build.query<XeroReport, void>({
+    xeroBalanceSheet: build.query<XeroReportResponse, void>({
       query: () => X.balanceSheet,
       providesTags: ['Xero'],
     }),
 
     /** Cash flow summary. */
-    xeroCashFlow: build.query<XeroReport, void>({
+    xeroCashFlow: build.query<XeroReportResponse, void>({
       query: () => X.cashFlow,
       providesTags: ['Xero'],
     }),

@@ -42,9 +42,14 @@ export interface XeroReportRow {
   readonly cells?: ReadonlyArray<{ readonly value: string }>;
 }
 
-/** Full Xero report response wrapper. */
+/** Single Xero report object inside the Reports array. */
 export interface XeroReport {
   readonly ReportID: string;
   readonly ReportName: string;
   readonly Rows: readonly XeroReportRow[];
+}
+
+/** Envelope returned by all Xero report endpoints. */
+export interface XeroReportResponse {
+  readonly Reports: readonly XeroReport[];
 }

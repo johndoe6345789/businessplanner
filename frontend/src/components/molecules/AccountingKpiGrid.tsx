@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Grid, Card, CardContent, Typography,
-         Skeleton } from '@mui/material';
+         Skeleton } from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import type { AccountingKpis }
   from '@/hooks/useAccountingDashboard';
