@@ -31,7 +31,7 @@ const EMPTY: AcceleratorFormData = {
  * @returns Query data and dialog control handlers.
  */
 export function useAcceleratorTracker() {
-  const { data = [], isLoading } =
+  const { data = [], isLoading, isError } =
     useListAcceleratorsQuery();
   const [create] = useCreateAcceleratorMutation();
   const [update] = useUpdateAcceleratorMutation();
@@ -41,6 +41,8 @@ export function useAcceleratorTracker() {
     useState<Accelerator | null>(null);
   const [form, setForm] =
     useState<AcceleratorFormData>(EMPTY);
+  const [saveError, setSaveError] =
+    useState<string | null>(null);
 
   const openAdd = () => {
     setEditing(null);
@@ -59,16 +61,23 @@ export function useAcceleratorTracker() {
   };
 
   const handleSave = async () => {
-    if (editing) {
-      await update({ id: editing.id, ...form });
-    } else {
-      await create(form);
+    setSaveError(null);
+    try {
+      if (editing) {
+        await update({
+          id: editing.id, ...form,
+        }).unwrap();
+      } else {
+        await create(form).unwrap();
+      }
+      setOpen(false);
+    } catch {
+      setSaveError('Failed to save. Try again.');
     }
-    setOpen(false);
   };
 
   return {
-    data, isLoading,
+    data, isLoading, isError, saveError,
     open, setOpen,
     editing, form, setForm,
     openAdd, openEdit,

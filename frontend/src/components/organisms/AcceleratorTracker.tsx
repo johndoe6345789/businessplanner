@@ -26,7 +26,7 @@ export const AcceleratorTracker: React.FC = () => {
   const t = useTranslations('accelerators');
   const tc = useTranslations('common');
   const {
-    data, isLoading,
+    data, isLoading, isError, saveError,
     open, setOpen,
     editing, form, setForm,
     openAdd, openEdit,
@@ -43,9 +43,24 @@ export const AcceleratorTracker: React.FC = () => {
     );
   }
 
+  if (isError) {
+    return (
+      <Typography color="error"
+        data-testid="accel-error">
+        {tc('error')}
+      </Typography>
+    );
+  }
+
   return (
     <Box data-testid="accelerator-tracker"
       aria-label={t('title')}>
+      {saveError && (
+        <Typography color="error" sx={{ mb: 2 }}
+          data-testid="accel-save-error">
+          {saveError}
+        </Typography>
+      )}
       <Box sx={{ display: 'flex',
         justifyContent: 'flex-end', mb: 2 }}>
         <Button variant="contained"

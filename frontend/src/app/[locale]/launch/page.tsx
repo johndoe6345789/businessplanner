@@ -34,6 +34,7 @@ export default async function LaunchPage({
     <Box
       component="main"
       role="main"
+      data-testid="launch-page"
       aria-label={t('title')}
       sx={{ maxWidth: 720, mx: 'auto', width: '100%' }}
     >

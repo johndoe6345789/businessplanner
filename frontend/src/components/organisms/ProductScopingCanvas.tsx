@@ -82,7 +82,7 @@ export const ProductScopingCanvas: React.FC = () => {
         aria-labelledby="scoping-dialog-title"
         data-testid="scoping-feature-dialog">
         <DialogTitle id="scoping-dialog-title">
-          {editing ? t('title') : t('addFeature')}
+          {editing ? t('editFeature') : t('addFeature')}
         </DialogTitle>
         <DialogContent>
           <FeatureForm initial={editing}

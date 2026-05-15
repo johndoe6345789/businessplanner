@@ -32,6 +32,7 @@ export default async function DecisionsPage({
 
   return (
     <Box component="main" role="main"
+      data-testid="decisions-page"
       aria-label={t('title')}
       sx={{ maxWidth: 960, mx: 'auto',
         width: '100%' }}>

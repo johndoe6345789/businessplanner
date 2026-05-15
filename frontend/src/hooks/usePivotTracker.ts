@@ -27,7 +27,7 @@ const EMPTY: PivotFormData = {
  * @returns Query data and dialog control handlers.
  */
 export function usePivotTracker() {
-  const { data = [], isLoading } =
+  const { data = [], isLoading, isError } =
     useListPivotsQuery();
   const [create] = useCreatePivotMutation();
   const [update] = useUpdatePivotMutation();
@@ -37,6 +37,8 @@ export function usePivotTracker() {
     useState<Pivot | null>(null);
   const [form, setForm] =
     useState<PivotFormData>(EMPTY);
+  const [saveError, setSaveError] =
+    useState<string | null>(null);
 
   const openAdd = () => {
     setEditing(null);
@@ -52,16 +54,23 @@ export function usePivotTracker() {
   };
 
   const handleSave = async () => {
-    if (editing) {
-      await update({ id: editing.id, ...form });
-    } else {
-      await create(form);
+    setSaveError(null);
+    try {
+      if (editing) {
+        await update({
+          id: editing.id, ...form,
+        }).unwrap();
+      } else {
+        await create(form).unwrap();
+      }
+      setOpen(false);
+    } catch {
+      setSaveError('Failed to save. Try again.');
     }
-    setOpen(false);
   };
 
   return {
-    data, isLoading,
+    data, isLoading, isError, saveError,
     open, setOpen,
     editing, form, setForm,
     openAdd, openEdit,

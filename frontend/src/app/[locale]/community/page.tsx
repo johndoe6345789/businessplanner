@@ -34,6 +34,7 @@ export default async function CommunityPage({
     <Box
       component="main"
       role="main"
+      data-testid="community-page"
       aria-label={t('boards')}
       sx={{ maxWidth: 960, mx: 'auto', width: '100%' }}
     >

@@ -14,7 +14,8 @@ namespace services::wiki
 static const std::string kKbQuery = R"(
     SELECT id, title, slug, path::text AS path,
            kb_type, startup_type, stage,
-           tags::text AS tags_raw, updated_at
+           COALESCE(ARRAY_TO_JSON(tags)::text,'[]') AS tags_json,
+           updated_at
     FROM wiki_pages
     WHERE kb_type IS NOT NULL
       AND (NULLIF($1, '') IS NULL
@@ -75,12 +76,16 @@ void WikiStore::listKbPages(
                          ? json(nullptr)
                          : json(row["stage"]
                                .as<std::string>())},
+                    {"tags",
+                     json::parse(
+                         row["tags_json"]
+                             .as<std::string>())},
                     {"updatedAt",
                      row["updated_at"]
                          .as<std::string>()},
                 });
             }
-            ok({{"pages", arr}});
+            ok(arr);
         } >>
         [err](
             const drogon::orm::

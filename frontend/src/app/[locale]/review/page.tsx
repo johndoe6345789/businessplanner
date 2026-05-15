@@ -35,6 +35,7 @@ export default async function ReviewPage({
 
   return (
     <Box component="main" role="main"
+      data-testid="review-page"
       aria-label={t('title')}
       sx={{
         maxWidth: 720,

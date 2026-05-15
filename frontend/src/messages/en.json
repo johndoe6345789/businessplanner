@@ -688,6 +688,7 @@
   },
   "knowledge": {
     "title": "Knowledge Base",
+    "loading": "Loading knowledge base…",
     "filterAll": "All",
     "filterGuide": "Guides",
     "filterPlaybook": "Playbooks",
@@ -1006,6 +1007,7 @@
   "scoping": {
     "title": "Product Scoping",
     "addFeature": "Add Feature",
+    "editFeature": "Edit Feature",
     "impact": "Impact",
     "confidence": "Confidence",
     "ease": "Ease",

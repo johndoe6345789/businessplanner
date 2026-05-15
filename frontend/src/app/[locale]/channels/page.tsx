@@ -32,6 +32,7 @@ export default async function ChannelsPage({
 
   return (
     <Box component="main" role="main"
+      data-testid="channels-page"
       aria-label={t('title')}
       sx={{ maxWidth: 960, mx: 'auto',
         width: '100%' }}>

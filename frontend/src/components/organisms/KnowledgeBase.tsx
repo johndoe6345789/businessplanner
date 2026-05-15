@@ -59,7 +59,7 @@ export const KnowledgeBase: React.FC = () => {
           justifyContent: 'center',
           py: 6,
         }}>
-          <CircularProgress aria-label={t('title')} />
+          <CircularProgress aria-label={t('loading')} />
         </Box>
       )}
 

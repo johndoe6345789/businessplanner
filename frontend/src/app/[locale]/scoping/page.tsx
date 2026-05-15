@@ -30,6 +30,7 @@ export default async function ScopingPage({
 
   return (
     <Box component="main" role="main"
+      data-testid="scoping-page"
       aria-label={t('title')}
       sx={{ maxWidth: 1280, mx: 'auto',
         width: '100%' }}>

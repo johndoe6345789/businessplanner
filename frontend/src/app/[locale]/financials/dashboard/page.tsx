@@ -4,6 +4,7 @@ import {
   getTranslations,
 } from 'next-intl/server';
 import Box from '@shared/m3/Box';
+import Typography from '@shared/m3/Typography';
 import { FinancialDashboard }
   from '@/components/organisms/FinancialDashboard';
 
@@ -30,8 +31,13 @@ export default async function FinancialsDashboardPage({
 
   return (
     <Box component="main" role="main"
+      data-testid="financials-dashboard-page"
       aria-label={t('nav.dashboard')}
       sx={{ maxWidth: 1080, mx: 'auto', width: '100%' }}>
+      <Typography variant="h4" component="h1"
+        gutterBottom sx={{ fontWeight: 800 }}>
+        {t('nav.dashboard')}
+      </Typography>
       <FinancialDashboard />
     </Box>
   );

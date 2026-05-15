@@ -30,7 +30,7 @@ export const translationApi =
 
       /** Fetch translations for a locale. */
       getTranslations: build.query<
-        Record<string, unknown>, string
+        Record<string, string>, string
       >({
         query: (locale) =>
           `/translations/${locale}`,

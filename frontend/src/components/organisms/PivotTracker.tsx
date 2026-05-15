@@ -26,7 +26,7 @@ export const PivotTracker: React.FC = () => {
   const t = useTranslations('pivot');
   const tc = useTranslations('common');
   const {
-    data, isLoading,
+    data, isLoading, isError, saveError,
     open, setOpen,
     editing, form, setForm,
     openAdd, openEdit,
@@ -43,9 +43,24 @@ export const PivotTracker: React.FC = () => {
     );
   }
 
+  if (isError) {
+    return (
+      <Typography color="error"
+        data-testid="pivot-error">
+        {tc('error')}
+      </Typography>
+    );
+  }
+
   return (
     <Box data-testid="pivot-tracker"
       aria-label={t('title')}>
+      {saveError && (
+        <Typography color="error" sx={{ mb: 2 }}
+          data-testid="pivot-save-error">
+          {saveError}
+        </Typography>
+      )}
       <Box sx={{ display: 'flex',
         justifyContent: 'flex-end', mb: 2 }}>
         <Button variant="contained"

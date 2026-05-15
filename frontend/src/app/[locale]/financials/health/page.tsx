@@ -2,9 +2,11 @@
 
 /**
  * Financial health score page.
+ * Derives the composite health score from persisted
+ * burn, unit-econ, and pricing data via RTK Query.
  * @module app/[locale]/financials/health/page
  */
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
 import { useTranslations } from 'next-intl';
@@ -16,10 +18,14 @@ import { useUnitEconCompute }
   from '@/hooks/useUnitEconCompute';
 import { useHealthScore }
   from '@/hooks/useHealthScore';
+import { useGetBurnQuery }
+  from '@/store/api/financialsBurnApi';
+import { useGetUnitEconQuery }
+  from '@/store/api/financialsUnitEconApi';
+import { useGetPricingQuery }
+  from '@/store/api/financialsPricingApi';
 import type {
-  BurnInputs,
-  UnitEconInputs,
-  PricingInputs,
+  BurnInputs, UnitEconInputs, PricingInputs,
 } from '@/types/financials';
 
 const DEFAULT_BURN: BurnInputs = {
@@ -42,10 +48,12 @@ const DEFAULT_PRICING: PricingInputs = {
  */
 export default function HealthPage() {
   const t = useTranslations('financials');
-  const [burnInputs] = useState<BurnInputs>(DEFAULT_BURN);
-  const [ueInputs] = useState<UnitEconInputs>(DEFAULT_UE);
-  const [pricingInputs] =
-    useState<PricingInputs>(DEFAULT_PRICING);
+  const { data: burnInputs = DEFAULT_BURN } =
+    useGetBurnQuery();
+  const { data: ueInputs = DEFAULT_UE } =
+    useGetUnitEconQuery();
+  const { data: pricingInputs = DEFAULT_PRICING } =
+    useGetPricingQuery();
 
   const burnResult = useBurnCompute(burnInputs);
   const unitEconResult = useUnitEconCompute(ueInputs);
@@ -55,6 +63,7 @@ export default function HealthPage() {
 
   return (
     <Box component="main" role="main"
+      data-testid="financials-health-page"
       aria-label={t('health.title')}
       sx={{ maxWidth: 600, mx: 'auto', width: '100%' }}>
       <Typography variant="h4" component="h1"

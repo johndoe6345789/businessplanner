@@ -34,6 +34,7 @@ export default async function FeedPage({
     <Box
       component="main"
       role="main"
+      data-testid="feed-page"
       aria-label={t('title')}
       sx={{ maxWidth: 700, mx: 'auto', width: '100%' }}
     >
