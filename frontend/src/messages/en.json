@@ -105,7 +105,8 @@
     "milestones": "Milestones",
     "companies": "Company Registry",
     "startupCompare": "Startup Comparison",
-    "hoshin": "Strategy Matrix"
+    "hoshin": "Strategy Matrix",
+    "accounting": "Accounting"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -1261,6 +1262,40 @@
       "strong": "Strong",
       "medium": "Medium",
       "weak": "Weak"
+    }
+  },
+  "accounting": {
+    "pageTitle": "Accounting",
+    "pageDescription": "RSM-style financial dashboard — Xero invoices, P&L, and Zelt payroll in one place.",
+    "integrations": "Integrations",
+    "overview": "Financial Overview",
+    "connectPrompt": "Connect Xero or Zelt above to see live financial data.",
+    "xero": {
+      "title": "Xero",
+      "cardLabel": "Xero connection card",
+      "description": "Invoices, bank transactions, P&L and cash flow.",
+      "connected": "Connected",
+      "notConnected": "Not connected",
+      "connect": "Connect Xero",
+      "disconnect": "Disconnect"
+    },
+    "zelt": {
+      "title": "Zelt",
+      "cardLabel": "Zelt connection card",
+      "description": "Payroll runs, employees, leave, and expenses.",
+      "connected": "Connected",
+      "notConnected": "Not connected",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "apiKeyLabel": "Zelt API Key"
+    },
+    "kpi": {
+      "gridLabel": "Key financial metrics",
+      "revenue": "Total Revenue",
+      "payroll": "Monthly Payroll",
+      "cash": "Cash on Hand",
+      "headcount": "Headcount",
+      "outstanding": "Outstanding Invoices"
     }
   }
 }

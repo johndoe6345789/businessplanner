@@ -42,5 +42,7 @@
   "organisations": ["users"],
   "accelerators": ["users", "organisations"],
   "market-research": ["users", "organisations"],
-  "hoshin": ["users", "organisations"]
+  "hoshin": ["users", "organisations"],
+  "xero": ["users"],
+  "zelt": ["users"]
 }

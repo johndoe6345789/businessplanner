@@ -56,5 +56,9 @@ list(APPEND NEXTRA_DOMAIN_DIRS
     webhooks/controllers
     wiki/backend
     wiki/controllers
+    xero/backend
+    xero/controllers
     xp/backend
+    zelt/backend
+    zelt/controllers
 )

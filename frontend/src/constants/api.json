@@ -128,5 +128,24 @@
     "objectiveById": "/api/hoshin/objectives/:id",
     "links": "/api/hoshin/links",
     "linkById": "/api/hoshin/links/:id"
+  },
+  "xero": {
+    "status": "/api/xero/status",
+    "connect": "/api/xero/connect",
+    "disconnect": "/api/xero/disconnect",
+    "invoices": "/api/xero/invoices",
+    "transactions": "/api/xero/transactions",
+    "profitLoss": "/api/xero/reports/profit-loss",
+    "balanceSheet": "/api/xero/reports/balance-sheet",
+    "cashFlow": "/api/xero/reports/cash-flow"
+  },
+  "zelt": {
+    "status": "/api/zelt/status",
+    "connect": "/api/zelt/connect",
+    "disconnect": "/api/zelt/disconnect",
+    "payroll": "/api/zelt/payroll",
+    "employees": "/api/zelt/employees",
+    "leave": "/api/zelt/leave",
+    "expenses": "/api/zelt/expenses"
   }
 }
