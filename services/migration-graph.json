@@ -42,5 +42,8 @@
   "organisations": ["users"],
   "accelerators": ["users", "organisations"],
   "market-research": ["users", "organisations"],
-  "hoshin": ["users", "organisations"]
+  "hoshin": ["users", "organisations"],
+  "kpi": ["users"],
+  "pdca": ["users"],
+  "okr": ["users"]
 }

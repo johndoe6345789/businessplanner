@@ -10,9 +10,15 @@ list(APPEND NEXTRA_DOMAIN_DIRS
     notifications/controllers
     hoshin/backend
     hoshin/controllers
+    kpi/backend
+    kpi/controllers
+    okr/backend
+    okr/controllers
     organisations/backend
     organisations/controllers
     orm-models/backend
+    pdca/backend
+    pdca/controllers
     pdf/backend
     pdf/backend/commands
     pdf/controllers
