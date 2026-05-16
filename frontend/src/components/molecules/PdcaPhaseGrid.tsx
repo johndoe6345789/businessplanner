@@ -58,7 +58,7 @@ const PdcaPhaseGrid: React.FC<PdcaPhaseGridProps> = (
             />
             {data.notes && (
               <Typography variant="caption"
-                display="block" sx={{ mt: 0.5 }}
+                sx={{ display: 'block', mt: 0.5 }}
                 color="text.secondary">
                 {data.notes.slice(0, 40)}
                 {data.notes.length > 40 ? '…' : ''}

@@ -41,7 +41,7 @@ const OkrKeyResultRow: React.FC<
         <LinearProgress variant="determinate"
           value={kr.progress}
           color={STATUS_COLOR[kr.status]}
-          sx={{ height: 6, borderRadius: 3, mt: 0.5 }}
+          style={{ height: 6, borderRadius: 3, marginTop: 4 }}
           aria-label={
             `${kr.title}: ${kr.progress}%`} />
       </Box>

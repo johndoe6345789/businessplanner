@@ -66,7 +66,7 @@ export const CompetitorForm: React.FC<
         }}
         data-testid="cf-website" fullWidth />
       <Select value={stage}
-        onChange={(e) => setStage(e.target.value)}
+        onChange={(e) => setStage(e.target.value as string)}
         aria-label={t('competitorStage')}
         data-testid="cf-stage" fullWidth>
         {COMPETITOR_STAGES.map((s) => (

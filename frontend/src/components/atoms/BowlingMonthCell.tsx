@@ -46,7 +46,7 @@ const BowlingMonthCell: React.FC<
         role="button"
         tabIndex={0}
         onClick={onClick}
-        onKeyDown={(e) => {
+        onKeyDown={(e: React.KeyboardEvent) => {
           if (e.key === 'Enter' || e.key === ' ')
             onClick?.();
         }}

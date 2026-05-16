@@ -10,7 +10,6 @@ import CardContent from '@shared/m3/CardContent';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
 import Chip from '@shared/m3/Chip';
-import Button from '@shared/m3/Button';
 import { useTranslations } from 'next-intl';
 
 /** A resource entry from resource-library.json. */
@@ -80,18 +79,21 @@ export const ResourceCard: React.FC<
         >
           {resource.desc}
         </Typography>
-        <Button
-          component="a"
+        <a
           href={resource.downloadUrl}
           download
-          variant="outlined"
-          size="small"
           aria-label={`${t('download')} ${resource.title}`}
           data-testid={`resource-download-${resource.id}`}
-          fullWidth
+          style={{
+            display: 'block', width: '100%',
+            textAlign: 'center', padding: '6px 16px',
+            border: '1px solid currentColor',
+            borderRadius: 4, textDecoration: 'none',
+            fontSize: '0.875rem', boxSizing: 'border-box',
+          }}
         >
           {t('download')}
-        </Button>
+        </a>
       </CardContent>
     </Card>
   );

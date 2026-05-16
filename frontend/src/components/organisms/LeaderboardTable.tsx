@@ -81,8 +81,9 @@ export const LeaderboardTable: React.FC<
             <TableBody>
               {rows.length === 0 && (
                 <TableRow><TableCell colSpan={6}
-                  sx={{ textAlign: 'center',
-                    color: 'text.secondary', py: 4 }}>
+                  style={{ textAlign: 'center',
+                    color: '#9e9e9e',
+                    paddingTop: 32, paddingBottom: 32 }}>
                   {t('noEntriesYet')}
                 </TableCell></TableRow>
               )}

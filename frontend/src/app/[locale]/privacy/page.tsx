@@ -65,7 +65,7 @@ export default async function PrivacyPage({
         {t('title')}
       </Typography>
       <Typography variant="body2"
-        color="text.secondary" mb={4}>
+        color="text.secondary" sx={{ mb: 4 }}>
         {legal.company} — effective{' '}
         {legal.effectiveDate}
       </Typography>

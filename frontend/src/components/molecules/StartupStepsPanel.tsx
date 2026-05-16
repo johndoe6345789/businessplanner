@@ -62,7 +62,7 @@ export const StartupStepsPanel: React.FC<
         <List dense>
           {steps.map((step) => (
             <React.Fragment key={step.id}>
-              <ListItem alignItems="flex-start">
+              <ListItem>
                 <ListItemText
                   primary={
                     `${step.step_number}. ${step.title}`}
@@ -71,7 +71,7 @@ export const StartupStepsPanel: React.FC<
                     `step-item-${step.id}`}
                 />
               </ListItem>
-              <Divider component="li" />
+              <Divider />
             </React.Fragment>
           ))}
         </List>

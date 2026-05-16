@@ -46,7 +46,7 @@ const NotificationItem: React.FC<
 
   return (
     <ListItem
-      component="li"
+      clickable
       onClick={handleClick}
       data-testid={`notification-item-${n.id}`}
       aria-label={n.title}
@@ -58,7 +58,7 @@ const NotificationItem: React.FC<
         gap: 1,
       }}
     >
-      <ListItemIcon sx={{ minWidth: 32, mt: 0.5 }}>
+      <ListItemIcon style={{ minWidth: 32, marginTop: 4 }}>
         <NotificationTypeIcon type={n.type} />
       </ListItemIcon>
       <ListItemText

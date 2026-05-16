@@ -68,7 +68,7 @@ export default function AccountingKpiGrid({ kpis }: Props) {
       data-testid="accounting-kpi-grid"
       aria-label={t('kpi.gridLabel')}>
       {tiles.map(({ key, label, v, currency }) => (
-        <Grid item xs={12} sm={6} md={4} lg={2.4} key={key}>
+        <Grid item xs={12} sm={6} md={4} lg={2} key={key}>
           <KpiTile label={label} value={v}
             isCurrency={currency}
             testId={`kpi-${key}`} />

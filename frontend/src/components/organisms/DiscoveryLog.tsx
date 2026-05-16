@@ -120,7 +120,7 @@ export const DiscoveryLog: React.FC = () => {
         maxWidth="sm" fullWidth>
         <DialogTitle>{t('logInterview')}</DialogTitle>
         <DialogContent
-          sx={{ overscrollBehavior: 'contain' }}>
+          style={{ overscrollBehavior: 'contain' }}>
           <DiscoveryEntryForm
             onDone={() => setDialogOpen(false)} />
         </DialogContent>

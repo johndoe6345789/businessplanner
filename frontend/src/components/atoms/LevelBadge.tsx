@@ -44,7 +44,7 @@ export const LevelBadge: React.FC<LevelBadgeProps> = ({
   size = 'md',
 }) => {
   const color = tierColor(level);
-  const chipSize = size === 'sm' ? 'sm' : undefined;
+  const chipSize = size === 'sm' ? 'small' : undefined;
 
   return (
     <Tooltip title={title} placement="bottom">

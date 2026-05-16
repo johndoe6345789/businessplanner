@@ -122,7 +122,7 @@ export const PersonaBoard: React.FC = () => {
           {editing ? editing.name : t('addPersona')}
         </DialogTitle>
         <DialogContent
-          sx={{ overscrollBehavior: 'contain' }}>
+          style={{ overscrollBehavior: 'contain' }}>
           <PersonaForm initial={editing}
             onDone={() => setDialogOpen(false)} />
         </DialogContent>

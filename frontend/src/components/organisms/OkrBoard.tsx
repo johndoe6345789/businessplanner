@@ -5,7 +5,6 @@ import {
   Box, Typography, Button, Grid, Select,
   MenuItem, FormControl, InputLabel, TextField,
 } from '@shared/m3';
-import type { SelectChangeEvent } from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import { useOkr } from '@/hooks/useOkr';
 import OkrObjectiveCard
@@ -33,7 +32,7 @@ const OkrBoard: React.FC = () => {
         <FormControl size="small" sx={{ minWidth:90 }}>
           <InputLabel>Quarter</InputLabel>
           <Select value={String(quarter)} label="Quarter"
-            onChange={(e: SelectChangeEvent<string>) =>
+            onChange={(e) =>
               setQuarter(Number(e.target.value))}>
             {QUARTERS.map((q) => (
               <MenuItem key={q} value={String(q)}>Q{q}</MenuItem>

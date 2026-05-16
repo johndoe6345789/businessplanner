@@ -64,7 +64,7 @@ export const VestingControls: React.FC<
           onChange={(_, v) => onCliff(v as number)}
           aria-label={t('cliffShares')}
           data-testid="vesting-cliff-slider"
-          size="small" sx={{ display: 'block' }} />
+          size="small"  />
       </Box>
       <Box sx={{ maxWidth: 320 }}>
         <Typography variant="caption"
@@ -77,7 +77,7 @@ export const VestingControls: React.FC<
             onVesting(v as number)}
           aria-label={t('totalVesting')}
           data-testid="vesting-months-slider"
-          size="small" sx={{ display: 'block' }} />
+          size="small"  />
       </Box>
       <FormControlLabel
         label={t('doubleTrigger')}
@@ -85,9 +85,8 @@ export const VestingControls: React.FC<
           <Switch checked={accelerationOnChange}
             onChange={(e) =>
               onAcceleration(e.target.checked)}
-            inputProps={{
-              'aria-label': t('doubleTrigger'),
-              'data-testid': 'vesting-accel' }} />
+            aria-label={t('doubleTrigger')}
+            testId="vesting-accel" />
         }
       />
     </Box>

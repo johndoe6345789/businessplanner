@@ -48,7 +48,8 @@ export default function HoshinObjectiveRow({ row }: Props) {
       )}
 
       {obj.target_date && (
-        <Typography variant="caption" color="text.secondary" display="block">
+        <Typography variant="caption" color="text.secondary"
+          sx={{ display: 'block' }}>
           {t('target')}: {obj.target_date}
         </Typography>
       )}

@@ -49,7 +49,7 @@ export const KbFilterChips: React.FC<
     <Stack
       direction="row"
       spacing={1}
-      flexWrap="wrap"
+      sx={{ flexWrap: 'wrap' }}
       data-testid="kb-filter-chips"
       aria-label={t('filterAll')}
     >

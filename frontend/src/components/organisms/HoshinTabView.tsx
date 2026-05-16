@@ -21,9 +21,9 @@ const HoshinTabView: React.FC = () => {
   return (
     <Box data-testid="hoshin-tab-view">
       <Tabs value={tab}
-        onChange={(_, v: number) => setTab(v)}
+        onChange={(_, v) => setTab(v as number)}
         aria-label="Hoshin Kanri tabs"
-        sx={{ mb: 3 }}>
+        style={{ marginBottom: 24 }}>
         <Tab label={t('xMatrix')}
           aria-label={t('xMatrix')}
           data-testid="hoshin-tab-xmatrix" />

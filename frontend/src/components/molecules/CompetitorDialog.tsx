@@ -49,7 +49,7 @@ export const CompetitorDialog: React.FC<
           : t('addCompetitor')}
       </DialogTitle>
       <DialogContent
-        sx={{ overscrollBehavior: 'contain' }}>
+        style={{ overscrollBehavior: 'contain' }}>
         <CompetitorForm
           initial={competitor}
           onDone={onClose}

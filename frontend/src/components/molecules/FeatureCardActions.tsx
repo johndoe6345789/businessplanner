@@ -75,7 +75,7 @@ export const FeatureCardActions: React.FC<
           data-testid={
             `feature-card-${feature.id}-edit`
           }>
-          <EditIcon fontSize="small" />
+          <EditIcon size="1rem" />
         </IconButton>
         <IconButton size="small"
           onClick={() => onDelete(feature.id)}
@@ -83,7 +83,7 @@ export const FeatureCardActions: React.FC<
           data-testid={
             `feature-card-${feature.id}-delete`
           }>
-          <DeleteIcon fontSize="small" />
+          <DeleteIcon size="1rem" />
         </IconButton>
       </Box>
     </Box>

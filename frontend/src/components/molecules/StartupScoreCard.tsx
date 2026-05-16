@@ -53,7 +53,7 @@ export const StartupScoreCard: React.FC<
         alignItems: 'center', gap: 1,
       }}>
         <Typography variant="subtitle1"
-          fontWeight={700} flex={1}>
+          fontWeight={700} sx={{ flex: 1 }}>
           {org.name}
         </Typography>
         <RiskLevelChip level={level} />

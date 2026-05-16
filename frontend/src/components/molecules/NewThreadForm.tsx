@@ -62,10 +62,8 @@ const NewThreadForm: React.FC<NewThreadFormProps> = ({
         onChange={(e) => setTitle(e.target.value)}
         required
         fullWidth
-        inputProps={{
-          'data-testid': 'thread-title-input',
-          'aria-label': t('threadTitle'),
-        }}
+        testId="thread-title-input"
+        inputProps={{ 'aria-label': t('threadTitle') }}
       />
       <TextField
         label={t('threadBody')}
@@ -75,10 +73,8 @@ const NewThreadForm: React.FC<NewThreadFormProps> = ({
         fullWidth
         multiline
         minRows={3}
-        inputProps={{
-          'data-testid': 'thread-content-input',
-          'aria-label': t('threadBody'),
-        }}
+        testId="thread-content-input"
+        inputProps={{ 'aria-label': t('threadBody') }}
       />
       <Button
         type="submit"

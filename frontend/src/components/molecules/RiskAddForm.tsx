@@ -30,11 +30,12 @@ const RiskAddForm: React.FC = () => {
   const f = useRiskForm();
 
   return (
-    <Grid container spacing={2} component="form"
+    <form
       onSubmit={f.handleSubmit}
       data-testid="risk-add-form"
       aria-label={t('addRisk')}
     >
+    <Grid container spacing={2}>
       <Grid item xs={12} sm={4}>
         <TextField label={t('fields.title')}
           value={f.title} required fullWidth
@@ -86,6 +87,7 @@ const RiskAddForm: React.FC = () => {
         >{t('addRisk')}</Button>
       </Grid>
     </Grid>
+    </form>
   );
 };
 

@@ -43,8 +43,7 @@ const AdminAnalyticsDashboard: React.FC = () => {
         <Typography
           variant="caption"
           color="text.secondary"
-          display="block"
-          sx={{ mb: 2 }}
+          sx={{ display: 'block', mb: 2 }}
         >
           {t('generatedAt')}{' '}
           {new Date(

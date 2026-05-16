@@ -57,7 +57,7 @@ export const DecisionDialog: React.FC<
         {isEdit ? tc('edit') : t('add')}
       </DialogTitle>
       <DialogContent
-        sx={{ overscrollBehavior: 'contain' }}>
+        style={{ overscrollBehavior: 'contain' }}>
         <DecisionForm
           value={form} onChange={onFormChange} />
       </DialogContent>

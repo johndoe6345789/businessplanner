@@ -47,8 +47,8 @@ export const KbArticleCard: React.FC<
         <Stack
           direction="row"
           spacing={0.5}
-          flexWrap="wrap"
-          sx={{ mb: article.tags.length ? 1 : 0 }}
+          sx={{ mb: article.tags.length ? 1 : 0,
+            flexWrap: 'wrap' }}
         >
           <Chip
             label={article.kbType}

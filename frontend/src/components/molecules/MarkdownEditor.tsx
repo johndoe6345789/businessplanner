@@ -54,7 +54,10 @@ export function MarkdownEditor({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             onKeyDown={(e) =>
-              handleMdKeyDown(e, ref, onChange)}
+              handleMdKeyDown(
+                e as unknown as React.KeyboardEvent<HTMLTextAreaElement>,
+                ref, onChange,
+              )}
             placeholder={label}
             disabled={disabled}
             aria-label={label}

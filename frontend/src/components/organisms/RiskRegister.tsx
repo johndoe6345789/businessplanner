@@ -38,7 +38,7 @@ const RiskRegister: React.FC = () => {
   return (
     <Box data-testid="risk-register">
       <Typography variant="h6" fontWeight={700}
-        mb={2}>{t('registerTitle')}
+        sx={{ mb: 2 }}>{t('registerTitle')}
       </Typography>
 
       <RiskAddForm />
@@ -50,7 +50,7 @@ const RiskRegister: React.FC = () => {
           {[0, 1, 2].map((i) => (
             <Skeleton key={i} height={52}
               variant="rectangular"
-              sx={{ mb: 1, borderRadius: 1 }} />
+              style={{ marginBottom: 8, borderRadius: 8 }} />
           ))}
         </Box>
       ) : !data?.length ? (

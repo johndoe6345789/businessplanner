@@ -49,9 +49,7 @@ export function MarkdownToolbarButtons({
           <span key={a.label} className={s.codeGroup}>
             {btn}
             <Button
-              ref={langBtnRef as React.Ref<
-                HTMLInputElement | HTMLDivElement
-              >}
+              ref={langBtnRef}
               type="button"
               size="small"
               variant="text"

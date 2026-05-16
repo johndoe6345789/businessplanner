@@ -29,8 +29,8 @@ export const LeaderboardRow: React.FC<
   <TableRow
     data-testid={`leaderboard-row-${entry.id}`}
     aria-current={isCurrentUser ? 'true' : undefined}
-    sx={isCurrentUser ? {
-      backgroundColor: 'action.selected',
+    style={isCurrentUser ? {
+      backgroundColor: 'rgba(0,0,0,0.08)',
       fontWeight: 700,
     } : undefined}
   >

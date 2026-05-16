@@ -46,7 +46,7 @@ export default async function NotificationsPage({
       <Typography
         variant="h4"
         component="h1"
-        mb={3}
+        sx={{ mb: 3 }}
         data-testid="notifications-page-title"
       >
         {t('title')}

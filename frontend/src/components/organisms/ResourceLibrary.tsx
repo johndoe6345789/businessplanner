@@ -81,7 +81,7 @@ export const ResourceLibrary: React.FC = () => {
         {filtered.map((resource) => (
           <Grid
             key={resource.id}
-            size={{ xs: 12, sm: 6, md: 4 }}
+            item xs={12} sm={6} md={4}
           >
             <ResourceCard resource={resource} />
           </Grid>

@@ -48,19 +48,20 @@ const NotificationPanel: React.FC<
       aria-label={t('panelLabel')}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      slotProps={{ paper: { sx: { width: 340, maxHeight: 480 } } }}
+      style={{ width: 340, maxHeight: 480, overflow: 'auto' }}
     >
       <NotificationPanelHeader />
       <Divider />
       {isLoading ? (
         <Box px={2} py={1}>
           {[...Array(3)].map((_, i) => (
-            <Skeleton key={i} height={52} sx={{ mb: 0.5 }} />
+            <Skeleton key={i} height={52}
+              style={{ marginBottom: 4 }} />
           ))}
         </Box>
       ) : items.length === 0 ? (
         <Typography variant="body2"
-          color="text.secondary" px={2} py={2}
+          color="text.secondary" sx={{ px: 2, py: 2 }}
         >
           {t('noNotifications')}
         </Typography>

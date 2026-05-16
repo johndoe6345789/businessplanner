@@ -54,7 +54,8 @@ export const GamificationSummary: React.FC<
         <Skeleton variant="text"
           width="100%" height={20} />
         <Skeleton variant="rectangular"
-          width="100%" height={8} sx={{ my: 0.5 }} />
+          width="100%" height={8}
+          style={{ margin: '4px 0' }} />
         <Skeleton variant="text" width={80} />
       </Box>
     );

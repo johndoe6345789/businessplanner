@@ -45,7 +45,7 @@ export const LaunchPadKpiGrid: React.FC<
       value: loading ? '' : fmtPct(d!.streakRetentionPct),
       icon: 'local_fire_department',
       intent: (!loading && d!.streakRetentionPct >= 50
-        ? 'good' : 'watch') as const,
+        ? 'good' : 'watch') as 'good' | 'watch',
     },
     {
       id: 'totalFounders',

@@ -79,7 +79,7 @@ export const AiDraftSelector: React.FC<
             <Typography
               variant="body2"
               fontWeight={600}
-              textAlign="center"
+              align="center"
             >
               {t(labelKey as never)}
             </Typography>

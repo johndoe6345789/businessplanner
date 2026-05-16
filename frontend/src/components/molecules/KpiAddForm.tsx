@@ -5,7 +5,6 @@ import {
   Box, TextField, Select, MenuItem,
   FormControl, InputLabel, Button,
 } from '@shared/m3';
-import type { SelectChangeEvent } from '@shared/m3';
 import { useTranslations } from 'next-intl';
 import type { KpiCategory, CreateKpiInput } from '@/types/kpi';
 import { useKpiAddForm } from '@/hooks/useKpiAddForm';
@@ -49,7 +48,7 @@ const KpiAddForm: React.FC<KpiAddFormProps> = (
       <FormControl size="small" sx={{ minWidth: 130 }}>
         <InputLabel>Category</InputLabel>
         <Select value={f.category} label="Category"
-          onChange={(e: SelectChangeEvent<string>) =>
+          onChange={(e) =>
             f.setCategory(e.target.value as KpiCategory)}>
           {CATS.map((c) => (
             <MenuItem key={c} value={c}>

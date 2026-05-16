@@ -64,7 +64,6 @@ export const DiscoveryEntryForm: React.FC<
         type="date" value={date}
         onChange={(e) => setDate(e.target.value)}
         inputProps={{ 'aria-label': t('interviewDate') }}
-        InputLabelProps={{ shrink: true }}
         data-testid="def-date" fullWidth />
       <TextField label={t('keyFindings')}
         multiline rows={3} value={keyFindings}

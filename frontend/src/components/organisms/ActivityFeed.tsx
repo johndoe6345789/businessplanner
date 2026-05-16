@@ -38,7 +38,7 @@ const ActivityFeed: React.FC = () => {
             key={i}
             variant="rectangular"
             height={72}
-            sx={{ borderRadius: 2, mb: 1 }}
+            style={{ borderRadius: 16, marginBottom: 8 }}
           />
         ))}
       </Box>

@@ -54,10 +54,8 @@ const ReplyForm: React.FC<ReplyFormProps> = ({
         minRows={3}
         fullWidth
         required
-        inputProps={{
-          'data-testid': 'reply-input',
-          'aria-label': t('reply'),
-        }}
+        testId="reply-input"
+        inputProps={{ 'aria-label': t('reply') }}
       />
       <Button
         type="submit"

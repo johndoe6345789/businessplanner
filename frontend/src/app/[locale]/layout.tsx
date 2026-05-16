@@ -19,16 +19,12 @@ import { PwaRegister } from
   '@/components/atoms/PwaRegister';
 import { DashboardShortcuts } from
   '@/components/organisms/DashboardShortcuts';
-import nextDynamic from 'next/dynamic';
 import { PwaHead } from './pwa-head';
-
-const WelcomeBanner = nextDynamic(
-  () => import('@/components/molecules/WelcomeBanner'),
-  { ssr: false },
-);
 import { loadMessages } from './loadMessages';
 import ClientCookieBanner from
   '@/components/atoms/ClientCookieBanner';
+import WelcomeBanner from
+  '@/components/atoms/WelcomeBannerLazy';
 
 /** All locale pages are dynamic. */
 export const dynamic = 'force-dynamic';

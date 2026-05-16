@@ -60,7 +60,7 @@ export default async function RiskAssessmentPage({
         {t('pageTitle')}
       </Typography>
       <Typography variant="body1"
-        color="text.secondary" mb={4}>
+        color="text.secondary" sx={{ mb: 4 }}>
         {t('pageDescription')}
       </Typography>
       <Grid container spacing={4}>

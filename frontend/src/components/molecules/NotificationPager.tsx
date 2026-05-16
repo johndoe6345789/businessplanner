@@ -42,7 +42,7 @@ const NotificationPager: React.FC<
       <Pagination
         count={pageCount}
         page={page}
-        onChange={(_, p) => onPageChange(p)}
+        onChange={(p) => onPageChange(p)}
         aria-label={t('pagination')}
       />
     </Box>

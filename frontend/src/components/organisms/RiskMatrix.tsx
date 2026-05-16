@@ -41,11 +41,11 @@ const RiskMatrix: React.FC = () => {
   return (
     <Box data-testid="risk-matrix">
       <Typography variant="h6" fontWeight={700}
-        mb={1}>{t('matrixTitle')}
+        sx={{ mb: 1 }}>{t('matrixTitle')}
       </Typography>
       <Typography variant="caption"
-        color="text.secondary" display="block"
-        mb={2}>{t('matrixHint')}
+        color="text.secondary"
+        sx={{ display: 'block', mb: 2 }}>{t('matrixHint')}
       </Typography>
 
       <Box display="flex" alignItems="flex-end"
@@ -86,7 +86,7 @@ const RiskMatrix: React.FC = () => {
             ))}
           </Box>
           <Typography variant="caption"
-            display="block" ml="18px" mt={0.5}>
+            sx={{ display: 'block', ml: '18px', mt: 0.5 }}>
             {t('axisX')}
           </Typography>
         </Box>

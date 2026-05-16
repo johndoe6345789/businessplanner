@@ -30,7 +30,7 @@ export interface ApiKeyRowProps {
   labels: {
     apiKey: string; model: string;
     save: string; edit: string;
-    remove: string;
+    remove: string; prefixWarning: string;
   };
 }
 
@@ -82,6 +82,7 @@ export const ApiKeyRow: React.FC<
         apiKey: labels.apiKey,
         model: labels.model,
         save: labels.save,
+        prefixWarning: labels.prefixWarning,
       }}
     />
   );

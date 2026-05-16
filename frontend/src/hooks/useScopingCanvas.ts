@@ -62,7 +62,7 @@ export function useScopingCanvas():
   ) => {
     const f = data.find((x) => x.id === id);
     if (!f) return;
-    void update({ id, ...f, status });
+    void update({ ...f, status });
   };
 
   const handleSubmit = (d: ScopedFeatureFormData) => {

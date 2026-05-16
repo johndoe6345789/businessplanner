@@ -68,14 +68,14 @@ const NotificationInbox: React.FC = () => {
         <Box>
           {[...Array(5)].map((_, i) => (
             <Skeleton key={i} height={60}
-              sx={{ mb: 1 }}
+              style={{ marginBottom: 8 }}
             />
           ))}
         </Box>
       ) : items.length === 0 ? (
         <Typography variant="body1"
-          color="text.secondary" py={4}
-          textAlign="center"
+          color="text.secondary" align="center"
+          sx={{ py: 4 }}
           data-testid="no-notifications"
         >
           {t('noNotifications')}

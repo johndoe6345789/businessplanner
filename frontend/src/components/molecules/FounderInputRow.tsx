@@ -78,9 +78,8 @@ export const FounderInputRow: React.FC<
             onChange={(e) => onChange({
               ...founder,
               ideaOriginator: e.target.checked })}
-            inputProps={{
-              'aria-label': t('ideaOriginator'),
-              'data-testid': `${tid}-idea` }}
+            aria-label={t('ideaOriginator')}
+            testId={`${tid}-idea`}
           />
         }
       />

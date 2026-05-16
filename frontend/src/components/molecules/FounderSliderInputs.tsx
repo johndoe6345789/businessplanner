@@ -59,7 +59,6 @@ export const FounderSliderInputs: React.FC<
           aria-label={t('timeCommitment')}
           data-testid={`${tid}-time`}
           size="small"
-          sx={{ display: 'block' }}
         />
       </Box>
       <Box sx={{ minWidth: 130 }}>

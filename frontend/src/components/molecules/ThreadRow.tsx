@@ -37,7 +37,7 @@ const ThreadRow: React.FC<ThreadRowProps> = ({
       onClick={() => onClick(thread.id)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) =>
+      onKeyDown={(e: React.KeyboardEvent) =>
         e.key === 'Enter' && onClick(thread.id)
       }
       sx={{

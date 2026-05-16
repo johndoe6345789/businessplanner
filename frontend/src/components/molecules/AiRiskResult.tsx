@@ -57,8 +57,7 @@ export const AiRiskResult: React.FC<AiRiskResultProps> = (
       <Typography
         variant="caption"
         color="text.secondary"
-        display="block"
-        sx={{ mb: 1 }}
+        sx={{ display: 'block', mb: 1 }}
       >
         {t('generatedAt')}{' '}
         {new Date(generatedAt).toLocaleString()}
