@@ -71,7 +71,7 @@ void MigrationRunnerBootstrap::run(
         >> [bootstrapSql, then, onError](
                const Result& r) {
             if (!r.empty()) {
-                spdlog::info(
+                spdlog::debug(
                     "Bootstrap already applied");
                 then();
                 return;

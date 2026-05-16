@@ -33,7 +33,7 @@ inline auto loadGamificationConfig() -> json
         if (ifs.is_open()) {
             return json::parse(ifs);
         }
-        spdlog::warn(
+        spdlog::debug(
             "gamification.json not found;"
             " using defaults");
     } catch (const std::exception& e) {

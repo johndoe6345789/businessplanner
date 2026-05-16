@@ -24,7 +24,7 @@ auto MigrationFileUtils::discoverFiles(const std::string& dir)
 {
     std::vector<std::string> files;
     if (!fs::exists(dir) || !fs::is_directory(dir)) {
-        spdlog::warn("Migrations directory not found: {}", dir);
+        spdlog::debug("Migrations directory not found: {}", dir);
         return files;
     }
 
