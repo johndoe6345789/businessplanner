@@ -5,8 +5,6 @@ import {
   Card, CardContent, CardActions,
   Typography, Chip, Button, IconButton, Collapse, Box,
 } from '@shared/m3';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 import { useTranslations } from 'next-intl';
 import type {
   OkrObjective, AddKeyResultInput,
@@ -59,7 +57,8 @@ const OkrObjectiveCard: React.FC<
         </Collapse>
       </CardContent>
       <CardActions>
-        <Button size="small" startIcon={<AddIcon />}
+        <Button size="small"
+          startIcon={<span aria-hidden style={{ fontSize: '0.875rem' }}>+</span>}
           data-testid={`okr-kr-add-btn-${objective.id}`}
           aria-label={t('addKeyResult')}
           onClick={() => setAdding((v) => !v)}>
@@ -70,7 +69,7 @@ const OkrObjectiveCard: React.FC<
           data-testid={`okr-obj-delete-${objective.id}`}
           onClick={() =>
             onDeleteObjective(objective.id)}>
-          <DeleteIcon fontSize="small" />
+          <span aria-hidden style={{ fontSize: '0.875rem' }}>✕</span>
         </IconButton>
       </CardActions>
     </Card>

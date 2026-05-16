@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Box, Typography, IconButton } from '@shared/m3';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslations } from 'next-intl';
 import type {
   BowlingObjective, BowlingStatus,
@@ -50,7 +49,7 @@ const BowlingObjectiveRow: React.FC<
           aria-label={t('deleteObjective')}
           data-testid={`bowling-delete-${objective.id}`}
           onClick={() => onDelete(objective.id)}>
-          <DeleteIcon fontSize="small" />
+          <span aria-hidden style={{ fontSize: '0.875rem' }}>✕</span>
         </IconButton>
       </Box>
       {MONTHS.map((m) => {

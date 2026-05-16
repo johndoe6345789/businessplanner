@@ -4,7 +4,6 @@ import React from 'react';
 import {
   Box, Typography, LinearProgress, Chip, IconButton,
 } from '@shared/m3';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslations } from 'next-intl';
 import type { KeyResult } from '@/types/okr';
 
@@ -57,7 +56,7 @@ const OkrKeyResultRow: React.FC<
         aria-label={t('deleteKeyResult')}
         data-testid={`okr-kr-delete-${kr.id}`}
         onClick={() => onDelete(kr.id)}>
-        <DeleteIcon fontSize="small" />
+        <span aria-hidden style={{ fontSize: '0.875rem' }}>✕</span>
       </IconButton>
     </Box>
   );

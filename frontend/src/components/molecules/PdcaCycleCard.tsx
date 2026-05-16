@@ -5,7 +5,6 @@ import {
   Card, CardContent, CardActions,
   Typography, Chip, Button, IconButton,
 } from '@shared/m3';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslations } from 'next-intl';
 import type {
   PdcaCycle, PdcaPhaseKey, UpdatePdcaPhaseInput,
@@ -69,7 +68,7 @@ const PdcaCycleCard: React.FC<PdcaCycleCardProps> = (
           aria-label={t('deleteCycle')}
           data-testid={`pdca-delete-${cycle.id}`}
           onClick={() => onDelete(cycle.id)}>
-          <DeleteIcon fontSize="small" />
+          <span aria-hidden style={{ fontSize: '0.875rem' }}>✕</span>
         </IconButton>
       </CardActions>
     </Card>

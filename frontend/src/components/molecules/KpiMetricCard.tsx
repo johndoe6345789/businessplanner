@@ -4,8 +4,6 @@ import React from 'react';
 import {
   Card, CardContent, Typography, Box, IconButton,
 } from '@shared/m3';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { useTranslations } from 'next-intl';
 import type { KpiMetric } from '@/types/kpi';
 import KpiStatusChip from '@/components/atoms/KpiStatusChip';
@@ -45,13 +43,13 @@ const KpiMetricCard: React.FC<KpiMetricCardProps> = (
               aria-label={t('updateValue')}
               data-testid={`kpi-edit-${metric.id}`}
               onClick={() => onUpdate(metric)}>
-              <EditIcon fontSize="small" />
+              <span aria-hidden style={{ fontSize: '0.875rem' }}>✎</span>
             </IconButton>
             <IconButton size="small"
               aria-label={t('deleteMetric')}
               data-testid={`kpi-delete-${metric.id}`}
               onClick={() => onDelete(metric.id)}>
-              <DeleteIcon fontSize="small" />
+              <span aria-hidden style={{ fontSize: '0.875rem' }}>✕</span>
             </IconButton>
           </Box>
         </Box>
