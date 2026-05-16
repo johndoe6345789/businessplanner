@@ -109,7 +109,12 @@
     "accounting": "Accounting",
     "okr": "OKRs",
     "kpi": "KPI Scorecard",
-    "pdca": "PDCA Cycles"
+    "pdca": "PDCA Cycles",
+    "groupPlan": "Planning",
+    "groupDiscover": "Research",
+    "groupFinance": "Financials",
+    "groupExecute": "Strategy & Execution",
+    "groupConnect": "Community"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -726,6 +731,13 @@
     "plannerLink": "Planner",
     "resourcesLink": "Resources",
     "knowledgeLink": "Knowledge"
+  },
+  "welcome": {
+    "title": "Welcome to Nextra",
+    "body": "Your all-in-one startup command centre. Start with the Planner to map out your first steps, or explore any section from the sidebar.",
+    "ctaPlanner": "Open Planner",
+    "ctaSetup": "Complete setup",
+    "dismiss": "Got it"
   },
   "onboarding": {
     "title": "Set Up Your LaunchPad",

@@ -55,6 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const LINKS = navLinks.map((l) => ({
     label: tNav(l.labelKey),
     href: l.href,
+    section: l.section,
   }));
 
   return (

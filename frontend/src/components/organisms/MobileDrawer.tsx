@@ -18,6 +18,8 @@ import { DrawerContent } from
 export interface NavLink {
   label: string;
   href: string;
+  /** Section key for grouped nav rendering. */
+  section?: string;
 }
 
 /** Props for MobileDrawer. */

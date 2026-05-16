@@ -1,15 +1,15 @@
 'use client';
 
 import React from 'react';
-import List from '@shared/m3/List';
+import { useTranslations } from 'next-intl';
 import Divider from '@shared/m3/Divider';
+import { useNavSections } from '@/hooks/useNavSections';
+import { NavSection } from '../molecules/NavSection';
+import { DrawerFooter } from '../molecules/DrawerFooter';
 import {
-  DrawerNavItem,
-} from '@shared/components/ui/DrawerNavItem';
-import { DrawerFooter } from
-  '../molecules/DrawerFooter';
-import { DrawerToolLinks } from
-  '../molecules/DrawerToolLinks';
+  DrawerToolLinks,
+} from '../molecules/DrawerToolLinks';
+import navGroups from '@/constants/nav-groups.json';
 import type { NavLink } from './MobileDrawer';
 
 /** Props for DrawerContent. */
@@ -21,36 +21,45 @@ export interface DrawerContentProps {
 }
 
 /**
- * Scrollable drawer body: search, nav links,
- * tool links, and footer with theme toggle
- * and locale switcher.
+ * Scrollable drawer body with grouped, collapsible nav
+ * sections, tool links, and footer.
  *
  * @param props - Component props.
  */
 export const DrawerContent: React.FC<
   DrawerContentProps
-> = ({ links, onClose }) => (
-  <>
-    <div style={{
-      flex: 1, overflowY: 'auto',
-    }}>
+> = ({ links, onClose }) => {
+  const t = useTranslations('nav');
+  const { open, toggle } = useNavSections();
+
+  const grouped = navGroups.map((g) => ({
+    ...g,
+    label: t(g.labelKey as Parameters<typeof t>[0]),
+    links: links.filter((l) => l.section === g.key),
+  }));
+
+  return (
+    <div style={{ flex: 1, overflowY: 'auto' }}
+      role="menu"
+    >
       <Divider />
-      <List sx={{ py: 1 }} role="menu">
-        {links.map((l) => (
-          <DrawerNavItem
-            key={l.href}
-            label={l.label}
-            href={l.href}
-            onClick={onClose}
-          />
-        ))}
-      </List>
+      {grouped.map((g) => (
+        <NavSection
+          key={g.key}
+          sectionKey={g.key}
+          label={g.label}
+          links={g.links}
+          open={open[g.key] ?? g.defaultOpen}
+          onToggle={() => toggle(g.key)}
+          onClose={onClose}
+        />
+      ))}
       <Divider />
       <DrawerToolLinks excludeUrls={['/app']} />
       <Divider />
       <DrawerFooter />
     </div>
-  </>
-);
+  );
+};
 
 export default DrawerContent;

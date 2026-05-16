@@ -19,7 +19,13 @@ import { PwaRegister } from
   '@/components/atoms/PwaRegister';
 import { DashboardShortcuts } from
   '@/components/organisms/DashboardShortcuts';
+import nextDynamic from 'next/dynamic';
 import { PwaHead } from './pwa-head';
+
+const WelcomeBanner = nextDynamic(
+  () => import('@/components/molecules/WelcomeBanner'),
+  { ssr: false },
+);
 import { loadMessages } from './loadMessages';
 import ClientCookieBanner from
   '@/components/atoms/ClientCookieBanner';
@@ -78,6 +84,7 @@ export default async function LocaleLayout({
                   flexDirection: 'column',
                   minHeight: 0, overflow: 'auto',
                 }}>
+                  <WelcomeBanner />
                   {children}
                 </Box>
               </Box>
