@@ -28,6 +28,9 @@
     "href": "/hoshin" },
   { "labelKey": "accounting",
     "href": "/accounting" },
+  { "labelKey": "okr", "href": "/okr" },
+  { "labelKey": "kpi", "href": "/kpi" },
+  { "labelKey": "pdca", "href": "/pdca" },
   { "labelKey": "channels", "href": "/channels" },
   { "labelKey": "milestones",
     "href": "/milestones" }

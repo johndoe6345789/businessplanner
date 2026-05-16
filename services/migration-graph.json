@@ -44,5 +44,8 @@
   "market-research": ["users", "organisations"],
   "hoshin": ["users", "organisations"],
   "xero": ["users"],
-  "zelt": ["users"]
+  "zelt": ["users"],
+  "kpi": ["users"],
+  "pdca": ["users"],
+  "okr": ["users"]
 }

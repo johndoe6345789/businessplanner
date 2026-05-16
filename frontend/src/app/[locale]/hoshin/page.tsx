@@ -5,8 +5,8 @@ import {
 } from 'next-intl/server';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
-import HoshinXMatrix
-  from '@/components/organisms/HoshinXMatrix';
+import HoshinTabView
+  from '@/components/organisms/HoshinTabView';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -49,7 +49,7 @@ export default async function HoshinPage({
       >
         {t('pageDescription')}
       </Typography>
-      <HoshinXMatrix />
+      <HoshinTabView />
     </Box>
   );
 }

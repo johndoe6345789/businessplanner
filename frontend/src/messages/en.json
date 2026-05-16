@@ -106,7 +106,10 @@
     "companies": "Company Registry",
     "startupCompare": "Startup Comparison",
     "hoshin": "Strategy Matrix",
-    "accounting": "Accounting"
+    "accounting": "Accounting",
+    "okr": "OKRs",
+    "kpi": "KPI Scorecard",
+    "pdca": "PDCA Cycles"
   },
   "hero": {
     "title": "Launch your startup with confidence",
@@ -1262,6 +1265,102 @@
       "strong": "Strong",
       "medium": "Medium",
       "weak": "Weak"
+    },
+    "tabs": {
+      "xMatrix": "X-Matrix",
+      "bowling": "Bowling Chart"
+    }
+  },
+  "bowling": {
+    "pageTitle": "Bowling Chart",
+    "addObjective": "Add Objective",
+    "deleteObjective": "Delete objective",
+    "objectivePlaceholder": "Objective title",
+    "noObjectives": "No objectives yet. Add one above.",
+    "months": {
+      "1": "Jan", "2": "Feb", "3": "Mar",
+      "4": "Apr", "5": "May", "6": "Jun",
+      "7": "Jul", "8": "Aug", "9": "Sep",
+      "10": "Oct", "11": "Nov", "12": "Dec"
+    },
+    "status": {
+      "not-started": "Not started",
+      "in-progress": "In progress",
+      "achieved": "Achieved",
+      "missed": "Missed"
+    },
+    "cellAriaLabel": "Month {month} status: {status}"
+  },
+  "kpi": {
+    "pageTitle": "KPI Scorecard",
+    "pageDescription": "Track key performance indicators across financial, customer, operational and growth dimensions.",
+    "addMetric": "Add Metric",
+    "deleteMetric": "Delete metric",
+    "updateValue": "Update value",
+    "noMetrics": "No metrics yet. Add one to get started.",
+    "currentValue": "Current",
+    "targetValue": "Target",
+    "unit": "Unit",
+    "period": "Period",
+    "status": {
+      "on-track": "On track",
+      "at-risk": "At risk",
+      "off-track": "Off track"
+    },
+    "category": {
+      "financial": "Financial",
+      "customer": "Customer",
+      "operational": "Operational",
+      "growth": "Growth"
+    },
+    "summary": {
+      "onTrack": "On track",
+      "atRisk": "At risk",
+      "offTrack": "Off track"
+    }
+  },
+  "pdca": {
+    "pageTitle": "PDCA Cycles",
+    "pageDescription": "Plan–Do–Check–Act continuous improvement cycles.",
+    "addCycle": "New Cycle",
+    "deleteCycle": "Delete cycle",
+    "noCycles": "No cycles yet. Create one to start improving.",
+    "phases": {
+      "plan": "Plan",
+      "do": "Do",
+      "check": "Check",
+      "act": "Act"
+    },
+    "notes": "Notes",
+    "markComplete": "Mark phase complete",
+    "status": {
+      "in-progress": "In progress",
+      "completed": "Completed"
+    },
+    "currentPhase": "Current phase"
+  },
+  "okr": {
+    "pageTitle": "OKRs",
+    "pageDescription": "Objectives and Key Results — set bold goals and track progress.",
+    "addObjective": "Add Objective",
+    "deleteObjective": "Delete objective",
+    "addKeyResult": "Add Key Result",
+    "deleteKeyResult": "Delete key result",
+    "noObjectives": "No objectives for this period.",
+    "quarter": "Q{quarter} {year}",
+    "progress": "{progress}%",
+    "status": {
+      "achieved": "Achieved",
+      "on-track": "On track",
+      "at-risk": "At risk",
+      "behind": "Behind"
+    },
+    "objective": {
+      "status": {
+        "active": "Active",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
     }
   },
   "accounting": {
