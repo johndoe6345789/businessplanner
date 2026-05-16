@@ -26,6 +26,9 @@
     "href": "/startup-compare" },
   { "labelKey": "hoshin",
     "href": "/hoshin" },
+  { "labelKey": "okr", "href": "/okr" },
+  { "labelKey": "kpi", "href": "/kpi" },
+  { "labelKey": "pdca", "href": "/pdca" },
   { "labelKey": "channels", "href": "/channels" },
   { "labelKey": "milestones",
     "href": "/milestones" }

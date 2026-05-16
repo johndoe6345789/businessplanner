@@ -127,6 +127,26 @@
     "objectives": "/api/hoshin/objectives",
     "objectiveById": "/api/hoshin/objectives/:id",
     "links": "/api/hoshin/links",
-    "linkById": "/api/hoshin/links/:id"
+    "linkById": "/api/hoshin/links/:id",
+    "bowling": "/api/hoshin/bowling",
+    "bowlingById": "/api/hoshin/bowling/:id",
+    "bowlingMonths": "/api/hoshin/bowling/:objId/months"
+  },
+  "kpi": {
+    "metrics": "/api/kpi/metrics",
+    "metricById": "/api/kpi/metrics/:id",
+    "metricValue": "/api/kpi/metrics/:id/value"
+  },
+  "pdca": {
+    "cycles": "/api/pdca/cycles",
+    "cycleById": "/api/pdca/cycles/:id",
+    "cyclePhase": "/api/pdca/cycles/:id/phase"
+  },
+  "okr": {
+    "objectives": "/api/okr/objectives",
+    "objectiveById": "/api/okr/objectives/:id",
+    "keyResults": "/api/okr/objectives/:id/key-results",
+    "keyResultById": "/api/okr/key-results/:id",
+    "keyResultValue": "/api/okr/key-results/:id/value"
   }
 }
