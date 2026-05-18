@@ -6,6 +6,8 @@
 FROM node:20-alpine
 ARG NPM_REGISTRY=http://host.docker.internal:4873
 ENV NPM_CONFIG_REGISTRY=$NPM_REGISTRY
+ARG NODE_OPTIONS=--max-old-space-size=512
+ENV NODE_OPTIONS=${NODE_OPTIONS}
 
 WORKDIR /build/sso
 COPY package.json package-lock.json* ./

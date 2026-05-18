@@ -13,6 +13,8 @@ ARG RUNTIME_IMAGE=debian:sid-slim
 FROM --platform=${BUILD_PLATFORM} ${NODE_IMAGE} AS deps
 ARG NPM_REGISTRY=http://host.docker.internal:4873
 ENV NPM_CONFIG_REGISTRY=$NPM_REGISTRY
+ARG NODE_OPTIONS=--max-old-space-size=512
+ENV NODE_OPTIONS=${NODE_OPTIONS}
 # Mirror the local monorepo layout so file: deps resolve
 COPY --from=shared . /build/shared/
 WORKDIR /build/app

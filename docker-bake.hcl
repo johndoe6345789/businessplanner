@@ -94,6 +94,9 @@ target "frontend" {
   contexts = {
     shared = "./shared"
   }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/frontend:${TAG}",
     "${REGISTRY}/frontend:latest",
@@ -119,6 +122,9 @@ target "notifications" {
   context    = "./services/notifications/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/notifications:${TAG}",
     "${REGISTRY}/notifications:latest",
@@ -129,6 +135,9 @@ target "image-processor-frontend" {
   context    = "./services/image/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/image-processor-frontend:${TAG}",
     "${REGISTRY}/image-processor-frontend:latest",
@@ -139,6 +148,9 @@ target "shop-admin" {
   context    = "./services/ecommerce/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/shop-admin:${TAG}",
     "${REGISTRY}/shop-admin:latest",
@@ -149,6 +161,9 @@ target "jobs" {
   context    = "./services/job-queue/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/jobs:${TAG}",
     "${REGISTRY}/jobs:latest",
@@ -159,6 +174,9 @@ target "search" {
   context    = "./services/search/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/search:${TAG}",
     "${REGISTRY}/search:latest",
@@ -169,6 +187,9 @@ target "streams" {
   context    = "./services/streaming/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/streams:${TAG}",
     "${REGISTRY}/streams:latest",
@@ -179,6 +200,9 @@ target "cron" {
   context    = "./services/cron/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/cron:${TAG}",
     "${REGISTRY}/cron:latest",
@@ -189,6 +213,9 @@ target "backups" {
   context    = "./services/backup/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/backups:${TAG}",
     "${REGISTRY}/backups:latest",
@@ -199,6 +226,9 @@ target "wiki" {
   context    = "./services/wiki/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/wiki:${TAG}",
     "${REGISTRY}/wiki:latest",
@@ -209,6 +239,9 @@ target "webhooks" {
   context    = "./services/webhooks/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/webhooks:${TAG}",
     "${REGISTRY}/webhooks:latest",
@@ -219,6 +252,9 @@ target "polls" {
   context    = "./services/polls/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/polls:${TAG}",
     "${REGISTRY}/polls:latest",
@@ -229,6 +265,9 @@ target "blog" {
   context    = "./services/blog/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/blog:${TAG}",
     "${REGISTRY}/blog:latest",
@@ -239,6 +278,9 @@ target "audit" {
   context    = "./services/audit/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/audit:${TAG}",
     "${REGISTRY}/audit:latest",
@@ -249,6 +291,9 @@ target "social-admin" {
   context    = "./services/social/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/social-admin:${TAG}",
     "${REGISTRY}/social-admin:latest",
@@ -259,6 +304,9 @@ target "gallery" {
   context    = "./services/gallery/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/gallery:${TAG}",
     "${REGISTRY}/gallery:latest",
@@ -269,6 +317,9 @@ target "flags" {
   context    = "./services/feature-flags/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/flags:${TAG}",
     "${REGISTRY}/flags:latest",
@@ -279,6 +330,9 @@ target "analytics" {
   context    = "./services/analytics/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/analytics:${TAG}",
     "${REGISTRY}/analytics:latest",
@@ -289,6 +343,9 @@ target "status" {
   context    = "./services/status-page/public"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/status:${TAG}",
     "${REGISTRY}/status:latest",
@@ -299,6 +356,9 @@ target "alerts" {
   context    = "./services/alerts/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/alerts:${TAG}",
     "${REGISTRY}/alerts:latest",
@@ -309,6 +369,9 @@ target "forum" {
   context    = "./services/comments/admin"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/forum:${TAG}",
     "${REGISTRY}/forum:latest",
@@ -323,6 +386,9 @@ target "emailclient" {
   context    = "./services/email/webmail"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/emailclient:${TAG}",
     "${REGISTRY}/emailclient:latest",
@@ -345,6 +411,9 @@ target "s3-frontend" {
   context    = "./services/object-store/server/frontend"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/s3-frontend:${TAG}",
     "${REGISTRY}/s3-frontend:latest",
@@ -371,6 +440,9 @@ target "packagerepo-frontend" {
   context    = "./services/package-repository/root/frontend"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/packagerepo-frontend:${TAG}",
     "${REGISTRY}/packagerepo-frontend:latest",
@@ -393,6 +465,9 @@ target "pgadmin-frontend" {
   context    = "./services/database/admin/frontend"
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
+  args = {
+    NODE_OPTIONS = "--max-old-space-size=512"
+  }
   tags = [
     "${REGISTRY}/pgadmin-frontend:${TAG}",
     "${REGISTRY}/pgadmin-frontend:latest",
