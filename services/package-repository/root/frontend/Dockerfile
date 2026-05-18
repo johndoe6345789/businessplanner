@@ -5,7 +5,7 @@
 
 FROM node:20-alpine
 ARG NPM_REGISTRY=
-ARG NODE_OPTIONS=--max-old-space-size=512
+ARG NODE_OPTIONS=--max-old-space-size=2048
 ENV NODE_OPTIONS=${NODE_OPTIONS}
 
 COPY --from=shared . /build/shared/

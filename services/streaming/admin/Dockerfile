@@ -4,9 +4,9 @@
 
 # -- Stage 1: deps --------------------------
 FROM node:20-alpine AS deps
-ARG NPM_REGISTRY=http://host.docker.internal:4873
+ARG NPM_REGISTRY=https://registry.npmjs.org
 ENV NPM_CONFIG_REGISTRY=$NPM_REGISTRY
-ARG NODE_OPTIONS=--max-old-space-size=512
+ARG NODE_OPTIONS=--max-old-space-size=2048
 ENV NODE_OPTIONS=${NODE_OPTIONS}
 COPY --from=shared . /build/shared/
 WORKDIR /build/services/streaming/admin

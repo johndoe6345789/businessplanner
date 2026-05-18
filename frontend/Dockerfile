@@ -11,9 +11,9 @@ ARG RUNTIME_IMAGE=debian:sid-slim
 
 # -- Stage 1: deps (amd64) ----------------------------------
 FROM --platform=${BUILD_PLATFORM} ${NODE_IMAGE} AS deps
-ARG NPM_REGISTRY=http://host.docker.internal:4873
+ARG NPM_REGISTRY=https://registry.npmjs.org
 ENV NPM_CONFIG_REGISTRY=$NPM_REGISTRY
-ARG NODE_OPTIONS=--max-old-space-size=512
+ARG NODE_OPTIONS=--max-old-space-size=2048
 ENV NODE_OPTIONS=${NODE_OPTIONS}
 # Mirror the local monorepo layout so file: deps resolve
 COPY --from=shared . /build/shared/
