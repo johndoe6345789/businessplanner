@@ -1,3 +1,4 @@
+@use "sass:meta";
 // ============================================
 // Auth Form Layout
 // ============================================
@@ -64,5 +65,5 @@
 // ============================================
 // Auth layout (2-pane split screen)
 // ============================================
-@import 'auth-page';
-@import 'auth-card';
+@include meta.load-css('auth-page');
+@include meta.load-css('auth-card');

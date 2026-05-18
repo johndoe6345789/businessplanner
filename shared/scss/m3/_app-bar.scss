@@ -1,3 +1,4 @@
+@use "sass:meta";
 // ============================================
 // AppBar & Toolbar
 // ============================================
@@ -51,5 +52,5 @@
   &--no-gutters { padding: 0; }
 }
 
-@import 'desktop-actions';
-@import 'nav-links';
+@include meta.load-css('desktop-actions');
+@include meta.load-css('nav-links');

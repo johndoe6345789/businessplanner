@@ -4,15 +4,15 @@
  * Uses M3 design tokens from CSS custom properties
  */
 
-@import './m3/app-shell';
-@import './m3/app-bar';
-@import './m3/buttons';
-@import './m3/typography';
-@import './m3/surfaces';
-@import './m3/navigation';
-@import './m3/feedback';
-@import './m3/grid';
-@import './m3/layout';
-@import './m3/auth';
-@import './m3/content';
-@import './m3/misc';
+@use 'm3/app-shell';
+@use 'm3/app-bar';
+@use 'm3/buttons';
+@use 'm3/typography';
+@use 'm3/surfaces';
+@use 'm3/navigation';
+@use 'm3/feedback';
+@use 'm3/grid';
+@use 'm3/layout';
+@use 'm3/auth';
+@use 'm3/content';
+@use 'm3/misc';
