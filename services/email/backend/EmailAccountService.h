@@ -41,6 +41,32 @@ class EmailAccountService
         const json& data,
         SyncCb onSuccess,
         SyncErrCb onError);
+
+    /**
+     * @brief Get a single account for a user.
+     * @param userId    Owner user ID.
+     * @param accountId Account UUID.
+     * @param onSuccess Returns the account JSON.
+     * @param onError   404 if not found/owned.
+     */
+    void getAccount(
+        const std::string& userId,
+        const std::string& accountId,
+        SyncCb onSuccess,
+        SyncErrCb onError);
+
+    /**
+     * @brief Delete a single account.
+     * @param userId    Owner user ID.
+     * @param accountId Account UUID.
+     * @param onSuccess Returns {deleted:true}.
+     * @param onError   404 if not found/owned.
+     */
+    void deleteAccount(
+        const std::string& userId,
+        const std::string& accountId,
+        SyncCb onSuccess,
+        SyncErrCb onError);
 };
 
 } // namespace services

@@ -1,11 +1,8 @@
 #pragma once
-/**
- * @file EmailInboxController.h
- * @brief REST endpoints for email inbox.
- *
- * Provides message listing, detail retrieval,
- * and IMAP sync trigger.
- */
+/// @file EmailInboxController.h
+/// @brief REST endpoints for the email inbox:
+/// message listing, detail, read/star flags, and
+/// the IMAP sync trigger.
 
 #include <drogon/HttpController.h>
 
@@ -17,6 +14,10 @@ class EmailInboxController
           EmailInboxController>
 {
   public:
+    /// Drogon response callback alias.
+    using Cb = std::function<void(
+        const drogon::HttpResponsePtr&)>;
+
     METHOD_LIST_BEGIN
     ADD_METHOD_TO(
         EmailInboxController::listMessages,
@@ -33,44 +34,45 @@ class EmailInboxController
         "/api/email/sync/{accountId}",
         drogon::Post,
         "filters::CookieAuthFilter");
+    ADD_METHOD_TO(
+        EmailInboxController::markRead,
+        "/api/email/messages/{id}/read",
+        drogon::Put,
+        "filters::CookieAuthFilter");
+    ADD_METHOD_TO(
+        EmailInboxController::toggleStar,
+        "/api/email/messages/{id}/star",
+        drogon::Put,
+        "filters::CookieAuthFilter");
     METHOD_LIST_END
 
-    /**
-     * @brief List messages for an account.
-     * @param req Query: accountId, folder, page.
-     * @param cb  Response callback.
-     */
+    /// @brief List owner messages (query:
+    /// accountId, folder, page, pageSize).
     void listMessages(
         const drogon::HttpRequestPtr& req,
-        std::function<void(
-            const drogon::HttpResponsePtr&
-        )>&& cb);
+        Cb&& cb);
 
-    /**
-     * @brief Get a single message.
-     * @param req  Request.
-     * @param cb   Response callback.
-     * @param id   Message UUID.
-     */
+    /// @brief Get a single owned message by id.
     void getMessage(
         const drogon::HttpRequestPtr& req,
-        std::function<void(
-            const drogon::HttpResponsePtr&
-        )>&& cb,
-        const std::string& id);
+        Cb&& cb, const std::string& id);
 
-    /**
-     * @brief Trigger IMAP sync for an account.
-     * @param req       Request.
-     * @param cb        Response callback.
-     * @param accountId Account UUID.
-     */
+    /// @brief Trigger IMAP sync for an account.
     void syncAccount(
         const drogon::HttpRequestPtr& req,
-        std::function<void(
-            const drogon::HttpResponsePtr&
-        )>&& cb,
-        const std::string& accountId);
+        Cb&& cb, const std::string& accountId);
+
+    /// @brief Mark a message read/unread
+    /// (body {isRead?:bool=true}).
+    void markRead(
+        const drogon::HttpRequestPtr& req,
+        Cb&& cb, const std::string& id);
+
+    /// @brief Set a message starred state
+    /// (body {isStarred?:bool=true}).
+    void toggleStar(
+        const drogon::HttpRequestPtr& req,
+        Cb&& cb, const std::string& id);
 };
 
 } // namespace controllers

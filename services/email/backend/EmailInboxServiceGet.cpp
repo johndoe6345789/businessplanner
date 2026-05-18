@@ -1,5 +1,6 @@
 /// @file EmailInboxServiceGet.cpp -- Single message fetch.
 #include "email/backend/EmailInboxService.h"
+#include "email/backend/EmailMessageJson.h"
 
 #include <drogon/orm/DbClient.h>
 #include <spdlog/spdlog.h>
@@ -11,41 +12,27 @@ using namespace drogon;
 using namespace drogon::orm;
 
 void EmailInboxService::getMessage(
+    const std::string& userId,
     const std::string& messageId,
     SyncCb onSuccess, SyncErrCb onError)
 {
     auto db = drogon::app().getDbClient();
     const std::string sql = R"(
-        SELECT * FROM email_messages
-        WHERE id = $1::uuid
+        SELECT m.* FROM email_messages m
+        JOIN email_accounts a
+          ON m.account_id = a.id
+        WHERE m.id = $1::uuid
+          AND a.user_id = $2::uuid
     )";
 
-    *db << sql << messageId
+    *db << sql << messageId << userId
         >> [onSuccess, onError](const Result& r) {
         if (r.empty()) {
             onError(k404NotFound,
                     "Message not found");
             return;
         }
-        auto row = r[0];
-        onSuccess({
-            {"id", row["id"]
-                 .as<std::string>()},
-            {"subject", row["subject"]
-                 .as<std::string>()},
-            {"from", row["from_addr"]
-                 .as<std::string>()},
-            {"to", row["to_addrs"]
-                 .as<std::string>()},
-            {"bodyText", row["body_text"]
-                 .as<std::string>()},
-            {"isRead",
-             row["is_read"].as<bool>()},
-            {"isStarred",
-             row["is_starred"].as<bool>()},
-            {"receivedAt", row["date_recv"]
-                 .as<std::string>()},
-        });
+        onSuccess(messageRowToJson(r[0]));
     }
         >> [onError](const DrogonDbException& e) {
         spdlog::error("getMessage: {}",

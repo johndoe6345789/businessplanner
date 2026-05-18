@@ -16,6 +16,8 @@ void EmailInboxController::listMessages(
     const drogon::HttpRequestPtr& req,
     Cb&& cb)
 {
+    auto userId = req->getAttributes()
+        ->get<std::string>("user_id");
     auto accountId =
         req->getParameter("accountId");
     auto folder =
@@ -28,16 +30,9 @@ void EmailInboxController::listMessages(
     if (!p.empty()) page = std::stoi(p);
     if (!ps.empty()) pageSize = std::stoi(ps);
 
-    if (accountId.empty()) {
-        cb(::utils::jsonError(
-            drogon::k400BadRequest,
-            "accountId required"));
-        return;
-    }
-
     services::EmailInboxService svc;
     svc.listMessages(
-        accountId, folder, page, pageSize,
+        userId, accountId, folder, page, pageSize,
         [cb](const auto& data) {
             cb(::utils::jsonOk(data));
         },
@@ -50,8 +45,11 @@ void EmailInboxController::getMessage(
     const drogon::HttpRequestPtr& req,
     Cb&& cb, const std::string& id)
 {
+    auto userId = req->getAttributes()
+        ->get<std::string>("user_id");
+
     services::EmailInboxService svc;
-    svc.getMessage(id,
+    svc.getMessage(userId, id,
         [cb](const auto& data) {
             cb(::utils::jsonOk(data));
         },
@@ -64,9 +62,11 @@ void EmailInboxController::syncAccount(
     const drogon::HttpRequestPtr& req,
     Cb&& cb, const std::string& accountId)
 {
+    auto userId = req->getAttributes()
+        ->get<std::string>("user_id");
     spdlog::info("IMAP sync for {}", accountId);
     services::ImapSyncService svc;
-    svc.syncAccount(accountId,
+    svc.syncAccount(accountId, userId,
         [cb](const auto& data) {
             cb(::utils::jsonOk(data));
         },

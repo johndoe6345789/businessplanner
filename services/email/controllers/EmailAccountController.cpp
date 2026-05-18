@@ -58,4 +58,38 @@ void EmailAccountController::create(
         });
 }
 
+void EmailAccountController::get(
+    const drogon::HttpRequestPtr& req,
+    Cb&& cb, const std::string& id)
+{
+    auto userId = req->getAttributes()
+        ->get<std::string>("user_id");
+
+    services::EmailAccountService svc;
+    svc.getAccount(userId, id,
+        [cb](const auto& data) {
+            cb(::utils::jsonOk(data));
+        },
+        [cb](auto code, const auto& msg) {
+            cb(::utils::jsonError(code, msg));
+        });
+}
+
+void EmailAccountController::remove(
+    const drogon::HttpRequestPtr& req,
+    Cb&& cb, const std::string& id)
+{
+    auto userId = req->getAttributes()
+        ->get<std::string>("user_id");
+
+    services::EmailAccountService svc;
+    svc.deleteAccount(userId, id,
+        [cb](const auto& data) {
+            cb(::utils::jsonOk(data));
+        },
+        [cb](auto code, const auto& msg) {
+            cb(::utils::jsonError(code, msg));
+        });
+}
+
 } // namespace controllers

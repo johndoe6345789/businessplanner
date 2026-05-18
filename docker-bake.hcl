@@ -32,7 +32,6 @@ variable "TAG" {
 group "default" {
   targets = [
     "nextra-api",
-    "emailclient-api",
     "emailclient",
     "notifications",
     "image-processor-frontend",
@@ -317,7 +316,8 @@ target "forum" {
 }
 
 # -----------------------------------------------------------------
-# emailclient — Next.js webmail UI; emailclient-api — its service
+# emailclient — Next.js webmail UI. The former Flask email-service
+# (emailclient-api) is now the C++ email domain inside nextra-api.
 # -----------------------------------------------------------------
 target "emailclient" {
   context    = "./services/email/webmail"
@@ -326,15 +326,6 @@ target "emailclient" {
   tags = [
     "${REGISTRY}/emailclient:${TAG}",
     "${REGISTRY}/emailclient:latest",
-  ]
-}
-
-target "emailclient-api" {
-  context    = "./services/email/webmail/deployment/docker/email-service"
-  dockerfile = "Dockerfile"
-  tags = [
-    "${REGISTRY}/emailclient-api:${TAG}",
-    "${REGISTRY}/emailclient-api:latest",
   ]
 }
 

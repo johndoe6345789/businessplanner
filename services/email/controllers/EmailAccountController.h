@@ -25,6 +25,16 @@ class EmailAccountController
         "/api/email/accounts",
         drogon::Post,
         "filters::CookieAuthFilter");
+    ADD_METHOD_TO(
+        EmailAccountController::get,
+        "/api/email/accounts/{id}",
+        drogon::Get,
+        "filters::CookieAuthFilter");
+    ADD_METHOD_TO(
+        EmailAccountController::remove,
+        "/api/email/accounts/{id}",
+        drogon::Delete,
+        "filters::CookieAuthFilter");
     METHOD_LIST_END
 
     /**
@@ -48,6 +58,32 @@ class EmailAccountController
         std::function<void(
             const drogon::HttpResponsePtr&
         )>&& cb);
+
+    /**
+     * @brief Get one account for current user.
+     * @param req Request with JWT user.
+     * @param cb  Response callback.
+     * @param id  Account UUID.
+     */
+    void get(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&
+        )>&& cb,
+        const std::string& id);
+
+    /**
+     * @brief Delete one account for the user.
+     * @param req Request with JWT user.
+     * @param cb  Response callback.
+     * @param id  Account UUID.
+     */
+    void remove(
+        const drogon::HttpRequestPtr& req,
+        std::function<void(
+            const drogon::HttpResponsePtr&
+        )>&& cb,
+        const std::string& id);
 };
 
 } // namespace controllers

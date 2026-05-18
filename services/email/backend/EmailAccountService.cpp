@@ -18,6 +18,9 @@ void EmailAccountService::listAccounts(
     const std::string sql = R"(
         SELECT id, account_name, email_address,
                imap_host, imap_port,
+               imap_encryption,
+               smtp_host, smtp_port,
+               smtp_encryption,
                last_sync_at, sync_status
         FROM email_accounts
         WHERE user_id = $1::uuid
@@ -26,23 +29,34 @@ void EmailAccountService::listAccounts(
 
     *db << sql << userId
         >> [onSuccess](const Result& r) {
+        auto str = [](const Row& row,
+                      const char* c) {
+            return row[c].isNull()
+                ? std::string()
+                : row[c].as<std::string>();
+        };
         json accounts = json::array();
         for (const auto& row : r) {
             accounts.push_back({
-                {"id",
-                 row["id"].as<std::string>()},
+                {"id", str(row, "id")},
                 {"accountName",
-                 row["account_name"]
-                     .as<std::string>()},
+                 str(row, "account_name")},
                 {"emailAddress",
-                 row["email_address"]
-                     .as<std::string>()},
+                 str(row, "email_address")},
                 {"imapHost",
-                 row["imap_host"]
-                     .as<std::string>()},
+                 str(row, "imap_host")},
+                {"imapPort",
+                 row["imap_port"].as<int>()},
+                {"imapEncryption",
+                 str(row, "imap_encryption")},
+                {"smtpHost",
+                 str(row, "smtp_host")},
+                {"smtpPort",
+                 row["smtp_port"].as<int>()},
+                {"smtpEncryption",
+                 str(row, "smtp_encryption")},
                 {"syncStatus",
-                 row["sync_status"]
-                     .as<std::string>()},
+                 str(row, "sync_status")},
             });
         }
         onSuccess({{"accounts", accounts}});
