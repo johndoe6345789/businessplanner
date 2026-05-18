@@ -6,8 +6,6 @@
 namespace services
 {
 
-using auth_t = mailio::imap::auth_method_t;
-
 // Flatten mailio's folder tree. mailio 0.23.0
 // exposes only names, so delimiter defaults to
 // "/" and flags is always [] (faithful port).
@@ -38,14 +36,16 @@ json imapListFolders(
     if (enc == "tls" || enc == "starttls") {
         mailio::imaps conn(host, port);
         if (!user.empty())
-            conn.authenticate(user, pass,
-                               auth_t::LOGIN);
+            conn.authenticate(
+                user, pass,
+                mailio::imaps::auth_method_t::LOGIN);
         tree = conn.list_folders("");
     } else {
         mailio::imap conn(host, port);
         if (!user.empty())
-            conn.authenticate(user, pass,
-                               auth_t::LOGIN);
+            conn.authenticate(
+                user, pass,
+                mailio::imap::auth_method_t::LOGIN);
         tree = conn.list_folders("");
     }
     flatten(tree, out);
