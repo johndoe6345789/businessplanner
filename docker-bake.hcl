@@ -95,7 +95,7 @@ target "frontend" {
     shared = "./shared"
   }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -124,7 +124,7 @@ target "notifications" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -138,7 +138,7 @@ target "image-processor-frontend" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -152,7 +152,7 @@ target "shop-admin" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -166,7 +166,7 @@ target "jobs" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -180,7 +180,7 @@ target "search" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -194,7 +194,7 @@ target "streams" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -208,7 +208,7 @@ target "cron" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -222,7 +222,7 @@ target "backups" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -236,7 +236,7 @@ target "wiki" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -250,7 +250,7 @@ target "webhooks" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -264,7 +264,7 @@ target "polls" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -278,7 +278,7 @@ target "blog" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -292,7 +292,7 @@ target "audit" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -306,7 +306,7 @@ target "social-admin" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -320,7 +320,7 @@ target "gallery" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -334,7 +334,7 @@ target "flags" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -348,7 +348,7 @@ target "analytics" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -362,7 +362,7 @@ target "status" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -376,7 +376,7 @@ target "alerts" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -390,7 +390,7 @@ target "forum" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -408,7 +408,7 @@ target "emailclient" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -434,7 +434,7 @@ target "s3-frontend" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -464,7 +464,7 @@ target "packagerepo-frontend" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
@@ -490,7 +490,7 @@ target "pgadmin-frontend" {
   dockerfile = "Dockerfile"
   contexts   = { shared = "./shared" }
   args = {
-    NODE_OPTIONS = "--max-old-space-size=512"
+    NODE_OPTIONS = "--max-old-space-size=2048"
     NPM_REGISTRY = "https://registry.npmjs.org"
   }
   tags = [
