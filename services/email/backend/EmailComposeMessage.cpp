@@ -1,6 +1,7 @@
 /// @file EmailComposeMessage.cpp -- MIME assembly.
 #include "email/backend/EmailComposeSend.h"
 
+#include <boost/date_time/local_time/local_time.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 #include <random>
@@ -58,8 +59,10 @@ auto buildComposeMessage(
     if (!replyTo.empty())
         msg.reply_address(
             mailio::mail_address("", replyTo));
-    msg.date_time(boost::posix_time::second_clock::
-                      universal_time());
+    boost::local_time::local_date_time now(
+        boost::posix_time::second_clock::universal_time(),
+        boost::local_time::time_zone_ptr());
+    msg.date_time(now);
     msg.message_id(makeMessageId(from));
 
     if (!html.empty()) {
