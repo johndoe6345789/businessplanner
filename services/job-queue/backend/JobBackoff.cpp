@@ -9,7 +9,7 @@
 #include <cmath>
 #include <random>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 namespace
@@ -52,4 +52,4 @@ std::chrono::milliseconds computeBackoff(BackoffStrategy strategy,
     return clamp(cfg.baseDelay, cfg);
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

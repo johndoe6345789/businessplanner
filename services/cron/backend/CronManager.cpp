@@ -11,7 +11,7 @@
 #include <drogon/orm/DbClient.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 CronManager::CronManager(std::shared_ptr<drogon::orm::DbClient> db,
@@ -64,4 +64,4 @@ void CronManager::tickerLoop()
     }
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

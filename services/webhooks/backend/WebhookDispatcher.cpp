@@ -10,7 +10,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 WebhookDispatcher::WebhookDispatcher(drogon::orm::DbClientPtr db,
@@ -69,4 +69,4 @@ void WebhookDispatcher::runOnce()
     }
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

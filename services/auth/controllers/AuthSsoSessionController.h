@@ -4,7 +4,7 @@
  * @brief Cookie-to-session bootstrap endpoint.
  *
  * GET /api/auth/sso-session
- *   Reads the `nextra_sso` HttpOnly cookie, validates the
+ *   Reads the `businessplanner_sso` HttpOnly cookie, validates the
  *   refresh token, and returns a fresh access token plus
  *   the user profile — so the main app never needs to
  *   store tokens in localStorage.
@@ -29,7 +29,7 @@ class AuthSsoSessionController
 
     /**
      * @brief Bootstrap an app session from the SSO cookie.
-     * @param req HTTP request (must carry nextra_sso cookie).
+     * @param req HTTP request (must carry businessplanner_sso cookie).
      * @param cb  Response callback.
      */
     void session(

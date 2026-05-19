@@ -1,7 +1,7 @@
 {
-  "name": "Nextra SSO",
+  "name": "Businessplanner SSO",
   "short_name": "SSO",
-  "description": "Nextra single sign-on portal.",
+  "description": "Businessplanner single sign-on portal.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

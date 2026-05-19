@@ -32,7 +32,7 @@ namespace commands
  */
 inline void ensureSearchTopic(const std::string& topic)
 {
-    auto producer = nextra::infra::makeKafkaProducer(
+    auto producer = businessplanner::infra::makeKafkaProducer(
         std::string{}, "search-indexer-bootstrap");
     nlohmann::json env;
     env["op"] = "noop";

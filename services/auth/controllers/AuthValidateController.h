@@ -4,7 +4,7 @@
  * @brief SSO token-validation endpoint for nginx auth_request.
  *
  * GET /api/auth/validate
- *   Reads the `nextra_token` cookie, verifies the JWT, and
+ *   Reads the `businessplanner_token` cookie, verifies the JWT, and
  *   returns 200 OK (valid) or 401 Unauthorized (invalid/absent).
  *   nginx uses this status code to gate access to all tool routes.
  */

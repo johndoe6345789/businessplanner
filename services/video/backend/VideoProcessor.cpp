@@ -17,7 +17,7 @@
 
 namespace fs = std::filesystem;
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 VideoProcessor::VideoProcessor(
@@ -41,7 +41,7 @@ bool VideoProcessor::runLadders(
     const TranscodeRequest& req, std::int64_t durationMs,
     const std::string& localSource, std::vector<Rendition>& out)
 {
-    return nextra::video::runLadders(
+    return businessplanner::video::runLadders(
         cfg_, req, durationMs, localSource, db_, out);
 }
 
@@ -72,4 +72,4 @@ bool VideoProcessor::processOne(const std::string& workerId)
     return true;
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

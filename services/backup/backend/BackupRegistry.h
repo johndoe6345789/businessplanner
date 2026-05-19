@@ -14,7 +14,7 @@
 #include <memory>
 #include <mutex>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 /// Process-wide accessor for the active backup runner instance.
@@ -47,6 +47,6 @@ private:
     std::shared_ptr<BackupRunner> runner_;
 };
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup
 
-using BackupRegistry = nextra::backup::BackupRegistry;
+using BackupRegistry = businessplanner::backup::BackupRegistry;

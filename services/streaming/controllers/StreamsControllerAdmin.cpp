@@ -13,7 +13,7 @@
 
 #include <fstream>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 using namespace drogon;
@@ -70,4 +70,4 @@ void StreamsController::kick(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

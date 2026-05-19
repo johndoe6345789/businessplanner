@@ -14,7 +14,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 void JobQueue::markSucceeded(std::int64_t jobId,
@@ -97,4 +97,4 @@ void JobQueue::markFailed(const QueuedJob& job,
     }
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

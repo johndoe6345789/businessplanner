@@ -20,7 +20,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 class StreamStore
@@ -66,4 +66,4 @@ private:
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

@@ -1,20 +1,20 @@
-# Nextra Helm Chart
+# Businessplanner Helm Chart
 
-Deploy the full Nextra stack to a Kubernetes cluster.
+Deploy the full Businessplanner stack to a Kubernetes cluster.
 
 ## Quickstart
 
 ```bash
 # Install with default values
-helm install nextra ./deploy/helm/nextra
+helm install businessplanner ./deploy/helm/businessplanner
 
 # Override the ingress host
-helm install nextra ./deploy/helm/nextra \
-  --set ingress.host=nextra.example.com
+helm install businessplanner ./deploy/helm/businessplanner \
+  --set ingress.host=businessplanner.example.com
 
 # Use a dedicated namespace
-helm install nextra ./deploy/helm/nextra \
-  --namespace nextra --create-namespace
+helm install businessplanner ./deploy/helm/businessplanner \
+  --namespace businessplanner --create-namespace
 ```
 
 ## What gets deployed
@@ -59,13 +59,13 @@ use the repo's `docker/nginx/nginx.conf` verbatim, pass
 it via `--set-file`:
 
 ```bash
-helm install nextra ./deploy/helm/nextra \
+helm install businessplanner ./deploy/helm/businessplanner \
   --set-file portal.nginxConf=docker/nginx/nginx.conf
 ```
 
 ## Uninstalling
 
 ```bash
-helm uninstall nextra
-kubectl delete pvc -l app.kubernetes.io/instance=nextra
+helm uninstall businessplanner
+kubectl delete pvc -l app.kubernetes.io/instance=businessplanner
 ```

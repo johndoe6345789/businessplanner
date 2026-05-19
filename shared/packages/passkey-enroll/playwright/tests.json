@@ -10,7 +10,7 @@
         { "action": "navigate", "url": "/login" },
         { "action": "waitForLoadState", "state": "domcontentloaded" },
         { "action": "fill", "label": "Email",
-          "value": "dev.admin@nextra.local" },
+          "value": "dev.admin@businessplanner.local" },
         { "action": "fill", "label": "Password", "value": "DevAdmin1" },
         { "action": "click", "role": "button", "text": "Log in" },
         { "action": "waitForLoadState", "state": "networkidle" },

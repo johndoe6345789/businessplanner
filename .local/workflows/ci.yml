@@ -128,12 +128,12 @@ jobs:
           context: ./tools/packagerepo
           file: ./tools/packagerepo/backend/Dockerfile
           push: false
-          tags: nextra-packagerepo:ci
+          tags: businessplanner-packagerepo:ci
           load: true
 
       - name: Verify image runs
         run: |
-          docker run --rm nextra-packagerepo:ci \
+          docker run --rm businessplanner-packagerepo:ci \
             packagerepo-server --help || true
           echo "Backend image built successfully."
 
@@ -171,7 +171,7 @@ jobs:
           context: ./tools/packagerepo
           file: ./tools/packagerepo/backend/Dockerfile
           push: false
-          tags: nextra-packagerepo:ci
+          tags: businessplanner-packagerepo:ci
           load: true
 
       - name: Run migrations
@@ -197,7 +197,7 @@ jobs:
             -e PGDATABASE=packagerepo \
             -e JWT_SECRET=ci-test-key \
             -e PORT=5050 \
-            nextra-packagerepo:ci
+            businessplanner-packagerepo:ci
           sleep 3
 
       - name: Health check

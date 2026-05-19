@@ -56,7 +56,7 @@
         {
           "type": "shell",
           "tag": "conan-upload",
-          "command": "curl -fsSL -X PUT {opt.repo}/v1/conan/nextra-backend/{opt.ver}/{arch}-release/blob -H \"Authorization: Bearer $(cat {token_file})\" -H \"Content-Type: application/octet-stream\" --data-binary @/tmp/conan-{arch}.tar.gz && rm -f /tmp/conan-{arch}.tar.gz"
+          "command": "curl -fsSL -X PUT {opt.repo}/v1/conan/businessplanner-backend/{opt.ver}/{arch}-release/blob -H \"Authorization: Bearer $(cat {token_file})\" -H \"Content-Type: application/octet-stream\" --data-binary @/tmp/conan-{arch}.tar.gz && rm -f /tmp/conan-{arch}.tar.gz"
         }
       ]
     },

@@ -32,7 +32,7 @@ export const rawBaseQuery = fetchBaseQuery({
     process.env.NEXT_PUBLIC_API_URL ?? API_BASE,
   timeout: REQUEST_TIMEOUT_MS,
   prepareHeaders: (headers, { getState }) => {
-    // Keycloak access token (nextra_sso cookie) is the
+    // Keycloak access token (businessplanner_sso cookie) is the
     // primary auth source. Fall back to the legacy Redux
     // access token only when the Keycloak cookie is
     // absent — the in-house auth path remains a viable

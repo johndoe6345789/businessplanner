@@ -1,6 +1,6 @@
 # Keycloak
 
-Realm: `nextra` (client `nextra-app`, public + PKCE).
+Realm: `businessplanner` (client `businessplanner-app`, public + PKCE).
 Admin console: <http://localhost:8088/sso/admin/>
 Public base:   <http://localhost:8889/sso/>
 
@@ -39,7 +39,7 @@ KC_MICROSOFT_CLIENT_ID    KC_MICROSOFT_CLIENT_SECRET
    - Google:    Google Cloud Console -> APIs & Services -> Credentials
    - Microsoft: Azure Portal -> Microsoft Entra ID -> App registrations
 2. Set the redirect / callback URI to:
-   `http://localhost:8889/sso/realms/nextra/broker/<alias>/endpoint`
+   `http://localhost:8889/sso/realms/businessplanner/broker/<alias>/endpoint`
    where `<alias>` is `github`, `google`, or `microsoft`.
 3. Put the client ID + secret into your host env or `.env` file:
    ```

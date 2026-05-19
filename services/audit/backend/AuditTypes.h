@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 /** @brief Decoded Kafka envelope for a single audit event. */
@@ -56,4 +56,4 @@ struct IntegrityReport
     std::string message;
 };
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

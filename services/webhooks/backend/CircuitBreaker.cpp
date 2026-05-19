@@ -5,7 +5,7 @@
 
 #include "webhooks/backend/CircuitBreaker.h"
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 bool CircuitBreaker::shouldAttempt(std::int64_t endpointId)
@@ -45,4 +45,4 @@ void CircuitBreaker::recordFailure(std::int64_t endpointId)
     }
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

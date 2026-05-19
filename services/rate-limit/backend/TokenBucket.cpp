@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <string>
 
-namespace nextra::ratelimit
+namespace businessplanner::ratelimit
 {
 
 namespace
@@ -74,4 +74,4 @@ BucketResult TokenBucket::parseReply(const std::string& raw)
     return r;
 }
 
-} // namespace nextra::ratelimit
+} // namespace businessplanner::ratelimit

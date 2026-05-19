@@ -2,14 +2,14 @@
 /**
  * @file services/infra/IKafkaProducer.h
  * @brief Abstract Kafka producer contract — mirrors the
- *        existing @ref nextra::infra::KafkaProducer shape so
+ *        existing @ref businessplanner::infra::KafkaProducer shape so
  *        publish sites do not care which implementation is
  *        linked into the binary.
  */
 
 #include <string>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -47,4 +47,4 @@ class IKafkaProducer
     virtual bool isConnected() const = 0;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

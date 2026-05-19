@@ -8,12 +8,12 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
-using nextra::jobs::JobHandler;
-using nextra::jobs::JobResult;
-using nextra::jobs::QueuedJob;
+using businessplanner::jobs::JobHandler;
+using businessplanner::jobs::JobResult;
+using businessplanner::jobs::QueuedJob;
 
 ScheduledPublisher::ScheduledPublisher(
     std::shared_ptr<drogon::orm::DbClient> db)
@@ -46,4 +46,4 @@ JobHandler ScheduledPublisher::makeHandler(
     return [pub](const QueuedJob& j) { return pub->run(j); };
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

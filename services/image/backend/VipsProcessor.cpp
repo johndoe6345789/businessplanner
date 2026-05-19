@@ -7,11 +7,11 @@
 
 #include <spdlog/spdlog.h>
 
-#ifdef NEXTRA_HAVE_VIPS
+#ifdef BUSINESSPLANNER_HAVE_VIPS
 #include <vips/vips.h>
 #endif
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 VipsProcessor::VipsProcessor() { ensureInit(); }
@@ -19,9 +19,9 @@ VipsProcessor::~VipsProcessor() = default;
 
 bool VipsProcessor::ensureInit()
 {
-#ifdef NEXTRA_HAVE_VIPS
+#ifdef BUSINESSPLANNER_HAVE_VIPS
     static bool ready = [] {
-        return vips_init("nextra-image") == 0;
+        return vips_init("businessplanner-image") == 0;
     }();
     return ready;
 #else
@@ -29,7 +29,7 @@ bool VipsProcessor::ensureInit()
 #endif
 }
 
-#ifdef NEXTRA_HAVE_VIPS
+#ifdef BUSINESSPLANNER_HAVE_VIPS
 static bool encode(VipsImage* img, const VariantSpec& s,
                    void** buf, std::size_t* len)
 {
@@ -52,7 +52,7 @@ ProcessingResult VipsProcessor::process(
     ProcessingResult r;
     r.variant.name = spec.name;
     r.variant.format = spec.format;
-#ifdef NEXTRA_HAVE_VIPS
+#ifdef BUSINESSPLANNER_HAVE_VIPS
     VipsImage* in = vips_image_new_from_buffer(
         src, srcLen, "", nullptr);
     if (!in) { r.error = "decode failed"; return r; }
@@ -89,4 +89,4 @@ ProcessingResult VipsProcessor::process(
 #endif
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

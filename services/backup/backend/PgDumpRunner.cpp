@@ -14,7 +14,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 namespace
@@ -71,4 +71,4 @@ std::int64_t runPgDump(
     return total;
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

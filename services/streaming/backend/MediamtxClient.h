@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 /// One active path as reported by GET /v3/paths/list.
@@ -52,4 +52,4 @@ private:
     std::string baseUrl_;
 };
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

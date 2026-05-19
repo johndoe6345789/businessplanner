@@ -56,7 +56,7 @@ void ForumController::createPost(
     store.insert(
         in,
         [cb, id](CommentRow row) {
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publish("upsert", "forum_posts",
                     std::to_string(row.id),
                     {{"target_type", row.targetType},

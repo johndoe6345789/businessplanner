@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -29,4 +29,4 @@ TranscoderConfig loadTranscoderConfig(const std::string& path);
  */
 std::string buildScaleFilter(const LadderRung& rung);
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

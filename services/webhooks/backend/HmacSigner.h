@@ -7,12 +7,12 @@
  * The canonical string signed is "<timestamp>.<body>" where the
  * timestamp is Unix seconds.  Receivers should reject anything
  * older than a few minutes to prevent replay attacks.  The returned
- * hex string is what goes into the X-Nextra-Signature header.
+ * hex string is what goes into the X-Businessplanner-Signature header.
  */
 
 #include <string>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 /**
@@ -26,4 +26,4 @@ std::string signHmacSha256(const std::string& secret,
                            const std::string& timestamp,
                            const std::string& body);
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

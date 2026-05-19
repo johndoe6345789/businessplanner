@@ -46,7 +46,7 @@ void EmailService::sendWelcomeEmail(
             sendEmail(email,
                       renderTemplate(
                           tmpl.value("subject",
-                                     "Welcome to Nextra!"),
+                                     "Welcome to Businessplanner!"),
                           vars),
                       renderTemplate(
                           tmpl.value("html", ""), vars));
@@ -75,7 +75,7 @@ void EmailService::sendPasswordResetEmail(
                 email,
                 renderTemplate(
                     tmpl.value("subject",
-                               "Reset Your Nextra Password"),
+                               "Reset Your Businessplanner Password"),
                     vars),
                 renderTemplate(
                     tmpl.value("html", ""), vars));

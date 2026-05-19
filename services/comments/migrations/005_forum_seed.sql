@@ -34,7 +34,7 @@ BEGIN
     FOR p IN SELECT * FROM (VALUES
         -- (board_slug, title, author, body, age_days, replies)
         ('general',
-         'Welcome to the Nextra forum!',
+         'Welcome to the Businessplanner forum!',
          u_admin,
          'Hey everyone — this is our brand new community '
          'space. Introduce yourself, share what you''re '
@@ -59,7 +59,7 @@ BEGIN
         ('announcements',
          'Beta is now open',
          u_admin,
-         'Nextra is officially in open beta. Thanks to '
+         'Businessplanner is officially in open beta. Thanks to '
          'everyone who tested with us. Bug reports and '
          'feedback welcome — see the support board.',
          20,

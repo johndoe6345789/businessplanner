@@ -16,12 +16,12 @@
 #include <format>
 #include <memory>
 
-namespace nextra::health
+namespace businessplanner::health
 {
 
-using nextra::jobs::JobHandler;
-using nextra::jobs::JobResult;
-using nextra::jobs::QueuedJob;
+using businessplanner::jobs::JobHandler;
+using businessplanner::jobs::JobResult;
+using businessplanner::jobs::QueuedJob;
 
 namespace
 {
@@ -95,4 +95,4 @@ JobHandler RouteHealthHandler::makeHandler()
     };
 }
 
-} // namespace nextra::health
+} // namespace businessplanner::health

@@ -1,6 +1,6 @@
 -- Email inbox tables for IMAP sync integration.
 -- Stores account credentials and synced messages
--- in the main Nextra database so the Drogon
+-- in the main Businessplanner database so the Drogon
 -- backend can serve the email client directly.
 
 CREATE TABLE IF NOT EXISTS email_accounts (

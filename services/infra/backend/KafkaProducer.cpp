@@ -3,7 +3,7 @@
  * @brief librdkafka producer body. Stub fallback lives in
  *        kafka_producer_stub.cpp; see KafkaProducer.h.
  */
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/KafkaProducer.h"
 
@@ -12,13 +12,13 @@
 
 #include <cstdlib>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 namespace
 {
 constexpr const char* kDefaultBootstrap = "kafka:9092";
-constexpr const char* kClientIdPrefix = "nextra-";
+constexpr const char* kClientIdPrefix = "businessplanner-";
 
 std::string envOr(const char* k, const char* def)
 {
@@ -95,6 +95,6 @@ KafkaProducer& KafkaProducer::instance()
     return inst;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

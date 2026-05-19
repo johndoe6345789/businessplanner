@@ -1,8 +1,8 @@
 #pragma once
 /**
  * @file services/audit/audit_consumer_adapter.h
- * @brief Adapter wrapping @ref nextra::infra::IKafkaConsumer so
- *        audit code keeps its own @ref nextra::audit::IKafkaConsumer
+ * @brief Adapter wrapping @ref businessplanner::infra::IKafkaConsumer so
+ *        audit code keeps its own @ref businessplanner::audit::IKafkaConsumer
  *        shape (poll(cb, max) returning dispatched count). Split
  *        out of AuditConsumer.cpp to respect the 100-LOC cap.
  */
@@ -15,7 +15,7 @@
 #include <mutex>
 #include <string>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 /**
@@ -39,11 +39,11 @@ public:
     void close() override;
 
 private:
-    std::unique_ptr<nextra::infra::IKafkaConsumer> inner_;
+    std::unique_ptr<businessplanner::infra::IKafkaConsumer> inner_;
     std::deque<std::string> queue_;
     std::mutex mu_;
     std::string brokers_;
     std::string group_;
 };
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

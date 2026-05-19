@@ -11,7 +11,7 @@
 
 #include <string>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 /// @brief Build a 400 JSON error response.
@@ -37,4 +37,4 @@ inline std::string webhooksEventsArray(const Json::Value& arr)
     return out;
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

@@ -16,7 +16,7 @@
 #include <functional>
 #include <string>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 /**
@@ -49,4 +49,4 @@ private:
     PdfConfig cfg_;
 };
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

@@ -1,22 +1,22 @@
 {
-  "authority": "http://localhost:8892/sso/realms/nextra",
-  "clientId": "nextra-app",
+  "authority": "http://localhost:8892/sso/realms/businessplanner",
+  "clientId": "businessplanner-app",
   "redirectUri": "http://localhost:8892/app/en/auth/callback",
   "postLogoutRedirectUri": "http://localhost:8892/app/en/login",
   "scopes": "openid profile email",
   "endpoints": {
     "authorization":
-      "http://localhost:8892/sso/realms/nextra/protocol/openid-connect/auth",
+      "http://localhost:8892/sso/realms/businessplanner/protocol/openid-connect/auth",
     "token":
-      "http://localhost:8892/sso/realms/nextra/protocol/openid-connect/token",
+      "http://localhost:8892/sso/realms/businessplanner/protocol/openid-connect/token",
     "logout":
-      "http://localhost:8892/sso/realms/nextra/protocol/openid-connect/logout"
+      "http://localhost:8892/sso/realms/businessplanner/protocol/openid-connect/logout"
   },
   "cookies": {
-    "access": "nextra_sso",
-    "refresh": "nextra_sso_refresh",
-    "state": "nextra_sso_state",
-    "verifier": "nextra_sso_verifier"
+    "access": "businessplanner_sso",
+    "refresh": "businessplanner_sso_refresh",
+    "state": "businessplanner_sso_state",
+    "verifier": "businessplanner_sso_verifier"
   },
   "refreshLeadSeconds": 60
 }

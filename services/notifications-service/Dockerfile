@@ -1,16 +1,16 @@
-# services/notifications-service/Dockerfile - nextra-notifications
+# services/notifications-service/Dockerfile - businessplanner-notifications
 # Generated from docker/service-base.Dockerfile;
 # per-service identity defaulted below so this
 # Dockerfile builds standalone. Edit the canonical
 # docker/service-base.Dockerfile, then regenerate.
-# Multi-stage build for all nextra Drogon microservices.
+# Multi-stage build for all businessplanner Drogon microservices.
 #
 # Stages toolchain and conan-deps have no per-service
 # ARGs, so Docker's layer cache shares them across all
 # 13 service builds — apt and conan run only once.
 #
 # Build args (only needed in final two stages):
-#   SVC_NAME   binary name      (e.g. nextra-auth)
+#   SVC_NAME   binary name      (e.g. businessplanner-auth)
 #   SVC_DIR    CMakeLists dir   (e.g. auth-service)
 #   SVC_PORT   exposed port     (e.g. 9001)
 
@@ -19,7 +19,7 @@ ARG RUNTIME_IMAGE=debian:sid-slim
 ARG APT_PROXY=
 
 # Per-service identity (override via --build-arg)
-ARG SVC_NAME=nextra-notifications
+ARG SVC_NAME=businessplanner-notifications
 ARG SVC_DIR=notifications-service
 ARG SVC_PORT=9003
 
@@ -95,9 +95,9 @@ RUN if [ -n "${APT_PROXY}" ]; then \
     apt-get install -y --no-install-recommends \
         ca-certificates libpq5 libssl3 && \
     rm -rf /var/lib/apt/lists/* && \
-    groupadd --system nextra && \
-    useradd --system --gid nextra \
-        --create-home nextra
+    groupadd --system businessplanner && \
+    useradd --system --gid businessplanner \
+        --create-home businessplanner
 
 # ── Stage 5: per-service runtime image ──────────────
 FROM runtime-base AS runtime
@@ -112,9 +112,9 @@ COPY "services/${SVC_DIR}/config/config.json" \
     ./config/config.json
 
 RUN mkdir -p logs && \
-    chown -R nextra:nextra /app
+    chown -R businessplanner:businessplanner /app
 
-USER nextra
+USER businessplanner
 EXPOSE ${SVC_PORT}
 
 ENTRYPOINT ["./bin/svc", "config/config.json"]

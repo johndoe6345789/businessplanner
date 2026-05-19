@@ -12,7 +12,7 @@
 
 #include <format>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 void AlertService::list(
@@ -82,4 +82,4 @@ void AlertService::list(
         });
 }
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

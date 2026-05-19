@@ -2,7 +2,7 @@
 /**
  * @file RateLimitDemoController.h
  * @brief Tiny /api/ratelimit/ping route that demonstrates the
- *        new nextra::filters::RateLimitFilter in isolation.
+ *        new businessplanner::filters::RateLimitFilter in isolation.
  *
  * The existing auth / admin controllers are owned by other
  * agents and are not edited here. This controller exists so
@@ -13,7 +13,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::controllers
+namespace businessplanner::controllers
 {
 
 /**
@@ -28,7 +28,7 @@ class RateLimitDemoController
     ADD_METHOD_TO(
         RateLimitDemoController::ping,
         "/api/ratelimit/ping", drogon::Get,
-        "nextra::filters::RateLimitFilter");
+        "businessplanner::filters::RateLimitFilter");
     METHOD_LIST_END
 
     /**
@@ -42,4 +42,4 @@ class RateLimitDemoController
             const drogon::HttpResponsePtr&)>&& cb);
 };
 
-} // namespace nextra::controllers
+} // namespace businessplanner::controllers

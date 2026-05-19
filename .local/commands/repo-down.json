@@ -14,12 +14,12 @@
     {
       "type": "shell",
       "tag": "repo",
-      "command": "docker rm -f nextra-packagerepo"
+      "command": "docker rm -f businessplanner-packagerepo"
     },
     {
       "type": "shell",
       "tag": "repo",
-      "command": "docker rm -f nextra-packagerepo-db"
+      "command": "docker rm -f businessplanner-packagerepo-db"
     }
   ]
 }

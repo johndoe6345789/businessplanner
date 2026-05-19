@@ -12,7 +12,7 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 
-namespace nextra::controllers
+namespace businessplanner::controllers
 {
 
 using namespace drogon;
@@ -48,4 +48,4 @@ void StatusController::incidents(
     };
 }
 
-} // namespace nextra::controllers
+} // namespace businessplanner::controllers

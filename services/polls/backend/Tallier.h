@@ -12,7 +12,7 @@
 
 #include <vector>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 /**
@@ -32,4 +32,4 @@ std::vector<OptionTally> tally(
     const Poll& poll,
     const std::vector<PollVote>& votes);
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

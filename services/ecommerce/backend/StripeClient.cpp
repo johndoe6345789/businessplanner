@@ -8,7 +8,7 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 StripeClient::StripeClient(
@@ -66,4 +66,4 @@ StripeClient::createPaymentIntent(
     }
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

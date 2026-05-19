@@ -57,7 +57,7 @@
     { "id": "alpine", "label": "alpine", "desc": "Alpine Linux apk packages", "color": "#0D597F",
       "install": "```\nmanager repo pull {ns}/{name}@{version}\n# planned: apk add {name}={version}\n```" },
     { "id": "helm", "label": "helm", "desc": "Kubernetes Helm charts", "color": "#0F1689",
-      "install": "```\nmanager repo pull {ns}/{name}@{version}\n# planned: helm install {name} nextra/{name} --version {version}\n```" },
+      "install": "```\nmanager repo pull {ns}/{name}@{version}\n# planned: helm install {name} businessplanner/{name} --version {version}\n```" },
     { "id": "oci", "label": "oci", "desc": "OCI container images", "color": "#2496ED",
       "install": "```\nmanager repo pull {ns}/{name}@{version}\n# planned: docker pull {host}/{ns}/{name}:{version}\n```" },
     { "id": "rubygems", "label": "rubygems", "desc": "Ruby gems", "color": "#CC342D",

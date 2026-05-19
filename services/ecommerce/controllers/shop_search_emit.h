@@ -17,9 +17,9 @@ namespace controllers
 
 /// Emit an upsert for one product row.
 inline void emitProduct(
-    const nextra::ecommerce::Product& p)
+    const businessplanner::ecommerce::Product& p)
 {
-    nextra::search::SearchEventPublisher::publish(
+    businessplanner::search::SearchEventPublisher::publish(
         "upsert", "products",
         std::to_string(p.id),
         {{"sku", p.sku}, {"name", p.name},

@@ -16,7 +16,7 @@
 
 namespace fs = std::filesystem;
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 bool runLadders(
@@ -62,4 +62,4 @@ bool runLadders(
     return true;
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

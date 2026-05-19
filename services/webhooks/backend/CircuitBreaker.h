@@ -18,7 +18,7 @@
 #include <mutex>
 #include <unordered_map>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 class CircuitBreaker
@@ -49,4 +49,4 @@ private:
     std::unordered_map<std::int64_t, Entry> entries_;
 };
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

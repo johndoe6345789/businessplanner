@@ -1,11 +1,11 @@
 ##
 ## @file cmake/service.cmake
-## @brief Macro for building a nextra microservice.
+## @brief Macro for building a businessplanner microservice.
 ##
 ## Usage (from a service's CMakeLists.txt):
 ##   include(service.cmake)
-##   nextra_service(
-##     NAME nextra-auth
+##   businessplanner_service(
+##     NAME businessplanner-auth
 ##     DIRS auth/backend auth/backend/oauth ...
 ##   )
 ##
@@ -16,7 +16,7 @@
 
 ## HTTP services: full shared kernel (auth filters need
 ## auth/backend; every request authenticates).
-set(NEXTRA_SERVICE_SHARED_DIRS
+set(BUSINESSPLANNER_SERVICE_SHARED_DIRS
     drogon-host/backend/utils
     http-filters/backend
     auth/backend
@@ -30,15 +30,15 @@ set(NEXTRA_SERVICE_SHARED_DIRS
 ## CLI one-shots (NO_HTTP): minimal set — no http-filters /
 ## auth / keycloak / rate-limit, so the auth dependency
 ## cascade (auth -> email -> ...) is not dragged into a
-## non-serving binary like nextra-migrate.
-set(NEXTRA_SERVICE_CLI_DIRS
+## non-serving binary like businessplanner-migrate.
+set(BUSINESSPLANNER_SERVICE_CLI_DIRS
     drogon-host/backend/utils
     infra/backend
     orm-models/backend
     service-host
 )
 
-macro(nextra_service)
+macro(businessplanner_service)
     cmake_parse_arguments(SVC "NO_HTTP" "NAME" "DIRS" ${ARGN})
 
     set(_root "${CMAKE_CURRENT_SOURCE_DIR}/../..")
@@ -60,9 +60,9 @@ macro(nextra_service)
     set(_srcs "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
 
     if(SVC_NO_HTTP)
-        set(_shared ${NEXTRA_SERVICE_CLI_DIRS})
+        set(_shared ${BUSINESSPLANNER_SERVICE_CLI_DIRS})
     else()
-        set(_shared ${NEXTRA_SERVICE_SHARED_DIRS})
+        set(_shared ${BUSINESSPLANNER_SERVICE_SHARED_DIRS})
     endif()
     set(_all_dirs ${_shared} ${SVC_DIRS})
     # A service may also list a shared dir explicitly; dedupe
@@ -84,7 +84,7 @@ macro(nextra_service)
     )
 
     target_compile_definitions(${SVC_NAME}
-        PRIVATE NEXTRA_VERSION="${PROJECT_VERSION}"
+        PRIVATE BUSINESSPLANNER_VERSION="${PROJECT_VERSION}"
     )
 
     target_link_libraries(${SVC_NAME}
@@ -102,7 +102,7 @@ macro(nextra_service)
         target_link_libraries(${SVC_NAME}
             PRIVATE RdKafka::rdkafka)
         target_compile_definitions(${SVC_NAME}
-            PRIVATE NEXTRA_HAVE_KAFKA)
+            PRIVATE BUSINESSPLANNER_HAVE_KAFKA)
     endif()
 
     if(mailio_FOUND)
@@ -116,6 +116,6 @@ macro(nextra_service)
         target_link_libraries(${SVC_NAME}
             PRIVATE ${VIPS_LIBRARIES})
         target_compile_definitions(${SVC_NAME}
-            PRIVATE NEXTRA_HAVE_VIPS)
+            PRIVATE BUSINESSPLANNER_HAVE_VIPS)
     endif()
 endmacro()

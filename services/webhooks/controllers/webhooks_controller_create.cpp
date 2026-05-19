@@ -9,7 +9,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 using namespace drogon;
@@ -43,4 +43,4 @@ void WebhooksController::createEndpoint(
     cb(r);
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

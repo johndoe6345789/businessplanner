@@ -18,7 +18,7 @@ int S3Cmd::build()
     if (!checkDaemon())
         return 1;
     fmt::print("[s3] Building S3 server image ...\n");
-    return shell("s3", "docker build -t nextra-s3server "
+    return shell("s3", "docker build -t businessplanner-s3server "
                        "-f tools/s3server/backend/Dockerfile "
                        "tools/s3server");
 }

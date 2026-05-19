@@ -21,11 +21,11 @@ struct RpConfig
 RpConfig loadFromEnv()
 {
     RpConfig r;
-    const char* id = std::getenv("NEXTRA_RP_ID");
-    const char* name = std::getenv("NEXTRA_RP_NAME");
-    const char* orig = std::getenv("NEXTRA_RP_ORIGIN");
+    const char* id = std::getenv("BUSINESSPLANNER_RP_ID");
+    const char* name = std::getenv("BUSINESSPLANNER_RP_NAME");
+    const char* orig = std::getenv("BUSINESSPLANNER_RP_ORIGIN");
     r.rpId = id ? id : "localhost";
-    r.rpName = name ? name : "Nextra";
+    r.rpName = name ? name : "Businessplanner";
     r.origin = orig ? orig : "http://localhost:8892";
     return r;
 }
@@ -37,9 +37,9 @@ class RpConfigTest : public ::testing::Test
 protected:
     void TearDown() override
     {
-        unsetenv("NEXTRA_RP_ID");
-        unsetenv("NEXTRA_RP_NAME");
-        unsetenv("NEXTRA_RP_ORIGIN");
+        unsetenv("BUSINESSPLANNER_RP_ID");
+        unsetenv("BUSINESSPLANNER_RP_NAME");
+        unsetenv("BUSINESSPLANNER_RP_ORIGIN");
     }
 };
 
@@ -47,15 +47,15 @@ TEST_F(RpConfigTest, DefaultsWhenUnset)
 {
     auto r = loadFromEnv();
     EXPECT_EQ(r.rpId, "localhost");
-    EXPECT_EQ(r.rpName, "Nextra");
+    EXPECT_EQ(r.rpName, "Businessplanner");
     EXPECT_EQ(r.origin, "http://localhost:8892");
 }
 
 TEST_F(RpConfigTest, ReadsEnvOverrides)
 {
-    setenv("NEXTRA_RP_ID", "example.com", 1);
-    setenv("NEXTRA_RP_NAME", "Ex", 1);
-    setenv("NEXTRA_RP_ORIGIN", "https://example.com", 1);
+    setenv("BUSINESSPLANNER_RP_ID", "example.com", 1);
+    setenv("BUSINESSPLANNER_RP_NAME", "Ex", 1);
+    setenv("BUSINESSPLANNER_RP_ORIGIN", "https://example.com", 1);
     auto r = loadFromEnv();
     EXPECT_EQ(r.rpId, "example.com");
     EXPECT_EQ(r.rpName, "Ex");

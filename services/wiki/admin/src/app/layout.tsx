@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Wiki — Nextra',
+  title: 'Wiki — Businessplanner',
   description:
     'Collaborative wiki with version history',
 }

@@ -50,7 +50,7 @@ void ShopController::getProduct(
     auto store = shop::products();
     // Accept numeric id or slug — frontend uses slug,
     // admin tooling uses id.
-    std::optional<nextra::ecommerce::Product> p;
+    std::optional<businessplanner::ecommerce::Product> p;
     const bool numeric =
         !key.empty()
         && std::all_of(key.begin(), key.end(),
@@ -72,7 +72,7 @@ void ShopController::createProduct(
     try {
         auto body =
             json::parse(std::string{req->body()});
-        nextra::ecommerce::Product p;
+        businessplanner::ecommerce::Product p;
         p.sku         = body.at("sku").get<std::string>();
         p.slug        = body.value("slug", p.sku);
         p.name        = body.at("name").get<std::string>();

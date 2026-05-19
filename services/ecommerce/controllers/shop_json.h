@@ -32,7 +32,7 @@ inline std::string formatPrice(
 }
 
 inline nlohmann::json toJson(
-    const nextra::ecommerce::Product& p)
+    const businessplanner::ecommerce::Product& p)
 {
     return {
         {"id", p.id},
@@ -51,7 +51,7 @@ inline nlohmann::json toJson(
 }
 
 inline nlohmann::json toJson(
-    const nextra::ecommerce::Review& r)
+    const businessplanner::ecommerce::Review& r)
 {
     return {
         {"id", r.id},

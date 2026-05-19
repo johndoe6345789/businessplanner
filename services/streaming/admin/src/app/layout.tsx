@@ -9,7 +9,7 @@ import './globals.scss'
  * typography token fonts resolve the same way.
  */
 export const metadata: Metadata = {
-  title: 'Streams — Nextra',
+  title: 'Streams — Businessplanner',
   description:
     'Live streaming control plane operator tool',
 }

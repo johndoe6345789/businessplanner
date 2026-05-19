@@ -6,7 +6,7 @@
 
 #include "ecommerce/backend/OrderService.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 void OrderService::setStripePi(
@@ -38,4 +38,4 @@ void OrderService::markShipped(std::int64_t orderId)
         "shipped_at=NOW() WHERE id=$1", orderId);
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

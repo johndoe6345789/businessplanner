@@ -14,7 +14,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 JobScheduler::JobScheduler(std::shared_ptr<drogon::orm::DbClient> db,
@@ -91,4 +91,4 @@ void JobScheduler::recoveryLoop()
     }
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

@@ -1,7 +1,7 @@
 /**
  * @file seed.h
  * @brief Declaration of the seed sub-command handler.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #pragma once

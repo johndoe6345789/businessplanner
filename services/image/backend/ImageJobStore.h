@@ -17,7 +17,7 @@
 #include <optional>
 #include <string>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 /// @brief Thin repository object around the jobs table.
@@ -66,4 +66,4 @@ class ImageJobStore
     drogon::orm::DbClientPtr db_;
 };
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

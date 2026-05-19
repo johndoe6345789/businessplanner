@@ -37,7 +37,7 @@ namespace commands
 
 void cmdSearchIndexer(const std::string& config)
 {
-    using namespace nextra::search;
+    using namespace businessplanner::search;
     std::signal(SIGINT, onSignal);
     std::signal(SIGTERM, onSignal);
     initIndexerLogging();

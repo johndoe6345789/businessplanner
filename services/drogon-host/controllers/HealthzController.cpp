@@ -46,12 +46,12 @@ void HealthzController::healthz(
     nlohmann::json body;
     body["db"] = probeDb();
     body["redis"] =
-        nextra::infra::RedisClient::instance()
+        businessplanner::infra::RedisClient::instance()
                 .isConnected()
             ? kOk
             : kDown;
     body["kafka"] =
-        nextra::infra::KafkaProducer::instance()
+        businessplanner::infra::KafkaProducer::instance()
                 .isConnected()
             ? kOk
             : kDown;

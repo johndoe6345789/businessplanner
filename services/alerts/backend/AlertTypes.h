@@ -9,7 +9,7 @@
 #include <functional>
 #include <string>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 using json = nlohmann::json;
@@ -30,4 +30,4 @@ using OkCb  = std::function<void(json)>;
 /** @brief Error callback — HTTP-ish status + message. */
 using ErrCb = std::function<void(int, std::string)>;
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

@@ -19,7 +19,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 class BackupsController
@@ -51,4 +51,4 @@ public:
         std::function<void(const drogon::HttpResponsePtr&)>&& cb);
 };
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

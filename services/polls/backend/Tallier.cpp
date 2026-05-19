@@ -8,7 +8,7 @@
 
 #include <unordered_map>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 std::vector<OptionTally> tally(
@@ -49,4 +49,4 @@ std::vector<OptionTally> tally(
     return out;
 }
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

@@ -9,12 +9,12 @@
     },
     {
       "type": "print",
-      "text": "[s3] Tailing nextra-s3server logs"
+      "text": "[s3] Tailing businessplanner-s3server logs"
     },
     {
       "type": "shell",
       "tag": "s3",
-      "command": "docker logs -f --tail=100 nextra-s3server"
+      "command": "docker logs -f --tail=100 businessplanner-s3server"
     }
   ]
 }

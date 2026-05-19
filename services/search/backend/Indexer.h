@@ -12,7 +12,7 @@
 #include <memory>
 #include <string>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /**
@@ -70,4 +70,4 @@ class Indexer
     std::int32_t batchSize_;
 };
 
-} // namespace nextra::search
+} // namespace businessplanner::search

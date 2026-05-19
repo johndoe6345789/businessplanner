@@ -13,7 +13,7 @@
 #include <drogon/orm/DbClient.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 NotificationRouter::NotificationRouter(
@@ -85,4 +85,4 @@ DeliveryResult NotificationRouter::dispatch(
     return r;
 }
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

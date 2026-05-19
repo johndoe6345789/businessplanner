@@ -20,7 +20,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 class InAppSender : public ChannelSender
@@ -39,4 +39,4 @@ class InAppSender : public ChannelSender
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

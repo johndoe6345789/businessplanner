@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 class ReviewStore
@@ -69,4 +69,4 @@ class ReviewStore
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

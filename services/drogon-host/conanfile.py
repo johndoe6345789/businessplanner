@@ -1,4 +1,4 @@
-"""Conan 2 recipe for the Nextra C++ backend."""
+"""Conan 2 recipe for the Businessplanner C++ backend."""
 
 import os
 
@@ -6,7 +6,7 @@ from conan import ConanFile
 from conan.tools.cmake import cmake_layout
 
 
-class NextraBackend(ConanFile):
+class BusinessplannerBackend(ConanFile):
     """Backend dependencies and build configuration."""
 
     settings = "os", "compiler", "build_type", "arch"

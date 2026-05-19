@@ -19,7 +19,7 @@
 
 #include <string>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 /**
@@ -45,4 +45,4 @@ class ChannelSender
         const RenderedMessage& msg) = 0;
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

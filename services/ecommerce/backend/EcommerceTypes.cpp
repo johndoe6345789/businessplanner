@@ -5,7 +5,7 @@
 
 #include "ecommerce/backend/EcommerceTypes.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 std::string statusToString(OrderStatus s)
@@ -29,4 +29,4 @@ OrderStatus statusFromString(const std::string& s)
     return OrderStatus::Pending;
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

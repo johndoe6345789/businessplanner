@@ -25,10 +25,10 @@ namespace commands
 /// Build the dispatcher closure. cfg supplies the
 /// logical-name → esIndex map; es is kept alive
 /// by search_indexer.cpp.
-inline nextra::infra::KafkaMessageHandler
+inline businessplanner::infra::KafkaMessageHandler
 buildSearchDispatcher(
-    const nextra::search::IndexerConfig& cfg,
-    std::shared_ptr<nextra::search::ElasticClient> es)
+    const businessplanner::search::IndexerConfig& cfg,
+    std::shared_ptr<businessplanner::search::ElasticClient> es)
 {
     auto map = std::make_shared<std::unordered_map<
         std::string, std::string>>();
@@ -37,9 +37,9 @@ buildSearchDispatcher(
 
     return [map, es](const std::string& key,
                      const std::string& payload) {
-        nextra::search::json env;
+        businessplanner::search::json env;
         try {
-            env = nextra::search::json::parse(payload);
+            env = businessplanner::search::json::parse(payload);
         } catch (...) {
             spdlog::warn(
                 "search dispatch: bad JSON key={}",
@@ -59,8 +59,8 @@ buildSearchDispatcher(
             return;
         }
         const auto esIndex = it->second;
-        nextra::search::json doc = env.value(
-            "doc", nextra::search::json::object());
+        businessplanner::search::json doc = env.value(
+            "doc", businessplanner::search::json::object());
         drogon::app().getLoop()->queueInLoop(
             [es, op, esIndex, id, doc]() {
                 auto ok = [esIndex, id, op](auto) {

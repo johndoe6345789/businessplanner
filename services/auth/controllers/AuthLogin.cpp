@@ -5,7 +5,7 @@
  * Phase 4 of the Keycloak migration: Keycloak owns the
  * login flow end-to-end. This endpoint used to verify a
  * password and issue an in-house JWT + set the legacy
- * `nextra_sso` HttpOnly cookie carrying the refresh
+ * `businessplanner_sso` HttpOnly cookie carrying the refresh
  * token. That bypassed Keycloak entirely.
  *
  * The route is retained per template-repo policy but
@@ -29,9 +29,9 @@ void AuthController::login(
 {
     static const std::string kTarget =
         "http://localhost:8892"
-        "/sso/realms/nextra/"
+        "/sso/realms/businessplanner/"
         "protocol/openid-connect/auth"
-        "?client_id=nextra-app"
+        "?client_id=businessplanner-app"
         "&response_type=code"
         "&scope=openid+profile+email"
         "&redirect_uri="

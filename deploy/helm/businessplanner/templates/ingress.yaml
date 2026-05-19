@@ -1,0 +1,62 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "businessplanner.fullname" . }}
+  labels:
+    {{- include "businessplanner.labels" . | nindent 4 }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- if .Values.ingress.tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
+      secretName: {{ .Values.ingress.tls.secretName }}
+  {{- end }}
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /app
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "businessplanner.fullname" . }}-frontend
+                port:
+                  number: {{ .Values.frontend.port }}
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "businessplanner.fullname" . }}-backend
+                port:
+                  number: {{ .Values.backend.port }}
+          - path: /sso
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "businessplanner.fullname" . }}-sso
+                port:
+                  number: {{ .Values.sso.port }}
+          - path: /jobs
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "businessplanner.fullname" . }}-job-scheduler
+                port:
+                  number: {{ .Values.jobScheduler.port }}
+          - path: /cron
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "businessplanner.fullname" . }}-cron-manager
+                port:
+                  number: {{ .Values.cronManager.port }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "businessplanner.fullname" . }}-portal
+                port:
+                  number: {{ .Values.portal.port }}
+{{- end -}}

@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 /**
@@ -71,4 +71,4 @@ struct ProcessingResult
     std::string error;
 };
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

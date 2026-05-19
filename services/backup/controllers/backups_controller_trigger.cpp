@@ -11,7 +11,7 @@
 #include <drogon/drogon.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 using namespace drogon;
@@ -57,4 +57,4 @@ void BackupsController::trigger(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

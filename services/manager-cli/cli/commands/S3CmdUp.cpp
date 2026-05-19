@@ -70,7 +70,7 @@ int S3Cmd::up()
                                      "-e PGUSER=s3user "
                                      "-e PGPASSWORD=s3pass "
                                      "-e PGDATABASE=s3server "
-                                     "nextra-s3server",
+                                     "businessplanner-s3server",
                                      kContainer, kNetwork, kPort, kDataVol,
                                      kDbContainer, kDbContainer));
 

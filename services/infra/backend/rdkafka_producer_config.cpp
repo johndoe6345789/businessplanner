@@ -1,18 +1,18 @@
 /**
  * @file services/infra/rdkafka_producer_config.cpp
  * @brief conf_set helpers and delivery-report callback for
- *        @ref nextra::infra::RdKafkaProducer. Split out so
+ *        @ref businessplanner::infra::RdKafkaProducer. Split out so
  *        RdKafkaProducer.cpp stays under the 100-LOC cap.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/rdkafka_producer_internal.h"
 
 #include <librdkafka/rdkafka.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::infra::producer_detail
+namespace businessplanner::infra::producer_detail
 {
 
 bool cset(
@@ -44,6 +44,6 @@ void drCallback(
     }
 }
 
-} // namespace nextra::infra::producer_detail
+} // namespace businessplanner::infra::producer_detail
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

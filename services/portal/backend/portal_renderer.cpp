@@ -26,12 +26,12 @@ std::string renderPortalHtml(
        << "  <meta name=\"viewport\" "
        << "content=\"width=device-width,"
        << " initial-scale=1\">\n"
-       << "  <title>Nextra Portal</title>\n"
+       << "  <title>Businessplanner Portal</title>\n"
        << "  <link rel=\"stylesheet\" "
        << "href=\"/portal/styles.css\">\n"
        << "</head>\n<body>\n"
        << "  <header>\n"
-       << "    <h1>Nextra Developer Portal</h1>\n"
+       << "    <h1>Businessplanner Developer Portal</h1>\n"
        << "    <p>All services at a glance</p>\n"
        << "  </header>\n  <div class=\"grid\">\n";
     if (tools.is_array()) {
@@ -40,7 +40,7 @@ std::string renderPortalHtml(
         }
     }
     os << "  </div>\n  <footer>\n"
-       << "    Nextra &mdash; "
+       << "    Businessplanner &mdash; "
        << "docker compose --profile tools up\n"
        << "  </footer>\n</body>\n</html>\n";
     return os.str();

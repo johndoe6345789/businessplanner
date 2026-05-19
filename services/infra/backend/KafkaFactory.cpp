@@ -1,6 +1,6 @@
 /**
  * @file services/infra/KafkaFactory.cpp
- * @brief Implementation of @ref nextra::infra::makeKafkaConsumer
+ * @brief Implementation of @ref businessplanner::infra::makeKafkaConsumer
  *        and friends. Uses preprocessor selection so the stub
  *        translation unit still compiles without librdkafka.
  */
@@ -9,14 +9,14 @@
 #include "infra/backend/StubKafkaConsumer.h"
 #include "infra/backend/StubKafkaProducer.h"
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 #include "infra/backend/RdKafkaConsumer.h"
 #include "infra/backend/RdKafkaProducer.h"
 #endif
 
 #include <cstdlib>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 namespace
@@ -36,7 +36,7 @@ std::string resolveBrokers(const std::string& explicitValue)
 
 bool hasRealKafka()
 {
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
     return true;
 #else
     return false;
@@ -49,7 +49,7 @@ std::unique_ptr<IKafkaConsumer> makeKafkaConsumer(
     const std::vector<std::string>& topics)
 {
     const auto bs = resolveBrokers(brokers);
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
     return std::make_unique<RdKafkaConsumer>(
         bs, groupId, topics);
 #else
@@ -74,7 +74,7 @@ std::unique_ptr<IKafkaProducer> makeKafkaProducer(
     const std::string& clientId)
 {
     const auto bs = resolveBrokers(brokers);
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
     return std::make_unique<RdKafkaProducer>(
         bs, clientId);
 #else
@@ -84,4 +84,4 @@ std::unique_ptr<IKafkaProducer> makeKafkaProducer(
 #endif
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

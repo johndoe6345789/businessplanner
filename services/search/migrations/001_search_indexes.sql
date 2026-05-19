@@ -31,12 +31,12 @@ DELETE FROM search_indexes
 -- services/search/constants.json.
 INSERT INTO search_indexes (name, target_table, es_index)
 VALUES
-    ('forum_posts',   'comments_v2', 'nextra-forum'),
-    ('wiki_pages',    'wiki_pages',  'nextra-wiki'),
-    ('articles',      'articles',    'nextra-blog'),
-    ('products',      'products',    'nextra-products'),
-    ('gallery_items', 'galleries',   'nextra-gallery'),
-    ('users',         'users',       'nextra-users')
+    ('forum_posts',   'comments_v2', 'businessplanner-forum'),
+    ('wiki_pages',    'wiki_pages',  'businessplanner-wiki'),
+    ('articles',      'articles',    'businessplanner-blog'),
+    ('products',      'products',    'businessplanner-products'),
+    ('gallery_items', 'galleries',   'businessplanner-gallery'),
+    ('users',         'users',       'businessplanner-users')
 ON CONFLICT (name) DO UPDATE
    SET target_table = EXCLUDED.target_table,
        es_index     = EXCLUDED.es_index,

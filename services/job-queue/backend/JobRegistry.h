@@ -10,7 +10,7 @@
  * registered callable.  Handlers are pure C++ functions — they do
  * not cross process boundaries, so the scheduler and the workers
  * run in the same backend binary (in the `job-scheduler` subcommand
- * of `nextra-api`).
+ * of `businessplanner-api`).
  */
 
 #include "JobTypes.h"
@@ -19,7 +19,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 /**
@@ -63,4 +63,4 @@ private:
     std::unordered_map<std::string, JobHandler> handlers_;
 };
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

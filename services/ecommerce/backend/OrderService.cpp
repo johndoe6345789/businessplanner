@@ -7,7 +7,7 @@
 
 #include "ecommerce/backend/OrderService.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 OrderService::OrderService(
@@ -87,4 +87,4 @@ std::optional<Order> OrderService::byId(std::int64_t id)
     return o;
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

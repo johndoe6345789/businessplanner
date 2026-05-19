@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 bool extractThumbnail(
@@ -40,4 +40,4 @@ bool extractThumbnail(
     return true;
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

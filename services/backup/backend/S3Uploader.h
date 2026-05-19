@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 /**
@@ -32,4 +32,4 @@ bool uploadToS3(const BackupConfig& cfg,
                 const std::string& key,
                 const std::vector<unsigned char>& payload);
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

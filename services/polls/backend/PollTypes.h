@@ -9,7 +9,7 @@
 #include <vector>
 #include <optional>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 /** @brief Poll kind enum (mirrors SQL CHECK). */
@@ -72,4 +72,4 @@ PollKind parseKind(const std::string& s);
 /** @brief Render a kind as SQL text. */
 std::string kindToString(PollKind k);
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

@@ -49,9 +49,9 @@ RUN cd /src/services/drogon-host && \
     cmake --build build -j"$(nproc)"
 
 # ── Extract migration SQL files only ──────────────────────────────
-# Mirrors docker/nextra-api.Dockerfile: copies only *.sql from
+# Mirrors docker/businessplanner-api.Dockerfile: copies only *.sql from
 # services/<domain>/migrations/ so the runtime image can run
-# `nextra-api migrate` without bundling all C++ source.
+# `businessplanner-api migrate` without bundling all C++ source.
 FROM build AS migration-files
 
 RUN find /src/services -type f -name "*.sql" \
@@ -71,12 +71,12 @@ RUN apt-get update && \
     libssl3 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --system nextra && \
-    useradd --system --gid nextra --create-home nextra
+RUN groupadd --system businessplanner && \
+    useradd --system --gid businessplanner --create-home businessplanner
 
 WORKDIR /app
 
-COPY --from=build /src/build/nextra-api ./nextra-api
+COPY --from=build /src/build/businessplanner-api ./businessplanner-api
 COPY services/drogon-host/config ./config
 COPY --from=build /src/services/audit/constants.json \
     ./constants/audit-manager.json
@@ -106,18 +106,18 @@ COPY --from=build \
     /src/services/http-filters/constants/security-headers.json \
     ./constants/security-headers.json
 
-# Migration SQL files + dependency graph (needed by `nextra-api
+# Migration SQL files + dependency graph (needed by `businessplanner-api
 # migrate`) — without these the migrate sidecar cannot bootstrap.
 COPY --from=migration-files /out/services ./services
 COPY services/migration-graph.json \
     ./services/migration-graph.json
 
 RUN mkdir -p logs public uploads && \
-    chown -R nextra:nextra /app
+    chown -R businessplanner:businessplanner /app
 
-USER nextra
+USER businessplanner
 
 EXPOSE 8080
 
-ENTRYPOINT ["./nextra-api"]
+ENTRYPOINT ["./businessplanner-api"]
 CMD ["serve", "--config", "config/config.prod.json"]

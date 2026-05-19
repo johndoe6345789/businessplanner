@@ -13,7 +13,7 @@
 #include <cstddef>
 #include <string>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 /**
@@ -24,4 +24,4 @@ namespace nextra::streaming
  */
 std::string generateIngestKey(std::size_t nBytes = 24);
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

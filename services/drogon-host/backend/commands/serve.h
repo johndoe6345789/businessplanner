@@ -1,7 +1,7 @@
 /**
  * @file serve.h
  * @brief Declaration of the serve sub-command handler.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #pragma once

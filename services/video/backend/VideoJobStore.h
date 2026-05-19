@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 class VideoJobStore
@@ -49,4 +49,4 @@ private:
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

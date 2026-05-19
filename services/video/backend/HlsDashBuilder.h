@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -32,4 +32,4 @@ std::vector<std::string> buildDashArgs(
     const std::string& outDir,
     const LadderRung& rung);
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

@@ -4,7 +4,7 @@
  * @file AuditConsumer.h
  * @brief Abstract Kafka consumer for the `audit.events` topic.
  *
- * The real librdkafka wrapper lives behind `NEXTRA_HAVE_KAFKA`
+ * The real librdkafka wrapper lives behind `BUSINESSPLANNER_HAVE_KAFKA`
  * while Phase 0 infra is still in flight.  Until it is defined,
  * `StubKafkaConsumer` is used — it returns no messages and the
  * audit-manager daemon still boots cleanly so it can be smoke
@@ -18,7 +18,7 @@
 #include <memory>
 #include <string>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 /** @brief Producer-agnostic Kafka consumer contract. */
@@ -67,4 +67,4 @@ void runConsumerLoop(IKafkaConsumer& consumer,
                      const std::string& topic,
                      std::atomic<bool>& stop);
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

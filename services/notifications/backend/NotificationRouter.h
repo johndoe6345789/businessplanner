@@ -24,7 +24,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 class NotificationRouter
@@ -55,4 +55,4 @@ class NotificationRouter
         std::unique_ptr<ChannelSender>> senders_;
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

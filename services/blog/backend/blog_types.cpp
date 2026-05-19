@@ -5,7 +5,7 @@
 
 #include "BlogTypes.h"
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 std::string statusToString(ArticleStatus s)
@@ -28,4 +28,4 @@ ArticleStatus statusFromString(const std::string& s)
     return ArticleStatus::Draft;
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

@@ -11,7 +11,7 @@
 
 #include <stdexcept>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 using namespace drogon;
@@ -43,4 +43,4 @@ std::string S3Upload::put(const std::string& key,
     return key;
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

@@ -3,7 +3,7 @@
  * @file services/infra/RdKafkaConsumer.h
  * @brief Real librdkafka-backed @ref IKafkaConsumer.
  *
- * Only compiled when @c NEXTRA_HAVE_KAFKA is defined (i.e.
+ * Only compiled when @c BUSINESSPLANNER_HAVE_KAFKA is defined (i.e.
  * @c find_package(RdKafka) succeeded). Daemons should never
  * instantiate this directly — go through
  * @ref makeKafkaConsumer in KafkaFactory.h which will return
@@ -24,7 +24,7 @@
 struct rd_kafka_s;
 struct rd_kafka_conf_s;
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -73,4 +73,4 @@ class RdKafkaConsumer final : public IKafkaConsumer
     bool closed_{false};
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

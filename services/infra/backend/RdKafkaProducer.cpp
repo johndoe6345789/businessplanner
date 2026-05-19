@@ -1,14 +1,14 @@
 /**
  * @file services/infra/RdKafkaProducer.cpp
  * @brief Construction, teardown and delivery-report loop for
- *        @ref nextra::infra::RdKafkaProducer. Config helpers
+ *        @ref businessplanner::infra::RdKafkaProducer. Config helpers
  *        live in rdkafka_producer_config.cpp and the
  *        produce/flush surface lives in
  *        rdkafka_producer_publish.cpp so each file stays under
  *        the 100-LOC cap.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/RdKafkaProducer.h"
 #include "infra/backend/rdkafka_producer_internal.h"
@@ -18,7 +18,7 @@
 
 #include <utility>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 using producer_detail::cset;
@@ -78,6 +78,6 @@ void RdKafkaProducer::pollLoop()
     }
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

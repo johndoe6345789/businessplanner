@@ -1,7 +1,7 @@
 /**
  * @file create_admin.h
  * @brief Declaration of the create-admin sub-command.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #pragma once

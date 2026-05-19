@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Feature flags — Nextra',
+  title: 'Feature flags — Businessplanner',
   description:
     'Operator tool for feature flag rollout',
 }

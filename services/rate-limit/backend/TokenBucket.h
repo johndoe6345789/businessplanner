@@ -18,7 +18,7 @@
 #include <string>
 #include <string_view>
 
-namespace nextra::ratelimit
+namespace businessplanner::ratelimit
 {
 
 /**
@@ -63,4 +63,4 @@ class TokenBucket
     static BucketResult parseReply(const std::string& raw);
 };
 
-} // namespace nextra::ratelimit
+} // namespace businessplanner::ratelimit

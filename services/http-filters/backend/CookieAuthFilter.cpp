@@ -38,7 +38,7 @@ void CookieAuthFilter::doFilter(
     drogon::FilterCallback&& cb,
     drogon::FilterChainCallback&& ccb)
 {
-    auto token = req->getCookie("nextra_sso");
+    auto token = req->getCookie("businessplanner_sso");
     if (token.empty()) {
         auto auth =
             req->getHeader("Authorization");

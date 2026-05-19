@@ -11,7 +11,7 @@
 
 struct rd_kafka_s;
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -67,4 +67,4 @@ class KafkaConsumer
     std::thread worker_;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

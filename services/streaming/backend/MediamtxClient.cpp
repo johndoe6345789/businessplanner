@@ -10,7 +10,7 @@
 #include <drogon/HttpResponse.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 MediamtxClient::MediamtxClient(std::string baseUrl)
@@ -71,4 +71,4 @@ bool MediamtxClient::kickReader(const std::string& readerId)
         && rsp->statusCode() < drogon::k300MultipleChoices;
 }
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

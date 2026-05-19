@@ -5,7 +5,7 @@
 
 #include "notifications/backend/TemplateRenderer.h"
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 std::string TemplateRenderer::render(
@@ -58,4 +58,4 @@ RenderedMessage TemplateRenderer::renderMessage(
     return {render(subject, vars), render(body, vars)};
 }
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

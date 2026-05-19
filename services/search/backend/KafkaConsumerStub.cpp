@@ -10,7 +10,7 @@
 
 #include <chrono>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 namespace
@@ -37,7 +37,7 @@ void noteKafkaPoll(bool ok, std::atomic<int>& errCount,
     }
     int n = errCount.fetch_add(1) + 1;
     if (n > kThreshold) {
-        nextra::alerts::alertEmitter().emit(
+        businessplanner::alerts::alertEmitter().emit(
             "search-indexer", "warning",
             "Kafka poll error rate exceeded "
             "(>30 in 5 min)",
@@ -50,4 +50,4 @@ void noteKafkaPoll(bool ok, std::atomic<int>& errCount,
     }
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

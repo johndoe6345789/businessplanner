@@ -2,7 +2,7 @@
  * @file authInitialState.ts
  * @brief Initial state builder for the auth slice.
  *        Hydrates user + accessToken from the Keycloak
- *        nextra_sso cookie so RTK Query has the right
+ *        businessplanner_sso cookie so RTK Query has the right
  *        auth state on first render.
  */
 import type { AuthState } from '../../types/auth';

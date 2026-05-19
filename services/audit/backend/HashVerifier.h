@@ -12,7 +12,7 @@
 #include <memory>
 #include <string>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 class HashVerifier
@@ -37,4 +37,4 @@ private:
     int pageSize_;
 };
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

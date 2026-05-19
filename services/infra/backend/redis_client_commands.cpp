@@ -11,7 +11,7 @@
 
 #include <hiredis/hiredis.h>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 std::optional<std::string> RedisClient::get(
@@ -70,4 +70,4 @@ long long RedisClient::incr(const std::string& key)
     return g.r->integer;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

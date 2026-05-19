@@ -23,7 +23,7 @@ TEST(PortalRenderer, EmptyArrayRendersShell)
         portal::renderPortalHtml(json::array());
     EXPECT_NE(html.find("<html"), std::string::npos);
     EXPECT_NE(
-        html.find("Nextra Developer Portal"),
+        html.find("Businessplanner Developer Portal"),
         std::string::npos);
     EXPECT_EQ(
         html.find("class=\"card\""),

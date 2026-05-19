@@ -1,7 +1,7 @@
-## @brief nextra-platform — feature flags, i18n,
+## @brief businessplanner-platform — feature flags, i18n,
 ##        rate-limit, portal, api-docs.
 cmake_minimum_required(VERSION 3.20)
-project(nextra-platform VERSION 0.1.0 LANGUAGES CXX)
+project(businessplanner-platform VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -13,10 +13,10 @@ include(
 # Generate portal_embedded.h from tool-links.json + styles.css
 set(_proj_root "${CMAKE_CURRENT_SOURCE_DIR}/../..")
 file(READ "${_proj_root}/shared/constants/tool-links.json"
-    NEXTRA_TOOL_LINKS_JSON)
+    BUSINESSPLANNER_TOOL_LINKS_JSON)
 file(READ
     "${_proj_root}/services/portal/static/styles.css"
-    NEXTRA_PORTAL_STYLES_CSS)
+    BUSINESSPLANNER_PORTAL_STYLES_CSS)
 file(MAKE_DIRECTORY
     "${CMAKE_BINARY_DIR}/generated/portal/backend")
 configure_file(
@@ -24,8 +24,8 @@ configure_file(
     "${CMAKE_BINARY_DIR}/generated/portal/backend/portal_embedded.h"
     @ONLY)
 
-nextra_service(
-    NAME nextra-platform
+businessplanner_service(
+    NAME businessplanner-platform
     DIRS
         feature-flags/backend
         feature-flags/controllers
@@ -42,5 +42,5 @@ nextra_service(
         auth/backend
 )
 
-target_include_directories(nextra-platform
+target_include_directories(businessplanner-platform
     PRIVATE "${CMAKE_BINARY_DIR}/generated")

@@ -1,6 +1,6 @@
 # Domain Layout Reference
 
-Nextra uses a domain-sliced monorepo. Every feature lives at
+Businessplanner uses a domain-sliced monorepo. Every feature lives at
 `services/<domain>/`. This document is the definitive reference
 for what can go inside each domain directory.
 

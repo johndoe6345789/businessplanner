@@ -13,7 +13,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 using drogon::orm::Result;
@@ -94,4 +94,4 @@ std::vector<QueuedJob> JobQueue::claimBatch(const std::string& workerId,
     return claimed;
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

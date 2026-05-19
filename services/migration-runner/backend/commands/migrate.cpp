@@ -1,7 +1,7 @@
 /**
  * @file migrate.cpp
  * @brief Implementation of the migrate sub-command.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #include "migrate.h"

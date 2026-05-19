@@ -1,6 +1,6 @@
 [
   {
-    "email": "admin@nextra.local",
+    "email": "admin@businessplanner.local",
     "username": "admin",
     "password_hash": "$2b$12$PLACEHOLDER_HASH_admin_change_me_000000000000000000000",
     "display_name": "Admin User",

@@ -3,7 +3,7 @@
  * @file services/infra/RdKafkaProducer.h
  * @brief Real librdkafka-backed @ref IKafkaProducer.
  *
- * Only compiled when @c NEXTRA_HAVE_KAFKA is defined. Uses
+ * Only compiled when @c BUSINESSPLANNER_HAVE_KAFKA is defined. Uses
  * @c rd_kafka_producev with @c RD_KAFKA_MSG_F_COPY so callers
  * never need to keep buffers alive. A background thread drains
  * delivery reports so @c rd_kafka_poll is always serviced.
@@ -17,7 +17,7 @@
 
 struct rd_kafka_s;
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -62,4 +62,4 @@ class RdKafkaProducer final : public IKafkaProducer
     std::thread pollThread_;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

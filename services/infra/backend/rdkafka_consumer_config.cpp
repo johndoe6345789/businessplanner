@@ -6,7 +6,7 @@
  *        isolated from lifecycle concerns.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/RdKafkaConsumer.h"
 
@@ -15,7 +15,7 @@
 
 #include <string>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 namespace
@@ -67,6 +67,6 @@ rd_kafka_conf_t* RdKafkaConsumer::buildConf()
     return conf;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

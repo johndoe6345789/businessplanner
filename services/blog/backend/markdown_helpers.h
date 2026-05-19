@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 /// HTML-escape the five special characters.
@@ -19,4 +19,4 @@ std::string mdInline(const std::string& line);
 /// Return the heading level 1..6 or 0 if not a heading.
 int mdHeading(const std::string& line);
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

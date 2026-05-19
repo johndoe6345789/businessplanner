@@ -38,17 +38,17 @@ class OAuthProviderConfigTest : public ::testing::Test
 protected:
     void SetUp() override
     {
-        setenv("NEXTRA_TEST_OAUTH_CID", "cid-42", 1);
+        setenv("BUSINESSPLANNER_TEST_OAUTH_CID", "cid-42", 1);
     }
     void TearDown() override
     {
-        unsetenv("NEXTRA_TEST_OAUTH_CID");
+        unsetenv("BUSINESSPLANNER_TEST_OAUTH_CID");
     }
 };
 
 TEST_F(OAuthProviderConfigTest, ExpandsEnvVariable)
 {
-    EXPECT_EQ(expandEnv("${NEXTRA_TEST_OAUTH_CID}"),
+    EXPECT_EQ(expandEnv("${BUSINESSPLANNER_TEST_OAUTH_CID}"),
               "cid-42");
 }
 

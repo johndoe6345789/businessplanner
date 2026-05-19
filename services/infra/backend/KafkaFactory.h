@@ -8,7 +8,7 @@
  * @c StubKafkaConsumer by name — they call
  * @ref makeKafkaConsumer and @ref makeKafkaProducer and get the
  * right implementation for the current build. When librdkafka
- * is unavailable (@c NEXTRA_HAVE_KAFKA undefined) the stubs are
+ * is unavailable (@c BUSINESSPLANNER_HAVE_KAFKA undefined) the stubs are
  * returned and the daemon still boots cleanly for smoke tests.
  */
 
@@ -19,7 +19,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -55,4 +55,4 @@ std::unique_ptr<IKafkaProducer> makeKafkaProducer(
 /** @brief True if this binary was compiled with librdkafka. */
 bool hasRealKafka();
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

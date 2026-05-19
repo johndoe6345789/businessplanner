@@ -26,7 +26,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -58,4 +58,4 @@ private:
     TranscoderConfig cfg_;
 };
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

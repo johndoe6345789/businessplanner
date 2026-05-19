@@ -16,7 +16,7 @@
 
 #include <string>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 class TemplateRenderer
@@ -42,4 +42,4 @@ class TemplateRenderer
         const nlohmann::json& vars);
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

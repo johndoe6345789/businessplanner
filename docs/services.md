@@ -1,7 +1,7 @@
 # Backend Services (Drogon Daemons)
 
-The Nextra backend is not a single process. One binary
-(`nextra-api`) is built from `services/drogon-host/` and exposes
+The Businessplanner backend is not a single process. One binary
+(`businessplanner-api`) is built from `services/drogon-host/` and exposes
 CLI subcommands defined in
 `services/drogon-host/backend/cli_setup_daemons.h`. Docker-compose
 runs each subcommand as its own long-lived container. All daemons
@@ -12,7 +12,7 @@ share the same PostgreSQL database and Drogon config file
 
 ## backend (`serve`)
 
-- **CLI**: `./nextra-api serve --port 8080`
+- **CLI**: `./businessplanner-api serve --port 8080`
 - **Source**: `services/drogon-host/backend/commands/serve.cpp`
 - **Compose service**: `backend`
 - **Port**: `8080`
@@ -28,7 +28,7 @@ share the same PostgreSQL database and Drogon config file
 
 ## job-scheduler (`job-scheduler`)
 
-- **CLI**: `./nextra-api job-scheduler --config config/config.json`
+- **CLI**: `./businessplanner-api job-scheduler --config config/config.json`
 - **Source**: `services/drogon-host/backend/commands/`
 - **Compose service**: `job-scheduler`
 - **Domain**: `services/job-queue/`
@@ -53,7 +53,7 @@ share the same PostgreSQL database and Drogon config file
 
 ## cron-manager (`cron-manager`)
 
-- **CLI**: `./nextra-api cron-manager --config config/config.json`
+- **CLI**: `./businessplanner-api cron-manager --config config/config.json`
 - **Source**: `services/drogon-host/backend/commands/`
 - **Compose service**: `cron-manager`
 - **Domain**: `services/cron/`
@@ -75,7 +75,7 @@ share the same PostgreSQL database and Drogon config file
 
 ## migrate (`migrate`)
 
-- **CLI**: `./nextra-api migrate --up` or `--down`
+- **CLI**: `./businessplanner-api migrate --up` or `--down`
 - **Source**: `services/migration-runner/backend/`
 - **Purpose**: One-shot (not a daemon). Reads the dependency graph
   at `services/migration-graph.json`, applies per-domain SQL files

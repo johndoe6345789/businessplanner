@@ -7,7 +7,7 @@
 
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 using drogon::orm::Row;
@@ -96,4 +96,4 @@ int ArticleStore::count(const ListFilter& f) const
     return rows[0][0].as<int>();
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

@@ -48,7 +48,7 @@ export default function SsoLoginForm({
         setError('This account does not have portal access.');
         return;
       }
-      // The backend has set the nextra_sso HttpOnly cookie.
+      // The backend has set the businessplanner_sso HttpOnly cookie.
       // The main app bootstraps auth from that cookie via
       // GET /api/auth/sso-session on startup.
       window.location.href = next;

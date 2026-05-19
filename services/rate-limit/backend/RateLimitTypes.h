@@ -11,7 +11,7 @@
 #include <cstdint>
 #include <string>
 
-namespace nextra::ratelimit
+namespace businessplanner::ratelimit
 {
 
 /**
@@ -60,4 +60,4 @@ struct RateLimitKey
     std::string routeGroup;
 };
 
-} // namespace nextra::ratelimit
+} // namespace businessplanner::ratelimit

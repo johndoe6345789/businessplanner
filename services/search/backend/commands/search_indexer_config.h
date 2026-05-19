@@ -24,10 +24,10 @@ namespace commands
  * @return Fully populated IndexerConfig.
  * @throws std::runtime_error on IO failure.
  */
-inline nextra::search::IndexerConfig
+inline businessplanner::search::IndexerConfig
 loadSearchConfig(const std::string& path)
 {
-    using namespace nextra::search;
+    using namespace businessplanner::search;
     std::ifstream f(path);
     if (!f) throw std::runtime_error(
         "cannot open " + path);

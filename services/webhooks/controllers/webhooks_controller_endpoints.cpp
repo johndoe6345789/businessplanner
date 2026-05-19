@@ -13,7 +13,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 using namespace drogon;
@@ -69,4 +69,4 @@ void WebhooksController::deleteEndpoint(
     cb(HttpResponse::newHttpResponse());
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

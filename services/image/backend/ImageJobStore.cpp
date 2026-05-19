@@ -7,7 +7,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 namespace
@@ -88,4 +88,4 @@ void ImageJobStore::recordVariant(
         v.format, key, bytes);
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

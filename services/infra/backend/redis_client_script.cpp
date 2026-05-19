@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 std::string RedisClient::evalScript(
@@ -65,4 +65,4 @@ std::string RedisClient::evalScript(
     return {};
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

@@ -22,7 +22,7 @@
 #include <cstdint>
 #include <string>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 /// Bitmasks for each of the five cron fields.  A set bit means the
@@ -48,4 +48,4 @@ std::chrono::system_clock::time_point
 nextFireTime(const CronExpression& cx,
              std::chrono::system_clock::time_point from);
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 using json = nlohmann::json;
@@ -69,7 +69,7 @@ struct SearchQueryParams
 /**
  * @brief Interface for the Kafka consumer. The
  *        real librdkafka-backed impl lives behind
- *        NEXTRA_HAVE_KAFKA; a no-op stub is used
+ *        BUSINESSPLANNER_HAVE_KAFKA; a no-op stub is used
  *        in dev builds today.
  */
 class IKafkaConsumer
@@ -80,4 +80,4 @@ class IKafkaConsumer
     virtual void stop() = 0;
 };
 
-} // namespace nextra::search
+} // namespace businessplanner::search

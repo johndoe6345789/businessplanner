@@ -9,7 +9,7 @@
 #include <drogon/orm/DbClient.h>
 #include <json/json.h>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 using namespace drogon;
@@ -46,4 +46,4 @@ void ImageController::submitJob(
     cb(resp);
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

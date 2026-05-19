@@ -11,9 +11,9 @@ namespace portal
 {
 
 inline constexpr const char* kToolLinksJson =
-    R"PORTAL_JSON(@NEXTRA_TOOL_LINKS_JSON@)PORTAL_JSON";
+    R"PORTAL_JSON(@BUSINESSPLANNER_TOOL_LINKS_JSON@)PORTAL_JSON";
 
 inline constexpr const char* kPortalStylesCss =
-    R"PORTAL_CSS(@NEXTRA_PORTAL_STYLES_CSS@)PORTAL_CSS";
+    R"PORTAL_CSS(@BUSINESSPLANNER_PORTAL_STYLES_CSS@)PORTAL_CSS";
 
 } // namespace portal

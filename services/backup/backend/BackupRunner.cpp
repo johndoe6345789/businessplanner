@@ -16,7 +16,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 namespace
@@ -95,4 +95,4 @@ BackupResult BackupRunner::run(DumpKind kind)
     return res;
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

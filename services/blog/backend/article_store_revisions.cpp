@@ -7,7 +7,7 @@
 
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 std::vector<Article> ArticleStore::revisions(
@@ -31,4 +31,4 @@ std::vector<Article> ArticleStore::revisions(
     return out;
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

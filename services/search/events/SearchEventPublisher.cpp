@@ -1,7 +1,7 @@
 /**
  * @file services/search/events/SearchEventPublisher.cpp
  * @brief Lazy singleton wrapper around
- *        @ref nextra::infra::IKafkaProducer.
+ *        @ref businessplanner::infra::IKafkaProducer.
  */
 
 #include "search/events/SearchEventPublisher.h"
@@ -14,7 +14,7 @@
 #include <memory>
 #include <mutex>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 namespace
@@ -22,14 +22,14 @@ namespace
 constexpr const char* kTopic = "search.reindex";
 
 std::mutex g_mu;
-std::unique_ptr<nextra::infra::IKafkaProducer>
+std::unique_ptr<businessplanner::infra::IKafkaProducer>
     g_producer;
 
-nextra::infra::IKafkaProducer& producer()
+businessplanner::infra::IKafkaProducer& producer()
 {
     std::lock_guard lk(g_mu);
     if (!g_producer) {
-        g_producer = nextra::infra::makeKafkaProducer(
+        g_producer = businessplanner::infra::makeKafkaProducer(
             std::string{}, "search-event-publisher");
         spdlog::info(
             "SearchEventPublisher producer ready");
@@ -73,4 +73,4 @@ void SearchEventPublisher::publishDelete(
             nlohmann::json::object());
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

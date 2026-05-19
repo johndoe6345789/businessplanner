@@ -16,7 +16,7 @@
 
 #include <string>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 class EmailSender : public ChannelSender
@@ -34,4 +34,4 @@ class EmailSender : public ChannelSender
     std::string endpoint_;
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

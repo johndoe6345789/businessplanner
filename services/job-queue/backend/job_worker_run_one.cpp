@@ -13,7 +13,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 void JobWorker::runOne(QueuedJob job)
@@ -54,4 +54,4 @@ void JobWorker::runOne(QueuedJob job)
     }
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

@@ -8,7 +8,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 using namespace drogon;
@@ -74,4 +74,4 @@ void JobController::listDeadLetter(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

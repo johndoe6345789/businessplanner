@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -25,4 +25,4 @@ bool extractThumbnail(
     const std::string& inputPath,
     const std::string& outputPath);
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

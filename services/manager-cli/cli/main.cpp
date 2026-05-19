@@ -17,7 +17,7 @@
 
 int main(int argc, char** argv)
 {
-    CLI::App app{"manager: nextra-api project management tool"};
+    CLI::App app{"manager: businessplanner-api project management tool"};
     app.require_subcommand(1);
 
     // ---- C++ commands ----

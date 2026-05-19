@@ -20,7 +20,7 @@ namespace commands::notif
 void InfraConsumerAdapter::subscribe(
     const std::string& topic)
 {
-    inner_ = nextra::infra::makeKafkaConsumer(
+    inner_ = businessplanner::infra::makeKafkaConsumer(
         std::string{}, group_, topic);
     inner_->setHandler(
         [this](const std::string&,

@@ -11,7 +11,7 @@
 #include <array>
 #include <cstdio>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 static std::string toHex(const unsigned char* buf, unsigned int len)
@@ -46,4 +46,4 @@ std::string signHmacSha256(const std::string& secret,
     return toHex(digest.data(), digestLen);
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

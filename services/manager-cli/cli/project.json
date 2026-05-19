@@ -1,9 +1,9 @@
 {
-  "project_name": "nextra-api",
+  "project_name": "businessplanner-api",
   "cpp_standard": 20,
   "targets": [
     {
-      "name": "nextra-api",
+      "name": "businessplanner-api",
       "type": "executable",
       "sources_dir": "src",
       "glob_patterns": ["*.cpp"],
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "name": "nextra-api-tests",
+      "name": "businessplanner-api-tests",
       "type": "executable",
       "sources_dir": "tests",
       "glob_patterns": ["*.cpp"],

@@ -16,7 +16,7 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 ProcessorConfig loadProcessorConfig(const std::string& p)
@@ -68,4 +68,4 @@ ImageProcessor::fetchSource(const std::string& url)
     return {body.begin(), body.end()};
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

@@ -58,7 +58,7 @@ void WikiController::updatePage(
         optField(body, "stage"),
         tags,
         [cb, id](const json& d) {
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publish("upsert", "wiki_pages",
                           id, d);
             cb(::utils::jsonOk(d));
@@ -79,7 +79,7 @@ void WikiController::deletePage(
     store.deletePage(
         std::stoll(id),
         [cb, id](const json& d) {
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publishDelete("wiki_pages", id);
             cb(::utils::jsonOk(d));
         },

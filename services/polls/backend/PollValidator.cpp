@@ -7,7 +7,7 @@
 
 #include <chrono>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 namespace
@@ -69,4 +69,4 @@ ValidationResult validateVote(const Poll& poll,
     return {true, ""};
 }
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

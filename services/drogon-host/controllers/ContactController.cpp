@@ -54,7 +54,7 @@ void ContactController::submit(
                 "<p>{}</p>",
                 name, email, msg);
             svc.sendEmail(
-                "admin@nextra.local",
+                "admin@businessplanner.local",
                 "Contact: " + name, html);
         } catch (const std::exception& e) {
             spdlog::error(

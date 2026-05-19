@@ -10,7 +10,7 @@
 
 #include <stdexcept>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 std::string toString(JobStatus s)
@@ -55,4 +55,4 @@ BackoffStrategy parseBackoff(const std::string& s)
     throw std::invalid_argument("Unknown BackoffStrategy: " + s);
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

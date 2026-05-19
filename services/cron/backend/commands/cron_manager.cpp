@@ -17,23 +17,23 @@
 #include <future>
 #include <thread>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 /// Set by cmdCronManager so CronController::forceTick can reach
 /// the live CronManager instance inside this process.  Controllers
 /// live in shared TUs, so a module-local global is the cleanest
 /// seam — the alternative would be an app-wide service locator.
 CronManager* g_cronManager = nullptr;
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron
 
 namespace
 {
 std::atomic<bool> g_stop{false};
 void onSignal(int) { g_stop.store(true); }
 
-nextra::cron::CronConfig loadCfg(const nlohmann::json& j)
+businessplanner::cron::CronConfig loadCfg(const nlohmann::json& j)
 {
-    nextra::cron::CronConfig cfg;
+    businessplanner::cron::CronConfig cfg;
     cfg.tickInterval = std::chrono::seconds{
         j.value("tickIntervalSeconds", 30)};
     cfg.gracefulShutdown = std::chrono::seconds{
@@ -65,10 +65,10 @@ void cmdCronManager(const std::string& config)
     nlohmann::json j;
     f >> j;
 
-    nextra::cron::CronManager manager(db, loadCfg(j));
+    businessplanner::cron::CronManager manager(db, loadCfg(j));
     manager.upsertSeedSchedules(j.value("seedSchedules",
                                          nlohmann::json::array()));
-    nextra::cron::g_cronManager = &manager;
+    businessplanner::cron::g_cronManager = &manager;
     manager.start();
     spdlog::info("cron-manager daemon ready");
 
@@ -79,7 +79,7 @@ void cmdCronManager(const std::string& config)
     drogon::app().quit();
     if (httpThread.joinable()) httpThread.join();
     manager.stop();
-    nextra::cron::g_cronManager = nullptr;
+    businessplanner::cron::g_cronManager = nullptr;
 }
 
 }  // namespace commands

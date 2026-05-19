@@ -8,7 +8,7 @@ import './globals.scss'
  * Intentionally public — no SSO gate.
  */
 export const metadata: Metadata = {
-  title: 'Status — Nextra',
+  title: 'Status — Businessplanner',
   description:
     'Public service health and incident history',
 }

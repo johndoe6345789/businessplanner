@@ -5,16 +5,16 @@
     "connection_pool_size": 8,
     "connect_timeout_ms": 2000,
     "command_timeout_ms": 1000,
-    "key_prefix": "nextra:"
+    "key_prefix": "businessplanner:"
   },
   "kafka": {
     "default_bootstrap_servers": "kafka:9092",
-    "client_id_prefix": "nextra-",
+    "client_id_prefix": "businessplanner-",
     "default_acks": "all",
     "default_compression": "lz4",
     "default_retries": 5,
     "default_linger_ms": 5,
-    "consumer_group_prefix": "nextra-",
+    "consumer_group_prefix": "businessplanner-",
     "session_timeout_ms": 10000,
     "default_topic_config": {
       "num_partitions": 3,
@@ -22,10 +22,10 @@
       "retention_ms": 604800000
     },
     "topics": {
-      "audit_events": "nextra.audit.events",
-      "email_outbound": "nextra.email.outbound",
-      "gamification": "nextra.gamification.events",
-      "notifications": "nextra.notifications"
+      "audit_events": "businessplanner.audit.events",
+      "email_outbound": "businessplanner.email.outbound",
+      "gamification": "businessplanner.gamification.events",
+      "notifications": "businessplanner.notifications"
     }
   }
 }

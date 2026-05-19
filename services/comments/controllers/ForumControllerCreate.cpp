@@ -66,7 +66,7 @@ void ForumController::create(
             doc["title"] = title;
             doc["body"] = bodyText;
             doc["created_at"] = createdAt;
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publish("upsert", "forum_posts",
                           idStr, doc);
             cb(::utils::jsonOk({

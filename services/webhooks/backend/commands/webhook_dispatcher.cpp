@@ -22,9 +22,9 @@ namespace
 std::atomic<bool> g_stop{false};
 void onSignal(int) { g_stop.store(true); }
 
-nextra::webhooks::DispatcherConfig loadCfg(const nlohmann::json& j)
+businessplanner::webhooks::DispatcherConfig loadCfg(const nlohmann::json& j)
 {
-    nextra::webhooks::DispatcherConfig c;
+    businessplanner::webhooks::DispatcherConfig c;
     c.claimBatchSize = j.value("claimBatchSize", 25U);
     c.pollInterval = std::chrono::milliseconds{
         j.value("pollIntervalMs", 2000)};
@@ -40,9 +40,9 @@ nextra::webhooks::DispatcherConfig loadCfg(const nlohmann::json& j)
     c.circuitCooldown = std::chrono::milliseconds{
         j.value("circuitCooldownMs", 300000)};
     c.signatureHeader = j.value("signatureHeader",
-                                 std::string{"X-Nextra-Signature"});
+                                 std::string{"X-Businessplanner-Signature"});
     c.timestampHeader = j.value("timestampHeader",
-                                 std::string{"X-Nextra-Timestamp"});
+                                 std::string{"X-Businessplanner-Timestamp"});
     return c;
 }
 }  // namespace
@@ -70,7 +70,7 @@ void cmdWebhookDispatcher(const std::string& config)
     nlohmann::json j;
     f >> j;
 
-    nextra::webhooks::WebhookDispatcher dispatcher(db, loadCfg(j));
+    businessplanner::webhooks::WebhookDispatcher dispatcher(db, loadCfg(j));
     dispatcher.start();
     spdlog::info("webhook-dispatcher daemon ready");
 

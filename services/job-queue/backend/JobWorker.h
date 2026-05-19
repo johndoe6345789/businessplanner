@@ -22,7 +22,7 @@
 #include <string>
 #include <thread>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 /**
@@ -73,4 +73,4 @@ private:
     std::thread thread_;
 };
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

@@ -15,7 +15,7 @@
 #include <optional>
 #include <string>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 /// Lifecycle state of a row in pdf_renders.
@@ -54,4 +54,4 @@ struct PdfConfig
 std::string toString(PdfStatus s);
 PdfStatus parsePdfStatus(const std::string& s);
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

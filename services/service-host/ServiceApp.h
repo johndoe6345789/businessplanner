@@ -2,7 +2,7 @@
 /**
  * @file ServiceApp.h
  * @brief Shared Drogon microservice bootstrap.
- *        Every nextra-* service binary calls
+ *        Every businessplanner-* service binary calls
  *        runService() instead of invoking the
  *        full CLI dispatch used by the monolith.
  */

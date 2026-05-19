@@ -22,7 +22,7 @@ void ShopController::listReviews(
     const Req&, Cb&& cb, const std::string& key)
 {
     auto pStore = shop::products();
-    std::optional<nextra::ecommerce::Product> p;
+    std::optional<businessplanner::ecommerce::Product> p;
     const bool numeric =
         !key.empty()
         && std::all_of(key.begin(), key.end(),

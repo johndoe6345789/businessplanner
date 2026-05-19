@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Shop Admin — Nextra',
+  title: 'Shop Admin — Businessplanner',
   description:
     'Ecommerce products and orders operator',
 }

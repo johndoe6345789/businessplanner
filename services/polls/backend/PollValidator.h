@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 /** @brief Validation outcome. */
@@ -42,4 +42,4 @@ ValidationResult validateVote(const Poll& poll,
                               std::optional<int> rank,
                               bool already);
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

@@ -40,7 +40,7 @@ const handleI18n = createMiddleware(routing);
 export function proxy(request: NextRequest) {
   const path = stripLocale(request.nextUrl.pathname);
   const needsAuth = PROTECTED.some((re) => re.test(path));
-  if (needsAuth && !request.cookies.has('nextra_sso')) {
+  if (needsAuth && !request.cookies.has('businessplanner_sso')) {
     const next = encodeURIComponent(request.nextUrl.pathname);
     const base = request.nextUrl.basePath;
     return NextResponse.redirect(

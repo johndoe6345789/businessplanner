@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace nextra::controllers
+namespace businessplanner::controllers
 {
 
 void RateLimitDemoController::ping(
@@ -22,4 +22,4 @@ void RateLimitDemoController::ping(
     cb(::utils::jsonOk(body));
 }
 
-} // namespace nextra::controllers
+} // namespace businessplanner::controllers

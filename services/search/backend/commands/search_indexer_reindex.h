@@ -28,12 +28,12 @@ namespace commands
  * and from the periodic-resync timer.
  */
 inline void reindexAll(
-    const nextra::search::IndexerConfig& cfg,
+    const businessplanner::search::IndexerConfig& cfg,
     drogon::orm::DbClientPtr db,
-    std::shared_ptr<nextra::search::ElasticClient>
+    std::shared_ptr<businessplanner::search::ElasticClient>
         es)
 {
-    using nextra::search::Indexer;
+    using businessplanner::search::Indexer;
     for (const auto& d : cfg.indexes) {
         auto ix = std::make_shared<Indexer>(
             db, es, d, cfg.batchSize);

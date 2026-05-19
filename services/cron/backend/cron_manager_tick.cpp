@@ -16,7 +16,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 TickStats CronManager::runTick()
@@ -87,4 +87,4 @@ TickStats CronManager::runTick()
     return stats;
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

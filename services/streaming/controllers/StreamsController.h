@@ -18,7 +18,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 class StreamsController
@@ -60,4 +60,4 @@ public:
         std::function<void(const drogon::HttpResponsePtr&)>&&);
 };
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

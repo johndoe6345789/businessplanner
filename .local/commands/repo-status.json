@@ -9,21 +9,21 @@
     },
     {
       "type": "capture",
-      "command": "docker inspect -f '{{.State.Status}}' nextra-packagerepo 2>/dev/null || echo 'not found'",
+      "command": "docker inspect -f '{{.State.Status}}' businessplanner-packagerepo 2>/dev/null || echo 'not found'",
       "var": "repo_state"
     },
     {
       "type": "capture",
-      "command": "docker inspect -f '{{.State.Status}}' nextra-packagerepo-db 2>/dev/null || echo 'not found'",
+      "command": "docker inspect -f '{{.State.Status}}' businessplanner-packagerepo-db 2>/dev/null || echo 'not found'",
       "var": "db_state"
     },
     {
       "type": "print",
-      "text": "[repo] nextra-packagerepo: {repo_state}"
+      "text": "[repo] businessplanner-packagerepo: {repo_state}"
     },
     {
       "type": "print",
-      "text": "[repo] nextra-packagerepo-db: {db_state}"
+      "text": "[repo] businessplanner-packagerepo-db: {db_state}"
     },
     {
       "type": "print",

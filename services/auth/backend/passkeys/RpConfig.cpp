@@ -23,10 +23,10 @@ std::string envOr(const char* key, const char* fallback)
 } // namespace
 
 RpConfig::RpConfig()
-    : id_(envOr("NEXTRA_RP_ID", "localhost")),
-      name_(envOr("NEXTRA_RP_NAME", "Nextra")),
+    : id_(envOr("BUSINESSPLANNER_RP_ID", "localhost")),
+      name_(envOr("BUSINESSPLANNER_RP_NAME", "Businessplanner")),
       origin_(envOr(
-          "NEXTRA_RP_ORIGIN", "http://localhost:8892"))
+          "BUSINESSPLANNER_RP_ORIGIN", "http://localhost:8892"))
 {
 }
 

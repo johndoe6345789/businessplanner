@@ -15,7 +15,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 class PdfController : public drogon::HttpController<PdfController>
@@ -38,4 +38,4 @@ public:
         std::int64_t id);
 };
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

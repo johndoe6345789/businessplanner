@@ -8,7 +8,7 @@
 #include <drogon/drogon.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::filters
+namespace businessplanner::filters
 {
 
 void SecurityHeadersFilter::doFilter(
@@ -24,4 +24,4 @@ void SecurityHeadersFilter::doFilter(
     ccb();
 }
 
-} // namespace nextra::filters
+} // namespace businessplanner::filters

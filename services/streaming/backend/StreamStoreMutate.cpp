@@ -7,7 +7,7 @@
 
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 std::optional<LiveStream> StreamStore::getBySlug(const std::string& slug)
@@ -65,4 +65,4 @@ void StreamStore::viewerLeave(std::int64_t streamId,
         streamId, sessionId);
 }
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

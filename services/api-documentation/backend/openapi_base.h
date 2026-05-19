@@ -15,7 +15,7 @@ inline auto baseSpec() -> nlohmann::json
     return nlohmann::json::parse(R"json({
         "openapi": "3.0.3",
         "info": {
-            "title": "Nextra API",
+            "title": "Businessplanner API",
             "version": "1.0.0",
             "description": "Gamified learning platform REST API."
         },

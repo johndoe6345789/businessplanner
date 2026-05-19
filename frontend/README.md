@@ -1,4 +1,4 @@
-# Nextra Frontend
+# Businessplanner Frontend
 
 Next.js 16 application with TypeScript strict mode, MUI v7,
 Redux Toolkit + RTK Query, and next-intl for i18n.

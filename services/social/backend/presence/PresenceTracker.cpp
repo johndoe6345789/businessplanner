@@ -26,14 +26,14 @@ namespace services::social::presence
 bool PresenceTracker::heartbeat(
     const std::string& user, const std::string& status)
 {
-    auto& r = nextra::infra::RedisClient::instance();
+    auto& r = businessplanner::infra::RedisClient::instance();
     return r.set(key(user), status, kPresenceTtlSec);
 }
 
 std::string PresenceTracker::status(
     const std::string& user)
 {
-    auto& r = nextra::infra::RedisClient::instance();
+    auto& r = businessplanner::infra::RedisClient::instance();
     auto v = r.get(key(user));
     if (!v.has_value()) return "offline";
     return *v;
@@ -41,7 +41,7 @@ std::string PresenceTracker::status(
 
 bool PresenceTracker::offline(const std::string& user)
 {
-    auto& r = nextra::infra::RedisClient::instance();
+    auto& r = businessplanner::infra::RedisClient::instance();
     // Re-set with a 1-second TTL to age out reliably.
     return r.set(key(user), "offline", 1);
 }

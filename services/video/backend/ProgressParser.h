@@ -20,7 +20,7 @@
 #include <cstdint>
 #include <string>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -54,4 +54,4 @@ private:
     int          percent_{0};
 };
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

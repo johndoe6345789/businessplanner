@@ -3,12 +3,12 @@
     "ffprobePath": "/usr/bin/ffprobe",
     "workerCount": 2,
     "pollIntervalMs": 2000,
-    "workDir": "/tmp/nextra-transcode",
+    "workDir": "/tmp/businessplanner-transcode",
     "s3": {
         "endpoint": "http://s3server:3001",
         "bucket": "video-renditions",
-        "accessKey": "nextra-dev",
-        "secretKey": "nextra-dev"
+        "accessKey": "businessplanner-dev",
+        "secretKey": "businessplanner-dev"
     },
     "thumbSeconds": 3,
     "ladders": [

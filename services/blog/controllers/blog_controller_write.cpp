@@ -9,7 +9,7 @@
 #include "blog/controllers/blog_search_emit.h"
 #include <drogon/drogon.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 using namespace drogon;
@@ -89,4 +89,4 @@ void BlogController::remove(
     cb(r);
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

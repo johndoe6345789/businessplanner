@@ -8,7 +8,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 using namespace drogon;
@@ -72,4 +72,4 @@ void ImageController::listVariants(
     cb(HttpResponse::newHttpJsonResponse(out));
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

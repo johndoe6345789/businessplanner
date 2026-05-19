@@ -27,7 +27,7 @@ void AlertController::acknowledge(
 {
     auto actor = req->getHeader("x-user-id");
     auto svc = std::make_shared<
-        nextra::alerts::AlertService>();
+        businessplanner::alerts::AlertService>();
     svc->acknowledge(id, actor,
         [cb, svc](nlohmann::json r) {
             cb(::utils::jsonOk(r));
@@ -44,7 +44,7 @@ void AlertController::resolve(
     const std::string& id)
 {
     auto svc = std::make_shared<
-        nextra::alerts::AlertService>();
+        businessplanner::alerts::AlertService>();
     svc->resolve(id,
         [cb, svc](nlohmann::json r) {
             cb(::utils::jsonOk(r));

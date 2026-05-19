@@ -1,7 +1,7 @@
-## @brief nextra-auth — auth, users, api-keys,
+## @brief businessplanner-auth — auth, users, api-keys,
 ##        user-preferences microservice.
 cmake_minimum_required(VERSION 3.20)
-project(nextra-auth VERSION 0.1.0 LANGUAGES CXX)
+project(businessplanner-auth VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -10,8 +10,8 @@ include(
     "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/service.cmake"
 )
 
-nextra_service(
-    NAME nextra-auth
+businessplanner_service(
+    NAME businessplanner-auth
     DIRS
         auth/backend
         auth/backend/oauth

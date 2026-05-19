@@ -27,10 +27,10 @@ struct KeycloakClaims
 
 /// Fixed contract — see CLAUDE.md / migration plan.
 inline constexpr const char* kKcIssuer =
-    "http://localhost:8892/sso/realms/nextra";
-inline constexpr const char* kKcClientId = "nextra-app";
+    "http://localhost:8892/sso/realms/businessplanner";
+inline constexpr const char* kKcClientId = "businessplanner-app";
 inline constexpr const char* kKcInternalJwks =
-    "http://keycloak:8080/sso/realms/nextra/"
+    "http://keycloak:8080/sso/realms/businessplanner/"
     "protocol/openid-connect/certs";
 
 /**

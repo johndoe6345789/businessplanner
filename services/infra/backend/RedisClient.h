@@ -25,7 +25,7 @@
 
 struct redisContext;
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -94,4 +94,4 @@ class RedisClient
     std::uint16_t port_ = 6379;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

@@ -6,7 +6,7 @@
 
 #include "ecommerce/backend/ReviewStore.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 static Review rowToReviewW(const drogon::orm::Row& r)
@@ -84,4 +84,4 @@ std::optional<std::string> ReviewStore::ownerOf(
     return rs[0]["user_id"].as<std::string>();
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

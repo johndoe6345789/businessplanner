@@ -8,7 +8,7 @@
 
 #include <drogon/drogon.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 using namespace drogon;
@@ -34,4 +34,4 @@ void BlogController::revisions(
     cb(HttpResponse::newHttpJsonResponse(b));
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

@@ -16,7 +16,7 @@
 
 #include <memory>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 /**
@@ -46,4 +46,4 @@ private:
     BackupConfig             cfg_;
 };
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

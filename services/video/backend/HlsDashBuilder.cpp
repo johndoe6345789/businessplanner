@@ -8,7 +8,7 @@
 
 #include <format>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 std::vector<std::string> buildHlsArgs(
@@ -57,4 +57,4 @@ std::vector<std::string> buildDashArgs(
     };
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

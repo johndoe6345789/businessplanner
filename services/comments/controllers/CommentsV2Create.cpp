@@ -60,7 +60,7 @@ void CommentsV2Controller::create(
             doc["author_id"] = row.authorId;
             doc["body"] = row.body;
             doc["created_at"] = row.createdAt;
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publish(
                     "upsert", "forum_posts",
                     std::to_string(row.id), doc);

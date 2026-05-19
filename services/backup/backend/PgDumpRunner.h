@@ -14,7 +14,7 @@
 #include <functional>
 #include <string>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 /// Callback invoked for every chunk read from pg_dump stdout.
@@ -34,4 +34,4 @@ using ChunkSink =
 std::int64_t runPgDump(
     const BackupConfig& cfg, DumpKind kind, ChunkSink sink);
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

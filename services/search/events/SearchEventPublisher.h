@@ -10,7 +10,7 @@
  * — never blocks the response, never throws.
  *
  * The producer is built lazily on first use via
- * @ref nextra::infra::makeKafkaProducer, so the
+ * @ref businessplanner::infra::makeKafkaProducer, so the
  * stub is selected automatically when librdkafka
  * is not linked.
  */
@@ -19,7 +19,7 @@
 
 #include <string>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /**
@@ -55,4 +55,4 @@ class SearchEventPublisher
         const std::string& id);
 };
 
-} // namespace nextra::search
+} // namespace businessplanner::search

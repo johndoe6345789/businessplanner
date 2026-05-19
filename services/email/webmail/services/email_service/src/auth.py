@@ -26,7 +26,7 @@ import jwt
 from flask import g, jsonify, request
 
 JWT_ALG = "HS256"
-COOKIE_NAME = "nextra_sso"
+COOKIE_NAME = "businessplanner_sso"
 BEARER_PREFIX = "Bearer "
 
 

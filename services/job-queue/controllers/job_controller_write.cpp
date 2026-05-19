@@ -12,7 +12,7 @@
 #include <drogon/orm/DbClient.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 using namespace drogon;
@@ -94,4 +94,4 @@ void JobController::cancelQueued(
     cb(r);
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

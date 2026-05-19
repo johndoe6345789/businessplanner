@@ -1,0 +1,17 @@
+{{- if .Values.kafka.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "businessplanner.fullname" . }}-kafka
+  labels:
+    {{- include "businessplanner.labels" . | nindent 4 }}
+    app.kubernetes.io/component: kafka
+spec:
+  type: ClusterIP
+  ports:
+    - name: kafka
+      port: {{ .Values.kafka.port }}
+      targetPort: kafka
+  selector:
+    {{- include "businessplanner.selectorLabels" (dict "ctx" . "component" "kafka") | nindent 4 }}
+{{- end -}}

@@ -26,9 +26,9 @@ std::atomic<bool> g_stop{false};
 
 void onSignal(int) { g_stop.store(true); }
 
-nextra::backup::BackupConfig loadConfig()
+businessplanner::backup::BackupConfig loadConfig()
 {
-    using namespace nextra::backup;
+    using namespace businessplanner::backup;
     BackupConfig c;
     std::ifstream f("constants/backup-manager.json");
     if (f)
@@ -53,7 +53,7 @@ namespace commands
 
 void cmdBackupManager(const std::string& config)
 {
-    using namespace nextra::backup;
+    using namespace businessplanner::backup;
     std::signal(SIGINT, onSignal);
     std::signal(SIGTERM, onSignal);
 

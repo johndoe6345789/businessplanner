@@ -2,7 +2,7 @@
 /**
  * @file OAuthIdentityLogin.h
  * @brief Upsert oauth identities, ensure a local user,
- *        and mint a Nextra session payload.
+ *        and mint a Businessplanner session payload.
  */
 
 #include "OAuthTypes.h"

@@ -17,7 +17,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 class ImageController
@@ -63,4 +63,4 @@ class ImageController
         std::int64_t id);
 };
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

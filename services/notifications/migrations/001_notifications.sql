@@ -52,11 +52,11 @@ CREATE TABLE notification_prefs (
 INSERT INTO notification_templates (key, channel, subject, body)
 VALUES
     ('welcome.email', 'email',
-     'Welcome to Nextra, {{name}}',
+     'Welcome to Businessplanner, {{name}}',
      'Hi {{name}}, thanks for signing up.'),
     ('badge.inapp', 'inapp',
      'New badge unlocked',
      'You earned the {{badge}} badge!'),
     ('password.reset', 'email',
-     'Reset your Nextra password',
+     'Reset your Businessplanner password',
      'Open {{link}} to reset your password.');

@@ -11,7 +11,7 @@
 #include <optional>
 #include <string>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 /** Result of a PaymentIntent create call. */
@@ -48,4 +48,4 @@ class StripeClient
     drogon::HttpClientPtr           client_;
 };
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

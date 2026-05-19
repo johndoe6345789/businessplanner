@@ -2,8 +2,8 @@
  * @file ImpersonateStopController.cpp
  * @brief Stop-impersonate and status endpoints.
  *
- * stopImpersonate: swaps nextra_sso_admin back
- * into nextra_sso and clears the backup cookie.
+ * stopImpersonate: swaps businessplanner_sso_admin back
+ * into businessplanner_sso and clears the backup cookie.
  * status: returns whether impersonation is active.
  */
 
@@ -25,7 +25,7 @@ void ImpersonateController::stopImpersonate(
     const drogon::HttpRequestPtr& req, Cb&& cb)
 {
     auto backup =
-        req->getCookie("nextra_sso_admin");
+        req->getCookie("businessplanner_sso_admin");
     if (backup.empty()) {
         cb(::utils::jsonError(
             drogon::k400BadRequest,
@@ -38,7 +38,7 @@ void ImpersonateController::stopImpersonate(
     auto resp = ::utils::jsonOk(
         json{{"message", "Restored"}});
 
-    drogon::Cookie sso("nextra_sso", backup);
+    drogon::Cookie sso("businessplanner_sso", backup);
     sso.setHttpOnly(true);
     sso.setPath("/");
     sso.setSameSite(
@@ -46,7 +46,7 @@ void ImpersonateController::stopImpersonate(
     sso.setMaxAge(30 * 24 * 3600);
     resp->addCookie(sso);
 
-    drogon::Cookie clear("nextra_sso_admin", "");
+    drogon::Cookie clear("businessplanner_sso_admin", "");
     clear.setHttpOnly(true);
     clear.setPath("/");
     clear.setMaxAge(0);
@@ -59,7 +59,7 @@ void ImpersonateController::status(
     const drogon::HttpRequestPtr& req, Cb&& cb)
 {
     auto backup =
-        req->getCookie("nextra_sso_admin");
+        req->getCookie("businessplanner_sso_admin");
     json data = {
         {"impersonating", !backup.empty()},
     };

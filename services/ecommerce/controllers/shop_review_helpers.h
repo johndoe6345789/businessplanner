@@ -35,7 +35,7 @@ inline std::string callerRole(
 
 /**
  * @brief Re-emit the parent product upsert so the
- *        nextra-products index refreshes derived
+ *        businessplanner-products index refreshes derived
  *        review aggregates.
  */
 inline void reemitProduct(std::int64_t productId)

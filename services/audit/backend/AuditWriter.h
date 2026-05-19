@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 class AuditWriter
@@ -65,4 +65,4 @@ private:
     drogon::orm::DbClientPtr db_;
 };
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

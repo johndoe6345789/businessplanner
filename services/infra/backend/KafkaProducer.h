@@ -21,7 +21,7 @@
 struct rd_kafka_s;
 struct rd_kafka_conf_s;
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -69,4 +69,4 @@ class KafkaProducer
     std::string clientId_;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

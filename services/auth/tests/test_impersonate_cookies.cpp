@@ -40,7 +40,7 @@ TEST(ImpersonationCookies, SsoCookieIsHardened)
 {
     auto c = makeImpersonationCookie("abc.def.ghi");
     const auto s = c.cookieString();
-    EXPECT_TRUE(contains(s, "nextra_sso=abc.def"));
+    EXPECT_TRUE(contains(s, "businessplanner_sso=abc.def"));
     EXPECT_TRUE(contains(s, "HttpOnly"));
     EXPECT_TRUE(contains(s, "Secure"));
     EXPECT_TRUE(contains(s, "SameSite=Strict"));
@@ -52,7 +52,7 @@ TEST(ImpersonationCookies, BackupIsHardened)
     auto c = makeAdminBackupCookie("admin.rt");
     const auto s = c.cookieString();
     EXPECT_TRUE(
-        contains(s, "nextra_sso_admin=admin.rt"));
+        contains(s, "businessplanner_sso_admin=admin.rt"));
     EXPECT_TRUE(contains(s, "HttpOnly"));
     EXPECT_TRUE(contains(s, "Secure"));
     EXPECT_TRUE(contains(s, "SameSite=Strict"));

@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import './globals.scss';
 
 export const metadata: Metadata = {
-  title: 'Forum moderation — Nextra',
+  title: 'Forum moderation — Businessplanner',
   description:
     'Moderate flagged threaded comments',
 };

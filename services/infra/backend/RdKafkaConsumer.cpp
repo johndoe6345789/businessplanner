@@ -5,7 +5,7 @@
  *        live in rdkafka_consumer_poll.cpp.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/RdKafkaConsumer.h"
 
@@ -14,7 +14,7 @@
 
 #include <utility>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 RdKafkaConsumer::RdKafkaConsumer(
@@ -89,6 +89,6 @@ bool RdKafkaConsumer::isConnected() const
     return rk_ != nullptr;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

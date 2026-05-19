@@ -7,7 +7,7 @@
 
 #include "PollStore.h"
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 std::optional<Poll> PollStore::getPoll(std::int64_t id)
@@ -77,4 +77,4 @@ std::vector<PollVote> PollStore::listVotes(std::int64_t id)
     return out;
 }
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

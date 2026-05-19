@@ -29,7 +29,7 @@ void ElasticCmd::registerAll(CLI::App& parent)
         "reindex", "Reindex a service");
     static std::string svc;
     rex->add_option("--service,-s", svc,
-                     "nextra|pkgrepo|s3|all")
+                     "businessplanner|pkgrepo|s3|all")
         ->required();
     rex->callback([]() { reindex(svc); });
 

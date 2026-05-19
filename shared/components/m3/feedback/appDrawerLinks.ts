@@ -22,7 +22,7 @@ export interface AppLink {
 export const APP_LINKS: AppLink[] = [
   {
     key: 'app',
-    label: 'Nextra',
+    label: 'Businessplanner',
     description: 'Main application',
     path: '/app/en',
   },

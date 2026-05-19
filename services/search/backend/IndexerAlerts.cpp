@@ -10,13 +10,13 @@
 
 #include <format>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 void emitBackfillAlert(const IndexDef& def, int code,
                        const std::string& msg)
 {
-    nextra::alerts::alertEmitter().emit(
+    businessplanner::alerts::alertEmitter().emit(
         "search-indexer", "error",
         std::format("backfill failed for {}: {}",
                     def.name, msg),
@@ -28,4 +28,4 @@ void emitBackfillAlert(const IndexDef& def, int code,
             {"table",   def.targetTable}});
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

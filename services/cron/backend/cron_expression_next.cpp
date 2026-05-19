@@ -14,7 +14,7 @@
 #include <ctime>
 #include <stdexcept>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 namespace
@@ -58,4 +58,4 @@ nextFireTime(const CronExpression& cx,
         "cron expression never fires within 400-day horizon");
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

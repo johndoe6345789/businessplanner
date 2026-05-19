@@ -5,7 +5,7 @@
 
 #include "ecommerce/backend/ReviewStore.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 ReviewStore::ReviewStore(
@@ -40,4 +40,4 @@ std::vector<Review> ReviewStore::listForProduct(
     return out;
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

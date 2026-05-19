@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE, MESSAGES } from
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Alerts — Nextra',
+  title: 'Alerts — Businessplanner',
   description:
     'Unified notification centre',
 }

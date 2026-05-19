@@ -14,7 +14,7 @@ namespace commands
  * @brief Run the search-indexer daemon.
  *
  * Loads @c constants/search-indexer.json,
- * constructs one @ref nextra::search::Indexer per
+ * constructs one @ref businessplanner::search::Indexer per
  * registered index, starts the Kafka consumer
  * (stub in dev builds), and drives the hourly
  * reindex timer.  Also serves the small Drogon

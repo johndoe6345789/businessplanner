@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <format>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 namespace
@@ -85,4 +85,4 @@ AlertEmitter& alertEmitter()
     return instance;
 }
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

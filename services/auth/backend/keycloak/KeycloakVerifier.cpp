@@ -23,8 +23,8 @@ static bool audOk(const jwt::decoded_jwt<
     // Keycloak public-client access tokens often have NO
     // `aud` claim — they carry the authorized party in
     // `azp` instead. Accept the token if either:
-    //   - aud contains nextra-app or account, OR
-    //   - azp == nextra-app, OR
+    //   - aud contains businessplanner-app or account, OR
+    //   - azp == businessplanner-app, OR
     //   - both are absent (older Keycloak builds).
     if (d.has_audience()) {
         for (const auto& a : d.get_audience()) {

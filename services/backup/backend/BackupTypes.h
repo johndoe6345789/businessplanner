@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <string>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 /// Which shape of dump to capture.
@@ -26,16 +26,16 @@ enum class DumpKind
 /// Runtime configuration loaded from backup-manager.json.
 struct BackupConfig
 {
-    std::string bucket{"nextra-backups"};
+    std::string bucket{"businessplanner-backups"};
     std::string kmsKeyEnv{"BACKUP_KMS_KEY"};
     std::string pgDumpPath{"/usr/bin/pg_dump"};
     std::string s3Endpoint{"http://s3:9000"};
     std::string s3AccessKey{"minioadmin"};
     std::string dbHost{"db"};
     int         dbPort{5432};
-    std::string dbName{"nextra_db"};
-    std::string dbUser{"nextra"};
-    std::string dbPassword{"nextra_dev"};
+    std::string dbName{"businessplanner_db"};
+    std::string dbUser{"businessplanner"};
+    std::string dbPassword{"businessplanner_dev"};
 };
 
 /// Result of a single backup run, persisted to backup_runs.
@@ -60,4 +60,4 @@ inline std::string kindToString(DumpKind k)
     }
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

@@ -24,7 +24,7 @@ struct SmtpConfig
     std::uint16_t port{587};
     std::string user;
     std::string pass;
-    std::string from{"noreply@nextra.app"};
+    std::string from{"noreply@businessplanner.app"};
     std::string baseUrl{"http://localhost:3000"};
 
     /**
@@ -53,7 +53,7 @@ struct SmtpConfig
         }
         cfg.user = env("SMTP_USER", "");
         cfg.pass = env("SMTP_PASS", "");
-        cfg.from = env("SMTP_FROM", "noreply@nextra.app");
+        cfg.from = env("SMTP_FROM", "noreply@businessplanner.app");
         cfg.baseUrl = env("APP_BASE_URL",
                           "http://localhost:3000");
         return cfg;

@@ -15,7 +15,7 @@
 #include <cstdint>
 #include <string>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 /**
@@ -50,4 +50,4 @@ struct DeliveryResult
     std::string error;
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

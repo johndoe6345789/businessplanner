@@ -7,7 +7,7 @@ Next.js webmail UI lives under `webmail/`.
 
 ## C++ API surface (`/api/email/...`)
 
-All routes are served by `nextra-api` (Drogon) under
+All routes are served by `businessplanner-api` (Drogon) under
 the `controllers` namespace.
 
 | Method | Path                         | Auth |

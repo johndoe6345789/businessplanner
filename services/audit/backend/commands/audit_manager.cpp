@@ -26,7 +26,7 @@ void onSignal(int) { g_stop.store(true); }
 struct AuditConfig
 {
     std::string topic  = "audit.events";
-    std::string group  = "nextra-audit-manager";
+    std::string group  = "businessplanner-audit-manager";
     std::string brokers = "kafka:9092";
 };
 
@@ -61,13 +61,13 @@ void cmdAuditManager(const std::string& config)
     auto cfg = loadAuditConfig(
         "constants/audit-manager.json");
 
-    nextra::audit::AuditWriter writer(db);
-    auto consumer = nextra::audit::makeKafkaConsumer(
+    businessplanner::audit::AuditWriter writer(db);
+    auto consumer = businessplanner::audit::makeKafkaConsumer(
         cfg.brokers, cfg.group);
 
     std::thread httpThread([] { drogon::app().run(); });
     std::thread loop([&] {
-        nextra::audit::runConsumerLoop(
+        businessplanner::audit::runConsumerLoop(
             *consumer, writer, cfg.topic, g_stop);
     });
 

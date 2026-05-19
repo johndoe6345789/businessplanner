@@ -56,7 +56,7 @@ int ElasticCmd::reindex(const std::string& service)
         }
         if (!found) {
             fmt::print("[es] Unknown '{}'\n", service);
-            fmt::print("[es] Valid: nextra, pkgrepo, "
+            fmt::print("[es] Valid: businessplanner, pkgrepo, "
                        "s3, all\n");
             return 1;
         }

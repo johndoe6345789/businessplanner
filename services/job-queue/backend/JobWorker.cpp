@@ -10,7 +10,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 JobWorker::JobWorker(std::string id,
@@ -80,4 +80,4 @@ void JobWorker::runLoop()
     spdlog::info("JobWorker {} exiting", id_);
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

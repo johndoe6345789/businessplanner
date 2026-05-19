@@ -7,7 +7,7 @@
 
 #include <regex>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 std::string mdEscape(const std::string& s)
@@ -52,4 +52,4 @@ int mdHeading(const std::string& l)
     return n;
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

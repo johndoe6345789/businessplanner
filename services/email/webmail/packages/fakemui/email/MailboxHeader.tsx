@@ -38,7 +38,7 @@ export function MailboxHeader({
         color: 'var(--mat-sys-on-surface)',
         marginRight: 8, whiteSpace: 'nowrap',
       }}>
-        Nextra Mail
+        Businessplanner Mail
       </span>
       <input aria-label="Search mail"
         placeholder="Search…" value={searchQuery}

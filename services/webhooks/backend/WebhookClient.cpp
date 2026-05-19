@@ -14,7 +14,7 @@
 #include <chrono>
 #include <string>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 static std::pair<std::string, std::string> splitUrl(const std::string& url)
@@ -47,7 +47,7 @@ DeliveryResult WebhookClient::send(const DeliveryJob& job)
     const auto sig = signHmacSha256(job.secret, ts, job.payload);
     req->addHeader(cfg_.timestampHeader, ts);
     req->addHeader(cfg_.signatureHeader, "sha256=" + sig);
-    req->addHeader("X-Nextra-Event", job.eventType);
+    req->addHeader("X-Businessplanner-Event", job.eventType);
     auto [result, resp] = client->sendRequest(
         req, cfg_.requestTimeout.count() / 1000.0);
     if (result != drogon::ReqResult::Ok || !resp)
@@ -63,4 +63,4 @@ DeliveryResult WebhookClient::send(const DeliveryJob& job)
     return out;
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

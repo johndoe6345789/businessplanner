@@ -11,7 +11,7 @@
 
 #include <memory>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 class CartService
@@ -44,4 +44,4 @@ class CartService
     std::shared_ptr<ProductStore>          products_;
 };
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

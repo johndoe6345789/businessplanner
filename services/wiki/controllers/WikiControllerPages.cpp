@@ -80,7 +80,7 @@ void WikiController::createPage(
                     d["id"].get<std::int64_t>())
                 : std::string{};
             if (!idStr.empty())
-                nextra::search::SearchEventPublisher
+                businessplanner::search::SearchEventPublisher
                     ::publish("upsert",
                               "wiki_pages",
                               idStr, d);

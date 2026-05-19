@@ -23,7 +23,7 @@ $config['preview_pane'] = true;
 $config['refresh_interval'] = 30;
 
 // Pre-fill the login username hint.
-$config['username_domain'] = 'nextra.local';
+$config['username_domain'] = 'businessplanner.local';
 
 // Custom CSS loaded after skin styles.
 $config['skin_logo'] = null;

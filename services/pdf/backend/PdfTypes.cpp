@@ -1,13 +1,13 @@
 /**
  * @file PdfTypes.cpp
- * @brief String conversions for @ref nextra::pdf types.
+ * @brief String conversions for @ref businessplanner::pdf types.
  */
 
 #include "pdf/backend/PdfTypes.h"
 
 #include <stdexcept>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 std::string toString(PdfStatus s)
@@ -31,4 +31,4 @@ PdfStatus parsePdfStatus(const std::string& s)
     throw std::invalid_argument("unknown PdfStatus: " + s);
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

@@ -200,7 +200,7 @@
           "selector":
             "input[type='email'], input[name='email']",
           "value":
-            "dev.admin@nextra.local" },
+            "dev.admin@businessplanner.local" },
         { "action": "fill",
           "selector": "input[type='password']",
           "value": "DevAdmin1" },
@@ -226,7 +226,7 @@
           "selector":
             "input[type='email'], input[name='email']",
           "value":
-            "dev.admin@nextra.local" },
+            "dev.admin@businessplanner.local" },
         { "action": "fill",
           "selector": "input[type='password']",
           "value": "DevAdmin1" },
@@ -269,7 +269,7 @@
           "selector":
             "input[type='email'], input[name='email']",
           "value":
-            "dev.admin@nextra.local" },
+            "dev.admin@businessplanner.local" },
         { "action": "fill",
           "selector": "input[type='password']",
           "value": "DevAdmin1" },

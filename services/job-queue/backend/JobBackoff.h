@@ -14,7 +14,7 @@
 
 #include <chrono>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 /// Parameters driving the retry schedule.  Loaded from
@@ -46,4 +46,4 @@ std::chrono::milliseconds computeBackoff(BackoffStrategy strategy,
                                          int attempt,
                                          const BackoffConfig& cfg);
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

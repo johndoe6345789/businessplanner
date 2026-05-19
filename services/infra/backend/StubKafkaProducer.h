@@ -2,7 +2,7 @@
 /**
  * @file services/infra/StubKafkaProducer.h
  * @brief No-op @ref IKafkaProducer used when librdkafka is
- *        not linked into the build (@c NEXTRA_HAVE_KAFKA
+ *        not linked into the build (@c BUSINESSPLANNER_HAVE_KAFKA
  *        undefined). Header-only so it always compiles.
  */
 
@@ -12,7 +12,7 @@
 
 #include <string>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -45,4 +45,4 @@ class StubKafkaProducer final : public IKafkaProducer
     bool isConnected() const override { return false; }
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

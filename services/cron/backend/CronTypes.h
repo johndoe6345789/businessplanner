@@ -5,7 +5,7 @@
  * @brief Shared types for the cron-manager daemon.
  *
  * The cron manager is an independent Drogon subcommand
- * (`./nextra-api cron-manager`) whose single responsibility is to
+ * (`./businessplanner-api cron-manager`) whose single responsibility is to
  * walk the @c scheduled_jobs table once per tick and insert due
  * rows into @c job_queue.  It does NOT run handlers itself — that
  * is the job scheduler's job.  Keeping the two concerns separate
@@ -20,7 +20,7 @@
 #include <optional>
 #include <string>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 /// A row of @c scheduled_jobs loaded by the tick query.
@@ -46,4 +46,4 @@ struct TickStats
     std::size_t errors{0};      ///< rows whose enqueue or reschedule failed
 };
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

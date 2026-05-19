@@ -1,6 +1,6 @@
 /**
  * @file services/audit/audit_consumer_adapter.cpp
- * @brief Implementation of @ref nextra::audit::InfraConsumerAdapter.
+ * @brief Implementation of @ref businessplanner::audit::InfraConsumerAdapter.
  */
 
 #include "audit/backend/audit_consumer_adapter.h"
@@ -10,7 +10,7 @@
 
 #include <utility>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 InfraConsumerAdapter::InfraConsumerAdapter(
@@ -24,7 +24,7 @@ InfraConsumerAdapter::InfraConsumerAdapter(
 void InfraConsumerAdapter::subscribe(
     const std::string& topic)
 {
-    inner_ = nextra::infra::makeKafkaConsumer(
+    inner_ = businessplanner::infra::makeKafkaConsumer(
         brokers_, group_, topic);
     inner_->setHandler(
         [this](const std::string&,
@@ -61,4 +61,4 @@ void InfraConsumerAdapter::close()
     if (inner_) inner_->close();
 }
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

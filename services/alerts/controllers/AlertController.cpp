@@ -33,7 +33,7 @@ void AlertController::ingest(
             "invalid JSON body"));
         return;
     }
-    nextra::alerts::Alert a;
+    businessplanner::alerts::Alert a;
     a.source    = body.value("source",     "");
     a.severity  = body.value("severity",   "info");
     a.message   = body.value("message",     "");
@@ -54,7 +54,7 @@ void AlertController::ingest(
     }
 
     auto svc = std::make_shared<
-        nextra::alerts::AlertService>();
+        businessplanner::alerts::AlertService>();
     svc->ingest(a,
         [cb, svc](nlohmann::json r) {
             cb(::utils::jsonCreated(r));
@@ -77,7 +77,7 @@ void AlertController::list(
     auto vf = req->getParameter("severity");
 
     auto svc = std::make_shared<
-        nextra::alerts::AlertService>();
+        businessplanner::alerts::AlertService>();
     svc->list(limit, offset, sf, vf,
         [cb, svc](nlohmann::json r) {
             cb(::utils::jsonOk(r));

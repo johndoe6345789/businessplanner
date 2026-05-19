@@ -12,7 +12,7 @@
 
 #include <sstream>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 std::string Indexer::buildNdjson(
@@ -54,4 +54,4 @@ void Indexer::writeStatus(
         status, docCount, def_.name);
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

@@ -9,7 +9,7 @@
 #include <cmath>
 #include <random>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 static double randomJitter(double ratio)
@@ -40,4 +40,4 @@ bool isExhausted(const DispatcherConfig& cfg, int attempts)
     return attempts >= cfg.maxAttempts;
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

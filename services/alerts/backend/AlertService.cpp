@@ -11,7 +11,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 AlertService::AlertService()
@@ -71,4 +71,4 @@ void AlertService::resolve(
     setStatus(db_, id, "resolved", std::string{}, ok, err);
 }
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

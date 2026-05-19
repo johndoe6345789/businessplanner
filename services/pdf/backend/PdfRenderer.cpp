@@ -9,11 +9,11 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
-using nextra::jobs::JobResult;
-using nextra::jobs::QueuedJob;
+using businessplanner::jobs::JobResult;
+using businessplanner::jobs::QueuedJob;
 
 PdfRenderer::PdfRenderer(
     std::shared_ptr<drogon::orm::DbClient> db, PdfConfig cfg)
@@ -26,7 +26,7 @@ PdfRenderer::PdfRenderer(
 
 void PdfRenderer::registerHandler()
 {
-    nextra::jobs::JobRegistry::instance().reg(
+    businessplanner::jobs::JobRegistry::instance().reg(
         cfg_.handlerName,
         [this](const QueuedJob& j) { return run(j); });
     spdlog::info("pdf-generator: handler '{}' registered",
@@ -75,4 +75,4 @@ JobResult PdfRenderer::run(const QueuedJob& job)
     }
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

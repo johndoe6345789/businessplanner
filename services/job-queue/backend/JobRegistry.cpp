@@ -9,7 +9,7 @@
 
 #include <stdexcept>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 JobRegistry& JobRegistry::instance()
@@ -51,4 +51,4 @@ void JobRegistry::clearForTesting()
     handlers_.clear();
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

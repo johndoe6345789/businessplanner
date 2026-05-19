@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 
-const STORAGE_KEY = 'nextra-welcomed';
+const STORAGE_KEY = 'businessplanner-welcomed';
 
 /**
  * Detects whether this is the user's first visit

@@ -13,7 +13,7 @@
 
 #include <string>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 class WebhookClient
@@ -32,4 +32,4 @@ private:
     const DispatcherConfig& cfg_;
 };
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

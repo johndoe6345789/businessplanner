@@ -13,7 +13,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 namespace
 {
@@ -78,4 +78,4 @@ std::int64_t s3Upload(const TranscoderConfig& cfg,
     return static_cast<std::int64_t>(body.size());
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

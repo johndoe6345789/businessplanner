@@ -17,7 +17,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 /**
@@ -31,15 +31,15 @@ public:
         std::shared_ptr<drogon::orm::DbClient> db);
 
     /// Invoke synchronously; used by the worker pool.
-    nextra::jobs::JobResult run(
-        const nextra::jobs::QueuedJob& job) const;
+    businessplanner::jobs::JobResult run(
+        const businessplanner::jobs::QueuedJob& job) const;
 
     /// Convenience factory for registerHandler lambdas.
-    static nextra::jobs::JobHandler makeHandler(
+    static businessplanner::jobs::JobHandler makeHandler(
         std::shared_ptr<drogon::orm::DbClient> db);
 
 private:
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

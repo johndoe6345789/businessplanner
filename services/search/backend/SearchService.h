@@ -29,7 +29,7 @@ class SearchService
     ~SearchService() = default;
 
     /**
-     * @brief Search across all nextra ES indices.
+     * @brief Search across all businessplanner ES indices.
      * @param query   Free-text search query.
      * @param page    1-based page number.
      * @param perPage Results per page (max 100).

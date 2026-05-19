@@ -14,7 +14,7 @@
 
 #include "ChannelSender.h"
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 class WebhookSender : public ChannelSender
@@ -29,4 +29,4 @@ class WebhookSender : public ChannelSender
         const RenderedMessage& msg) override;
 };
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

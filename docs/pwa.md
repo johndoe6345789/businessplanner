@@ -1,6 +1,6 @@
 # PWA — Mobile install and offline shell (Phase 8.5)
 
-Nextra's main `frontend/` app and each tool (SSO,
+Businessplanner's main `frontend/` app and each tool (SSO,
 Email, Jobs, Cron, Alerts) ship a web app manifest
 and an SVG icon so they can be installed to the
 home screen on iOS and Android. The main app also
@@ -21,7 +21,7 @@ registers a service worker for offline shell + SWR.
 
 1. Open `http://localhost:8889/app/en` in Safari.
 2. Tap Share → Add to Home Screen.
-3. Name it "Nextra" and tap Add.
+3. Name it "Businessplanner" and tap Add.
 
 Note: iOS ignores `beforeinstallprompt`, so no in-app
 snackbar appears. The manifest, theme-color and
@@ -31,7 +31,7 @@ snackbar appears. The manifest, theme-color and
 
 1. Open the portal URL in Chrome.
 2. Tap the three-dot menu → Install app.
-3. Or wait for the in-app "Install Nextra as an app?"
+3. Or wait for the in-app "Install Businessplanner as an app?"
    Snackbar — tap Install.
 
 ## Testing the service worker

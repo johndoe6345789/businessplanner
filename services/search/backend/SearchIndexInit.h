@@ -1,7 +1,7 @@
 #pragma once
 /**
  * @file SearchIndexInit.h
- * @brief Creates all nextra Elasticsearch indices on startup.
+ * @brief Creates all businessplanner Elasticsearch indices on startup.
  */
 
 #include "elasticsearch/backend/ElasticClient.h"
@@ -15,14 +15,14 @@ using json = nlohmann::json;
 
 /**
  * @class SearchIndexInit
- * @brief Static helper to ensure all nextra ES indices
+ * @brief Static helper to ensure all businessplanner ES indices
  *        exist with correct mappings.
  */
 class SearchIndexInit
 {
   public:
     /**
-     * @brief Create all nextra indices with mappings.
+     * @brief Create all businessplanner indices with mappings.
      * @param es Reference to an initialised ElasticClient.
      *
      * Safe to call repeatedly; ES ignores create-if-exists

@@ -1,13 +1,13 @@
 # CLAUDE.md - AI Assistant Instructions
 
-This file provides context for AI coding assistants working on the Nextra
+This file provides context for AI coding assistants working on the Businessplanner
 project. Read this before making any changes.
 
 ---
 
 ## Project Overview
 
-Nextra is a full-stack gamified web application with AI chat integration.
+Businessplanner is a full-stack gamified web application with AI chat integration.
 
 - **Frontend**: Next.js 16 (App Router), TypeScript strict mode, MUI v6,
   Redux Toolkit + RTK Query, next-intl for i18n
@@ -214,7 +214,7 @@ tests inside Docker:
 
 ```bash
 docker run --rm \
-  --volume "//d/GitHub/next_extra_primary://src" \
+  --volume "//d/GitHub/businessplanner://src" \
   -w //src/services/manager-cli \
   gcc:13 bash -c "apt-get install -y libssl-dev -q && make"
 ```
@@ -343,11 +343,11 @@ time).
 
 # Apply to the running database
 ./manager user seed | docker compose exec -T db \
-  psql -U nextra -d nextra_db
+  psql -U businessplanner -d businessplanner_db
 
 # Reset a single user's password (outputs SQL UPDATE)
 ./manager user reset --user devadmin --password NewPass1
-./manager user reset --user dev.admin@nextra.local --password NewPass1
+./manager user reset --user dev.admin@businessplanner.local --password NewPass1
 ```
 
 Password format: `saltHex$600000$dkHex` (PBKDF2-HMAC-SHA256,
@@ -361,7 +361,7 @@ MSYS2 has no C++ compiler:
 
 ```bash
 docker run --rm \
-  --volume "//d/GitHub/next_extra_primary://src" \
+  --volume "//d/GitHub/businessplanner://src" \
   -w //src/services/manager-cli \
   gcc:13 bash -c "apt-get install -y libssl-dev -q && make"
 ```
@@ -379,7 +379,7 @@ docker compose up --build        # All services
 Or to run services individually:
 
 ```bash
-./build/nextra-api serve --port 8080
+./build/businessplanner-api serve --port 8080
 cd frontend && npm run dev       # port 3100 by default
 ```
 
@@ -394,7 +394,7 @@ docker compose up --build --no-deps <service>
 # Examples:
 docker compose up --build --no-deps frontend
 docker compose up --build --no-deps portal
-docker compose up --build --no-deps nextra-content
+docker compose up --build --no-deps businessplanner-content
 ```
 
 Do NOT use `docker cp` to patch files into a running container.

@@ -36,7 +36,7 @@ void AuditController::listEvents(
         return;
     }
 
-    nextra::audit::AuditWriter writer(
+    businessplanner::audit::AuditWriter writer(
         drogon::app().getDbClient());
     auto rows = writer.list(tenant, since, until, limit);
 

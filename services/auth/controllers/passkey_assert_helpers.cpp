@@ -35,7 +35,7 @@ void issuePasskeySession(
          {{"accessToken", access},
           {"refreshToken", refresh}}}};
     auto resp = ::utils::jsonOk(payload);
-    drogon::Cookie sso("nextra_sso", refresh);
+    drogon::Cookie sso("businessplanner_sso", refresh);
     sso.setHttpOnly(true);
     sso.setPath("/");
     sso.setSameSite(drogon::Cookie::SameSite::kLax);

@@ -2,8 +2,8 @@
 /**
  * @file services/search/KafkaConsumerStub.h
  * @brief Adapter implementing the search-local
- *        @ref nextra::search::IKafkaConsumer (start/stop) on
- *        top of the unified @ref nextra::infra::IKafkaConsumer
+ *        @ref businessplanner::search::IKafkaConsumer (start/stop) on
+ *        top of the unified @ref businessplanner::infra::IKafkaConsumer
  *        factory. Includes a 5-min error-rate canary that
  *        emits an alert when poll errors exceed a threshold.
  */
@@ -21,7 +21,7 @@
 #include <thread>
 #include <utility>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /// Tick the per-poll error counter and emit a warning
@@ -41,12 +41,12 @@ class KafkaConsumerStub : public IKafkaConsumer
 
     ~KafkaConsumerStub() override { stop(); }
 
-    void setHandler(nextra::infra::KafkaMessageHandler h)
+    void setHandler(businessplanner::infra::KafkaMessageHandler h)
     { handler_ = std::move(h); }
 
     void start() override
     {
-        inner_ = nextra::infra::makeKafkaConsumer(
+        inner_ = businessplanner::infra::makeKafkaConsumer(
             std::string{}, "search-indexer", topic_);
         if (handler_) {
             inner_->setHandler(handler_);
@@ -89,12 +89,12 @@ class KafkaConsumerStub : public IKafkaConsumer
 
   private:
     std::string topic_;
-    nextra::infra::KafkaMessageHandler handler_;
-    std::unique_ptr<nextra::infra::IKafkaConsumer> inner_;
+    businessplanner::infra::KafkaMessageHandler handler_;
+    std::unique_ptr<businessplanner::infra::IKafkaConsumer> inner_;
     std::atomic<bool> running_{false};
     std::atomic<int> errCount_{0};
     std::atomic<long long> windowStart_{0};
     std::thread worker_;
 };
 
-} // namespace nextra::search
+} // namespace businessplanner::search

@@ -48,7 +48,7 @@ void GalleryController::patch(
                 k404NotFound, "gallery not found"));
             return;
         }
-        nextra::search::SearchEventPublisher::publish(
+        businessplanner::search::SearchEventPublisher::publish(
             "upsert", "gallery_items",
             std::to_string(g->id),
             {{"slug", g->slug},
@@ -74,7 +74,7 @@ void GalleryController::remove(
             k404NotFound, "gallery not found"));
         return;
     }
-    nextra::search::SearchEventPublisher
+    businessplanner::search::SearchEventPublisher
         ::publishDelete("gallery_items", id);
     cb(::utils::jsonOk({{"deleted", true}}));
 }

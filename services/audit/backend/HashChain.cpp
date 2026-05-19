@@ -11,7 +11,7 @@
 #include <cstdio>
 #include <stdexcept>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 std::string canonicalJson(const nlohmann::json& j)
@@ -88,4 +88,4 @@ std::vector<unsigned char> fromHex(const std::string& hex)
     return out;
 }
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

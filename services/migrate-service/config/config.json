@@ -3,7 +3,7 @@
     "number_of_threads": 1,
     "log": {
       "log_path": "./logs",
-      "logfile_base_name": "nextra-migrate",
+      "logfile_base_name": "businessplanner-migrate",
       "log_size_limit": 52428800,
       "log_level": "INFO"
     }
@@ -14,9 +14,9 @@
       "rdbms": "postgresql",
       "host": "db",
       "port": 5432,
-      "dbname": "nextra_db",
-      "user": "nextra",
-      "passwd": "nextra_dev",
+      "dbname": "businessplanner_db",
+      "user": "businessplanner",
+      "passwd": "businessplanner_dev",
       "connection_number": 2,
       "timeout": 60,
       "auto_batch": true

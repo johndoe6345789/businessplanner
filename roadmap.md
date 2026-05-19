@@ -1,6 +1,6 @@
 # ROADMAP — LaunchPad
 
-> **Built on the [next_extra_primary](https://github.com/next_extra_primary)
+> **Built on the [businessplanner](https://github.com/businessplanner)
 > template.** The template supplies the backend, SSO, infra, and
 > 25+ service domains. This roadmap tracks only what LaunchPad
 > — a guided startup launcher — actually needs to surface to its

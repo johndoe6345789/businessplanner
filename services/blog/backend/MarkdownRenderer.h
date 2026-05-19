@@ -20,7 +20,7 @@
 
 #include <string>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 /**
@@ -31,4 +31,4 @@ namespace nextra::blog
  */
 std::string renderMarkdown(const std::string& md);
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

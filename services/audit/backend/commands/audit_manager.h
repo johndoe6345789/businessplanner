@@ -15,7 +15,7 @@ namespace commands
 {
 
 /**
- * @brief Entry point for `nextra-api audit-manager`.
+ * @brief Entry point for `businessplanner-api audit-manager`.
  * @param config Path to the Drogon JSON config file.
  */
 void cmdAuditManager(const std::string& config);

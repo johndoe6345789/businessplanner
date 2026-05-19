@@ -35,7 +35,7 @@
     {
       "type": "shell",
       "tag": "npm-upload",
-      "command": "curl -fsSL -X PUT {opt.repo}/v1/npm/nextra-frontend/{lock_hash}/noarch/blob -H \"Authorization: Bearer $(cat {token_file})\" -H \"Content-Type: application/octet-stream\" --data-binary @/tmp/npm-{lock_hash}.tar.gz && rm -f /tmp/npm-{lock_hash}.tar.gz"
+      "command": "curl -fsSL -X PUT {opt.repo}/v1/npm/businessplanner-frontend/{lock_hash}/noarch/blob -H \"Authorization: Bearer $(cat {token_file})\" -H \"Content-Type: application/octet-stream\" --data-binary @/tmp/npm-{lock_hash}.tar.gz && rm -f /tmp/npm-{lock_hash}.tar.gz"
     },
     {
       "type": "print",

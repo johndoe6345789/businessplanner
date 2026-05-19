@@ -12,7 +12,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 using drogon::orm::Result;
@@ -93,4 +93,4 @@ void JobQueue::writeRun(std::int64_t queueId,
         workerId);
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

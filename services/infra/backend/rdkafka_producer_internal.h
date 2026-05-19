@@ -7,13 +7,13 @@
  *        services/infra.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 struct rd_kafka_conf_s;
 struct rd_kafka_s;
 struct rd_kafka_message_s;
 
-namespace nextra::infra::producer_detail
+namespace businessplanner::infra::producer_detail
 {
 
 /**
@@ -32,6 +32,6 @@ void drCallback(
     const rd_kafka_message_s* msg,
     void* opaque);
 
-} // namespace nextra::infra::producer_detail
+} // namespace businessplanner::infra::producer_detail
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

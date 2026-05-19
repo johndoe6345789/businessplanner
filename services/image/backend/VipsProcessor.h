@@ -6,7 +6,7 @@
  *
  * Wraps the vips C API behind a narrow interface so the
  * rest of the daemon can be built and tested without the
- * library present. When @c NEXTRA_HAVE_VIPS is NOT defined
+ * library present. When @c BUSINESSPLANNER_HAVE_VIPS is NOT defined
  * the implementation returns a stub failure result; see
  * VipsProcessor.cpp for the real path.
  */
@@ -15,7 +15,7 @@
 
 #include <cstddef>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 /**
@@ -50,4 +50,4 @@ class VipsProcessor
         const VariantSpec& spec);
 };
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

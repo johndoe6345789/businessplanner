@@ -7,7 +7,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 VideoJobStore::VideoJobStore(
@@ -89,4 +89,4 @@ void VideoJobStore::insertRenditions(
     }
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

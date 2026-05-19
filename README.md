@@ -72,9 +72,9 @@ Keycloak automatically):
 
 | Role      | Username  | Email                      | Password  |
 |-----------|-----------|----------------------------|-----------|
-| Admin     | devadmin  | dev.admin@nextra.local     | DevAdmin1 |
-| Moderator | devmod    | dev.mod@nextra.local       | DevMod1a  |
-| User      | devuser   | dev.user@nextra.local      | DevUser1  |
+| Admin     | devadmin  | dev.admin@businessplanner.local     | DevAdmin1 |
+| Moderator | devmod    | dev.mod@businessplanner.local       | DevMod1a  |
+| User      | devuser   | dev.user@businessplanner.local      | DevUser1  |
 
 User definitions live in `services/users/seeds/users.json`.
 
@@ -113,11 +113,11 @@ The frontend uses a PKCE OAuth 2.0 flow — no credentials ever touch the
 Next.js server:
 
 ```
-/app/en/login  →  Keycloak /sso/realms/nextra/…  →  /app/en/auth/callback
+/app/en/login  →  Keycloak /sso/realms/businessplanner/…  →  /app/en/auth/callback
 ```
 
-Tokens are stored in `HttpOnly`-style cookies (`nextra_sso`,
-`nextra_sso_refresh`) and refreshed silently before expiry by the
+Tokens are stored in `HttpOnly`-style cookies (`businessplanner_sso`,
+`businessplanner_sso_refresh`) and refreshed silently before expiry by the
 `useKeycloakRefresh` hook.
 
 The realm is imported fresh on first Keycloak start from
@@ -184,7 +184,7 @@ Services started:
 
 ## Backend (C++ Drogon)
 
-All daemons are subcommands of the `nextra-api` binary:
+All daemons are subcommands of the `businessplanner-api` binary:
 
 | Subcommand | Compose service | Purpose |
 |---|---|---|

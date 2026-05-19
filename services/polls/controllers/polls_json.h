@@ -15,7 +15,7 @@ namespace controllers::polls_json
 
 using json = nlohmann::json;
 
-inline json pollToJson(const nextra::polls::Poll& p)
+inline json pollToJson(const businessplanner::polls::Poll& p)
 {
     json opts = json::array();
     for (const auto& o : p.options)

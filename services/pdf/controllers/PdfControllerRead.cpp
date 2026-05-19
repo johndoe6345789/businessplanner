@@ -11,7 +11,7 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 using namespace drogon;
@@ -69,4 +69,4 @@ void PdfController::getRender(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

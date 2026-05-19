@@ -28,7 +28,7 @@ constexpr int kImpersonationTtlSec = 5 * 60;
 inline auto makeImpersonationCookie(
     const std::string& access) -> drogon::Cookie
 {
-    drogon::Cookie c("nextra_sso", access);
+    drogon::Cookie c("businessplanner_sso", access);
     c.setHttpOnly(true);
     c.setSecure(true);
     c.setPath("/");
@@ -42,14 +42,14 @@ inline auto makeImpersonationCookie(
  * @brief Build the backup cookie that stashes the
  *        admin's original refresh token so
  *        stopImpersonate can restore it.
- * @param adminToken  Admin's original nextra_sso.
+ * @param adminToken  Admin's original businessplanner_sso.
  * @return Configured drogon::Cookie.
  */
 inline auto makeAdminBackupCookie(
     const std::string& adminToken) -> drogon::Cookie
 {
     drogon::Cookie c(
-        "nextra_sso_admin", adminToken);
+        "businessplanner_sso_admin", adminToken);
     c.setHttpOnly(true);
     c.setSecure(true);
     c.setPath("/");

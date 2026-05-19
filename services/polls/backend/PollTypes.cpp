@@ -7,7 +7,7 @@
 
 #include <stdexcept>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 PollKind parseKind(const std::string& s)
@@ -31,4 +31,4 @@ std::string kindToString(PollKind k)
     return "single";
 }
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

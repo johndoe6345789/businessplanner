@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Audit — Nextra',
+  title: 'Audit — Businessplanner',
   description:
     'Tamper-evident audit event log',
 }

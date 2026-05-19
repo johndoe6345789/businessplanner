@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 /// @brief Tunables loaded from constants/webhook-dispatcher.json.
@@ -30,8 +30,8 @@ struct DispatcherConfig
     double jitterRatio{0.2};
     int circuitFailThreshold{5};
     std::chrono::milliseconds circuitCooldown{300000};
-    std::string signatureHeader{"X-Nextra-Signature"};
-    std::string timestampHeader{"X-Nextra-Timestamp"};
+    std::string signatureHeader{"X-Businessplanner-Signature"};
+    std::string timestampHeader{"X-Businessplanner-Timestamp"};
 };
 
 /// @brief Row claimed from webhook_deliveries for one delivery cycle.
@@ -54,4 +54,4 @@ struct DeliveryResult
     std::string error;
 };
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

@@ -7,7 +7,7 @@
 
 #include "ecommerce/backend/ProductStore.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 std::int64_t ProductStore::insert(const Product& p)
@@ -52,4 +52,4 @@ bool ProductStore::decrementStock(
     return !rs.empty();
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

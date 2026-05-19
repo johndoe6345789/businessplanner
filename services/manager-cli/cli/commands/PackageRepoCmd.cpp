@@ -19,7 +19,7 @@ int PackageRepoCmd::build()
     if (!checkDaemon())
         return 1;
     fmt::print("[repo] Building backend image ...\n");
-    return shell("repo", "docker build -t nextra-packagerepo "
+    return shell("repo", "docker build -t businessplanner-packagerepo "
                          "-f tools/packagerepo/backend/Dockerfile "
                          "tools/packagerepo");
 }
@@ -61,7 +61,7 @@ int PackageRepoCmd::up()
                                "-e PGPASSWORD=packagerepo "
                                "-e PGDATABASE=packagerepo "
                                "-e JWT_SECRET=dev-secret-key "
-                               "nextra-packagerepo",
+                               "businessplanner-packagerepo",
                                kContainer, kNetwork, kPort, S3Cmd::kContainer,
                                kDbContainer, kDbContainer));
 

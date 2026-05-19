@@ -31,7 +31,7 @@ services::auth::oauth::UserProfile mapProfile(
 void attachSso(const drogon::HttpResponsePtr& r,
                const std::string& refreshToken)
 {
-    drogon::Cookie sso("nextra_sso", refreshToken);
+    drogon::Cookie sso("businessplanner_sso", refreshToken);
     sso.setHttpOnly(true);
     sso.setPath("/");
     sso.setSameSite(drogon::Cookie::SameSite::kLax);

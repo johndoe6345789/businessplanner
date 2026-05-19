@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Social admin — Nextra',
+  title: 'Social admin — Businessplanner',
   description:
     'Operator tool for follows, DMs, groups, ' +
     'reactions, and presence.',

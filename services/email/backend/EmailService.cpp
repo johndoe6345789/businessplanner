@@ -40,7 +40,7 @@ auto EmailService::sendEmail(
     try {
         mailio::message msg;
         msg.from(
-            mailio::mail_address("Nextra", cfg_.from));
+            mailio::mail_address("Businessplanner", cfg_.from));
         msg.add_recipient(
             mailio::mail_address("", to));
         msg.subject(subject);

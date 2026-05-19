@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /**
@@ -20,4 +20,4 @@ namespace nextra::search
 void emitBackfillAlert(const IndexDef& def, int code,
                        const std::string& msg);
 
-} // namespace nextra::search
+} // namespace businessplanner::search

@@ -12,7 +12,7 @@
 
 #include "job-queue/backend/JobTypes.h"
 
-namespace nextra::health
+namespace businessplanner::health
 {
 
 /**
@@ -23,11 +23,11 @@ class RouteHealthHandler
 {
 public:
     /// Invoke synchronously; called by the worker pool.
-    nextra::jobs::JobResult run(
-        const nextra::jobs::QueuedJob& job) const;
+    businessplanner::jobs::JobResult run(
+        const businessplanner::jobs::QueuedJob& job) const;
 
     /// Convenience factory for registerHandler lambdas.
-    static nextra::jobs::JobHandler makeHandler();
+    static businessplanner::jobs::JobHandler makeHandler();
 };
 
-} // namespace nextra::health
+} // namespace businessplanner::health

@@ -16,7 +16,7 @@ namespace commands
  *
  * Loads @c constants/image-processor.json, opens a Drogon
  * ORM connection from @p config, and spawns a
- * @ref nextra::image::ImageProcessor pool of workers.
+ * @ref businessplanner::image::ImageProcessor pool of workers.
  * The function blocks until SIGINT/SIGTERM is received.
  *
  * @param config Path to a Drogon JSON config with DB creds.

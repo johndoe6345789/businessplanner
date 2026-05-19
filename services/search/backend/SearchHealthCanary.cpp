@@ -15,7 +15,7 @@
 #include <format>
 #include <string>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 namespace
@@ -31,7 +31,7 @@ void compareOne(const std::string& name,
         [name, esIndex, prior](nlohmann::json r) {
             std::int64_t cur = r.value("count", -1);
             if (cur == 0) {
-                nextra::alerts::alertEmitter().emit(
+                businessplanner::alerts::alertEmitter().emit(
                     "search-indexer", "error",
                     std::format(
                         "data loss in {}: {} -> 0 docs",
@@ -84,4 +84,4 @@ void armHealthCanary(
     spdlog::info("search: doc-count canary armed (60s)");
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

@@ -14,7 +14,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace nextra::image::s3_signer
+namespace businessplanner::image::s3_signer
 {
 
 std::vector<unsigned char> hmac256(
@@ -77,4 +77,4 @@ std::string hexEncode(
     return oss.str();
 }
 
-}  // namespace nextra::image::s3_signer
+}  // namespace businessplanner::image::s3_signer

@@ -13,7 +13,7 @@
 #include <future>
 #include <string>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 bool uploadToS3(const BackupConfig& cfg,
@@ -57,4 +57,4 @@ bool uploadToS3(const BackupConfig& cfg,
     return true;
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

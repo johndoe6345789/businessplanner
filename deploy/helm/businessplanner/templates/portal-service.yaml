@@ -1,0 +1,17 @@
+{{- if .Values.portal.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "businessplanner.fullname" . }}-portal
+  labels:
+    {{- include "businessplanner.labels" . | nindent 4 }}
+    app.kubernetes.io/component: portal
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.portal.port }}
+      targetPort: http
+  selector:
+    {{- include "businessplanner.selectorLabels" (dict "ctx" . "component" "portal") | nindent 4 }}
+{{- end -}}

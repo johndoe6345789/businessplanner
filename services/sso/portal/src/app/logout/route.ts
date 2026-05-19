@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 /**
  * GET /sso/logout
- * Clears the nextra_sso cookie and redirects
+ * Clears the businessplanner_sso cookie and redirects
  * to the SSO login page.
  */
 export function GET() {
@@ -13,7 +13,7 @@ export function GET() {
         ?? 'http://localhost:8889',
     ),
   );
-  res.cookies.set('nextra_sso', '', {
+  res.cookies.set('businessplanner_sso', '', {
     httpOnly: true,
     path: '/',
     maxAge: 0,

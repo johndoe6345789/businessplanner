@@ -24,14 +24,14 @@ namespace
 std::atomic<bool> g_stop{false};
 void onSignal(int) { g_stop.store(true); }
 
-nextra::pdf::PdfConfig loadConfig(const std::string& path)
+businessplanner::pdf::PdfConfig loadConfig(const std::string& path)
 {
     std::ifstream f(path);
     if (!f) throw std::runtime_error("cannot open " + path);
     nlohmann::json j;
     f >> j;
 
-    nextra::pdf::PdfConfig c;
+    businessplanner::pdf::PdfConfig c;
     c.gotenbergUrl  = j.value("gotenbergUrl", c.gotenbergUrl);
     c.gotenbergPath = j.value("gotenbergPath", c.gotenbergPath);
     c.timeoutMs     = j.value("timeoutMs", c.timeoutMs);
@@ -61,13 +61,13 @@ void cmdPdfGenerator(const std::string& config)
     auto db = drogon::app().getDbClient();
 
     auto cfg = loadConfig("constants/pdf-generator.json");
-    nextra::pdf::PdfRenderer renderer(db, cfg);
+    businessplanner::pdf::PdfRenderer renderer(db, cfg);
     renderer.registerHandler();
 
-    nextra::jobs::SchedulerConfig sc;
+    businessplanner::jobs::SchedulerConfig sc;
     sc.workers = cfg.workerCount;
-    sc.workerIdPrefix = "nextra-pdf";
-    nextra::jobs::JobScheduler scheduler(db, sc);
+    sc.workerIdPrefix = "businessplanner-pdf";
+    businessplanner::jobs::JobScheduler scheduler(db, sc);
     scheduler.start();
     spdlog::info("pdf-generator daemon ready ({} workers)",
                  cfg.workerCount);

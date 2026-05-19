@@ -5,7 +5,7 @@
 
 #include "ecommerce/backend/CartService.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 CartService::CartService(
@@ -93,4 +93,4 @@ void CartService::clear(std::int64_t cartId)
         "DELETE FROM cart_items WHERE cart_id=$1", cartId);
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

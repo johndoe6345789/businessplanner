@@ -12,7 +12,7 @@
 #include <optional>
 #include <vector>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 class ProductStore
@@ -54,4 +54,4 @@ class ProductStore
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

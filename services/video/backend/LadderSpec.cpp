@@ -11,7 +11,7 @@
 #include <format>
 #include <stdexcept>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 TranscoderConfig loadTranscoderConfig(const std::string& path)
@@ -61,4 +61,4 @@ std::string buildScaleFilter(const LadderRung& rung)
         rung.width, rung.height);
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

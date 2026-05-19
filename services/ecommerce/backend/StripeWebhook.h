@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 class StripeWebhook
@@ -40,4 +40,4 @@ class StripeWebhook
     std::string                   secret_;
 };
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

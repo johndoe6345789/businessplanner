@@ -9,7 +9,7 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 EmailSender::EmailSender(std::string endpoint)
@@ -53,4 +53,4 @@ DeliveryResult EmailSender::send(
     }
 }
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

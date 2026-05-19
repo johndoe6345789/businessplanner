@@ -23,7 +23,7 @@ BulkImportResult BulkImport::run(
     BulkImportResult out;
     auto db = app().getDbClient();
     GalleryStore store;
-    nextra::jobs::JobQueue queue(db);
+    businessplanner::jobs::JobQueue queue(db);
 
     for (const auto& e : entries)
     {
@@ -41,7 +41,7 @@ BulkImportResult BulkImport::run(
             store.appendItem(
                 galleryId, assetId, e.caption);
 
-            nextra::jobs::QueuedJob j;
+            businessplanner::jobs::QueuedJob j;
             j.name = "image.process";
             j.handler = "image.process";
             j.payload = nlohmann::json{

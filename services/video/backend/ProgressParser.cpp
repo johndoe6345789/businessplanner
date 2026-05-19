@@ -9,7 +9,7 @@
 #include <charconv>
 #include <string_view>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 ProgressParser::ProgressParser(std::int64_t totalDurationMs)
@@ -42,4 +42,4 @@ bool ProgressParser::feed(const std::string& line)
     return false;
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

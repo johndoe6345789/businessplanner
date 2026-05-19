@@ -9,7 +9,7 @@
 #include <format>
 #include <sstream>
 
-namespace nextra::image::s3_signer
+namespace businessplanner::image::s3_signer
 {
 
 namespace
@@ -93,4 +93,4 @@ std::string signRequest(
         accessKey, scope, sig);
 }
 
-}  // namespace nextra::image::s3_signer
+}  // namespace businessplanner::image::s3_signer

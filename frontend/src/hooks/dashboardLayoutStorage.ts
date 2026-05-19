@@ -8,7 +8,7 @@ import type {
 import registryJson from
   '@/constants/dashboard-widgets.json';
 
-const STORAGE_KEY = 'nextra-dashboard-layout';
+const STORAGE_KEY = 'businessplanner-dashboard-layout';
 
 /** Build default layout from widget registry. */
 export function defaultLayout(): DashboardLayout {

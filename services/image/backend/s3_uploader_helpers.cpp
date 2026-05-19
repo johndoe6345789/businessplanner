@@ -11,7 +11,7 @@
 #include <iomanip>
 #include <sstream>
 
-namespace nextra::image::s3help
+namespace businessplanner::image::s3help
 {
 
 std::string env(const char* k, const char* fallback)
@@ -52,4 +52,4 @@ std::string hostFromUrl(const std::string& url)
     return h;
 }
 
-}  // namespace nextra::image::s3help
+}  // namespace businessplanner::image::s3help

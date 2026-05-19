@@ -1,6 +1,6 @@
 # Adding a New Frontend Tool
 
-Operator tools in Nextra are Next.js apps that live as an `admin/`,
+Operator tools in Businessplanner are Next.js apps that live as an `admin/`,
 `site/`, or `public/` subfolder inside their owning domain under
 `services/<domain>/`. Nginx reverse-proxies them into the unified
 portal on port 8889.

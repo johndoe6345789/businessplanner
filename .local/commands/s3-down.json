@@ -14,12 +14,12 @@
     {
       "type": "shell",
       "tag": "s3",
-      "command": "docker rm -f nextra-s3server 2>/dev/null || true"
+      "command": "docker rm -f businessplanner-s3server 2>/dev/null || true"
     },
     {
       "type": "shell",
       "tag": "s3",
-      "command": "docker rm -f nextra-s3server-db 2>/dev/null || true"
+      "command": "docker rm -f businessplanner-s3server-db 2>/dev/null || true"
     },
     {
       "type": "print",

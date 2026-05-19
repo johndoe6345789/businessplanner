@@ -1,10 +1,10 @@
-/** @brief nextra-comments microservice entry point. */
+/** @brief businessplanner-comments microservice entry point. */
 #include "service-host/ServiceApp.h"
 
 int main(int argc, char* argv[])
 {
     const char* cfg = argc > 1
         ? argv[1] : "config/config.json";
-    services::runService(cfg, "nextra-comments");
+    services::runService(cfg, "businessplanner-comments");
     return 0;
 }

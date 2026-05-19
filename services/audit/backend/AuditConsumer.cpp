@@ -2,7 +2,7 @@
  * @file AuditConsumer.cpp
  * @brief Consumer factory + decode/write loop. The adapter
  *        that bridges the audit-local @ref IKafkaConsumer
- *        shape onto @ref nextra::infra::IKafkaConsumer lives
+ *        shape onto @ref businessplanner::infra::IKafkaConsumer lives
  *        in audit_consumer_adapter.{h,cpp}.
  */
 
@@ -17,7 +17,7 @@
 #include <chrono>
 #include <thread>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 namespace
 {
@@ -67,4 +67,4 @@ void runConsumerLoop(IKafkaConsumer& consumer,
     consumer.close();
 }
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

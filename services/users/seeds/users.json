@@ -1,7 +1,7 @@
 [
   {
     "username": "devadmin",
-    "email": "dev.admin@nextra.local",
+    "email": "dev.admin@businessplanner.local",
     "display_name": "Dev Admin",
     "password": "DevAdmin1",
     "role": "admin",
@@ -13,7 +13,7 @@
   },
   {
     "username": "devuser",
-    "email": "dev.user@nextra.local",
+    "email": "dev.user@businessplanner.local",
     "display_name": "Dev User",
     "password": "DevUser1",
     "role": "user",
@@ -25,7 +25,7 @@
   },
   {
     "username": "devmod",
-    "email": "dev.mod@nextra.local",
+    "email": "dev.mod@businessplanner.local",
     "display_name": "Dev Moderator",
     "password": "DevMod1a",
     "role": "moderator",

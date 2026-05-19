@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 /** A single product row. */
@@ -93,4 +93,4 @@ std::string statusToString(OrderStatus s);
 /** Convert DB string -> enum. */
 OrderStatus statusFromString(const std::string& s);
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

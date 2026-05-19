@@ -16,7 +16,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 void CronManager::upsertSeedSchedules(const nlohmann::json& seeds)
@@ -63,4 +63,4 @@ void CronManager::upsertSeedSchedules(const nlohmann::json& seeds)
     }
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

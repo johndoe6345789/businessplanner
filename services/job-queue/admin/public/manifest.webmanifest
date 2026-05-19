@@ -1,7 +1,7 @@
 {
-  "name": "Nextra Jobs",
+  "name": "Businessplanner Jobs",
   "short_name": "Jobs",
-  "description": "Nextra background jobs console.",
+  "description": "Businessplanner background jobs console.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

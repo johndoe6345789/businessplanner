@@ -12,7 +12,7 @@
 
 #include <memory>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /**
@@ -29,4 +29,4 @@ namespace nextra::search
 void armHealthCanary(drogon::orm::DbClientPtr db,
                      std::shared_ptr<ElasticClient> es);
 
-} // namespace nextra::search
+} // namespace businessplanner::search

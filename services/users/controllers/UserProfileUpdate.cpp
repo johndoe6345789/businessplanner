@@ -63,7 +63,7 @@ void UserController::updateProfile(
             }
             const auto uid =
                 r[0]["id"].as<std::string>();
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publish("upsert", "users", uid,
                     {{"display_name", displayName}});
             cb(::utils::jsonOk(

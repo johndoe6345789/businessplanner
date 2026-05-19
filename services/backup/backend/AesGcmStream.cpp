@@ -11,7 +11,7 @@
 #include <cstring>
 #include <stdexcept>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 namespace
@@ -78,4 +78,4 @@ void AesGcmStream::finish()
     out_.insert(out_.end(), tag, tag + 16);
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

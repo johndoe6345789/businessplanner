@@ -2,7 +2,7 @@
 
 /**
  * Alerts centre — unified notification
- * feed across all Nextra services.
+ * feed across all Businessplanner services.
  */
 
 import { Alert, Typography } from '@shared/m3'

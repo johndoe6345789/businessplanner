@@ -1,5 +1,5 @@
 {
-  "title": "Nextra Developer Portal",
+  "title": "Businessplanner Developer Portal",
   "tagline": "All services at a glance",
-  "footer": "Nextra — docker compose --profile tools up"
+  "footer": "Businessplanner — docker compose --profile tools up"
 }

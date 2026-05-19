@@ -21,7 +21,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 class BlogController
@@ -77,4 +77,4 @@ public:
         std::int64_t id);
 };
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

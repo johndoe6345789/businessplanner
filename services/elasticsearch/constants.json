@@ -1,13 +1,13 @@
 {
   "default_host": "localhost",
   "default_port": 9200,
-  "index_prefix": "nextra",
+  "index_prefix": "businessplanner",
   "indices": {
-    "users": "nextra-users",
-    "chat_messages": "nextra-chat",
-    "badges": "nextra-badges",
-    "notifications": "nextra-notifications",
-    "leaderboard": "nextra-leaderboard"
+    "users": "businessplanner-users",
+    "chat_messages": "businessplanner-chat",
+    "badges": "businessplanner-badges",
+    "notifications": "businessplanner-notifications",
+    "leaderboard": "businessplanner-leaderboard"
   },
   "settings": {
     "number_of_shards": 1,

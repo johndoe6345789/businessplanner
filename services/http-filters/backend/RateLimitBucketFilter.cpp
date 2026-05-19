@@ -1,6 +1,6 @@
 /**
  * @file RateLimitBucketFilter.cpp
- * @brief Implementation of nextra::filters::RateLimitFilter.
+ * @brief Implementation of businessplanner::filters::RateLimitFilter.
  */
 
 #include "http-filters/backend/RateLimitBucketFilter.h"
@@ -10,12 +10,12 @@
 #include <drogon/HttpResponse.h>
 #include <nlohmann/json.hpp>
 
-namespace nextra::filters
+namespace businessplanner::filters
 {
 
-using nextra::ratelimit::BucketSpec;
-using nextra::ratelimit::RateLimitKey;
-using nextra::ratelimit::RedisBucketStore;
+using businessplanner::ratelimit::BucketSpec;
+using businessplanner::ratelimit::RateLimitKey;
+using businessplanner::ratelimit::RedisBucketStore;
 
 std::string RateLimitFilter::classifyGroup(
     const std::string& path)
@@ -96,4 +96,4 @@ void RateLimitFilter::doFilter(
     cb(resp);
 }
 
-} // namespace nextra::filters
+} // namespace businessplanner::filters

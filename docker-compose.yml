@@ -1,9 +1,20 @@
-## LaunchPad — minimal Docker Compose (8 services).
+## LaunchPad — LEAN Docker Compose (right-sized for a 3.8 GB host).
+##
+## Lean-ship changes vs docker-compose.yml.prelean:
+##  - backend + backend-migrate use the registry:2 businessplanner-api image,
+##    kept CURRENT by the businessplanner-apps Jenkins pipeline (which
+##    reuses the prebuilt businessplanner-base-conan layer — no host C++ compile).
+##  - Elasticsearch COMMENTED OUT "for now" (user instruction + JVM mem
+##    hog). Full-text search disabled until re-enabled.
+##  - Keycloak + keycloak-db KEPT (required for login/OIDC) but the JVM
+##    heap is tightly capped (Java is a mem hog on this 3.8 GB host).
+##  - Every service has a hard `mem_limit` (contains each container so a
+##    spike cannot OOM-cascade the other resident stacks).
+##  - Postgres shared_buffers 24MB, Redis maxmemory 48MB, Next heap 512MB.
+##  - Only the nginx `portal` publishes a host port (8892).
 ##
 ## Usage:
-##   docker compose up --build
-##   docker compose up -d
-##
+##   docker compose up -d --build
 ## App: http://localhost:8892/app/en
 
 services:
@@ -11,22 +22,41 @@ services:
   # ---- PostgreSQL (main app) --------------------------------
   db:
     image: postgres:16-alpine
+    command:
+      - postgres
+      - -c
+      - shared_buffers=24MB
+      - -c
+      - max_connections=20
+      - -c
+      - work_mem=1MB
+      - -c
+      - maintenance_work_mem=16MB
     environment:
-      POSTGRES_DB: nextra_db
-      POSTGRES_USER: nextra
-      POSTGRES_PASSWORD: nextra_dev
+      POSTGRES_DB: businessplanner_db
+      POSTGRES_USER: businessplanner
+      POSTGRES_PASSWORD: businessplanner_dev
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U nextra -d nextra_db"]
+      test: ["CMD-SHELL", "pg_isready -U businessplanner -d businessplanner_db"]
       interval: 5s
       timeout: 5s
       retries: 5
+    mem_limit: 160m
     restart: unless-stopped
 
   # ---- Keycloak Postgres ------------------------------------
   keycloak-db:
     image: postgres:16-alpine
+    command:
+      - postgres
+      - -c
+      - shared_buffers=16MB
+      - -c
+      - max_connections=20
+      - -c
+      - work_mem=1MB
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -38,9 +68,12 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    mem_limit: 140m
     restart: unless-stopped
 
   # ---- Keycloak (OIDC identity provider) --------------------
+  # REQUIRED for login. JVM/Quarkus — tightly heap-capped (Java is a
+  # mem hog on a 3.8 GB host); revisit caps after the 16 GB upgrade.
   keycloak:
     build:
       context: ./docker/keycloak
@@ -59,28 +92,27 @@ services:
       KC_HTTP_RELATIVE_PATH: /sso
       KC_PROXY_HEADERS: xforwarded
       KC_HOSTNAME_STRICT: "false"
+      JAVA_OPTS_KC_HEAP: "-Xms48m -Xmx256m"
       KC_GITHUB_CLIENT_ID: ${KC_GITHUB_CLIENT_ID:-}
       KC_GITHUB_CLIENT_SECRET: ${KC_GITHUB_CLIENT_SECRET:-}
       KC_GOOGLE_CLIENT_ID: ${KC_GOOGLE_CLIENT_ID:-}
       KC_GOOGLE_CLIENT_SECRET: ${KC_GOOGLE_CLIENT_SECRET:-}
       KC_MICROSOFT_CLIENT_ID: ${KC_MICROSOFT_CLIENT_ID:-}
       KC_MICROSOFT_CLIENT_SECRET: ${KC_MICROSOFT_CLIENT_SECRET:-}
+    mem_limit: 420m
     restart: unless-stopped
 
-  # ---- Elasticsearch (full-text search) --------------------
+  # ---- Elasticsearch MOCK (hacky C++; no JVM) --------------
+  # Replaces the ~1 GB ES JVM (Java is a mem hog on this 3.8 GB
+  # host). Backend's ES client is unchanged — it "thinks it's
+  # talking to ES, but it's mocked": indexing is acknowledged,
+  # every search returns zero hits. Swap back to
+  # image: elasticsearch:8.17.0 after the 16 GB upgrade.
   elasticsearch:
-    image: elasticsearch:8.17.0
-    environment:
-      discovery.type: single-node
-      xpack.security.enabled: "false"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-    volumes:
-      - esdata:/var/lib/elasticsearch/data
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:9200"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    build:
+      context: ./docker/es-mock
+      dockerfile: Dockerfile
+    mem_limit: 32m
     restart: unless-stopped
 
   # ---- Redis (sessions + rate-limiting) ---------------------
@@ -88,60 +120,57 @@ services:
     image: redis:7-alpine
     volumes:
       - redisdata:/data
-    command: ["redis-server", "--appendonly", "yes"]
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --maxmemory
+      - 48mb
+      - --maxmemory-policy
+      - allkeys-lru
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 10
+    mem_limit: 90m
     restart: unless-stopped
 
   # ---- DB migrations (runs once, then exits) ----------------
-  backend-migrate:
-    build:
-      context: .
-      dockerfile: docker/nextra-api.Dockerfile
-      args:
-        BASE_IMAGE: debian:sid
-        RUNTIME_IMAGE: debian:sid-slim
-        SRC_BUST: ${SRC_BUST:-0}
+  # Uses the registry:2 businessplanner-api image kept CURRENT by the
+  # businessplanner-apps Jenkins pipeline (migrate fix af658ca + the
+  # baked migration SQL come from that fresh image — no host compile).
+  # Dedicated one-shot migrator (replaces the monolith
+  # businessplanner-api migrate sidecar). Its entrypoint runs
+  # `migrate --up` against the baked config/config.json
+  # then exits — no command/env override needed.
+  businessplanner-migrate:
+    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-migrate:latest
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: nextra_db
-      DB_USER: nextra
-      DB_PASSWORD: nextra_dev
-    command: ["migrate", "--up",
-              "--config", "config/config.prod.json"]
+    mem_limit: 256m
     restart: "no"
 
   # ---- C++ Drogon API ---------------------------------------
+  # Registry:2 businessplanner-api (pipeline-built). ES dep removed (ES off).
   backend:
-    build:
-      context: .
-      dockerfile: docker/nextra-api.Dockerfile
-      args:
-        BASE_IMAGE: debian:sid
-        RUNTIME_IMAGE: debian:sid-slim
-        SRC_BUST: ${SRC_BUST:-0}
+    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-api:latest
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
       elasticsearch:
-        condition: service_healthy
-      backend-migrate:
+        condition: service_started
+      businessplanner-migrate:
         condition: service_completed_successfully
     environment:
       DB_HOST: db
       DB_PORT: "5432"
-      DB_NAME: nextra_db
-      DB_USER: nextra
-      DB_PASSWORD: nextra_dev
+      DB_NAME: businessplanner_db
+      DB_USER: businessplanner
+      DB_PASSWORD: businessplanner_dev
       REDIS_HOST: redis
       REDIS_PORT: "6379"
       ES_HOST: elasticsearch
@@ -151,6 +180,25 @@ services:
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       FRONTEND_VERSION: "0.1.0"
+    mem_limit: 320m
+    restart: unless-stopped
+
+  # ---- businessplanner-auth microservice (Phase 5 vertical slice) ----
+  # Per-service image (BP slug). Proves the split end-to-end;
+  # owns auth/users/api-keys/user-preferences routes (nginx
+  # prefix routing wired during Phase 6 fan-out).
+  businessplanner-auth:
+    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-auth:latest
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      businessplanner-migrate:
+        condition: service_completed_successfully
+    environment:
+      JWT_SECRET: change-me-in-production
+    mem_limit: 96m
     restart: unless-stopped
 
   # ---- Next.js frontend -------------------------------------
@@ -169,6 +217,8 @@ services:
       INTERNAL_API_URL: http://backend:8080
       NEXT_BASE_PATH: /app
       BACKEND_URL: http://backend:8080
+      NODE_OPTIONS: "--max-old-space-size=512"
+    mem_limit: 700m
     restart: unless-stopped
 
   # ---- SSO portal (login gate) ------------------------------
@@ -186,11 +236,21 @@ services:
     environment:
       NEXT_PUBLIC_ORIGIN: http://localhost:8892
       NODE_ENV: development
+      NODE_OPTIONS: "--max-old-space-size=512"
+    mem_limit: 700m
     restart: unless-stopped
 
   # ---- Package repository — dedicated Postgres --------------
   pkgrepo-db:
     image: postgres:16-alpine
+    command:
+      - postgres
+      - -c
+      - shared_buffers=16MB
+      - -c
+      - max_connections=20
+      - -c
+      - work_mem=1MB
     environment:
       POSTGRES_DB: pkgrepo_db
       POSTGRES_USER: pkgrepo
@@ -203,6 +263,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    mem_limit: 140m
     restart: unless-stopped
 
   # ---- MinIO (S3-compatible blob store) ---------------------
@@ -220,6 +281,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 256m
     restart: unless-stopped
 
   # ---- MinIO bucket init (runs once, then exits) ------------
@@ -235,6 +297,7 @@ services:
         mc alias set local
         http://minio:9000 minioadmin minioadmin &&
         mc mb --ignore-existing local/packagerepo
+    mem_limit: 64m
     restart: "no"
 
   # ---- Package repository — C++ backend ---------------------
@@ -264,6 +327,7 @@ services:
       ES_HOST: elasticsearch
       ES_PORT: "9200"
       PORT: "5000"
+    mem_limit: 200m
     restart: unless-stopped
 
   # ---- Package repository — Next.js frontend ----------------
@@ -280,9 +344,11 @@ services:
       BACKEND_URL: http://pkgrepo-backend:5000
       NEXT_BASE_PATH: /repo
       NODE_ENV: development
+      NODE_OPTIONS: "--max-old-space-size=512"
     volumes:
       - pkgrepo_node_modules:/build/services/package-repository/root/frontend/node_modules
       - pkgrepo_next:/build/services/package-repository/root/frontend/.next
+    mem_limit: 700m
     restart: unless-stopped
 
   # ---- Nginx reverse proxy ----------------------------------
@@ -297,12 +363,13 @@ services:
       - backend
       - sso
       - pkgrepo-frontend
+    mem_limit: 64m
     restart: unless-stopped
 
 volumes:
   pgdata:
   keycloak_pgdata:
-  esdata:
+  # esdata:            # commented out with elasticsearch
   redisdata:
   sso_node_modules:
   sso_next:

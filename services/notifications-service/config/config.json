@@ -20,7 +20,7 @@
     "use_gzip": true,
     "log": {
       "log_path": "./logs",
-      "logfile_base_name": "nextra-notifications",
+      "logfile_base_name": "businessplanner-notifications",
       "log_size_limit": 52428800,
       "log_level": "INFO"
     }
@@ -31,9 +31,9 @@
       "rdbms": "postgresql",
       "host": "db",
       "port": 5432,
-      "dbname": "nextra_db",
-      "user": "nextra",
-      "passwd": "nextra_dev",
+      "dbname": "businessplanner_db",
+      "user": "businessplanner",
+      "passwd": "businessplanner_dev",
       "connection_number": 4,
       "timeout": 30,
       "auto_batch": true
@@ -51,7 +51,7 @@
   "custom_config": {
     "jwt": {
       "secret": "",
-      "issuer": "nextra-api",
+      "issuer": "businessplanner-api",
       "access_token_ttl_seconds": 900,
       "refresh_token_ttl_seconds": 604800
     }

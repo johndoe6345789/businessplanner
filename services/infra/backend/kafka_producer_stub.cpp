@@ -1,26 +1,26 @@
 /**
  * @file services/infra/kafka_producer_stub.cpp
- * @brief No-op fallback for @ref nextra::infra::KafkaProducer
- *        used when @c NEXTRA_HAVE_KAFKA is not defined.
+ * @brief No-op fallback for @ref businessplanner::infra::KafkaProducer
+ *        used when @c BUSINESSPLANNER_HAVE_KAFKA is not defined.
  *
  * Keeps the legacy @c KafkaProducer::instance() singleton
  * referenced from HealthzController compiling even in builds
  * without librdkafka. For new code prefer the interface-based
- * @ref nextra::infra::makeKafkaProducer factory.
+ * @ref businessplanner::infra::makeKafkaProducer factory.
  */
 
-#ifndef NEXTRA_HAVE_KAFKA
+#ifndef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/KafkaProducer.h"
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 KafkaProducer::KafkaProducer(
     const std::string& clientId)
-    : clientId_("nextra-" + clientId)
+    : clientId_("businessplanner-" + clientId)
 {
     spdlog::info(
         "KafkaProducer stub active (client={})",
@@ -50,6 +50,6 @@ KafkaProducer& KafkaProducer::instance()
     return inst;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // !NEXTRA_HAVE_KAFKA
+#endif // !BUSINESSPLANNER_HAVE_KAFKA

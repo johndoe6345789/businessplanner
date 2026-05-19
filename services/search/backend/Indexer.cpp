@@ -14,7 +14,7 @@
 
 #include <format>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 Indexer::Indexer(drogon::orm::DbClientPtr db,
@@ -78,4 +78,4 @@ void Indexer::runBulk(EsOk onOk, EsErr onErr)
         });
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

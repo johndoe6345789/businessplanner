@@ -1,4 +1,4 @@
-# Keycloak 26 image for Nextra.
+# Keycloak 26 image for Businessplanner.
 # Bakes the realm export into the image (no bind mounts).
 FROM quay.io/keycloak/keycloak:26.0 AS builder
 
@@ -13,10 +13,10 @@ FROM quay.io/keycloak/keycloak:26.0
 
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 COPY realm-export.json /opt/keycloak/data/import/realm-export.json
-# Custom Nextra login theme (matches the app's M3
+# Custom Businessplanner login theme (matches the app's M3
 # dark surface + purple accent). Realm config sets
-# loginTheme="nextra" to activate.
-COPY themes/nextra /opt/keycloak/themes/nextra
+# loginTheme="businessplanner" to activate.
+COPY themes/businessplanner /opt/keycloak/themes/businessplanner
 
 ENV KC_DB=postgres
 ENV KC_HTTP_RELATIVE_PATH=/sso

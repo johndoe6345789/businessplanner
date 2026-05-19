@@ -1,7 +1,7 @@
 /**
  * @file services/search/ElasticClientMeta.cpp
  * @brief createIndex / count / search helpers
- *        for nextra::search::ElasticClient.
+ *        for businessplanner::search::ElasticClient.
  *        Split out to keep each file ≤100 LOC.
  */
 
@@ -10,7 +10,7 @@
 #include <drogon/drogon.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 namespace
@@ -90,4 +90,4 @@ void ElasticClient::search(
         });
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

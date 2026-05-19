@@ -6,7 +6,7 @@
 
 #include "ecommerce/backend/OrderService.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 Order OrderService::createFromCart(std::int64_t userId)
@@ -32,4 +32,4 @@ Order OrderService::createFromCart(std::int64_t userId)
     return *byId(orderId);
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

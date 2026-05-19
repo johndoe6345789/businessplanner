@@ -15,7 +15,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::controllers
+namespace businessplanner::controllers
 {
 
 /**
@@ -56,4 +56,4 @@ class StatusController
             const drogon::HttpResponsePtr&)>&& cb);
 };
 
-} // namespace nextra::controllers
+} // namespace businessplanner::controllers

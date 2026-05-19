@@ -8,7 +8,7 @@
   "jitterRatio": 0.2,
   "circuitFailThreshold": 5,
   "circuitCooldownMs": 300000,
-  "signatureHeader": "X-Nextra-Signature",
-  "timestampHeader": "X-Nextra-Timestamp",
+  "signatureHeader": "X-Businessplanner-Signature",
+  "timestampHeader": "X-Businessplanner-Timestamp",
   "signatureAlgorithm": "HMAC-SHA256"
 }

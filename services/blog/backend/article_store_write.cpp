@@ -7,7 +7,7 @@
 
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 std::int64_t ArticleStore::create(const Article& a)
@@ -81,4 +81,4 @@ int ArticleStore::publishDue()
     return static_cast<int>(rows.size());
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

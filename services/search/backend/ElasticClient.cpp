@@ -10,7 +10,7 @@
 
 #include <format>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 namespace
@@ -89,4 +89,4 @@ void ElasticClient::deleteIndex(
         });
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

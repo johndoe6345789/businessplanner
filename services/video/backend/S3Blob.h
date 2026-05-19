@@ -15,7 +15,7 @@
 
 #include <string>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -34,4 +34,4 @@ std::int64_t s3Upload(const TranscoderConfig& cfg,
                       const std::string& localPath,
                       const std::string& key);
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

@@ -19,21 +19,21 @@ namespace controllers::shop
 {
 
 /** @brief Lazily-built product store. */
-std::shared_ptr<nextra::ecommerce::ProductStore> products();
+std::shared_ptr<businessplanner::ecommerce::ProductStore> products();
 
 /** @brief Lazily-built review store. */
-std::shared_ptr<nextra::ecommerce::ReviewStore> reviews();
+std::shared_ptr<businessplanner::ecommerce::ReviewStore> reviews();
 
 /** @brief Lazily-built cart service. */
-std::shared_ptr<nextra::ecommerce::CartService> carts();
+std::shared_ptr<businessplanner::ecommerce::CartService> carts();
 
 /** @brief Lazily-built order service. */
-std::shared_ptr<nextra::ecommerce::OrderService> orders();
+std::shared_ptr<businessplanner::ecommerce::OrderService> orders();
 
 /** @brief Lazily-built Stripe REST client. */
-std::shared_ptr<nextra::ecommerce::StripeClient> stripe();
+std::shared_ptr<businessplanner::ecommerce::StripeClient> stripe();
 
 /** @brief Lazily-built webhook verifier/dispatcher. */
-std::shared_ptr<nextra::ecommerce::StripeWebhook> webhook();
+std::shared_ptr<businessplanner::ecommerce::StripeWebhook> webhook();
 
 }  // namespace controllers::shop

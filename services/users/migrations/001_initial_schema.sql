@@ -1,7 +1,7 @@
 -- ============================================================
 -- Migration 001 : Initial Schema
 -- ============================================================
--- Creates the core tables for the Nextra platform:
+-- Creates the core tables for the Businessplanner platform:
 --   users, badges, user_badges, points_log, streaks,
 --   notifications, chat_messages, token_blocklist,
 --   and the schema_migrations bookkeeping table.

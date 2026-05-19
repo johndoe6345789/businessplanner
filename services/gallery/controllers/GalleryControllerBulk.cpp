@@ -56,7 +56,7 @@ void GalleryController::bulk(
         if (res.enqueued > 0) {
             services::gallery::GalleryStore gs;
             if (auto g = gs.findById(std::stoll(id))) {
-                nextra::search::SearchEventPublisher
+                businessplanner::search::SearchEventPublisher
                     ::publish("upsert", "gallery_items",
                         std::to_string(g->id),
                         {{"slug", g->slug},

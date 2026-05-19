@@ -9,7 +9,7 @@
 #include <drogon/orm/DbClient.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 using namespace drogon;
@@ -71,4 +71,4 @@ void PdfController::enqueueRender(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

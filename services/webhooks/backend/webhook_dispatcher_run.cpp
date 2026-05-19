@@ -10,7 +10,7 @@
 
 #include <chrono>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 std::vector<DeliveryJob> WebhookDispatcher::claimBatch()
@@ -96,4 +96,4 @@ void WebhookDispatcher::markRetry(const DeliveryJob& job,
         job.id);
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

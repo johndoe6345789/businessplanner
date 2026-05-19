@@ -45,7 +45,7 @@ static void showImages()
                        "'  {{.Repository}}:{{.Tag}}"
                        "\t{{.Size}}\t{{.CreatedSince}}' "
                        "2>/dev/null | grep -E "
-                       "'(deps|nextra|frontend|backend)' "
+                       "'(deps|businessplanner|frontend|backend)' "
                        "| head -20");
     fmt::print("{}\n", out.empty() ? "  (none found)" : out);
 }

@@ -1,7 +1,7 @@
 # Adding a New Drogon Daemon
 
-Each long-running background process in Nextra is a CLI subcommand
-of the shared `nextra-api` binary. This guide walks through
+Each long-running background process in Businessplanner is a CLI subcommand
+of the shared `businessplanner-api` binary. This guide walks through
 creating a new one. Use the existing `cron` domain
 (`services/cron/`) as the concrete reference.
 
@@ -104,10 +104,10 @@ controller method:
 
 ```cpp
 // in cli_setup_daemons.h callback:
-namespace nextra::mydaemon {
+namespace businessplanner::mydaemon {
     MyDaemon* g_daemon = nullptr;
 }
-nextra::mydaemon::g_daemon = &daemon;
+businessplanner::mydaemon::g_daemon = &daemon;
 ```
 
 The controller is linked into the `backend` (`serve`) daemon, not
@@ -148,7 +148,7 @@ my-daemon:
     args:
       DEPS_IMAGE: debian:sid
       RUNTIME_IMAGE: debian:sid-slim
-  command: ["./nextra-api", "my-daemon",
+  command: ["./businessplanner-api", "my-daemon",
             "--config", "config/config.json"]
   depends_on:
     db:
@@ -156,9 +156,9 @@ my-daemon:
   environment:
     DB_HOST: db
     DB_PORT: "5432"
-    DB_NAME: nextra_db
-    DB_USER: nextra
-    DB_PASSWORD: nextra_dev
+    DB_NAME: businessplanner_db
+    DB_USER: businessplanner
+    DB_PASSWORD: businessplanner_dev
   restart: unless-stopped
 ```
 

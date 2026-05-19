@@ -3,7 +3,7 @@
  * @file ImpersonateController.h
  * @brief Admin endpoint to impersonate another user.
  *
- * Issues a new nextra_sso cookie for the target user
+ * Issues a new businessplanner_sso cookie for the target user
  * so the admin can browse the app as that user.
  */
 

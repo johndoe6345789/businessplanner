@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Analytics — Nextra',
+  title: 'Analytics — Businessplanner',
   description:
     'Admin analytics dashboard — platform metrics',
 }

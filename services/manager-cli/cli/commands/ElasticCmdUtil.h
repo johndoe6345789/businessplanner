@@ -36,7 +36,7 @@ struct SvcCfg {
 inline std::vector<SvcCfg> allServices()
 {
     return {
-        {"nextra",
+        {"businessplanner",
          "backend/src/constants/elasticsearch.json"},
         {"pkgrepo",
          "tools/packagerepo/backend/src/"

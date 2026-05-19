@@ -6,8 +6,8 @@
  * Prior to Phase 0.4 each daemon defined its own incompatible
  * `IKafkaConsumer` shape (audit, search, notification-router).
  * This header is the single source of truth: daemons talk to the
- * interface, @ref nextra::infra::makeKafkaConsumer picks the real
- * librdkafka implementation when @c NEXTRA_HAVE_KAFKA is defined
+ * interface, @ref businessplanner::infra::makeKafkaConsumer picks the real
+ * librdkafka implementation when @c BUSINESSPLANNER_HAVE_KAFKA is defined
  * and falls back to @ref StubKafkaConsumer otherwise.
  */
 
@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -62,4 +62,4 @@ class IKafkaConsumer
     virtual bool isConnected() const = 0;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

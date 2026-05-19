@@ -3,7 +3,7 @@
  * @brief Impersonate a user (admin only).
  *
  * Looks up the target user, generates tokens, and
- * sets the nextra_sso HttpOnly cookie so the admin
+ * sets the businessplanner_sso HttpOnly cookie so the admin
  * can browse the portal as that user.
  */
 
@@ -52,7 +52,7 @@ void ImpersonateController::impersonate(
         body["userId"].get<std::string>();
 
     auto adminCookie =
-        req->getCookie("nextra_sso");
+        req->getCookie("businessplanner_sso");
 
     spdlog::info(
         "Admin {} impersonating user {}",
@@ -60,7 +60,7 @@ void ImpersonateController::impersonate(
 
     // Chosen mitigation: option (b) from the spec.
     // Issue a short-lived ACCESS token (not refresh)
-    // as nextra_sso, 5 min, HttpOnly+Secure+Strict.
+    // as businessplanner_sso, 5 min, HttpOnly+Secure+Strict.
     // The admin refresh token is stashed only in the
     // backup cookie for stopImpersonate. Refresh
     // while impersonating is implicitly forbidden:

@@ -26,9 +26,9 @@ std::atomic<bool> g_stop{false};
 
 void onSignal(int) { g_stop.store(true); }
 
-nextra::jobs::SchedulerConfig loadConfig(const std::string& path)
+businessplanner::jobs::SchedulerConfig loadConfig(const std::string& path)
 {
-    using namespace nextra::jobs;
+    using namespace businessplanner::jobs;
     std::ifstream f(path);
     if (!f) throw std::runtime_error("cannot open " + path);
     nlohmann::json j;
@@ -49,7 +49,7 @@ nextra::jobs::SchedulerConfig loadConfig(const std::string& path)
     cfg.backoff.maxDelay  = std::chrono::milliseconds{
         j.value("backoffMaxMs", 3600000)};
     cfg.workerIdPrefix = j.value("workerIdPrefix",
-                                  std::string{"nextra-worker"});
+                                  std::string{"businessplanner-worker"});
     return cfg;
 }
 }  // namespace
@@ -72,13 +72,13 @@ void cmdJobScheduler(const std::string& config)
     auto db = drogon::app().getDbClient();
 
     auto cfg = loadConfig("constants/job-scheduler.json");
-    nextra::jobs::JobScheduler scheduler(db, cfg);
+    businessplanner::jobs::JobScheduler scheduler(db, cfg);
     scheduler.registerHandler(
         "blog.publish_due",
-        nextra::blog::ScheduledPublisher::makeHandler(db));
+        businessplanner::blog::ScheduledPublisher::makeHandler(db));
     scheduler.registerHandler(
         "routes.health_check",
-        nextra::health::RouteHealthHandler::makeHandler());
+        businessplanner::health::RouteHealthHandler::makeHandler());
     scheduler.start();
     spdlog::info("job-scheduler daemon ready ({} workers)", cfg.workers);
 

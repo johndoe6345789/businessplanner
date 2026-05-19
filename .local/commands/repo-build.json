@@ -14,7 +14,7 @@
     {
       "type": "shell",
       "tag": "repo",
-      "command": "docker build -t nextra-packagerepo -f tools/packagerepo/backend/Dockerfile tools/packagerepo"
+      "command": "docker build -t businessplanner-packagerepo -f tools/packagerepo/backend/Dockerfile tools/packagerepo"
     }
   ]
 }

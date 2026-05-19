@@ -25,7 +25,7 @@
     "use_brotli": true,
     "log": {
       "log_path": "./logs",
-      "logfile_base_name": "nextra-api",
+      "logfile_base_name": "businessplanner-api",
       "log_size_limit": 104857600,
       "log_level": "WARN"
     }
@@ -36,9 +36,9 @@
       "rdbms": "postgresql",
       "host": "db",
       "port": 5432,
-      "dbname": "nextra_db",
-      "user": "nextra",
-      "passwd": "nextra_dev",
+      "dbname": "businessplanner_db",
+      "user": "businessplanner",
+      "passwd": "businessplanner_dev",
       "is_fast": false,
       "connection_number": 16,
       "timeout": 30,
@@ -48,17 +48,17 @@
   "custom_config": {
     "jwt": {
       "secret": "change-me-in-production",
-      "issuer": "nextra-api",
+      "issuer": "businessplanner-api",
       "access_token_ttl_seconds": 900,
       "refresh_token_ttl_seconds": 604800
     },
     "smtp": {
       "host": "mailserver",
       "port": 587,
-      "user": "noreply@nextra.local",
-      "password": "nextra_dev",
-      "from_address": "noreply@nextra.local",
-      "from_name": "Nextra",
+      "user": "noreply@businessplanner.local",
+      "password": "businessplanner_dev",
+      "from_address": "noreply@businessplanner.local",
+      "from_name": "Businessplanner",
       "use_tls": true
     },
     "ai": {

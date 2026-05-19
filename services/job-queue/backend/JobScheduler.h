@@ -5,7 +5,7 @@
  * @brief Facade that starts the worker pool and the recovery loop.
  *
  * A single JobScheduler instance is constructed from the
- * `./nextra-api job-scheduler` subcommand in main.cpp.  It owns:
+ * `./businessplanner-api job-scheduler` subcommand in main.cpp.  It owns:
  *   - N JobWorker threads that drain job_queue.
  *   - A recovery thread that unlocks jobs stranded by dead workers.
  *
@@ -32,7 +32,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 class JobWorker;
@@ -46,7 +46,7 @@ struct SchedulerConfig
     std::chrono::seconds gracefulShutdown{30};
     std::chrono::seconds recoveryTick{60};
     BackoffConfig backoff;
-    std::string workerIdPrefix{"nextra-worker"};
+    std::string workerIdPrefix{"businessplanner-worker"};
 };
 
 /**
@@ -84,4 +84,4 @@ private:
     std::thread recoveryThread_;
 };
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

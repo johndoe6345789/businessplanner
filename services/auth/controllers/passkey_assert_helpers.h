@@ -46,7 +46,7 @@ inline auto verifyStoredCredential(
 
 /**
  * @brief Build the signed-in JSON response, attach the
- *        nextra_sso cookie, and async-touch last_used_at.
+ *        businessplanner_sso cookie, and async-touch last_used_at.
  * @param userId Local user UUID from the credential row.
  * @param credIdHex Hex credential id for the UPDATE.
  * @param cb     Controller response callback to invoke.

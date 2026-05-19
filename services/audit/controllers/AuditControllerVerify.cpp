@@ -28,7 +28,7 @@ void AuditController::verifyChain(
         return;
     }
 
-    nextra::audit::HashVerifier verifier(
+    businessplanner::audit::HashVerifier verifier(
         drogon::app().getDbClient(), 1000);
     auto report = verifier.verify(tenant);
 

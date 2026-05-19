@@ -1,10 +1,10 @@
 ##
 ## @file cmake/sources_domains_nz.cmake
 ## @brief Domain dirs N..Z (second half) — appended to
-##        NEXTRA_DOMAIN_DIRS by sources_domains.cmake.
+##        BUSINESSPLANNER_DOMAIN_DIRS by sources_domains.cmake.
 ##
 
-list(APPEND NEXTRA_DOMAIN_DIRS
+list(APPEND BUSINESSPLANNER_DOMAIN_DIRS
     notifications/backend
     notifications/backend/commands
     notifications/controllers

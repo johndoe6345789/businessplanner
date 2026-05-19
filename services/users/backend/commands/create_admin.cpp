@@ -1,7 +1,7 @@
 /**
  * @file create_admin.cpp
  * @brief Implementation of the create-admin sub-command.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #include "create_admin.h"

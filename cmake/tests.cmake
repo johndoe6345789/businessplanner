@@ -3,7 +3,7 @@
 ## @brief GTest binary built from every services/*/tests/*.cpp.
 ##
 
-set(NEXTRA_TEST_DIRS
+set(BUSINESSPLANNER_TEST_DIRS
     alerts/tests
     audit/tests
     auth/tests
@@ -27,21 +27,21 @@ set(NEXTRA_TEST_DIRS
     wiki/tests
 )
 
-set(NEXTRA_TEST_SOURCES "")
-foreach(dir IN LISTS NEXTRA_TEST_DIRS)
+set(BUSINESSPLANNER_TEST_SOURCES "")
+foreach(dir IN LISTS BUSINESSPLANNER_TEST_DIRS)
     file(GLOB _t "${CMAKE_SOURCE_DIR}/services/${dir}/*.cpp")
-    list(APPEND NEXTRA_TEST_SOURCES ${_t})
+    list(APPEND BUSINESSPLANNER_TEST_SOURCES ${_t})
 endforeach()
 
-if(NEXTRA_TEST_SOURCES)
-    add_executable(nextra-tests ${NEXTRA_TEST_SOURCES})
-    target_include_directories(nextra-tests
+if(BUSINESSPLANNER_TEST_SOURCES)
+    add_executable(businessplanner-tests ${BUSINESSPLANNER_TEST_SOURCES})
+    target_include_directories(businessplanner-tests
         PRIVATE
             "${CMAKE_SOURCE_DIR}/services"
             "${CMAKE_SOURCE_DIR}/services/drogon-host/backend"
-            "${NEXTRA_PORTAL_GEN_INCLUDE}"
+            "${BUSINESSPLANNER_PORTAL_GEN_INCLUDE}"
     )
-    target_link_libraries(nextra-tests
+    target_link_libraries(businessplanner-tests
         PRIVATE
             Drogon::Drogon
             nlohmann_json::nlohmann_json
@@ -53,5 +53,5 @@ if(NEXTRA_TEST_SOURCES)
             GTest::gtest_main
     )
     include(GoogleTest)
-    gtest_discover_tests(nextra-tests)
+    gtest_discover_tests(businessplanner-tests)
 endif()

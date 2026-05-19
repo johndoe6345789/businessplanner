@@ -1,7 +1,7 @@
 {
-  "name": "Nextra Alerts",
+  "name": "Businessplanner Alerts",
   "short_name": "Alerts",
-  "description": "Nextra alerts and notifications.",
+  "description": "Businessplanner alerts and notifications.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

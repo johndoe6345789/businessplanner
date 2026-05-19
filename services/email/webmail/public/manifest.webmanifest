@@ -1,7 +1,7 @@
 {
-  "name": "Nextra Email",
+  "name": "Businessplanner Email",
   "short_name": "Email",
-  "description": "Nextra IMAP webmail client.",
+  "description": "Businessplanner IMAP webmail client.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

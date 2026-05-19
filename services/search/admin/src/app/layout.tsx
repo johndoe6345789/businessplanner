@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
  * Uses the shared M3 dark theme via data-theme.
  */
 export const metadata: Metadata = {
-  title: 'Search — Nextra',
+  title: 'Search — Businessplanner',
   description:
     'Elasticsearch index health + reindex',
 }

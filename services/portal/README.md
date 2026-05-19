@@ -1,8 +1,8 @@
 # services/portal
 
 Developer portal homepage — a grid of cards linking
-to every tool in the Nextra stack. Served by the
-main Drogon `nextra-api` binary at `/portal/`.
+to every tool in the Businessplanner stack. Served by the
+main Drogon `businessplanner-api` binary at `/portal/`.
 
 ## Data source
 

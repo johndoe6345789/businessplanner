@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Backups — Nextra',
+  title: 'Backups — Businessplanner',
   description:
     'Encrypted pg_dump runs and restore tool',
 }

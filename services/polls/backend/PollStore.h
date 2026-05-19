@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 /**
@@ -54,4 +54,4 @@ class PollStore
     drogon::orm::DbClientPtr db_;
 };
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

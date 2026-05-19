@@ -65,7 +65,7 @@ inline std::string detectRegistry()
             repo = repo.substr(0, repo.size() - 4);
     }
     if (repo.empty())
-        repo = "local/nextra";
+        repo = "local/businessplanner";
     return "ghcr.io/" + repo;
 }
 

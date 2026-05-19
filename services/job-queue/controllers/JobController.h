@@ -20,7 +20,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 class JobController : public drogon::HttpController<JobController>
@@ -63,4 +63,4 @@ public:
                       std::int64_t id);
 };
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

@@ -15,7 +15,7 @@
 #include <optional>
 #include <string>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 /// Lifecycle states mirroring the live_streams CHECK constraint.
@@ -56,4 +56,4 @@ struct PublishHook
     std::string sourceAddr;  // optional IP
 };
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

@@ -1,19 +1,19 @@
 /**
  * @file services/infra/rdkafka_producer_publish.cpp
  * @brief Synchronous produce / flush / isConnected surface of
- *        @ref nextra::infra::RdKafkaProducer. Split out from
+ *        @ref businessplanner::infra::RdKafkaProducer. Split out from
  *        RdKafkaProducer.cpp so each translation unit stays
  *        under the 100-LOC cap.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/RdKafkaProducer.h"
 
 #include <librdkafka/rdkafka.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 bool RdKafkaProducer::produce(
@@ -52,6 +52,6 @@ bool RdKafkaProducer::isConnected() const
     return rk_ != nullptr;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

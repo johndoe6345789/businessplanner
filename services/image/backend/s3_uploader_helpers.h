@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace nextra::image::s3help
+namespace businessplanner::image::s3help
 {
 
 /**
@@ -32,4 +32,4 @@ std::string utcNow();
  */
 std::string hostFromUrl(const std::string& url);
 
-}  // namespace nextra::image::s3help
+}  // namespace businessplanner::image::s3help

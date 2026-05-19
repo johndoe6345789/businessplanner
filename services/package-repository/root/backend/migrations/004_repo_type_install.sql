@@ -16,7 +16,7 @@ VALUES
   ('npm', 'npm', 'Node.js packages', '#CB3837',
    E'npm install {name}@{version} --registry http://localhost:5050/npm/'),
   ('conan', 'conan', 'C/C++ Conan v2 packages', '#6699CB',
-   E'conan remote add nextra http://localhost:5050/conan\nconan install --requires={name}/{version}'),
+   E'conan remote add businessplanner http://localhost:5050/conan\nconan install --requires={name}/{version}'),
   ('pypi', 'pypi', 'Python wheels/sdists', '#3776AB',
    E'manager repo pull {ns}/{name}@{version}'),
   ('maven', 'maven', 'Java/Kotlin JARs', '#C71A36',

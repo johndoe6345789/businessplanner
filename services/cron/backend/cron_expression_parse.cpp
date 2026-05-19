@@ -14,7 +14,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 namespace
@@ -92,4 +92,4 @@ CronExpression parseCron(const std::string& expr)
     return cx;
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

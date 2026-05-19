@@ -40,7 +40,7 @@
     {
       "type": "shell",
       "tag": "status",
-      "command": "docker images --format 'table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}' | grep -E '(REPOSITORY|deps|nextra|frontend|backend)' | head -20 || echo '  (none)'"
+      "command": "docker images --format 'table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}' | grep -E '(REPOSITORY|deps|businessplanner|frontend|backend)' | head -20 || echo '  (none)'"
     },
     {
       "type": "print",

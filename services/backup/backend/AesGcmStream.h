@@ -18,7 +18,7 @@
 
 struct evp_cipher_ctx_st;
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 /**
@@ -59,4 +59,4 @@ private:
     unsigned char              iv_[12]{};
 };
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

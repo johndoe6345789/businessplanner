@@ -9,21 +9,21 @@
     },
     {
       "type": "capture",
-      "command": "docker inspect -f '{{.State.Status}}' nextra-s3server 2>/dev/null || echo 'not found'",
+      "command": "docker inspect -f '{{.State.Status}}' businessplanner-s3server 2>/dev/null || echo 'not found'",
       "var": "app_state"
     },
     {
       "type": "print",
-      "text": "[s3] nextra-s3server:    {app_state}"
+      "text": "[s3] businessplanner-s3server:    {app_state}"
     },
     {
       "type": "capture",
-      "command": "docker inspect -f '{{.State.Status}}' nextra-s3server-db 2>/dev/null || echo 'not found'",
+      "command": "docker inspect -f '{{.State.Status}}' businessplanner-s3server-db 2>/dev/null || echo 'not found'",
       "var": "db_state"
     },
     {
       "type": "print",
-      "text": "[s3] nextra-s3server-db: {db_state}"
+      "text": "[s3] businessplanner-s3server-db: {db_state}"
     },
     {
       "type": "print",

@@ -7,7 +7,7 @@
  * from v1 and is the new default for any controller that wants
  * distributed, tenant-aware rate limiting. Wire via:
  *
- *     "Filters": ["nextra::filters::RateLimitFilter"]
+ *     "Filters": ["businessplanner::filters::RateLimitFilter"]
  *
  * Groups + limits come from `constants/rate-limit.json`.
  */
@@ -17,7 +17,7 @@
 #include <drogon/HttpFilter.h>
 #include <string>
 
-namespace nextra::filters
+namespace businessplanner::filters
 {
 
 /**
@@ -52,8 +52,8 @@ class RateLimitFilter
         const drogon::HttpRequestPtr& req);
 
     /** @brief Look up the bucket spec for a group. */
-    [[nodiscard]] static nextra::ratelimit::BucketSpec
+    [[nodiscard]] static businessplanner::ratelimit::BucketSpec
     specFor(const std::string& group);
 };
 
-} // namespace nextra::filters
+} // namespace businessplanner::filters

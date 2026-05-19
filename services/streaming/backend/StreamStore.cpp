@@ -8,7 +8,7 @@
 
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 std::string statusToString(StreamStatus s)
@@ -93,4 +93,4 @@ void StreamStore::markLive(std::int64_t id)
         "WHERE id=$1 AND status<>'blocked'", id);
 }
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

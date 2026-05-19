@@ -9,7 +9,7 @@
  *     `state` is the original `next` URL (a path).
  *  2. Client-side login() from useKeycloak() (with
  *     PKCE). `state` is a random token persisted in
- *     the nextra_sso_state cookie alongside the
+ *     the businessplanner_sso_state cookie alongside the
  *     PKCE verifier.
  *
  * Logic is encapsulated in useAuthCallback so this

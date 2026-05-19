@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -33,7 +33,7 @@ struct TranscoderConfig
     std::string ffprobePath{"/usr/bin/ffprobe"};
     int         workerCount{2};
     int         pollIntervalMs{2000};
-    std::string workDir{"/tmp/nextra-transcode"};
+    std::string workDir{"/tmp/businessplanner-transcode"};
     std::string s3Endpoint;
     std::string s3Bucket;
     std::string s3AccessKey;
@@ -64,4 +64,4 @@ struct Rendition
     std::int64_t bytes{0};
 };
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

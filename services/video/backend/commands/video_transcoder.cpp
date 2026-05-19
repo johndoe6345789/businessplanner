@@ -41,7 +41,7 @@ void cmdVideoTranscoder(const std::string& config)
     std::thread httpThread([] { drogon::app().run(); });
     startedFuture.wait();
     auto db  = drogon::app().getDbClient();
-    auto cfg = nextra::video::loadTranscoderConfig(
+    auto cfg = businessplanner::video::loadTranscoderConfig(
         "constants/video-transcoder.json");
 
     spdlog::info("video-transcoder: {} workers, ffmpeg={}",
@@ -51,7 +51,7 @@ void cmdVideoTranscoder(const std::string& config)
     for (int i = 0; i < cfg.workerCount; ++i) {
         workers.emplace_back([db, cfg, i] {
             const auto id = std::format("video-worker-{}", i);
-            nextra::video::VideoProcessor proc(db, cfg);
+            businessplanner::video::VideoProcessor proc(db, cfg);
             while (!g_stop.load()) {
                 const bool didWork = proc.processOne(id);
                 if (!didWork) {

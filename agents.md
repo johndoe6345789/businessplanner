@@ -1,7 +1,7 @@
 # AI Agent Configurations
 
 This file defines specialized AI agent roles for automated tasks in the
-Nextra project. Each agent has a specific responsibility and set of
+Businessplanner project. Each agent has a specific responsibility and set of
 instructions.
 
 ---

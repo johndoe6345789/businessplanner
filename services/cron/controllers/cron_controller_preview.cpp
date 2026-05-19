@@ -15,7 +15,7 @@
 
 #include <drogon/drogon.h>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 using namespace drogon;
@@ -85,4 +85,4 @@ void CronController::forceTick(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

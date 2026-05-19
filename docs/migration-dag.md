@@ -1,6 +1,6 @@
 # Migration DAG
 
-Nextra uses per-domain SQL migrations numbered from `001`. The
+Businessplanner uses per-domain SQL migrations numbered from `001`. The
 migration runner reads a dependency graph and applies domains in
 topological order so FK constraints are always satisfied.
 
@@ -34,11 +34,11 @@ applied in any order relative to each other.
 of the graph and applies each domain's migrations in order. Within
 a domain, files are applied in filename order (`001_`, `002_`, …).
 
-Invoke via the `nextra-api migrate` subcommand:
+Invoke via the `businessplanner-api migrate` subcommand:
 
 ```bash
-./nextra-api migrate --up    # apply all pending
-./nextra-api migrate --down  # rollback last batch
+./businessplanner-api migrate --up    # apply all pending
+./businessplanner-api migrate --down  # rollback last batch
 ```
 
 Or through the manager CLI:

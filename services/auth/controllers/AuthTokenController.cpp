@@ -7,7 +7,7 @@
  * session endpoint). These handlers are retained per
  * template-repo policy:
  *  - logout: revokes the DB session (9.1 hardening),
- *    clears the residual nextra_sso cookie, returns 200.
+ *    clears the residual businessplanner_sso cookie, returns 200.
  *  - refresh: returns 401 to force the SPA through
  *    Keycloak's refresh-token grant.
  *
@@ -51,7 +51,7 @@ void AuthTokenController::logout(
         {{"message", "Logged out"}});
     // Clear any residual legacy SSO cookie. New auth
     // state lives in the Keycloak end-session flow.
-    drogon::Cookie sso("nextra_sso", "");
+    drogon::Cookie sso("businessplanner_sso", "");
     sso.setHttpOnly(true);
     sso.setPath("/");
     sso.setMaxAge(0);

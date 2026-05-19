@@ -41,7 +41,7 @@ COPY frontend/package.json frontend/package-lock.json* ./
 
 RUN if [ -n "$REPO_URL" ]; then \
         curl -fsSL \
-            "$REPO_URL/v1/npm/nextra-frontend/$NPM_LOCK_HASH/noarch/blob" \
+            "$REPO_URL/v1/npm/businessplanner-frontend/$NPM_LOCK_HASH/noarch/blob" \
             -o /tmp/npm.tar.gz && \
         mkdir -p node_modules && \
         tar -xzf /tmp/npm.tar.gz -C node_modules && \

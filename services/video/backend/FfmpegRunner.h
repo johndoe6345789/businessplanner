@@ -16,7 +16,7 @@
 #include <sys/types.h>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -48,4 +48,4 @@ FfmpegResult runFfmpeg(
     const std::vector<std::string>& argv,
     const std::function<void(const std::string&)>& onProgressLine);
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

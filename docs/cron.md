@@ -1,6 +1,6 @@
 # Cron (scheduled_jobs)
 
-Nextra has its own library-free cron parser living in
+Businessplanner has its own library-free cron parser living in
 `services/cron/backend/`. The goal is that a template consumer
 does not inherit a transitive cron dependency just for next-fire
 time computation.
@@ -50,7 +50,7 @@ Each field accepts:
 - Seconds — tick is minute-grained.
 
 A malformed expression throws `std::invalid_argument` from
-`nextra::cron::parseCron`.
+`businessplanner::cron::parseCron`.
 
 ---
 

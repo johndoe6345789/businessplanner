@@ -47,7 +47,7 @@ std::pair<std::string, size_t> S3BlobStore::store(const std::string& data)
     req->setBody(data);
 
     // Timeout scales with payload size: 30 s + 1 s per MB,
-    // capped at 600 s. A fresh nextra-base-conan layer is
+    // capped at 600 s. A fresh businessplanner-base-conan layer is
     // ~500 MB and must fit inside this window.
     const auto sizeMb = static_cast<double>(data.size()) /
                         (1024.0 * 1024.0);

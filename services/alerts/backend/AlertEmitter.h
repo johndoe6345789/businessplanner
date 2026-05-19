@@ -13,7 +13,7 @@
 #include <memory>
 #include <string>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 /**
@@ -54,4 +54,4 @@ class AlertEmitter
 /** @brief Process-wide singleton accessor. */
 AlertEmitter& alertEmitter();
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

@@ -30,7 +30,7 @@ nlohmann::json fetchUserInfo(
     req->addHeader("Accept", "application/json");
     req->addHeader("Authorization",
                    "Bearer " + accessToken);
-    req->addHeader("User-Agent", "nextra-oauth/1.0");
+    req->addHeader("User-Agent", "businessplanner-oauth/1.0");
     auto [rc, resp] = client->sendRequest(req, 10.0);
     if (rc != drogon::ReqResult::Ok || !resp) {
         spdlog::warn("oauth userinfo GET fail");

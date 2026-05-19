@@ -9,7 +9,7 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 
-namespace nextra::notifications
+namespace businessplanner::notifications
 {
 
 InAppSender::InAppSender(
@@ -43,4 +43,4 @@ DeliveryResult InAppSender::send(
     }
 }
 
-}  // namespace nextra::notifications
+}  // namespace businessplanner::notifications

@@ -12,7 +12,7 @@
 #include <drogon/HttpResponse.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 S3Config S3Config::fromEnv()
@@ -21,9 +21,9 @@ S3Config S3Config::fromEnv()
     c.endpoint = s3help::env(
         "S3_ENDPOINT", "http://s3:9000");
     c.accessKey = s3help::env(
-        "S3_ACCESS_KEY", "nextra-dev");
+        "S3_ACCESS_KEY", "businessplanner-dev");
     c.secretKey = s3help::env(
-        "S3_SECRET_KEY", "nextra-dev");
+        "S3_SECRET_KEY", "businessplanner-dev");
     c.bucket = s3help::env(
         "S3_BUCKET", "image-variants");
     c.region = s3help::env(
@@ -85,4 +85,4 @@ bool S3Uploader::upload(
     return true;
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

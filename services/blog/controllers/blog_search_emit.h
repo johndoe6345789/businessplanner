@@ -13,14 +13,14 @@
 #include <cstdint>
 #include <string>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 /// Emit an upsert event for one article row.
 inline void emitArticle(std::int64_t id,
                         const Article& a)
 {
-    nextra::search::SearchEventPublisher::publish(
+    businessplanner::search::SearchEventPublisher::publish(
         "upsert", "articles", std::to_string(id),
         {{"slug", a.slug}, {"title", a.title},
          {"body_md", a.bodyMd},
@@ -30,9 +30,9 @@ inline void emitArticle(std::int64_t id,
 /// Emit a delete event for one article id.
 inline void emitArticleDelete(std::int64_t id)
 {
-    nextra::search::SearchEventPublisher
+    businessplanner::search::SearchEventPublisher
         ::publishDelete("articles",
                         std::to_string(id));
 }
 
-} // namespace nextra::blog
+} // namespace businessplanner::blog

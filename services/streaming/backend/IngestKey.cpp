@@ -11,7 +11,7 @@
 #include <stdexcept>
 #include <vector>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 std::string generateIngestKey(std::size_t nBytes)
@@ -35,4 +35,4 @@ std::string generateIngestKey(std::size_t nBytes)
     return out;
 }
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

@@ -1,10 +1,10 @@
 ##
 ## @file CMakeLists.txt
-## @brief Top-level CMake for the domain-sliced Nextra backend.
+## @brief Top-level CMake for the domain-sliced Businessplanner backend.
 ##
 ## Every domain lives under services/<domain>/ with its own
 ## backend/ controllers/ tests/ subfolders. This file globs
-## per-domain and feeds every .cpp into one nextra-api binary.
+## per-domain and feeds every .cpp into one businessplanner-api binary.
 ##
 ## Build:
 ##   conan install services/drogon-host --build=missing
@@ -13,7 +13,7 @@
 ##
 
 cmake_minimum_required(VERSION 3.20)
-project(nextra-api
+project(businessplanner-api
     VERSION   0.1.0
     LANGUAGES CXX
 )
@@ -43,18 +43,18 @@ endif()
 include(cmake/sources.cmake)
 include(cmake/portal.cmake)
 
-add_executable(${PROJECT_NAME} ${NEXTRA_SOURCES})
+add_executable(${PROJECT_NAME} ${BUSINESSPLANNER_SOURCES})
 
 # Domain-rooted include paths: include "audit/backend/X.h"
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/services"
         "${CMAKE_CURRENT_SOURCE_DIR}/services/drogon-host/backend"
-        "${NEXTRA_PORTAL_GEN_INCLUDE}"
+        "${BUSINESSPLANNER_PORTAL_GEN_INCLUDE}"
 )
 
 target_compile_definitions(${PROJECT_NAME}
-    PRIVATE NEXTRA_VERSION="${PROJECT_VERSION}"
+    PRIVATE BUSINESSPLANNER_VERSION="${PROJECT_VERSION}"
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -75,7 +75,7 @@ if(RdKafka_FOUND)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE RdKafka::rdkafka)
     target_compile_definitions(${PROJECT_NAME}
-        PRIVATE NEXTRA_HAVE_KAFKA)
+        PRIVATE BUSINESSPLANNER_HAVE_KAFKA)
 endif()
 
 if(VIPS_FOUND)
@@ -84,7 +84,7 @@ if(VIPS_FOUND)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE ${VIPS_LIBRARIES})
     target_compile_definitions(${PROJECT_NAME}
-        PRIVATE NEXTRA_HAVE_VIPS)
+        PRIVATE BUSINESSPLANNER_HAVE_VIPS)
 endif()
 
 option(BUILD_TESTING "Build GTest suite" OFF)

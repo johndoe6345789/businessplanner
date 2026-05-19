@@ -13,7 +13,7 @@
 
 #include <chrono>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 /**
@@ -34,4 +34,4 @@ std::chrono::milliseconds nextRetryDelay(const DispatcherConfig& cfg,
  */
 bool isExhausted(const DispatcherConfig& cfg, int attempts);
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

@@ -41,12 +41,12 @@ void cmdImageProcessor(const std::string& config)
     startedFuture.wait();
     auto db = drogon::app().getDbClient();
 
-    auto cfg = nextra::image::loadProcessorConfig(
+    auto cfg = businessplanner::image::loadProcessorConfig(
         "constants/image-processor.json");
-    nextra::image::ImageJobStore store(db);
-    nextra::image::S3Uploader uploader(
-        nextra::image::S3Config::fromEnv());
-    nextra::image::ImageProcessor proc(
+    businessplanner::image::ImageJobStore store(db);
+    businessplanner::image::S3Uploader uploader(
+        businessplanner::image::S3Config::fromEnv());
+    businessplanner::image::ImageProcessor proc(
         std::move(store), std::move(uploader), cfg);
 
     proc.start();

@@ -25,7 +25,7 @@ export default function StatusPage() {
           Service status
         </Typography>
         <Typography variant="body1">
-          Live health of every Nextra service.
+          Live health of every Businessplanner service.
           This page updates every 15 seconds.
         </Typography>
       </header>

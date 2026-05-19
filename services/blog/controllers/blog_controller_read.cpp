@@ -8,7 +8,7 @@
 
 #include <drogon/drogon.h>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 using namespace drogon;
@@ -85,4 +85,4 @@ void BlogController::getBySlug(
     cb(HttpResponse::newHttpJsonResponse(toJson(*a)));
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

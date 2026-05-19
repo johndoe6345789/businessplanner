@@ -7,7 +7,7 @@
 
 #include "ecommerce/backend/ProductStore.h"
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 ProductStore::ProductStore(
@@ -86,4 +86,4 @@ std::optional<Product> ProductStore::bySlug(
     return rowToProduct(rs[0]);
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

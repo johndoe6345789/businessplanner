@@ -15,7 +15,7 @@ namespace controllers
 {
 
 using json = nlohmann::json;
-using nextra::polls::PollStore;
+using businessplanner::polls::PollStore;
 
 void PollsController::results(
     const drogon::HttpRequestPtr& req,
@@ -31,7 +31,7 @@ void PollsController::results(
             drogon::k404NotFound, "poll not found"));
     const auto votes = store.listVotes(id);
     const auto tallies =
-        nextra::polls::tally(*poll, votes);
+        businessplanner::polls::tally(*poll, votes);
 
     json items = json::array();
     for (const auto& t : tallies)
@@ -45,7 +45,7 @@ void PollsController::results(
     cb(utils::jsonOk({
         {"poll_id", id},
         {"kind",
-         nextra::polls::kindToString(poll->kind)},
+         businessplanner::polls::kindToString(poll->kind)},
         {"items", items},
         {"total_votes",
          static_cast<std::int64_t>(votes.size())}}));

@@ -1,7 +1,7 @@
 /**
  * @file serve.cpp
  * @brief Implementation of the serve sub-command.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #include "serve.h"
@@ -62,7 +62,7 @@ void cmdServe(std::uint16_t port,
 
     registerHttpAdvice();
 
-    spdlog::info("Starting nextra-api on port {}",
+    spdlog::info("Starting businessplanner-api on port {}",
                  port);
     drogon::app().run();
 

@@ -15,7 +15,7 @@
 
 #include <drogon/HttpFilter.h>
 
-namespace nextra::filters
+namespace businessplanner::filters
 {
 
 /**
@@ -40,4 +40,4 @@ class SecurityHeadersFilter
         drogon::FilterChainCallback&& ccb) override;
 };
 
-} // namespace nextra::filters
+} // namespace businessplanner::filters

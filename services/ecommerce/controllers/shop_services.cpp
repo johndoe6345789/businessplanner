@@ -34,7 +34,7 @@ nlohmann::json loadCfg()
 namespace controllers::shop
 {
 
-using namespace nextra::ecommerce;
+using namespace businessplanner::ecommerce;
 
 std::shared_ptr<ProductStore> products()
 {

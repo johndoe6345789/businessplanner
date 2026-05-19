@@ -17,7 +17,7 @@ void HealthController::check(
 {
     nlohmann::json body = {
         {"status", "ok"},
-        {"version", NEXTRA_VERSION}};
+        {"version", BUSINESSPLANNER_VERSION}};
     cb(::utils::jsonOk(body));
 }
 
@@ -29,9 +29,9 @@ void HealthController::version(
     const char* feV =
         std::getenv("FRONTEND_VERSION");
     nlohmann::json body = {
-        {"backend", NEXTRA_VERSION},
+        {"backend", BUSINESSPLANNER_VERSION},
         {"frontend", feV ? feV : "unknown"},
-        {"service", "nextra-api"}};
+        {"service", "businessplanner-api"}};
     cb(::utils::jsonOk(body));
 }
 

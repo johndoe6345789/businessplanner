@@ -1,7 +1,7 @@
 /**
  * @file migrate.h
  * @brief Declaration of the migrate sub-command handler.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #pragma once

@@ -123,13 +123,13 @@ backend/
 
 ### 1.2 CLI Entry Point (main.cpp)
 Uses CLI11 for subcommands:
-- `./nextra-api` -- start server (default)
-- `./nextra-api serve --port 8080 --config config.json`
-- `./nextra-api migrate --up`
-- `./nextra-api migrate --down`
-- `./nextra-api seed`
-- `./nextra-api create-admin --email admin@example.com`
-- `./nextra-api generate-models`
+- `./businessplanner-api` -- start server (default)
+- `./businessplanner-api serve --port 8080 --config config.json`
+- `./businessplanner-api migrate --up`
+- `./businessplanner-api migrate --down`
+- `./businessplanner-api seed`
+- `./businessplanner-api create-admin --email admin@example.com`
+- `./businessplanner-api generate-models`
 
 ### 1.3 Database Schema
 **users**: id (UUID PK), email, username, password_hash,
@@ -349,7 +349,7 @@ builds without external network access.
 ## Verification Plan
 
 1. Backend compiles: `conan install . && cmake --build .`
-2. Backend starts: `./nextra-api serve` -- health endpoint OK
+2. Backend starts: `./businessplanner-api serve` -- health endpoint OK
 3. Frontend compiles: `npm run build` -- no TS/ESLint errors
 4. Frontend starts: `npm run dev` -- hero page renders
 5. Docker Compose: `docker compose up` -- all 3 services healthy

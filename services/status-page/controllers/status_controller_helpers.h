@@ -9,7 +9,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace nextra::controllers::status_helpers
+namespace businessplanner::controllers::status_helpers
 {
 
 /**
@@ -35,4 +35,4 @@ inline nlohmann::json rowToJson(
     return j;
 }
 
-} // namespace nextra::controllers::status_helpers
+} // namespace businessplanner::controllers::status_helpers

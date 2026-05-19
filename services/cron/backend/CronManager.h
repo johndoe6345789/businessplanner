@@ -25,7 +25,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 /// Configuration loaded from constants/cron-manager.json.
@@ -75,4 +75,4 @@ private:
     std::thread tickerThread_;
 };
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

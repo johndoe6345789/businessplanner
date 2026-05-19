@@ -3,7 +3,7 @@
  * @brief SSO token-validation endpoint for nginx
  *        auth_request.
  *
- * Reads the `nextra_sso` cookie which carries a
+ * Reads the `businessplanner_sso` cookie which carries a
  * Keycloak-issued RS256 access token. Returns 200 with
  * X-User-Id / X-User-Email / X-User-Roles headers on
  * success, 401 otherwise.
@@ -56,7 +56,7 @@ static std::string joinRoles(
 void AuthValidateController::validate(
     const drogon::HttpRequestPtr& req, Cb&& cb)
 {
-    const auto token = req->getCookie("nextra_sso");
+    const auto token = req->getCookie("businessplanner_sso");
     if (token.empty()) {
         cb(::utils::jsonError(
             drogon::k401Unauthorized,

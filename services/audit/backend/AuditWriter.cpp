@@ -11,7 +11,7 @@
 
 #include <string>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 AuditWriter::AuditWriter(drogon::orm::DbClientPtr db)
@@ -97,4 +97,4 @@ AuditWriter::list(const std::string& tenantId,
     return out;
 }
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::ratelimit
+namespace businessplanner::ratelimit
 {
 
 long long RedisBucketStore::nowMillis()
@@ -48,11 +48,11 @@ BucketResult RedisBucketStore::take(
     const std::vector<std::string> args{
         cap, rate, now, ttl};
 
-    auto& redis = nextra::infra::RedisClient::instance();
+    auto& redis = businessplanner::infra::RedisClient::instance();
     const std::string reply = redis.evalScript(
         std::string(TokenBucket::luaScript()),
         keys, args);
     return TokenBucket::parseReply(reply);
 }
 
-} // namespace nextra::ratelimit
+} // namespace businessplanner::ratelimit

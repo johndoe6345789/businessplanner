@@ -1,10 +1,10 @@
 /**
  * @file services/infra/rdkafka_consumer_poll.cpp
  * @brief Poll and commit implementation for
- *        @ref nextra::infra::RdKafkaConsumer.
+ *        @ref businessplanner::infra::RdKafkaConsumer.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/RdKafkaConsumer.h"
 
@@ -13,7 +13,7 @@
 
 #include <string>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 int RdKafkaConsumer::poll(int timeoutMs)
@@ -71,6 +71,6 @@ void RdKafkaConsumer::commit()
     }
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

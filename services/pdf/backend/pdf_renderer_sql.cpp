@@ -1,6 +1,6 @@
 /**
  * @file pdf_renderer_sql.cpp
- * @brief DB helpers for @ref nextra::pdf::PdfRenderer.
+ * @brief DB helpers for @ref businessplanner::pdf::PdfRenderer.
  *
  * Kept in a separate translation unit so @c PdfRenderer.cpp stays
  * under the 100-LOC per-file cap.  These methods are the only place
@@ -11,7 +11,7 @@
 
 #include <stdexcept>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 PdfRender PdfRenderer::loadRow(std::int64_t id) const
@@ -62,4 +62,4 @@ void PdfRenderer::markFailed(std::int64_t id,
         id, err);
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

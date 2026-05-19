@@ -18,7 +18,7 @@
 
 extern char** environ;
 
-namespace nextra::video
+namespace businessplanner::video
 {
 namespace
 {
@@ -89,4 +89,4 @@ FfmpegResult runFfmpeg(
     return res;
 }
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

@@ -9,7 +9,7 @@
 #include <sstream>
 #include <string>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 std::string renderMarkdown(const std::string& md)
@@ -59,4 +59,4 @@ std::string renderMarkdown(const std::string& md)
     return out.str();
 }
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

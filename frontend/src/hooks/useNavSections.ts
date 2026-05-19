@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import navGroups from '@/constants/nav-groups.json';
 
-const STORAGE_KEY = 'nextra-nav-sections';
+const STORAGE_KEY = 'businessplanner-nav-sections';
 
 type SectionState = Record<string, boolean>;
 

@@ -17,7 +17,7 @@
 #include <chrono>
 #include <random>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 using namespace drogon;
@@ -27,7 +27,7 @@ namespace
 std::string makeBoundary()
 {
     static thread_local std::mt19937_64 rng{std::random_device{}()};
-    return "----nextraPdfBoundary" + std::to_string(rng());
+    return "----businessplannerPdfBoundary" + std::to_string(rng());
 }
 
 std::string buildMultipartBody(const std::string& html,
@@ -77,4 +77,4 @@ void GotenbergClient::render(const std::string& html,
     onOk(std::string(resp->getBody()));
 }
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

@@ -10,7 +10,7 @@
         { "action": "navigate", "url": "/login" },
         { "action": "waitForLoadState", "state": "domcontentloaded" },
         { "action": "fill", "label": "Email",
-          "value": "dev.admin@nextra.local" },
+          "value": "dev.admin@businessplanner.local" },
         { "action": "fill", "label": "Password", "value": "DevAdmin1" },
         { "action": "click", "role": "button", "text": "Log in" },
         { "action": "waitForLoadState", "state": "networkidle" },
@@ -20,7 +20,7 @@
           "url": "**/api/totp/enroll",
           "response": {
             "secret": "JBSWY3DPEHPK3PXP",
-            "otpauth": "otpauth://totp/nextra?secret=JBSWY3DPEHPK3PXP"
+            "otpauth": "otpauth://totp/businessplanner?secret=JBSWY3DPEHPK3PXP"
           } },
         { "action": "mockApi",
           "url": "**/api/totp/verify",

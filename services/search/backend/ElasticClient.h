@@ -13,7 +13,7 @@
 
 #include <string>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /**
@@ -73,4 +73,4 @@ class ElasticClient
     drogon::HttpClientPtr client_;
 };
 
-} // namespace nextra::search
+} // namespace businessplanner::search

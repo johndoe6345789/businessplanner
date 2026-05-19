@@ -13,7 +13,7 @@
 #include <cstring>
 #include <sstream>
 
-namespace nextra::ecommerce
+namespace businessplanner::ecommerce
 {
 
 static std::string hmacHex(
@@ -88,4 +88,4 @@ bool StripeWebhook::dispatch(const std::string& payload)
     }
 }
 
-}  // namespace nextra::ecommerce
+}  // namespace businessplanner::ecommerce

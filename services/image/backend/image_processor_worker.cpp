@@ -14,7 +14,7 @@
 #include <exception>
 #include <thread>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 void ImageProcessor::processJob(ImageJob& job)
@@ -77,4 +77,4 @@ void ImageProcessor::workerLoop()
     }
 }
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

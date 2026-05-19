@@ -5,7 +5,7 @@
 
 #include "search/backend/SearchQuery.h"
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 json SearchQueryBuilder::build(
@@ -64,4 +64,4 @@ SearchQueryParams SearchQueryBuilder::fromParams(
     return p;
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

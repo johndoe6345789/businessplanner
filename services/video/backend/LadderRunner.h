@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::video
+namespace businessplanner::video
 {
 
 /**
@@ -30,4 +30,4 @@ bool runLadders(
     std::shared_ptr<drogon::orm::DbClient> db,
     std::vector<Rendition>& out);
 
-}  // namespace nextra::video
+}  // namespace businessplanner::video

@@ -1,7 +1,7 @@
 /**
  * @file seed.cpp
  * @brief Implementation of the seed sub-command.
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #include "seed.h"

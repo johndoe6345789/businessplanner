@@ -17,7 +17,7 @@
 
 namespace drogon::orm { class DbClient; }
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 /// Filter passed to @ref ArticleStore::list.
@@ -64,4 +64,4 @@ private:
     std::shared_ptr<drogon::orm::DbClient> db_;
 };
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

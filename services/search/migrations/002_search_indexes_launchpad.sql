@@ -2,7 +2,7 @@
 -- Replace template-era indexes in the registry with
 -- the 4 LaunchPad content domains.
 --
--- The nextra-* indexes (forum, wiki, blog, products,
+-- The businessplanner-* indexes (forum, wiki, blog, products,
 -- gallery, users) are template defaults not used by
 -- LaunchPad. This migration removes them and registers
 -- the 4 LaunchPad indexes that the search-indexer

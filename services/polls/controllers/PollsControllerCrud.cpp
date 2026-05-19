@@ -16,8 +16,8 @@ namespace controllers
 {
 
 using json = nlohmann::json;
-using nextra::polls::Poll;
-using nextra::polls::PollStore;
+using businessplanner::polls::Poll;
+using businessplanner::polls::PollStore;
 using controllers::polls_json::pollToJson;
 
 void PollsController::list(
@@ -47,7 +47,7 @@ void PollsController::create(
     p.tenantId  = body.value("tenant_id", "");
     p.creatorId = req->getHeader("X-User-Id");
     p.question  = body.value("question", "");
-    p.kind = nextra::polls::parseKind(
+    p.kind = businessplanner::polls::parseKind(
         body.value("kind", "single"));
     p.opensAt  = body.value("opens_at", "now()");
     p.closesAt = body.value("closes_at", "");
@@ -59,7 +59,7 @@ void PollsController::create(
         p.options.push_back(
             {0, 0, pos++, o.value("label", "")});
     }
-    auto v = nextra::polls::validatePoll(p);
+    auto v = businessplanner::polls::validatePoll(p);
     if (!v.ok)
         return cb(utils::jsonError(
             drogon::k422UnprocessableEntity, v.message));

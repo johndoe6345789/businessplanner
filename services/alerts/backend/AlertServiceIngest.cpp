@@ -9,7 +9,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 void AlertService::ingest(
@@ -50,4 +50,4 @@ void AlertService::ingest(
         a.dedupeKey, meta);
 }
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

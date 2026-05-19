@@ -38,7 +38,7 @@ void VideoController::upload(
     }
 
     auto db = drogon::app().getDbClient();
-    nextra::video::VideoJobStore store(db);
+    businessplanner::video::VideoJobStore store(db);
     const auto assetId = store.insertAsset(sourceKey, mime);
     const auto tjId = store.insertTranscodeJob(assetId);
 

@@ -1,6 +1,6 @@
 # System Architecture
 
-Nextra is a domain-sliced monorepo. Every feature lives under
+Businessplanner is a domain-sliced monorepo. Every feature lives under
 `services/<domain>/`. This document describes how the pieces wire
 together at runtime. For the canonical subfolder reference see
 `docs/domain-layout.md`; for the service catalogue see
@@ -183,8 +183,8 @@ Browser <-- { response } <-----------'
 ```mermaid
 flowchart TB
     Nginx["Nginx + SSL (Let's Encrypt)"]
-    Nginx --> NextJS["nextra-web (Next.js)"]
-    Nginx --> API2["nextra-api (C++ binary)"]
+    Nginx --> NextJS["businessplanner-web (Next.js)"]
+    Nginx --> API2["businessplanner-api (C++ binary)"]
     API2 --> PG2[("PostgreSQL 16")]
 ```
 

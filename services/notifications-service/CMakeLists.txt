@@ -1,6 +1,6 @@
-## @brief nextra-notifications microservice.
+## @brief businessplanner-notifications microservice.
 cmake_minimum_required(VERSION 3.20)
-project(nextra-notifications VERSION 0.1.0 LANGUAGES CXX)
+project(businessplanner-notifications VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -9,8 +9,8 @@ include(
     "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/service.cmake"
 )
 
-nextra_service(
-    NAME nextra-notifications
+businessplanner_service(
+    NAME businessplanner-notifications
     DIRS
         notifications/backend
         notifications/backend/commands

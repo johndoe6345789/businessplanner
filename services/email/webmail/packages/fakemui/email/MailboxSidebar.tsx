@@ -49,7 +49,7 @@ export function MailboxSidebar({
         justifyContent: 'space-between',
         borderBottom: `1px solid ${V.border}` }}>
         <span style={{ fontWeight: 700, fontSize: 15,
-          color: V.text }}>Nextra Mail</span>
+          color: V.text }}>Businessplanner Mail</span>
         <button aria-label="Close menu"
           onClick={onClose}
           style={{ background: 'none', border: 'none',
@@ -66,7 +66,7 @@ export function MailboxSidebar({
           fontSize: 14, fontWeight: 500,
           borderBottom: `1px solid ${V.border}` }}>
         <span style={icon}>arrow_back</span>
-        Back to Nextra
+        Back to Businessplanner
       </a>
 
       {/* Compose */}

@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 HashVerifier::HashVerifier(drogon::orm::DbClientPtr db,
@@ -61,4 +61,4 @@ IntegrityReport HashVerifier::verify(
     return out;
 }
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

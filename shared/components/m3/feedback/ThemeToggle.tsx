@@ -17,7 +17,7 @@ import { Sun } from '../../../icons/react/m3/Sun'
 import { Moon } from '../../../icons/react/m3/Moon'
 import { IconButton } from '../inputs/IconButton'
 
-const STORAGE_KEY = 'nextra:theme'
+const STORAGE_KEY = 'businessplanner:theme'
 
 type Theme = 'light' | 'dark'
 

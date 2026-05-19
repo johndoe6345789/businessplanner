@@ -1,0 +1,17 @@
+{{- if .Values.frontend.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "businessplanner.fullname" . }}-frontend
+  labels:
+    {{- include "businessplanner.labels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.frontend.port }}
+      targetPort: http
+  selector:
+    {{- include "businessplanner.selectorLabels" (dict "ctx" . "component" "frontend") | nindent 4 }}
+{{- end -}}

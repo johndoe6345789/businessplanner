@@ -16,8 +16,8 @@ namespace controllers
 {
 
 using json = nlohmann::json;
-using nextra::polls::PollStore;
-using nextra::polls::PollVote;
+using businessplanner::polls::PollStore;
+using businessplanner::polls::PollVote;
 
 void PollsController::vote(
     const drogon::HttpRequestPtr& req,
@@ -48,7 +48,7 @@ void PollsController::vote(
         v.rank = body["rank"].get<int>();
 
     const bool already = store.hasVoted(id, voter);
-    auto chk = nextra::polls::validateVote(
+    auto chk = businessplanner::polls::validateVote(
         *poll, v.optionId, v.rank, already);
     if (!chk.ok)
         return cb(utils::jsonError(

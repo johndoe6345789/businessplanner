@@ -8,7 +8,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::backup
+namespace businessplanner::backup
 {
 
 using namespace drogon;
@@ -63,4 +63,4 @@ void BackupsController::listPolicy(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::backup
+}  // namespace businessplanner::backup

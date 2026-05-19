@@ -17,7 +17,7 @@
 #include <optional>
 #include <string>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 /// Lifecycle state of a row in job_queue.
@@ -72,4 +72,4 @@ std::string toString(BackoffStrategy s);
 JobStatus parseJobStatus(const std::string& s);
 BackoffStrategy parseBackoff(const std::string& s);
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

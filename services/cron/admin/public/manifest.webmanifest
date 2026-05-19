@@ -1,7 +1,7 @@
 {
-  "name": "Nextra Cron",
+  "name": "Businessplanner Cron",
   "short_name": "Cron",
-  "description": "Nextra scheduled tasks console.",
+  "description": "Businessplanner scheduled tasks console.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

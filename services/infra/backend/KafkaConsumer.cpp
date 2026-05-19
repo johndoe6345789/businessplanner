@@ -3,12 +3,12 @@
  * @brief librdkafka consumer construction + subscribe.
  * Polling loop lives in kafka_consumer_run.cpp.
  *
- * This legacy wrapper is only compiled when @c NEXTRA_HAVE_KAFKA
- * is defined. New code should use @ref nextra::infra::IKafkaConsumer
- * via @ref nextra::infra::makeKafkaConsumer.
+ * This legacy wrapper is only compiled when @c BUSINESSPLANNER_HAVE_KAFKA
+ * is defined. New code should use @ref businessplanner::infra::IKafkaConsumer
+ * via @ref businessplanner::infra::makeKafkaConsumer.
  */
 
-#ifdef NEXTRA_HAVE_KAFKA
+#ifdef BUSINESSPLANNER_HAVE_KAFKA
 
 #include "infra/backend/KafkaConsumer.h"
 
@@ -17,7 +17,7 @@
 
 #include <cstdlib>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 namespace
@@ -85,6 +85,6 @@ bool KafkaConsumer::isConnected() const
     return rk_ != nullptr;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra
 
-#endif // NEXTRA_HAVE_KAFKA
+#endif // BUSINESSPLANNER_HAVE_KAFKA

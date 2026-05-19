@@ -1,11 +1,11 @@
 /**
  * @file main.cpp
- * @brief Entry point for the nextra-api service.
+ * @brief Entry point for the businessplanner-api service.
  *
  * Parses CLI args via CLI11, then dispatches to the
  * matching sub-command handler.
  *
- * @copyright 2024 Nextra Contributors
+ * @copyright 2024 Businessplanner Contributors
  */
 
 #include "cli_daemon_opts.h"
@@ -28,7 +28,7 @@
 int main(int argc, char* argv[])
 {
     CLI::App app{
-        "nextra-api -- backend service"};
+        "businessplanner-api -- backend service"};
     app.require_subcommand(0, 1);
 
     // -- serve (default) --

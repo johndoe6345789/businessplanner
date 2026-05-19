@@ -4,7 +4,7 @@
  * @file PdfRenderer.h
  * @brief Job handler that turns @c pdf.render jobs into stored PDFs.
  *
- * Registered with @ref nextra::jobs::JobRegistry under the handler
+ * Registered with @ref businessplanner::jobs::JobRegistry under the handler
  * name from @c pdf-generator.json (default @c pdf.render).  The job
  * payload references a row in @c pdf_renders by id; the handler
  * loads source HTML, calls Gotenberg, uploads the result to s3server,
@@ -20,7 +20,7 @@
 
 #include <memory>
 
-namespace nextra::pdf
+namespace businessplanner::pdf
 {
 
 /**
@@ -37,7 +37,7 @@ public:
     void registerHandler();
 
     /// Execute one render; called by the job worker loop.
-    nextra::jobs::JobResult run(const nextra::jobs::QueuedJob& job);
+    businessplanner::jobs::JobResult run(const businessplanner::jobs::QueuedJob& job);
 
 private:
     PdfRender loadRow(std::int64_t id) const;
@@ -53,4 +53,4 @@ private:
     S3Upload s3_;
 };
 
-}  // namespace nextra::pdf
+}  // namespace businessplanner::pdf

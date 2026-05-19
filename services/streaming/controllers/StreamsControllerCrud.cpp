@@ -9,7 +9,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::streaming
+namespace businessplanner::streaming
 {
 
 using namespace drogon;
@@ -96,4 +96,4 @@ void StreamsController::publishHook(
     cb(HttpResponse::newHttpResponse());
 }
 
-}  // namespace nextra::streaming
+}  // namespace businessplanner::streaming

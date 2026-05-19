@@ -69,7 +69,7 @@ smoke. Run the full stack with
 Uses the seed user from
 `backend/seeds/users.json`:
 
-- email: `dev.admin@nextra.local`
+- email: `dev.admin@businessplanner.local`
 - password: `DevAdmin1`
 
 If you reset seeds, re-run

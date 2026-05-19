@@ -13,7 +13,7 @@
 
 #include <string>
 
-namespace nextra::ratelimit
+namespace businessplanner::ratelimit
 {
 
 /**
@@ -41,4 +41,4 @@ class RedisBucketStore
     static long long nowMillis();
 };
 
-} // namespace nextra::ratelimit
+} // namespace businessplanner::ratelimit

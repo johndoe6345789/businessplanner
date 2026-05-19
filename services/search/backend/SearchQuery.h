@@ -7,7 +7,7 @@
 
 #include "search/backend/SearchTypes.h"
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 /**
@@ -43,4 +43,4 @@ class SearchQueryBuilder
         std::int32_t size);
 };
 
-} // namespace nextra::search
+} // namespace businessplanner::search

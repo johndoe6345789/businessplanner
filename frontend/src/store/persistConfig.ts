@@ -13,7 +13,7 @@ import type { RootReducerState } from './store';
  *  tokens are never written to localStorage.
  */
 export const persistConfig: PersistConfig<RootReducerState> = {
-  key: 'nextra-root',
+  key: 'businessplanner-root',
   storage,
   whitelist: ['theme', 'planner', 'startupType'],
 };

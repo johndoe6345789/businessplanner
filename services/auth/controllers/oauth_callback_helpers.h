@@ -18,7 +18,7 @@ namespace controllers::oauth_cb
 mapProfile(const std::string& provider,
            const nlohmann::json& j);
 
-/** @brief Attach the nextra_sso cookie to @p r. */
+/** @brief Attach the businessplanner_sso cookie to @p r. */
 void attachSso(const drogon::HttpResponsePtr& r,
                const std::string& refreshToken);
 

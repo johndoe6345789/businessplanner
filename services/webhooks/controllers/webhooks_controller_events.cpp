@@ -8,7 +8,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 using namespace drogon;
@@ -35,4 +35,4 @@ void WebhooksController::listEvents(
     cb(HttpResponse::newHttpJsonResponse(body));
 }
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

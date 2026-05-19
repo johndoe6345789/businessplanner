@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <format>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 namespace
@@ -95,4 +95,4 @@ bool RedisClient::isConnected()
     return ok;
 }
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

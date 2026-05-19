@@ -52,7 +52,7 @@ inline RouterConfig loadConfig(const std::string& path)
 /**
  * @brief Adapter bridging the legacy single-shot
  *        @c pollOnce API onto the unified
- *        @ref nextra::infra::IKafkaConsumer handler model.
+ *        @ref businessplanner::infra::IKafkaConsumer handler model.
  *
  * Buffers incoming messages in a small queue so the existing
  * notification_router.cpp main loop (which repeatedly calls
@@ -69,7 +69,7 @@ class InfraConsumerAdapter : public IKafkaConsumer
     void close() override;
 
   private:
-    std::unique_ptr<nextra::infra::IKafkaConsumer> inner_;
+    std::unique_ptr<businessplanner::infra::IKafkaConsumer> inner_;
     std::deque<std::string> queue_;
     std::string group_;
 };

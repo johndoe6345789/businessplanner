@@ -1,7 +1,7 @@
 /**
  * @file services/search/ElasticClientDoc.cpp
  * @brief Single-document upsert / delete helpers
- *        for nextra::search::ElasticClient. Split
+ *        for businessplanner::search::ElasticClient. Split
  *        out from ElasticClient.cpp to keep each
  *        translation unit under the 100-LOC cap.
  */
@@ -11,7 +11,7 @@
 #include <drogon/drogon.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::search
+namespace businessplanner::search
 {
 
 namespace
@@ -76,4 +76,4 @@ void ElasticClient::deleteDoc(
         });
 }
 
-} // namespace nextra::search
+} // namespace businessplanner::search

@@ -14,7 +14,7 @@
     {
       "type": "shell",
       "tag": "s3",
-      "command": "docker build -t nextra-s3server -f tools/s3server/backend/Dockerfile tools/s3server"
+      "command": "docker build -t businessplanner-s3server -f tools/s3server/backend/Dockerfile tools/s3server"
     }
   ]
 }

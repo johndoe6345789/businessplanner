@@ -14,7 +14,7 @@
 #include <drogon/drogon.h>
 #include <drogon/orm/DbClient.h>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 using namespace drogon;
@@ -89,4 +89,4 @@ void CronController::create(
     cb(r);
 }
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

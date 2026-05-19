@@ -22,7 +22,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::cron
+namespace businessplanner::cron
 {
 
 class CronController : public drogon::HttpController<CronController>
@@ -71,4 +71,4 @@ public:
                  std::function<void(const drogon::HttpResponsePtr&)>&& cb);
 };
 
-}  // namespace nextra::cron
+}  // namespace businessplanner::cron

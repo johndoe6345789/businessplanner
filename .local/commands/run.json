@@ -52,7 +52,7 @@
     },
     {
       "type": "print",
-      "text": "[run] Starting nextra-api on port {opt.port}"
+      "text": "[run] Starting businessplanner-api on port {opt.port}"
     },
     {
       "type": "set",
@@ -68,7 +68,7 @@
     {
       "type": "shell",
       "tag": "run",
-      "command": "./{build_dir}/nextra-api serve --port {opt.port} {config_flag}"
+      "command": "./{build_dir}/businessplanner-api serve --port {opt.port} {config_flag}"
     }
   ]
 }

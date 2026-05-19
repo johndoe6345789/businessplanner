@@ -20,7 +20,7 @@
 
 #include <drogon/HttpController.h>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 class WebhooksController
@@ -77,4 +77,4 @@ public:
         std::function<void(const drogon::HttpResponsePtr&)>&& cb);
 };
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

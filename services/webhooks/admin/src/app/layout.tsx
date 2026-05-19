@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Webhooks — Nextra',
+  title: 'Webhooks — Businessplanner',
   description:
     'Outbound webhook operator tool',
 }

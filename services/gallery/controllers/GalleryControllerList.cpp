@@ -62,7 +62,7 @@ void GalleryController::create(
         }
         services::gallery::GalleryStore store;
         auto out = store.create(g);
-        nextra::search::SearchEventPublisher::publish(
+        businessplanner::search::SearchEventPublisher::publish(
             "upsert", "gallery_items",
             std::to_string(out.id),
             {{"slug", out.slug},

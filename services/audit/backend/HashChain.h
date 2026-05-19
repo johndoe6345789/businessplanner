@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::audit
+namespace businessplanner::audit
 {
 
 /** @brief SHA256 digest size in bytes. */
@@ -55,4 +55,4 @@ std::string toHex(const std::vector<unsigned char>& bytes);
  */
 std::vector<unsigned char> fromHex(const std::string& hex);
 
-}  // namespace nextra::audit
+}  // namespace businessplanner::audit

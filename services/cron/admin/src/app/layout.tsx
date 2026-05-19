@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import './globals.scss'
 
 export const metadata: Metadata = {
-  title: 'Cron — Nextra',
+  title: 'Cron — Businessplanner',
   description:
     'Cron schedule management tool',
 }

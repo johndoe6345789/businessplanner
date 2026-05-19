@@ -15,7 +15,7 @@
 #include <drogon/orm/Exception.h>
 #include <spdlog/spdlog.h>
 
-namespace nextra::jobs
+namespace businessplanner::jobs
 {
 
 void JobQueue::recoverAbandonedJobs(std::chrono::seconds lockTimeout)
@@ -50,4 +50,4 @@ void JobQueue::recoverAbandonedJobs(std::chrono::seconds lockTimeout)
     }
 }
 
-}  // namespace nextra::jobs
+}  // namespace businessplanner::jobs

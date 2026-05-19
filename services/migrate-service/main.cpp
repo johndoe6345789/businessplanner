@@ -1,6 +1,6 @@
 /**
  * @file main.cpp
- * @brief nextra-migrate — one-shot DB migration entry point.
+ * @brief businessplanner-migrate — one-shot DB migration entry point.
  *
  * Invokes the migrate command directly (NOT runService/HTTP):
  * applies all pending migrations then exits. Best-effort —

@@ -7,7 +7,7 @@
 
 #include <spdlog/spdlog.h>
 
-namespace nextra::polls
+namespace businessplanner::polls
 {
 
 PollStore::PollStore()
@@ -65,4 +65,4 @@ bool PollStore::hasVoted(std::int64_t id,
     return !r.empty();
 }
 
-}  // namespace nextra::polls
+}  // namespace businessplanner::polls

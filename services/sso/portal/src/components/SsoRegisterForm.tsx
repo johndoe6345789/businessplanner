@@ -9,7 +9,7 @@ interface SsoRegisterFormProps {
 
 /**
  * Registration form: creates account, auto-logs in
- * (which sets the nextra_sso HttpOnly cookie), then
+ * (which sets the businessplanner_sso HttpOnly cookie), then
  * redirects.  The main app bootstraps auth from the
  * cookie via GET /api/auth/sso-session on startup.
  */
@@ -53,7 +53,7 @@ export default function SsoRegisterForm({
         window.location.href = '/sso/login';
         return;
       }
-      // nextra_sso cookie set by the login response.
+      // businessplanner_sso cookie set by the login response.
       void ld;
       window.location.href = next;
     } catch {

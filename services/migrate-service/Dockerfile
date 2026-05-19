@@ -1,16 +1,16 @@
-# services/migrate-service/Dockerfile - nextra-migrate
+# services/migrate-service/Dockerfile - businessplanner-migrate
 # Generated from docker/service-base.Dockerfile;
 # per-service identity defaulted below so this
 # Dockerfile builds standalone. Edit the canonical
 # docker/service-base.Dockerfile, then regenerate.
-# Multi-stage build for all nextra Drogon microservices.
+# Multi-stage build for all businessplanner Drogon microservices.
 #
 # Stages toolchain and conan-deps have no per-service
 # ARGs, so Docker's layer cache shares them across all
 # 13 service builds — apt and conan run only once.
 #
 # Build args (only needed in final two stages):
-#   SVC_NAME   binary name      (e.g. nextra-auth)
+#   SVC_NAME   binary name      (e.g. businessplanner-auth)
 #   SVC_DIR    CMakeLists dir   (e.g. auth-service)
 #   SVC_PORT   exposed port     (e.g. 9001)
 
@@ -19,7 +19,7 @@ ARG RUNTIME_IMAGE=debian:sid-slim
 ARG APT_PROXY=
 
 # Per-service identity (override via --build-arg)
-ARG SVC_NAME=nextra-migrate
+ARG SVC_NAME=businessplanner-migrate
 ARG SVC_DIR=migrate-service
 ARG SVC_PORT=9099
 
@@ -81,7 +81,7 @@ RUN cmake -B /build \
         -j"$(( $(nproc) > 4 ? 4 : $(nproc) ))"
 
 # ── Stage 3b: extract migration SQL (migrate one-shot) ─
-# nextra-migrate runs the migrator, so unlike the other
+# businessplanner-migrate runs the migrator, so unlike the other
 # services it must carry the per-domain *.sql + the graph.
 FROM build AS migration-files
 RUN find /src/services -type f -name "*.sql" \
@@ -105,9 +105,9 @@ RUN if [ -n "${APT_PROXY}" ]; then \
     apt-get install -y --no-install-recommends \
         ca-certificates libpq5 libssl3 && \
     rm -rf /var/lib/apt/lists/* && \
-    groupadd --system nextra && \
-    useradd --system --gid nextra \
-        --create-home nextra
+    groupadd --system businessplanner && \
+    useradd --system --gid businessplanner \
+        --create-home businessplanner
 
 # ── Stage 5: per-service runtime image ──────────────
 FROM runtime-base AS runtime
@@ -128,9 +128,9 @@ COPY services/migration-graph.json \
     ./services/migration-graph.json
 
 RUN mkdir -p logs && \
-    chown -R nextra:nextra /app
+    chown -R businessplanner:businessplanner /app
 
-USER nextra
+USER businessplanner
 EXPOSE ${SVC_PORT}
 
 ENTRYPOINT ["./bin/svc", "config/config.json"]

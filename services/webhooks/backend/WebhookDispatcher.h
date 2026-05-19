@@ -23,7 +23,7 @@
 #include <thread>
 #include <vector>
 
-namespace nextra::webhooks
+namespace businessplanner::webhooks
 {
 
 class WebhookDispatcher
@@ -55,4 +55,4 @@ private:
     std::thread worker_;
 };
 
-}  // namespace nextra::webhooks
+}  // namespace businessplanner::webhooks

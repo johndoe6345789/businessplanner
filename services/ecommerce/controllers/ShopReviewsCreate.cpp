@@ -2,7 +2,7 @@
  * @file ShopReviewsCreate.cpp
  * @brief POST /api/shop/products/{id}/reviews — auth'd
  *        upsert of a review by (product, user). Re-emits
- *        the parent product to nextra-products.
+ *        the parent product to businessplanner-products.
  */
 
 #include "ecommerce/controllers/ShopController.h"
@@ -35,7 +35,7 @@ void ShopController::createReview(
                 "body must be 1..5000 chars"));
             return;
         }
-        std::optional<nextra::ecommerce::Product> p;
+        std::optional<businessplanner::ecommerce::Product> p;
         const bool numeric = !id.empty()
             && std::all_of(id.begin(), id.end(),
                 [](char c) { return std::isdigit(

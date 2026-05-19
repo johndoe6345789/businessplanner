@@ -24,12 +24,12 @@ void onSignal(int) { g_stop.store(true); }
 
 void handleOne(
     const std::string& payload,
-    nextra::notifications::NotificationRouter& router)
+    businessplanner::notifications::NotificationRouter& router)
 {
     try
     {
         auto j = nlohmann::json::parse(payload);
-        nextra::notifications::Notification n;
+        businessplanner::notifications::Notification n;
         n.id = j.value("id", 0LL);
         n.tenantId = j.value("tenant_id", "");
         n.userId = j.value("user_id", "");
@@ -59,7 +59,7 @@ void cmdNotificationRouter(const std::string& config)
 
     auto cfg = notif::loadConfig(
         "constants/notification-router.json");
-    nextra::notifications::NotificationRouter router(db);
+    businessplanner::notifications::NotificationRouter router(db);
     router.registerDefaults(cfg.emailEndpoint);
     spdlog::info(
         "notification-router ready, topic={}", cfg.topic);

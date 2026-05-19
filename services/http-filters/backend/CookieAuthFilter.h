@@ -1,7 +1,7 @@
 #pragma once
 /**
  * @file CookieAuthFilter.h
- * @brief Auth filter that reads the nextra_sso cookie.
+ * @brief Auth filter that reads the businessplanner_sso cookie.
  *
  * Used by endpoints accessed from the email client
  * frontend, which shares the SSO cookie but cannot
@@ -23,7 +23,7 @@ class CookieAuthFilter
     CookieAuthFilter() = default;
 
     /**
-     * @brief Validate nextra_sso cookie or Bearer.
+     * @brief Validate businessplanner_sso cookie or Bearer.
      * @param req  Incoming HTTP request.
      * @param cb   Failure callback.
      * @param ccb  Success chain callback.

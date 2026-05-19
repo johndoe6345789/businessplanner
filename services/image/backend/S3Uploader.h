@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 /// @brief Runtime config loaded from environment variables.
@@ -52,4 +52,4 @@ class S3Uploader
     S3Config cfg_;
 };
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image

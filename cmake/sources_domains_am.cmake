@@ -1,10 +1,10 @@
 ##
 ## @file cmake/sources_domains_am.cmake
 ## @brief Domain dirs A..M (first half) — appended to
-##        NEXTRA_DOMAIN_DIRS by sources_domains.cmake.
+##        BUSINESSPLANNER_DOMAIN_DIRS by sources_domains.cmake.
 ##
 
-list(APPEND NEXTRA_DOMAIN_DIRS
+list(APPEND BUSINESSPLANNER_DOMAIN_DIRS
     ai-chat/backend
     ai-chat/controllers
     alerts/backend

@@ -10,6 +10,6 @@
   "gracefulShutdownSeconds": 30,
   "deadLetterRetentionDays": 30,
   "runHistoryRetentionDays": 90,
-  "workerIdPrefix": "nextra-worker",
+  "workerIdPrefix": "businessplanner-worker",
   "_note": "Scheduled/cron-style jobs live in cron-manager.json and are owned by the separate cron-manager daemon. This file configures the ad-hoc queue drainer only."
 }

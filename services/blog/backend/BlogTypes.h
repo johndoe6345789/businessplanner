@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::blog
+namespace businessplanner::blog
 {
 
 /// Lifecycle states of an article row.
@@ -50,4 +50,4 @@ std::string statusToString(ArticleStatus s);
 /// Parse a SQL status string; defaults to Draft on bad input.
 ArticleStatus statusFromString(const std::string& s);
 
-}  // namespace nextra::blog
+}  // namespace businessplanner::blog

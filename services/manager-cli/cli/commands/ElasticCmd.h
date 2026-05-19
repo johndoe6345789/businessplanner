@@ -50,7 +50,7 @@ class ElasticCmd
 
     /**
      * @brief Reindex a specific service or all.
-     * @param service One of: nextra, pkgrepo, s3, all.
+     * @param service One of: businessplanner, pkgrepo, s3, all.
      * @return int 0 on success, non-zero on failure.
      */
     static int reindex(const std::string& service);

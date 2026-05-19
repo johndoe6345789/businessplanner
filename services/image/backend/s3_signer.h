@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace nextra::image::s3_signer
+namespace businessplanner::image::s3_signer
 {
 
 /**
@@ -76,4 +76,4 @@ std::string signRequest(
     const std::string& region,
     const std::string& service);
 
-}  // namespace nextra::image::s3_signer
+}  // namespace businessplanner::image::s3_signer

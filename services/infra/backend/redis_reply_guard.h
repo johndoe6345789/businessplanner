@@ -6,7 +6,7 @@
 
 #include <hiredis/hiredis.h>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -34,4 +34,4 @@ struct ReplyGuard
     ReplyGuard& operator=(const ReplyGuard&) = delete;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

@@ -65,7 +65,7 @@ COPY backend/conanfile.py .
 
 # -- Conan dependencies -------------------------------------
 RUN if [ -n "$REPO_URL" ]; then \
-        URL="$REPO_URL/v1/conan/nextra-backend" && \
+        URL="$REPO_URL/v1/conan/businessplanner-backend" && \
         URL="$URL/$CONAN_VER/$TARGETARCH-release/blob" && \
         curl -fsSL "$URL" -o /tmp/conan.tar.gz && \
         tar -xzf /tmp/conan.tar.gz -C ~ && \

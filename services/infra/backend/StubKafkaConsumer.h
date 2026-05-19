@@ -2,7 +2,7 @@
 /**
  * @file services/infra/StubKafkaConsumer.h
  * @brief No-op @ref IKafkaConsumer used when librdkafka is
- *        not linked into the build (@c NEXTRA_HAVE_KAFKA
+ *        not linked into the build (@c BUSINESSPLANNER_HAVE_KAFKA
  *        undefined).
  *
  * Header-only so it is always available regardless of whether
@@ -21,7 +21,7 @@
 #include <utility>
 #include <vector>
 
-namespace nextra::infra
+namespace businessplanner::infra
 {
 
 /**
@@ -76,4 +76,4 @@ class StubKafkaConsumer final : public IKafkaConsumer
     KafkaMessageHandler handler_;
 };
 
-} // namespace nextra::infra
+} // namespace businessplanner::infra

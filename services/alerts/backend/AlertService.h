@@ -13,7 +13,7 @@
 #include <memory>
 #include <string>
 
-namespace nextra::alerts
+namespace businessplanner::alerts
 {
 
 /**
@@ -52,4 +52,4 @@ class AlertService
     drogon::orm::DbClientPtr db_;
 };
 
-} // namespace nextra::alerts
+} // namespace businessplanner::alerts

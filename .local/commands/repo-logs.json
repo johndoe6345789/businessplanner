@@ -10,7 +10,7 @@
     {
       "type": "shell",
       "tag": "repo",
-      "command": "docker logs -f --tail=100 nextra-packagerepo"
+      "command": "docker logs -f --tail=100 businessplanner-packagerepo"
     }
   ]
 }

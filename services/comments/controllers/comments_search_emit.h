@@ -20,7 +20,7 @@ namespace controllers
 /// Emit a delete event for one moderated comment id.
 inline void emitForumPostDelete(std::int64_t id)
 {
-    nextra::search::SearchEventPublisher
+    businessplanner::search::SearchEventPublisher
         ::publishDelete("forum_posts",
                         std::to_string(id));
 }
@@ -34,7 +34,7 @@ inline void emitForumPostReindex(std::int64_t id)
     store.findById(
         id,
         [](services::comments::CommentRow row) {
-            nextra::search::SearchEventPublisher
+            businessplanner::search::SearchEventPublisher
                 ::publish("upsert", "forum_posts",
                     std::to_string(row.id),
                     {{"target_type", row.targetType},

@@ -15,7 +15,7 @@ namespace controllers::shop
 {
 
 inline nlohmann::json toJson(
-    const nextra::ecommerce::Cart& c)
+    const businessplanner::ecommerce::Cart& c)
 {
     nlohmann::json items = nlohmann::json::array();
     for (const auto& it : c.items) {
@@ -34,7 +34,7 @@ inline nlohmann::json toJson(
 }
 
 inline nlohmann::json toJson(
-    const nextra::ecommerce::Order& o)
+    const businessplanner::ecommerce::Order& o)
 {
     nlohmann::json lines = nlohmann::json::array();
     for (const auto& l : o.lines) {
@@ -48,7 +48,7 @@ inline nlohmann::json toJson(
         {"id", o.id},
         {"user_id", o.userId},
         {"status",
-         nextra::ecommerce::statusToString(o.status)},
+         businessplanner::ecommerce::statusToString(o.status)},
         {"total_cents", o.totalCents},
         {"currency", o.currency},
         {"stripe_pi",

@@ -3,7 +3,7 @@
  * @brief Legacy cookie-to-session bootstrap endpoint.
  *
  * Phase 4 of the Keycloak migration: this endpoint used
- * to read the legacy `nextra_sso` HttpOnly cookie (in-
+ * to read the legacy `businessplanner_sso` HttpOnly cookie (in-
  * house HS256 token) and bootstrap a Redux session for
  * the SPA. Keycloak now owns auth end-to-end — the SPA
  * derives state directly from the Keycloak access token

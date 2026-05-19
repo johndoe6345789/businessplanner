@@ -18,7 +18,7 @@
 #include <thread>
 #include <vector>
 
-namespace nextra::image
+namespace businessplanner::image
 {
 
 /// @brief Daemon-wide runtime configuration.
@@ -65,4 +65,4 @@ class ImageProcessor
     std::vector<std::thread> workers_;
 };
 
-}  // namespace nextra::image
+}  // namespace businessplanner::image
