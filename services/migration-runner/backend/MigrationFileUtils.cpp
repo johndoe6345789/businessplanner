@@ -4,6 +4,7 @@
  */
 
 #include "migration-runner/backend/MigrationFileUtils.h"
+#include "migration-runner/backend/sql_statement_split.h"
 
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
@@ -73,23 +74,10 @@ auto MigrationFileUtils::extractDown(const std::string& sql) -> std::string
 auto MigrationFileUtils::splitStatements(const std::string& sql)
     -> std::vector<std::string>
 {
-    std::vector<std::string> stmts;
-    std::string cur;
-    for (const char c : sql) {
-        if (c == ';') {
-            auto s = cur.find_first_not_of(" \t\r\n");
-            if (s != std::string::npos)
-                stmts.push_back(cur.substr(s));
-            cur.clear();
-        } else {
-            cur += c;
-        }
-    }
-    // Handle any trailing content without a semicolon
-    auto s = cur.find_first_not_of(" \t\r\n");
-    if (s != std::string::npos)
-        stmts.push_back(cur.substr(s));
-    return stmts;
+    // Delegate to the quote/comment/$$-aware splitter so
+    // DO $$ ... $$ blocks (and ; inside string literals)
+    // are not shattered into broken fragments.
+    return services::splitSqlStatements(sql);
 }
 
 } // namespace services
