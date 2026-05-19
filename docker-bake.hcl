@@ -37,7 +37,6 @@ variable "TAG" {
 # -----------------------------------------------------------------
 group "default" {
   targets = [
-    "businessplanner-api",
     "businessplanner-auth",
     "businessplanner-social",
     "businessplanner-notifications",
@@ -87,23 +86,6 @@ group "default" {
 # -----------------------------------------------------------------
 # businessplanner-api — Drogon C++ backend (shared by 13 compose services)
 # -----------------------------------------------------------------
-target "businessplanner-api" {
-  context    = "."
-  dockerfile = "services/drogon-host/Dockerfile"
-  contexts = {
-    manager  = "services/manager-cli/cli"
-    commands = ".local/commands"
-  }
-  args = {
-    DEPS_IMAGE    = "${REGISTRY}/businessplanner-base-conan:latest"
-    APT_IMAGE     = "${REGISTRY}/businessplanner-base-apt:latest"
-    RUNTIME_IMAGE = "debian:sid-slim"
-  }
-  tags = [
-    "${REGISTRY}/businessplanner-api:${TAG}",
-    "${REGISTRY}/businessplanner-api:latest",
-  ]
-}
 
 # -----------------------------------------------------------------
 # frontend — Next.js app (production Dockerfile)

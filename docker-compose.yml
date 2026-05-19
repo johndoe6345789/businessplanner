@@ -152,37 +152,6 @@ services:
     mem_limit: 256m
     restart: "no"
 
-  # ---- C++ Drogon API ---------------------------------------
-  # Registry:2 businessplanner-api (pipeline-built). ES dep removed (ES off).
-  backend:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-api:latest
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      elasticsearch:
-        condition: service_started
-      businessplanner-migrate:
-        condition: service_completed_successfully
-    environment:
-      DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: businessplanner_db
-      DB_USER: businessplanner
-      DB_PASSWORD: businessplanner_dev
-      REDIS_HOST: redis
-      REDIS_PORT: "6379"
-      ES_HOST: elasticsearch
-      ES_PORT: "9200"
-      JWT_SECRET: change-me-in-production
-      APP_BASE_URL: http://localhost:8892
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      FRONTEND_VERSION: "0.1.0"
-    mem_limit: 320m
-    restart: unless-stopped
-
   # ---- businessplanner-auth microservice (Phase 5 vertical slice) ----
   # Per-service image (BP slug). Proves the split end-to-end;
   # owns auth/users/api-keys/user-preferences routes (nginx
@@ -511,12 +480,12 @@ services:
       args:
         SRC_BUST: ${SRC_BUST:-0}
     depends_on:
-      - backend
+      - businessplanner-platform
     environment:
       NEXT_PUBLIC_BASE_PATH: /app
-      INTERNAL_API_URL: http://backend:8080
+      INTERNAL_API_URL: http://businessplanner-platform:9012
       NEXT_BASE_PATH: /app
-      BACKEND_URL: http://backend:8080
+      BACKEND_URL: http://businessplanner-platform:9012
       NODE_OPTIONS: "--max-old-space-size=512"
     mem_limit: 700m
     restart: unless-stopped
@@ -532,7 +501,7 @@ services:
       - sso_node_modules:/build/sso/node_modules
       - sso_next:/build/sso/.next
     depends_on:
-      - backend
+      - businessplanner-platform
     environment:
       NEXT_PUBLIC_ORIGIN: http://localhost:8892
       NODE_ENV: development
@@ -660,7 +629,7 @@ services:
       - "8892:80"
     depends_on:
       - frontend
-      - backend
+      - businessplanner-platform
       - sso
       - pkgrepo-frontend
     mem_limit: 64m
