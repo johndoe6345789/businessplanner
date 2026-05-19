@@ -1,10 +1,5 @@
-/**
- * @file sql_statement_split.cpp
- * @brief Quote/comment/dollar-quote aware SQL splitter.
- */
-
+/** @file sql_statement_split.cpp @brief See header. */
 #include "migration-runner/backend/sql_statement_split.h"
-
 #include <cctype>
 
 namespace services
