@@ -14,6 +14,7 @@ businessplanner_service(
     NAME businessplanner-auth
     DIRS
         auth/backend
+        auth/backend/keycloak
         auth/backend/oauth
         auth/backend/passkeys
         auth/backend/totp
