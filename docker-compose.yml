@@ -198,6 +198,8 @@ services:
         condition: service_completed_successfully
     environment:
       JWT_SECRET: change-me-in-production
+      AUTH_HOST: businessplanner-auth
+      AUTH_PORT: "9001"
     mem_limit: 96m
     restart: unless-stopped
 
