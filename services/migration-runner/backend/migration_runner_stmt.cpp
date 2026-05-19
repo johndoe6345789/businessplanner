@@ -41,6 +41,21 @@ static bool isTxnCtl(const std::string& s)
            || w == "START" || w == "END";
 }
 
+/**
+ * @brief True if @p msg is a benign idempotent-replay error.
+ *
+ * The legacy users/001 schema and the domain-sliced
+ * migrations both CREATE several of the same objects, so
+ * "already exists" / duplicate-key errors are expected and
+ * safe to skip — the object the migration wanted is present.
+ */
+static bool isBenignDup(const std::string& msg)
+{
+    return msg.find("already exists") != std::string::npos
+           || msg.find("duplicate key value")
+                  != std::string::npos;
+}
+
 void applyStmts(
     DbClientPtr db,
     std::vector<std::string> stmts,
@@ -71,14 +86,21 @@ void applyStmts(
             applyStmts(db, stmts, idx + 1,
                        onDone, onError);
         },
-        [idx, onError](
+        [db, stmts, idx, onDone, onError](
             const DrogonDbException& e) {
-            spdlog::error("Stmt {}: {}",
-                          idx, e.base().what());
+            const std::string m = e.base().what();
+            if (isBenignDup(m)) {
+                spdlog::warn(
+                    "Stmt {} idempotent-skip: {}",
+                    idx, m);
+                applyStmts(db, stmts, idx + 1,
+                           onDone, onError);
+                return;
+            }
+            spdlog::error("Stmt {}: {}", idx, m);
             onError(k500InternalServerError,
                     fmt::format("Statement {}: {}",
-                                idx,
-                                e.base().what()));
+                                idx, m));
         });
 }
 
