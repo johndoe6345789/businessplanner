@@ -22,7 +22,7 @@
   {
     "labelKey": "apiDocs",
     "label": "API Docs",
-    "url": "/api/docs",
+    "url": "/apidocs",
     "icon": "menu_book",
     "emoji": "\ud83d\udcd6",
     "port": "backend :8080",
