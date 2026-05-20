@@ -474,11 +474,16 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       additional_contexts:
         shared: ./shared
       args:
         SRC_BUST: ${SRC_BUST:-0}
+        NEXT_BASE_PATH: /app
+        BACKEND_URL: http://businessplanner-platform:9012
+        # Cap build heap on the 3.8 GB host (proven value
+        # from hamradio/webdev prod builds); runtime is light.
+        NODE_OPTIONS: --max-old-space-size=1024
     depends_on:
       - businessplanner-platform
     environment:
@@ -486,8 +491,7 @@ services:
       INTERNAL_API_URL: http://businessplanner-platform:9012
       NEXT_BASE_PATH: /app
       BACKEND_URL: http://businessplanner-platform:9012
-      NODE_OPTIONS: "--max-old-space-size=512"
-    mem_limit: 700m
+    mem_limit: 256m
     restart: unless-stopped
 
   # ---- SSO portal (login gate) ------------------------------
@@ -571,9 +575,7 @@ services:
 
   # ---- Package repository — C++ backend ---------------------
   pkgrepo-backend:
-    build:
-      context: ./services/package-repository/root
-      dockerfile: backend/Dockerfile
+    image: localhost:5001/johndoe6345789/businessplanner/packagerepo-backend:latest
     depends_on:
       pkgrepo-db:
         condition: service_healthy
@@ -601,23 +603,14 @@ services:
 
   # ---- Package repository — Next.js frontend ----------------
   pkgrepo-frontend:
-    build:
-      context: >-
-        ./services/package-repository/root/frontend
-      dockerfile: Dockerfile
-      additional_contexts:
-        shared: ./shared
+    image: localhost:5001/johndoe6345789/businessplanner/packagerepo-frontend:latest
     depends_on:
       - pkgrepo-backend
     environment:
       BACKEND_URL: http://pkgrepo-backend:5000
       NEXT_BASE_PATH: /repo
-      NODE_ENV: development
-      NODE_OPTIONS: "--max-old-space-size=512"
-    volumes:
-      - pkgrepo_node_modules:/build/services/package-repository/root/frontend/node_modules
-      - pkgrepo_next:/build/services/package-repository/root/frontend/.next
-    mem_limit: 700m
+      NEXT_PUBLIC_BASE_PATH: /repo
+    mem_limit: 512m
     restart: unless-stopped
 
   # ---- Nginx reverse proxy ----------------------------------
