@@ -40,8 +40,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       fullWidth ? styles.fullWidth : '', className,
     ].filter(Boolean).join(' ')
 
-    const Element = Component || 'button'
-    const elProps = Component ? { ...restProps, href } : { ...restProps, type }
+    const hasHref = href !== undefined
+    const Element = Component || (hasHref ? 'a' : 'button')
+    const elProps = Component
+      ? { ...restProps, href }
+      : hasHref
+        ? { ...restProps, href }
+        : { ...restProps, type }
 
     const sizeStyle: Record<string, string> = {}
     const norm = size === 'small' ? 'sm' : size === 'large' ? 'lg' : size
