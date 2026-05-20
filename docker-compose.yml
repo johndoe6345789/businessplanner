@@ -567,9 +567,7 @@ services:
 
   # ---- S3-compatible object store (in-house) ----------------
   s3:
-    build:
-      context: ./services/object-store/server
-      dockerfile: backend/Dockerfile
+    image: localhost:5001/johndoe6345789/businessplanner/s3:latest
     depends_on:
       s3-db:
         condition: service_healthy
@@ -675,9 +673,7 @@ services:
 
   # ---- Mailserver (postfix + dovecot) -----------------------
   mailserver:
-    build:
-      context: docker/mail
-      dockerfile: Dockerfile
+    image: localhost:5001/johndoe6345789/businessplanner/mailserver:latest
     hostname: mail
     domainname: businessplanner.local
     environment:
@@ -722,9 +718,7 @@ services:
 
   # ---- Email client API (Flask) -----------------------------
   emailclient-api:
-    build:
-      context: ./services/email/webmail
-      dockerfile: deployment/docker/email-service/Dockerfile
+    image: localhost:5001/johndoe6345789/businessplanner/emailclient-api:latest
     depends_on:
       mailserver:
         condition: service_healthy
