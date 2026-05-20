@@ -402,8 +402,7 @@ target "forum" {
 }
 
 # -----------------------------------------------------------------
-# emailclient — Next.js webmail UI. The former Flask email-service
-# (emailclient-api) is now the C++ email domain inside businessplanner-api.
+# emailclient — Next.js webmail UI.
 # -----------------------------------------------------------------
 target "emailclient" {
   context    = "./services/email/webmail"
@@ -416,6 +415,28 @@ target "emailclient" {
   tags = [
     "${REGISTRY}/emailclient:${TAG}",
     "${REGISTRY}/emailclient:latest",
+  ]
+}
+
+# emailclient-api — Flask IMAP/SMTP REST API used by webmail+alerts.
+# -----------------------------------------------------------------
+target "emailclient-api" {
+  context    = "./services/email/webmail"
+  dockerfile = "deployment/docker/email-service/Dockerfile"
+  tags = [
+    "${REGISTRY}/emailclient-api:${TAG}",
+    "${REGISTRY}/emailclient-api:latest",
+  ]
+}
+
+# mailserver — postfix + dovecot SMTP/IMAP for the dev mailbox.
+# -----------------------------------------------------------------
+target "mailserver" {
+  context    = "./docker/mail"
+  dockerfile = "Dockerfile"
+  tags = [
+    "${REGISTRY}/mailserver:${TAG}",
+    "${REGISTRY}/mailserver:latest",
   ]
 }
 
