@@ -26,10 +26,12 @@ const nextConfig = {
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
     includePaths: [
+      path.join(__dirname, "src", "styles"),
       path.join(monorepoRoot, "shared", "scss"),
       path.join(monorepoRoot, "shared", "scss", "m3-scss"),
     ],
     loadPaths: [
+      path.join(__dirname, "src", "styles"),
       path.join(monorepoRoot, "shared", "scss", "m3-scss"),
       path.join(monorepoRoot, "shared", "scss"),
     ],
