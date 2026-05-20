@@ -34,6 +34,7 @@ const nextConfig = {
     "@shared/service-adapters",
   ],
   turbopack: { root: monorepoRoot },
+  allowedDevOrigins: ['wardcrew.com'],
   async rewrites() {
     return [
       {

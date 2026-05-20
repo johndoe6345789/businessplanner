@@ -34,6 +34,7 @@ const nextConfig = {
     ],
   },
   turbopack: { root: monorepoRoot },
+  allowedDevOrigins: ['wardcrew.com'],
   async rewrites() {
     return [
       {
