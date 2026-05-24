@@ -499,6 +499,8 @@ services:
     build:
       context: ./services/sso/portal
       dockerfile: Dockerfile
+      additional_contexts:
+        shared: ./shared
       args:
         SRC_BUST: ${SRC_BUST:-0}
     volumes:
