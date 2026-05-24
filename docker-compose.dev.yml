@@ -1,0 +1,30 @@
+# Development override — use with:
+#   docker compose -f docker-compose.yml \
+#                  -f docker-compose.dev.yml \
+#                  up --build
+#
+# Rebuilds each Next.js UI from Dockerfile.dev so it runs
+# next dev --turbopack with hot-reload. All other services
+# (C++ backends, DBs, Kafka, etc.) are unchanged.
+services:
+  sso:
+    build:
+      dockerfile: Dockerfile.dev
+  s3-frontend:
+    build:
+      context: ./services/object-store/server/frontend
+      dockerfile: Dockerfile.dev
+      additional_contexts:
+        shared: ./shared
+  pgadmin-frontend:
+    build:
+      context: ./services/database/admin/frontend
+      dockerfile: Dockerfile.dev
+      additional_contexts:
+        shared: ./shared
+  emailclient:
+    build:
+      context: ./services/email/webmail
+      dockerfile: Dockerfile.dev
+      additional_contexts:
+        shared: ./shared
