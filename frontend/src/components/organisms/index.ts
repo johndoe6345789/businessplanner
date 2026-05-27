@@ -51,39 +51,10 @@ export { default as SettingsAdminCard }
 export { default as SettingsPreferences }
   from './SettingsPreferences';
 
-export * from './index.auth';
-
 export { StartupRoadmap } from './StartupRoadmap';
 export type {
   StartupRoadmapProps,
 } from './StartupRoadmap';
-
-export {
-  SkillsProfileForm,
-} from './SkillsProfileForm';
-
-export { ContactForm } from './ContactForm';
-
-export { BadgeCabinet } from './BadgeCabinet';
-
-export { LeaderboardTable } from './LeaderboardTable';
-export type {
-  LeaderboardTableProps,
-} from './LeaderboardTable';
-
-export { KnowledgeBase } from './KnowledgeBase';
-
-export {
-  EquityCalculator,
-} from './EquityCalculator';
-
-export {
-  VestingCalculator,
-} from './VestingCalculator';
-
-export * from './index.market-research';
-
-export * from './index.financials';
 
 export { default as NotificationInbox }
   from './NotificationInbox';
@@ -100,37 +71,9 @@ export type {
   LaunchPadKpiGridProps,
 } from './LaunchPadKpiGrid';
 
-export { WeeklyReviewForm }
-  from './WeeklyReviewForm';
-export { WeeklyReviewHistory }
-  from './WeeklyReviewHistory';
-
-export { LaunchChecklist }
-  from './LaunchChecklist';
-
-export { ResourceLibrary }
-  from './ResourceLibrary';
-
-export { DecisionLog } from './DecisionLog';
-
-export { ProductScopingCanvas }
-  from './ProductScopingCanvas';
-export { ScopingLane } from './ScopingLane';
-export type { ScopingLaneProps }
-  from './ScopingLane';
-
+export * from './index.auth';
+export * from './index.market-research';
+export * from './index.financials';
 export * from './index.community';
-
-export { AiRiskReport }
-  from './AiRiskReport';
-
-export { AiDocumentDrafter }
-  from './AiDocumentDrafter';
-
-export { PivotTracker } from './PivotTracker';
-
-export { AcceleratorTracker }
-  from './AcceleratorTracker';
-
-export { ChannelFitGuide }
-  from './ChannelFitGuide';
+export * from './index.profiles';
+export * from './index.tools';
