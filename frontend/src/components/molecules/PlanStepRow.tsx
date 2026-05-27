@@ -4,6 +4,8 @@ import React from 'react';
 import Box from '@shared/m3/Box';
 import Typography from '@shared/m3/Typography';
 import { useTranslations } from 'next-intl';
+import { StepWhyDetail }
+  from '@/components/molecules/StepWhyDetail';
 
 /** Props for an individual step row. */
 export interface PlanStepRowProps {
@@ -64,38 +66,11 @@ export const PlanStepRow: React.FC<
           >
             {t(`steps.${stepId}.title`)}
           </Typography>
-          <Typography
-            component="button"
-            variant="caption"
-            onClick={() => onExpand(stepId)}
-            aria-expanded={expanded}
-            aria-controls={`why-${stepId}`}
-            data-testid={`expand-${stepId}`}
-            sx={{
-              display: 'block', background: 'none',
-              border: 'none', color: 'primary.main',
-              cursor: 'pointer', p: 0, mt: 0.25,
-            }}
-          >
-            {expanded
-              ? t('hideDetail')
-              : t('whyThisMatters')}
-          </Typography>
-          {expanded && (
-            <Typography
-              id={`why-${stepId}`}
-              variant="caption"
-              color="text.secondary"
-              sx={{
-                display: 'block', mt: 0.5,
-                borderLeft: '2px solid',
-                borderColor: 'primary.light',
-                pl: 1,
-              }}
-            >
-              {t(`steps.${stepId}.why`)}
-            </Typography>
-          )}
+          <StepWhyDetail
+            stepId={stepId}
+            expanded={expanded}
+            onExpand={onExpand}
+          />
         </Box>
       </Box>
     </Box>

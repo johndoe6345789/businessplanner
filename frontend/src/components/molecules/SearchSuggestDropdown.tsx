@@ -7,16 +7,19 @@
  */
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import type { SearchSuggestItem } from '@/types/search';
-import {
-  TYPE_LABEL_KEY,
-} from '@/constants/search-type-labels';
+import { TYPE_LABEL_KEY }
+  from '@/constants/search-type-labels';
 import {
   PANEL, LIST, ROW_TOP, BADGE, TITLE, SNIPPET,
-  EMPTY_STATE, rowStyle, viewAllStyle,
+  EMPTY_STATE, rowStyle,
 } from './searchSuggestStyles';
+import { useScrollActiveIntoView }
+  from '@/hooks/useScrollActiveIntoView';
+import { SearchViewAllItem }
+  from './SearchViewAllItem';
 
 /** Props for SearchSuggestDropdown. */
 export interface SearchSuggestDropdownProps {
@@ -39,29 +42,21 @@ export const SearchSuggestDropdown: React.FC<
 > = ({ query, items, isLoading = false,
   activeIndex, onHover, onPick, onViewAll }) => {
   const t = useTranslations('search');
-  const listRef = useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    const el = listRef.current
-      ?.querySelectorAll('li')[activeIndex];
-    (el as HTMLElement | undefined)
-      ?.scrollIntoView({ block: 'nearest' });
-  }, [activeIndex]);
+  const listRef =
+    useScrollActiveIntoView(activeIndex);
+  const emptyMsg = isLoading
+    ? t('searching')
+    : items.length === 0
+    ? t('noResultsFor', { query })
+    : null;
 
   return (
     <div
       style={PANEL}
       data-testid="search-suggest-dropdown"
     >
-      {isLoading && (
-        <div style={EMPTY_STATE}>
-          {t('searching')}
-        </div>
-      )}
-      {!isLoading && items.length === 0 && (
-        <div style={EMPTY_STATE}>
-          {t('noResultsFor', { query })}
-        </div>
+      {emptyMsg && (
+        <div style={EMPTY_STATE}>{emptyMsg}</div>
       )}
       {!isLoading && items.length > 0 && (
       <ul
@@ -90,18 +85,12 @@ export const SearchSuggestDropdown: React.FC<
             <div style={SNIPPET}>{it.snippet}</div>
           </li>
         ))}
-        <li
-          role="option"
-          aria-selected={activeIndex === items.length}
-          onClick={onViewAll}
-          onMouseEnter={() => onHover(items.length)}
-          style={viewAllStyle(
-            activeIndex === items.length,
-          )}
-          data-testid="search-suggest-view-all"
-        >
-          {t('viewAll', { query })}
-        </li>
+        <SearchViewAllItem
+          query={query}
+          isActive={activeIndex === items.length}
+          onViewAll={onViewAll}
+          onHover={() => onHover(items.length)}
+        />
       </ul>
       )}
     </div>

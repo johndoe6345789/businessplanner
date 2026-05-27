@@ -5,25 +5,17 @@
  * Nine text areas, auto-saved on blur.
  * @module components/organisms/BusinessModelCanvas
  */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Box from '@shared/m3/Box';
 import TextField from '@shared/m3/TextField';
 import Grid from '@shared/m3/Grid';
 import CircularProgress from
   '@mui/material/CircularProgress';
 import { useTranslations } from 'next-intl';
-import { useGetBmcQuery }
-  from '@/store/api/marketResearchBmcApi';
-import { useBmcAutosave }
-  from '@/hooks/useBmcAutosave';
-import type { BmcCanvas } from '@/types/marketResearch';
-
-const EMPTY: BmcCanvas = {
-  problem: '', solution: '', uvp: '',
-  channels: '', customerSegments: '',
-  costStructure: '', revenueStreams: '',
-  keyMetrics: '', unfairAdvantage: '',
-};
+import { useBusinessModelCanvas }
+  from '@/hooks/useBusinessModelCanvas';
+import type { BmcCanvas }
+  from '@/types/marketResearch';
 
 type BmcKey = keyof BmcCanvas;
 
@@ -56,13 +48,9 @@ const FIELDS: { key: BmcKey; lk: string;
 export const BusinessModelCanvas: React.FC = () => {
   const t = useTranslations('marketResearch');
   const tc = useTranslations('common');
-  const { data, isLoading } = useGetBmcQuery();
-  const { scheduleAutosave } = useBmcAutosave();
-  const [canvas, setCanvas] = useState<BmcCanvas>(EMPTY);
+  const vm = useBusinessModelCanvas();
 
-  useEffect(() => { if (data) setCanvas(data); }, [data]);
-
-  if (isLoading) {
+  if (vm.isLoading) {
     return (
       <Box sx={{ display: 'flex',
         justifyContent: 'center', mt: 4 }}>
@@ -72,22 +60,24 @@ export const BusinessModelCanvas: React.FC = () => {
     );
   }
 
-  const handleChange = (k: BmcKey, v: string) =>
-    setCanvas((p) => ({ ...p, [k]: v }));
-
   return (
     <Box data-testid="business-model-canvas"
       aria-label={t('canvas')}>
       <Grid container spacing={2}>
         {FIELDS.map((f) => (
-          <Grid item xs={12} sm={6} md={4} key={f.key}>
+          <Grid item xs={12} sm={6} md={4}
+            key={f.key}>
             <TextField
-              label={t(f.lk as Parameters<typeof t>[0])}
+              label={t(
+                f.lk as Parameters<typeof t>[0])}
               multiline rows={4}
-              value={canvas[f.key]}
+              value={vm.canvas[f.key]}
               onChange={(e) =>
-                handleChange(f.key, e.target.value)}
-              onBlur={() => scheduleAutosave(canvas)}
+                vm.handleChange(
+                  f.key, e.target.value,
+                )}
+              onBlur={() =>
+                vm.scheduleAutosave(vm.canvas)}
               inputProps={{
                 'aria-label': t(
                   f.lk as Parameters<typeof t>[0]),

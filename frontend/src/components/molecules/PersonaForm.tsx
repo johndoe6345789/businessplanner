@@ -4,15 +4,13 @@
  * Form molecule for creating or editing a persona.
  * @module components/molecules/PersonaForm
  */
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@shared/m3/Box';
 import TextField from '@shared/m3/TextField';
 import Button from '@shared/m3/Button';
 import { useTranslations } from 'next-intl';
-import {
-  useCreatePersonaMutation,
-  useUpdatePersonaMutation,
-} from '@/store/api/marketResearchPersonaApi';
+import { usePersonaForm }
+  from '@/hooks/usePersonaForm';
 import { TagInput }
   from '@/components/molecules/TagInput';
 import type { Persona } from '@/types/marketResearch';
@@ -36,61 +34,42 @@ export const PersonaForm: React.FC<
 > = ({ initial, onDone }) => {
   const t = useTranslations('marketResearch');
   const tc = useTranslations('common');
-  const [create] = useCreatePersonaMutation();
-  const [update] = useUpdatePersonaMutation();
-
-  const [name, setName] = useState(
-    initial?.name ?? '');
-  const [role, setRole] = useState(
-    initial?.role ?? '');
-  const [painPoints, setPainPoints] = useState<string[]>(
-    initial?.painPoints ?? []);
-  const [goals, setGoals] = useState<string[]>(
-    initial?.goals ?? []);
-  const [notes, setNotes] = useState(
-    initial?.notes ?? '');
-
-  const handleSubmit = async () => {
-    const payload = { name, role, painPoints,
-      goals, notes };
-    if (initial) {
-      await update({ id: initial.id, data: payload });
-    } else {
-      await create(payload);
-    }
-    onDone();
-  };
+  const vm = usePersonaForm(initial, onDone);
 
   return (
     <Box data-testid="persona-form"
       sx={{ display: 'flex', flexDirection: 'column',
         gap: 2 }}>
-      <TextField label={t('personaName')} value={name}
-        onChange={(e) => setName(e.target.value)}
+      <TextField label={t('personaName')}
+        value={vm.name}
+        onChange={(e) => vm.setName(e.target.value)}
         inputProps={{ 'aria-label': t('personaName') }}
         data-testid="pf-name" fullWidth />
-      <TextField label={t('personaRole')} value={role}
-        onChange={(e) => setRole(e.target.value)}
+      <TextField label={t('personaRole')}
+        value={vm.role}
+        onChange={(e) => vm.setRole(e.target.value)}
         inputProps={{ 'aria-label': t('personaRole') }}
         data-testid="pf-role" fullWidth />
       <TagInput label={t('personaPainPoints')}
-        tags={painPoints} onChange={setPainPoints}
+        tags={vm.painPoints}
+        onChange={vm.setPainPoints}
         placeholder={t('addPainPoint')}
         inputAriaLabel={t('addPainPoint')}
         testId="pf-pain-input" />
       <TagInput label={t('personaGoals')}
-        tags={goals} onChange={setGoals}
+        tags={vm.goals} onChange={vm.setGoals}
         placeholder={t('addGoal')}
         inputAriaLabel={t('addGoal')}
         testId="pf-goal-input" />
       <TextField label={t('personaNotes')}
-        multiline rows={3} value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        inputProps={{ 'aria-label': t('personaNotes') }}
+        multiline rows={3} value={vm.notes}
+        onChange={(e) => vm.setNotes(e.target.value)}
+        inputProps={{
+          'aria-label': t('personaNotes') }}
         data-testid="pf-notes" fullWidth />
       <Box sx={{ display: 'flex', gap: 1 }}>
         <Button variant="contained"
-          onClick={() => void handleSubmit()}
+          onClick={() => void vm.handleSubmit()}
           aria-label={tc('save')}
           data-testid="pf-submit">
           {tc('save')}

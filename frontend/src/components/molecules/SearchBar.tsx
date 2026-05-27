@@ -7,18 +7,15 @@
  */
 'use client';
 
-import React, { useCallback, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
-import { useGlobalSearch } from '@/hooks/useGlobalSearch';
-import {
-  useSearchKeyboardNav,
-} from '@/hooks/useSearchKeyboardNav';
-import { SearchInput } from '@/components/atoms/SearchInput';
+import React from 'react';
+import { useSearchBarState }
+  from '@/hooks/useSearchBarState';
+import { SearchInput }
+  from '@/components/atoms/SearchInput';
 import {
   SearchSuggestDropdown,
 } from './SearchSuggestDropdown';
-import type { SearchSuggestItem } from '@/types/search';
+import { useTranslations } from 'next-intl';
 
 /** Public props for SearchBar. */
 export interface SearchBarProps {
@@ -35,65 +32,47 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder, testId = 'search-bar',
 }) => {
   const t = useTranslations('common');
-  const router = useRouter();
-  const {
-    query, setQuery, suggest,
-    isLoading, submit, clear,
-  } = useGlobalSearch();
-  const [active, setActive] = useState(0);
-  const [open, setOpen] = useState(false);
-  const showDrop = open && query.trim().length >= 2;
-
-  const onPick = useCallback(
-    (it: SearchSuggestItem) => {
-      router.push(it.url);
-      clear();
-      setOpen(false);
-    },
-    [router, clear],
-  );
-
-  const onKeyDown = useSearchKeyboardNav({
-    suggest, active, setActive, setOpen, clear,
-    submit: () => submit(), onPick,
-  });
+  const vm = useSearchBarState();
 
   return (
     <div
       data-testid={testId}
-      onKeyDown={onKeyDown}
-      onFocus={() => setOpen(true)}
+      onKeyDown={vm.onKeyDown}
+      onFocus={() => vm.setOpen(true)}
       onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget))
-          setOpen(false);
+        if (!e.currentTarget.contains(
+          e.relatedTarget,
+        )) vm.setOpen(false);
       }}
       style={ROOT}
     >
       <SearchInput
-        value={query}
+        value={vm.query}
         onChange={(e) => {
-          setQuery(e.target.value);
-          setActive(0);
-          setOpen(true);
+          vm.setQuery(e.target.value);
+          vm.setActive(0);
+          vm.setOpen(true);
         }}
-        onClear={() => { clear(); setOpen(false); }}
-        isLoading={isLoading}
-        focused={open}
+        onClear={() => {
+          vm.clear(); vm.setOpen(false);
+        }}
+        isLoading={vm.isLoading}
+        focused={vm.open}
         placeholder={
           placeholder ?? `${t('search')}…`
         }
         testId={`${testId}-input`}
       />
-      {showDrop && (
+      {vm.showDrop && (
         <SearchSuggestDropdown
-          query={query}
-          items={suggest}
-          isLoading={isLoading}
-          activeIndex={active}
-          onHover={setActive}
-          onPick={onPick}
+          query={vm.query}
+          items={vm.suggest}
+          isLoading={vm.isLoading}
+          activeIndex={vm.active}
+          onHover={vm.setActive}
+          onPick={vm.onPick}
           onViewAll={() => {
-            submit(); setOpen(false);
+            vm.submit(); vm.setOpen(false);
           }}
         />
       )}

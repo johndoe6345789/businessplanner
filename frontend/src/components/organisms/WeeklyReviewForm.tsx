@@ -1,7 +1,7 @@
 'use client';
 
 /** @module components/organisms/WeeklyReviewForm */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Box from '@shared/m3/Box';
 import Button from '@shared/m3/Button';
 import TextField from '@shared/m3/TextField';
@@ -11,6 +11,8 @@ import Slider from '@mui/material/Slider';
 import { useTranslations } from 'next-intl';
 import { useWeeklyReview } from
   '@/hooks/useWeeklyReview';
+import { useWeeklyReviewFormState }
+  from '@/hooks/useWeeklyReviewFormState';
 
 /**
  * Structured weekly reflection form.
@@ -22,32 +24,11 @@ import { useWeeklyReview } from
 const WeeklyReviewForm: React.FC = () => {
   const t = useTranslations('review');
   const tc = useTranslations('common');
-  const {
-    thisWeek, submitReview, isSubmitting,
-  } = useWeeklyReview();
-  const [wins, setWins] = useState('');
-  const [challenges, setChallenges] = useState('');
-  const [nextGoals, setNextGoals] = useState('');
-  const [morale, setMorale] = useState(3);
-  const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    if (!thisWeek) return;
-    setWins(thisWeek.wins);
-    setChallenges(thisWeek.challenges);
-    setNextGoals(thisWeek.next_goals);
-    setMorale(thisWeek.morale);
-  }, [thisWeek]);
-
-  const handleSubmit = async () => {
-    await submitReview({
-      week_start: thisWeek?.week_start ?? '',
-      wins, challenges,
-      next_goals: nextGoals,
-      morale: morale as 1 | 2 | 3 | 4 | 5,
-    });
-    setSaved(true);
-  };
+  const { thisWeek, submitReview, isSubmitting } =
+    useWeeklyReview();
+  const vm = useWeeklyReviewFormState(
+    thisWeek, submitReview,
+  );
 
   return (
     <Box component="form"
@@ -55,41 +36,40 @@ const WeeklyReviewForm: React.FC = () => {
       aria-label={t('title')}
       sx={{ display: 'flex',
         flexDirection: 'column', gap: 2 }}>
-      {saved && (
-        <Alert severity="success">
-          {t('saved')}
-        </Alert>
+      {vm.saved && (
+        <Alert severity="success">{t('saved')}</Alert>
       )}
       <TextField label={t('wins')} multiline
-        minRows={3} value={wins}
-        onChange={(e) => setWins(e.target.value)}
+        minRows={3} value={vm.wins}
+        onChange={(e) => vm.setWins(e.target.value)}
         inputProps={{ 'aria-label': t('wins') }}
         data-testid="review-wins" />
       <TextField label={t('challenges')} multiline
-        minRows={3} value={challenges}
-        onChange={(e) => setChallenges(e.target.value)}
+        minRows={3} value={vm.challenges}
+        onChange={(e) =>
+          vm.setChallenges(e.target.value)}
         inputProps={{ 'aria-label': t('challenges') }}
         data-testid="review-challenges" />
       <TextField label={t('nextGoals')} multiline
-        minRows={3} value={nextGoals}
-        onChange={(e) => setNextGoals(e.target.value)}
+        minRows={3} value={vm.nextGoals}
+        onChange={(e) =>
+          vm.setNextGoals(e.target.value)}
         inputProps={{ 'aria-label': t('nextGoals') }}
         data-testid="review-next-goals" />
       <Box>
         <Typography gutterBottom>
-          {t('morale')}: {morale}
+          {t('morale')}: {vm.morale}
         </Typography>
         <Slider min={1} max={5} step={1} marks
-          value={morale}
+          value={vm.morale}
           onChange={(_, v) =>
-            setMorale(v as number)}
+            vm.setMorale(v as number)}
           aria-label={t('morale')}
-          aria-valuemin={1}
-          aria-valuemax={5}
+          aria-valuemin={1} aria-valuemax={5}
           data-testid="review-morale" />
       </Box>
       <Button variant="contained"
-        onClick={handleSubmit}
+        onClick={() => void vm.handleSubmit()}
         disabled={isSubmitting}
         aria-label={t('save')}
         data-testid="review-save-btn">

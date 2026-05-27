@@ -4,7 +4,7 @@
  * TAM / SAM / SOM live calculator organism.
  * @module components/organisms/TamCalculator
  */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Box from '@shared/m3/Box';
 import Button from '@shared/m3/Button';
 import TextField from '@shared/m3/TextField';
@@ -13,11 +13,8 @@ import CircularProgress from
   '@mui/material/CircularProgress';
 import Typography from '@shared/m3/Typography';
 import { useTranslations } from 'next-intl';
-import { useTamCompute } from '@/hooks/useTamCompute';
-import {
-  useGetTamQuery,
-  useSaveTamMutation,
-} from '@/store/api/marketResearchTamApi';
+import { useTamCalculator }
+  from '@/hooks/useTamCalculator';
 import { TamResultCards }
   from '@/components/molecules/TamResultCards';
 
@@ -28,39 +25,14 @@ import { TamResultCards }
 export const TamCalculator: React.FC = () => {
   const t = useTranslations('marketResearch');
   const tc = useTranslations('common');
-  const { data, isLoading } = useGetTamQuery();
-  const [saveTam, { isLoading: isSaving }] =
-    useSaveTamMutation();
+  const vm = useTamCalculator();
 
-  const [totalMarketUsd, setTotalMarketUsd] = useState(0);
-  const [targetSegmentPct, setTargetSegmentPct] =
-    useState(10);
-  const [reachablePct, setReachablePct] = useState(5);
-  const [notes, setNotes] = useState('');
-
-  useEffect(() => {
-    if (!data) return;
-    setTotalMarketUsd(data.totalMarketUsd);
-    setTargetSegmentPct(data.targetSegmentPct);
-    setReachablePct(data.reachablePct);
-    setNotes(data.notes ?? '');
-  }, [data]);
-
-  const result = useTamCompute({
-    totalMarketUsd, targetSegmentPct, reachablePct,
-  });
-
-  const handleSave = () =>
-    void saveTam({
-      totalMarketUsd, targetSegmentPct,
-      reachablePct, notes,
-    });
-
-  if (isLoading) {
+  if (vm.isLoading) {
     return (
       <Box sx={{ display: 'flex',
         justifyContent: 'center', mt: 4 }}>
-        <CircularProgress aria-label={tc('loading')} />
+        <CircularProgress
+          aria-label={tc('loading')} />
       </Box>
     );
   }
@@ -70,44 +42,47 @@ export const TamCalculator: React.FC = () => {
       aria-label={t('tam')}>
       <TextField
         label={t('totalMarket')} type="number"
-        value={totalMarketUsd}
+        value={vm.totalMarketUsd}
         onChange={(e) =>
-          setTotalMarketUsd(Number(e.target.value))}
+          vm.setTotalMarketUsd(Number(e.target.value))}
         inputProps={{
           'aria-label': t('totalMarket'), min: 0 }}
         data-testid="tam-input-total"
         fullWidth sx={{ mb: 3 }}
       />
       <Typography gutterBottom>
-        {t('targetSegmentPct')}: {targetSegmentPct}%
+        {t('targetSegmentPct')}:
+        {' '}{vm.targetSegmentPct}%
       </Typography>
-      <Slider value={targetSegmentPct}
+      <Slider value={vm.targetSegmentPct}
         onChange={(_, v) =>
-          setTargetSegmentPct(v as number)}
+          vm.setTargetSegmentPct(v as number)}
         min={0} max={100} step={1}
         aria-label={t('targetSegmentPct')}
         data-testid="tam-slider-segment"
         sx={{ mb: 3 }}
       />
       <Typography gutterBottom>
-        {t('reachablePct')}: {reachablePct}%
+        {t('reachablePct')}: {vm.reachablePct}%
       </Typography>
-      <Slider value={reachablePct}
+      <Slider value={vm.reachablePct}
         onChange={(_, v) =>
-          setReachablePct(v as number)}
+          vm.setReachablePct(v as number)}
         min={0} max={100} step={1}
         aria-label={t('reachablePct')}
         data-testid="tam-slider-reachable"
         sx={{ mb: 3 }}
       />
-      <TamResultCards result={result} />
+      <TamResultCards result={vm.result} />
       <TextField label="Notes" multiline rows={3}
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
+        value={vm.notes}
+        onChange={(e) => vm.setNotes(e.target.value)}
         inputProps={{ 'aria-label': 'Notes' }}
-        data-testid="tam-notes" fullWidth sx={{ mb: 2 }}
+        data-testid="tam-notes"
+        fullWidth sx={{ mb: 2 }}
       />
-      <Button onClick={handleSave} disabled={isSaving}
+      <Button onClick={vm.handleSave}
+        disabled={vm.isSaving}
         aria-label={t('saveInputs')}
         data-testid="tam-save-btn"
         variant="contained">
