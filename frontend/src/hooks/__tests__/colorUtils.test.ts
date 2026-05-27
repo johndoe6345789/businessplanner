@@ -73,19 +73,13 @@ describe('ratio', () => {
 });
 
 describe('hue', () => {
-  it('returns 0 for grey (r=g=b)', () => {
+  it('returns 0 for grey and red', () => {
     expect(hue(128, 128, 128)).toBe(0);
-  });
-
-  it('returns 0 for pure red', () => {
     expect(hue(255, 0, 0)).toBe(0);
   });
 
-  it('returns 120 for pure green', () => {
+  it('returns 120 for green and 240 for blue', () => {
     expect(hue(0, 255, 0)).toBe(120);
-  });
-
-  it('returns 240 for pure blue', () => {
     expect(hue(0, 0, 255)).toBe(240);
   });
 });
@@ -97,17 +91,9 @@ describe('hslToRgb', () => {
     expect(g).toBe(b);
   });
 
-  it('returns ~[255,0,0] for pure red (hsl 0,1,0.5)', () => {
-    const [r, g, b] = hslToRgb(0, 1, 0.5);
-    expect(r).toBe(255);
-    expect(g).toBe(0);
-    expect(b).toBe(0);
-  });
-
-  it('returns ~[0,255,0] for pure green (hsl 120,1,0.5)', () => {
-    const [r, g, b] = hslToRgb(120, 1, 0.5);
-    expect(r).toBe(0);
-    expect(g).toBe(255);
-    expect(b).toBe(0);
+  it('returns correct rgb for pure hues', () => {
+    expect(hslToRgb(0, 1, 0.5)).toEqual([255, 0, 0]);
+    expect(hslToRgb(120, 1, 0.5)).toEqual([0, 255, 0]);
+    expect(hslToRgb(240, 1, 0.5)).toEqual([0, 0, 255]);
   });
 });

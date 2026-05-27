@@ -39,20 +39,16 @@ describe('useSkillsGap', () => {
   });
 
   it('returns empty arrays when no slug selected', () => {
-    const { result } =
-      renderHook(() => useSkillsGap());
-    expect(result.current.recommendedSkills)
-      .toEqual([]);
+    const { result } = renderHook(() => useSkillsGap());
+    expect(result.current.recommendedSkills).toEqual([]);
     expect(result.current.missingSkills).toEqual([]);
     expect(result.current.strengthSkills).toEqual([]);
   });
 
   it('returns empty arrays for unknown slug', () => {
     selectorMock.mockReturnValue('unknown-slug');
-    const { result } =
-      renderHook(() => useSkillsGap());
-    expect(result.current.recommendedSkills)
-      .toEqual([]);
+    const { result } = renderHook(() => useSkillsGap());
+    expect(result.current.recommendedSkills).toEqual([]);
   });
 
   it('all skills missing when profile is empty', () => {

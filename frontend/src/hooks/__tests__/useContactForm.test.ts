@@ -52,18 +52,7 @@ describe('useContactForm', () => {
     expect(result.current.status).toBe('sent');
   });
 
-  it('handleSubmit calls preventDefault', async () => {
-    const { result } = renderHook(() => useContactForm());
-    const fakeEvent = {
-      preventDefault: jest.fn(),
-    } as unknown as React.FormEvent;
-    await act(async () => {
-      await result.current.handleSubmit(fakeEvent);
-    });
-    expect(fakeEvent.preventDefault).toHaveBeenCalled();
-  });
-
-  it('handleSubmit POSTs name, email, message', async () => {
+  it('handleSubmit calls preventDefault and POSTs name/email/message', async () => {
     const { result } = renderHook(() => useContactForm());
     act(() => {
       result.current.setName('Bob');
