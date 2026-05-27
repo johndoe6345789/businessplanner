@@ -11,7 +11,7 @@ import React from 'react';
 import {
   INPUT_WRAP, SEARCH_INPUT,
   ICON_WRAP, CLEAR_BTN,
-} from '../molecules/searchSuggestStyles';
+} from '../molecules/searchSuggestInputStyles';
 import { SearchSpinner }
   from '@/components/atoms/SearchSpinner';
 
