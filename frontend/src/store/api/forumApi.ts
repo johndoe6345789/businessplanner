@@ -7,31 +7,18 @@ import type {
   ForumBoard, ForumThread, ForumPost,
 } from '@/types/forum';
 import apiConstants from '@/constants/api.json';
-
-/** Args for listing threads on a board. */
-export interface ListThreadsArgs {
-  board: string;
-  page?: number;
-}
-
-/** Args for creating a new thread. */
-export interface CreateThreadArgs {
-  title: string;
-  content: string;
-  board_slug: string;
-}
-
-/** Thread detail response (thread + posts). */
-export interface ThreadDetail {
-  thread: ForumThread;
-  posts: ForumPost[];
-}
-
-/** Paginated list of threads. */
-export interface ThreadsPage {
-  threads: ForumThread[];
-  total: number;
-}
+export type {
+  ListThreadsArgs,
+  CreateThreadArgs,
+  ThreadDetail,
+  ThreadsPage,
+} from './forumApi.types';
+import type {
+  ListThreadsArgs,
+  CreateThreadArgs,
+  ThreadDetail,
+  ThreadsPage,
+} from './forumApi.types';
 
 /** Forum API endpoints. */
 export const forumApi = baseApi.injectEndpoints({

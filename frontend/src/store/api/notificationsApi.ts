@@ -11,14 +11,10 @@ import type {
 import apiConstants from '@/constants/api.json';
 import notifConstants
   from '@/constants/notifications.json';
-
-/** Query args for the paginated list endpoint. */
-export interface ListNotificationsArgs {
-  /** 1-based page number. */
-  page?: number;
-  /** Items per page. */
-  per_page?: number;
-}
+export type { ListNotificationsArgs }
+  from './notificationsApi.types';
+import type { ListNotificationsArgs }
+  from './notificationsApi.types';
 
 const urls = apiConstants.notifications;
 
