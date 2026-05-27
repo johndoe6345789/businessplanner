@@ -10,6 +10,9 @@ import {
   StreakCounter,
 } from '@/components/atoms/StreakCounter';
 import {
+  GamificationCompactSkeleton,
+} from '@/components/atoms/GamificationCompactSkeleton';
+import {
   GamificationSummaryFull,
 } from './GamificationSummaryFull';
 
@@ -18,18 +21,6 @@ export interface GamificationSummaryProps {
   /** compact=true → Navbar; false → Dashboard. */
   compact?: boolean;
 }
-
-/** Compact skeleton for Navbar loading state. */
-const CompactSkeleton: React.FC = () => (
-  <Box
-    sx={{ display: 'flex', gap: 1 }}
-    component="span"
-    data-testid="gamification-summary"
-  >
-    <Skeleton variant="circular" width={28} height={28} />
-    <Skeleton variant="text" width={48} />
-  </Box>
-);
 
 /**
  * Renders gamification state.
@@ -46,7 +37,7 @@ export const GamificationSummary: React.FC<
   const testId = 'gamification-summary';
 
   if (isLoading && compact) {
-    return <CompactSkeleton />;
+    return <GamificationCompactSkeleton />;
   }
   if (isLoading) {
     return (

@@ -1,9 +1,5 @@
 'use client';
 
-/**
- * Card for a single downloadable resource.
- * @module components/molecules/ResourceCard
- */
 import React from 'react';
 import Card from '@shared/m3/Card';
 import CardContent from '@shared/m3/CardContent';

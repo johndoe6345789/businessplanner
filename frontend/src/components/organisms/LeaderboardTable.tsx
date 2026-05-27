@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Table from '@shared/m3/Table';
 import { TableHead, TableBody, TableRow,
   TableCell, TableContainer,
@@ -8,15 +8,12 @@ import { TableHead, TableBody, TableRow,
 import Box from '@shared/m3/Box';
 import Chip from '@shared/m3/Chip';
 import Skeleton from '@shared/m3/Skeleton';
-import { useTranslations } from 'next-intl';
-import {
-  useGetLeaderboardQuery,
-} from '@/store/api/gamificationApi';
-import { useAppSelector } from '@/store/hooks';
-import type { LeaderboardPeriod }
-  from '@/types/gamification';
 import { LeaderboardRow }
   from '../molecules/LeaderboardRow';
+import { useLeaderboardTable }
+  from '@/hooks/useLeaderboardTable';
+import type { LeaderboardPeriod }
+  from '@/types/gamification';
 
 const PERIODS: LeaderboardPeriod[] =
   ['all', 'weekly', 'monthly'];
@@ -37,34 +34,23 @@ export interface LeaderboardTableProps {
 export const LeaderboardTable: React.FC<
   LeaderboardTableProps
 > = ({ period: init = 'all' }) => {
-  const t = useTranslations('gamification');
-  const [period, setPeriod] =
-    useState<LeaderboardPeriod>(init);
-  const userId =
-    useAppSelector((s) => s.auth.user?.id);
-  const { data, isLoading } =
-    useGetLeaderboardQuery({ period, limit: 50 });
-  const labels: Record<LeaderboardPeriod, string> = {
-    all: t('allTime'), weekly: t('thisWeek'),
-    monthly: t('thisMonth'),
-  };
-  const rows = data ?? [];
+  const vm = useLeaderboardTable(init);
 
   return (
     <Box
       data-testid="leaderboard-table"
-      aria-label={t('leaderboard')}
+      aria-label={vm.t('leaderboard')}
     >
       <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
         {PERIODS.map((p) => (
-          <Chip key={p} label={labels[p]} clickable
-            onClick={() => setPeriod(p)}
-            variant={period === p ? 'filled' : 'outlined'}
-            aria-pressed={period === p}
+          <Chip key={p} label={vm.labels[p]} clickable
+            onClick={() => vm.setPeriod(p)}
+            variant={vm.period === p ? 'filled' : 'outlined'}
+            aria-pressed={vm.period === p}
           />
         ))}
       </Box>
-      {isLoading
+      {vm.isLoading
         ? <Skeleton variant="rectangular"
             width="100%" height={240} />
         : (
@@ -74,22 +60,22 @@ export const LeaderboardTable: React.FC<
               <TableRow>
                 {['rankCol','player','level','xp',
                   'streak','badges'].map((k) => (
-                  <TableCell key={k}>{t(k)}</TableCell>
+                  <TableCell key={k}>{vm.t(k)}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.length === 0 && (
+              {vm.rows.length === 0 && (
                 <TableRow><TableCell colSpan={6}
                   style={{ textAlign: 'center',
                     color: '#9e9e9e',
                     paddingTop: 32, paddingBottom: 32 }}>
-                  {t('noEntriesYet')}
+                  {vm.t('noEntriesYet')}
                 </TableCell></TableRow>
               )}
-              {rows.map((e) => (
+              {vm.rows.map((e) => (
                 <LeaderboardRow key={e.id} entry={e}
-                  isCurrentUser={e.id === userId} />
+                  isCurrentUser={e.id === vm.userId} />
               ))}
             </TableBody>
           </Table>

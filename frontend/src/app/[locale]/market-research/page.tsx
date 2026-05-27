@@ -10,6 +10,8 @@ import CardContent from '@shared/m3/CardContent';
 import Chip from '@shared/m3/Chip';
 import LinkedCardActionArea from
   '@/components/atoms/LinkedCardActionArea';
+import { MARKET_RESEARCH_ROUTES }
+  from '@/constants/market-research-routes';
 
 /** Skip static prerendering. */
 export const dynamic = 'force-dynamic';
@@ -20,8 +22,7 @@ interface MarketResearchPageProps {
 }
 
 /**
- * Market research dashboard page at /market-research.
- * Shows card links to all market research tools.
+ * Market research dashboard — card links to all tools.
  *
  * @param props - Page props with locale.
  * @returns Market research landing page UI.
@@ -34,39 +35,6 @@ export default async function MarketResearchPage({
   const t = await getTranslations('marketResearch');
   const tn = await getTranslations('nav');
 
-  const cards = [
-    {
-      href: `/${locale}/market-research/tam`,
-      title: t('tam'),
-      desc: t('tamDesc'),
-      testId: 'mr-card-tam',
-    },
-    {
-      href: `/${locale}/market-research/competitors`,
-      title: t('competitors'),
-      desc: t('competitorsDesc'),
-      testId: 'mr-card-competitors',
-    },
-    {
-      href: `/${locale}/market-research/canvas`,
-      title: t('canvas'),
-      desc: t('canvasDesc'),
-      testId: 'mr-card-canvas',
-    },
-    {
-      href: `/${locale}/market-research/personas`,
-      title: t('personas'),
-      desc: t('personasDesc'),
-      testId: 'mr-card-personas',
-    },
-    {
-      href: `/${locale}/market-research/discovery`,
-      title: t('discovery'),
-      desc: t('discoveryDesc'),
-      testId: 'mr-card-discovery',
-    },
-  ];
-
   return (
     <Box component="main" role="main"
       aria-label={tn('marketResearch')}
@@ -77,27 +45,27 @@ export default async function MarketResearchPage({
       </Typography>
       <Box sx={{ display: 'flex', gap: 2,
         flexWrap: 'wrap' }}>
-        {cards.map((c) => (
-          <Card key={c.testId}
-            data-testid={c.testId}
+        {MARKET_RESEARCH_ROUTES.map((r) => (
+          <Card key={r.testId}
+            data-testid={r.testId}
             sx={{ width: 280 }}>
             <LinkedCardActionArea
-              href={c.href}
-              aria-label={c.title}>
+              href={`/${locale}/market-research/${r.path}`}
+              aria-label={t(r.titleKey)}>
               <CardContent>
                 <Typography variant="h6"
                   gutterBottom sx={{ fontWeight: 700 }}>
-                  {c.title}
+                  {t(r.titleKey)}
                 </Typography>
                 <Typography variant="body2"
                   color="text.secondary"
                   sx={{ mb: 1 }}>
-                  {c.desc}
+                  {t(r.descKey)}
                 </Typography>
                 <Chip
                   label={t('notStarted')}
                   size="small"
-                  data-testid={`${c.testId}-status`}
+                  data-testid={`${r.testId}-status`}
                 />
               </CardContent>
             </LinkedCardActionArea>

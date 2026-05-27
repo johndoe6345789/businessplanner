@@ -40,7 +40,6 @@ export function PaginationFooter({
       }}
       data-testid={testId}
     >
-      {/* Primary navigation row — big thumb-friendly buttons */}
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
@@ -84,7 +83,6 @@ export function PaginationFooter({
         </Button>
       </Box>
 
-      {/* Secondary strip — quick jump to any page */}
       {pageCount > 2 && (
         <Pagination
           count={pageCount}
