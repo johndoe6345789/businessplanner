@@ -1,4 +1,7 @@
-const entries = [{ id: '1', method: 'GET', url: '/api/test', status: 200, ts: 0 }];
+const entries = [{
+  id: '1', method: 'GET', url: '/api/test',
+  status: 200, ts: 0,
+}];
 const clearMock = jest.fn();
 const subscribeMock = jest.fn(() => () => {});
 const selectorMock = jest.fn();

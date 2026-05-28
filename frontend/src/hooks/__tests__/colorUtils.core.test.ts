@@ -1,5 +1,5 @@
 import {
-  lin, lum, parseRgb, ratio, hue, hslToRgb,
+  lin, lum, parseRgb, ratio,
 } from '../colorUtils';
 
 describe('lin', () => {
@@ -62,38 +62,14 @@ describe('ratio', () => {
   });
 
   it('returns 21 for black vs white', () => {
-    expect(ratio(lum(0, 0, 0), lum(255, 255, 255))).toBeCloseTo(
-      21, 0,
-    );
+    expect(
+      ratio(lum(0, 0, 0), lum(255, 255, 255)),
+    ).toBeCloseTo(21, 0);
   });
 
   it('is commutative', () => {
-    expect(ratio(0.2, 0.8)).toBeCloseTo(ratio(0.8, 0.2), 10);
-  });
-});
-
-describe('hue', () => {
-  it('returns 0 for grey and red', () => {
-    expect(hue(128, 128, 128)).toBe(0);
-    expect(hue(255, 0, 0)).toBe(0);
-  });
-
-  it('returns 120 for green and 240 for blue', () => {
-    expect(hue(0, 255, 0)).toBe(120);
-    expect(hue(0, 0, 255)).toBe(240);
-  });
-});
-
-describe('hslToRgb', () => {
-  it('returns grey for saturation 0', () => {
-    const [r, g, b] = hslToRgb(180, 0, 0.5);
-    expect(r).toBe(g);
-    expect(g).toBe(b);
-  });
-
-  it('returns correct rgb for pure hues', () => {
-    expect(hslToRgb(0, 1, 0.5)).toEqual([255, 0, 0]);
-    expect(hslToRgb(120, 1, 0.5)).toEqual([0, 255, 0]);
-    expect(hslToRgb(240, 1, 0.5)).toEqual([0, 0, 255]);
+    expect(ratio(0.2, 0.8)).toBeCloseTo(
+      ratio(0.8, 0.2), 10,
+    );
   });
 });

@@ -4,7 +4,7 @@ import { useContactForm } from '../useContactForm';
 const mockFetch = jest.fn();
 global.fetch = mockFetch;
 
-describe('useContactForm', () => {
+describe('useContactForm submit', () => {
   beforeEach(() => {
     mockFetch.mockResolvedValue({ ok: true });
   });
@@ -13,35 +13,7 @@ describe('useContactForm', () => {
     mockFetch.mockReset();
   });
 
-  it('initialises with empty fields and idle status', () => {
-    const { result } = renderHook(() => useContactForm());
-    expect(result.current.name).toBe('');
-    expect(result.current.email).toBe('');
-    expect(result.current.message).toBe('');
-    expect(result.current.status).toBe('idle');
-  });
-
-  it('setName updates name field', () => {
-    const { result } = renderHook(() => useContactForm());
-    act(() => { result.current.setName('Alice'); });
-    expect(result.current.name).toBe('Alice');
-  });
-
-  it('setEmail updates email field', () => {
-    const { result } = renderHook(() => useContactForm());
-    act(() => { result.current.setEmail('a@b.com'); });
-    expect(result.current.email).toBe('a@b.com');
-  });
-
-  it('setMessage updates message field', () => {
-    const { result } = renderHook(() => useContactForm());
-    act(() => {
-      result.current.setMessage('Hello there');
-    });
-    expect(result.current.message).toBe('Hello there');
-  });
-
-  it('handleSubmit transitions status to sent', async () => {
+  it('transitions status to sent on submit', async () => {
     const { result } = renderHook(() => useContactForm());
     const fakeEvent = {
       preventDefault: jest.fn(),
@@ -52,7 +24,7 @@ describe('useContactForm', () => {
     expect(result.current.status).toBe('sent');
   });
 
-  it('handleSubmit calls preventDefault and POSTs name/email/message', async () => {
+  it('POSTs name, email and message', async () => {
     const { result } = renderHook(() => useContactForm());
     act(() => {
       result.current.setName('Bob');
@@ -70,7 +42,9 @@ describe('useContactForm', () => {
       expect.objectContaining({
         method: 'POST',
         body: JSON.stringify({
-          name: 'Bob', email: 'bob@x.com', message: 'Hi',
+          name: 'Bob',
+          email: 'bob@x.com',
+          message: 'Hi',
         }),
       }),
     );
