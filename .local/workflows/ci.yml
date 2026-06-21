@@ -196,20 +196,20 @@ jobs:
             -e PGPASSWORD=packagerepo \
             -e PGDATABASE=packagerepo \
             -e JWT_SECRET=ci-test-key \
-            -e PORT=5050 \
+            -e PORT=5001 \
             businessplanner-packagerepo:ci
           sleep 3
 
       - name: Health check
         run: |
-          curl -sf http://localhost:5050/health \
+          curl -sf http://localhost:5001/health \
             | grep -q healthy
           echo "Health check passed."
 
       - name: Test auth flow
         run: |
           TOKEN=$(curl -sf -X POST \
-            http://localhost:5050/auth/login \
+            http://localhost:5001/auth/login \
             -H "Content-Type: application/json" \
             -d '{"username":"admin","password":"admin"}' \
             | python3 -c \
@@ -219,7 +219,7 @@ jobs:
 
           curl -sf \
             -H "Authorization: Bearer $TOKEN" \
-            http://localhost:5050/auth/me \
+            http://localhost:5001/auth/me \
             | python3 -c \
               "import sys,json; \
                d=json.load(sys.stdin); \
@@ -229,7 +229,7 @@ jobs:
       - name: Test publish and fetch
         run: |
           TOKEN=$(curl -sf -X POST \
-            http://localhost:5050/auth/login \
+            http://localhost:5001/auth/login \
             -H "Content-Type: application/json" \
             -d '{"username":"admin","password":"admin"}' \
             | python3 -c \
@@ -239,7 +239,7 @@ jobs:
           echo "ci-test-payload" | curl -sf -X PUT \
             -H "Authorization: Bearer $TOKEN" \
             --data-binary @- \
-            http://localhost:5050/v1/ci/test-pkg/0.1.0/default/blob \
+            http://localhost:5001/v1/ci/test-pkg/0.1.0/default/blob \
             | python3 -c \
               "import sys,json; \
                d=json.load(sys.stdin); \
@@ -248,7 +248,7 @@ jobs:
 
           curl -sf \
             -H "Authorization: Bearer $TOKEN" \
-            http://localhost:5050/v1/ci/test-pkg/latest \
+            http://localhost:5001/v1/ci/test-pkg/latest \
             | python3 -c \
               "import sys,json; \
                d=json.load(sys.stdin); \
@@ -256,7 +256,7 @@ jobs:
           echo "Latest version check passed."
 
           curl -sf \
-            http://localhost:5050/v1/packages \
+            http://localhost:5001/v1/packages \
             | python3 -c \
               "import sys,json; \
                d=json.load(sys.stdin); \

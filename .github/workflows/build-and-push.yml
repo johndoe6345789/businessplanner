@@ -23,7 +23,7 @@ on:
       local_registry:
         description: Local registry host for act runs
         type: string
-        default: host.docker.internal:5050
+        default: host.docker.internal:5001
 
 permissions:
   contents: read

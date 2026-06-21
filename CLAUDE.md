@@ -5,6 +5,30 @@ project. Read this before making any changes.
 
 ---
 
+## Local Docker Registry
+
+Businessplanner runs its own Docker image registry via the `pkgrepo-backend`
+service (the custom package repository). It is exposed on **host port 5001**.
+
+- Local image prefix: `localhost:5001/businessplanner/<service>:latest`
+- Under `act` (GitHub Actions locally): `host.docker.internal:5001/businessplanner/<service>:latest`
+- Production (CI push): `ghcr.io/<owner>/businessplanner/<service>:latest`
+
+**The jenkins registry at localhost:5001 is for Jenkins CI only — do not
+confuse it with this project's registry.** When businessplanner's
+`pkgrepo-backend` is running, it serves on the same port (5001) and
+replaces the need for the jenkins registry for this project's images.
+
+Base images are pre-baked and stored in this registry:
+- `localhost:5001/businessplanner/businessplanner-base-apt:latest`
+- `localhost:5001/businessplanner/businessplanner-base-conan:latest`
+- `localhost:5001/businessplanner/businessplanner-base-node:latest`
+
+To rebuild base images: run the `businessplanner-base-images` workflow
+(or `act`) — it pushes to `host.docker.internal:5001/businessplanner/`.
+
+---
+
 ## Project Overview
 
 Businessplanner is a full-stack gamified web application with AI chat integration.

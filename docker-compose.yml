@@ -145,7 +145,7 @@ services:
   # `migrate --up` against the baked config/config.json
   # then exits — no command/env override needed.
   businessplanner-migrate:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-migrate:latest
+    image: localhost:5001/businessplanner/businessplanner-migrate:latest
     depends_on:
       db:
         condition: service_healthy
@@ -157,7 +157,7 @@ services:
   # owns auth/users/api-keys/user-preferences routes (nginx
   # prefix routing wired during Phase 6 fan-out).
   businessplanner-auth:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-auth:latest
+    image: localhost:5001/businessplanner/businessplanner-auth:latest
     depends_on:
       db:
         condition: service_healthy
@@ -174,7 +174,7 @@ services:
 
   # ---- businessplanner-social (private internal service) ----
   businessplanner-social:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-social:latest
+    image: localhost:5001/businessplanner/businessplanner-social:latest
     depends_on:
       db:
         condition: service_healthy
@@ -198,7 +198,7 @@ services:
 
   # ---- businessplanner-notifications (private internal service) ----
   businessplanner-notifications:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-notifications:latest
+    image: localhost:5001/businessplanner/businessplanner-notifications:latest
     depends_on:
       db:
         condition: service_healthy
@@ -222,7 +222,7 @@ services:
 
   # ---- businessplanner-comments (private internal service) ----
   businessplanner-comments:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-comments:latest
+    image: localhost:5001/businessplanner/businessplanner-comments:latest
     depends_on:
       db:
         condition: service_healthy
@@ -246,7 +246,7 @@ services:
 
   # ---- businessplanner-analytics (private internal service) ----
   businessplanner-analytics:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-analytics:latest
+    image: localhost:5001/businessplanner/businessplanner-analytics:latest
     depends_on:
       db:
         condition: service_healthy
@@ -270,7 +270,7 @@ services:
 
   # ---- businessplanner-gamification (private internal service) ----
   businessplanner-gamification:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-gamification:latest
+    image: localhost:5001/businessplanner/businessplanner-gamification:latest
     depends_on:
       db:
         condition: service_healthy
@@ -294,7 +294,7 @@ services:
 
   # ---- businessplanner-content (private internal service) ----
   businessplanner-content:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-content:latest
+    image: localhost:5001/businessplanner/businessplanner-content:latest
     depends_on:
       db:
         condition: service_healthy
@@ -318,7 +318,7 @@ services:
 
   # ---- businessplanner-media (private internal service) ----
   businessplanner-media:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-media:latest
+    image: localhost:5001/businessplanner/businessplanner-media:latest
     depends_on:
       db:
         condition: service_healthy
@@ -344,7 +344,7 @@ services:
 
   # ---- businessplanner-search (private internal service) ----
   businessplanner-search:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-search:latest
+    image: localhost:5001/businessplanner/businessplanner-search:latest
     depends_on:
       db:
         condition: service_healthy
@@ -370,7 +370,7 @@ services:
 
   # ---- businessplanner-infra (private internal service) ----
   businessplanner-infra:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-infra:latest
+    image: localhost:5001/businessplanner/businessplanner-infra:latest
     depends_on:
       db:
         condition: service_healthy
@@ -396,7 +396,7 @@ services:
 
   # ---- businessplanner-ai (private internal service) ----
   businessplanner-ai:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-ai:latest
+    image: localhost:5001/businessplanner/businessplanner-ai:latest
     depends_on:
       db:
         condition: service_healthy
@@ -422,7 +422,7 @@ services:
 
   # ---- businessplanner-platform (private internal service) ----
   businessplanner-platform:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-platform:latest
+    image: localhost:5001/businessplanner/businessplanner-platform:latest
     depends_on:
       db:
         condition: service_healthy
@@ -448,7 +448,7 @@ services:
 
   # ---- businessplanner-commerce (private internal service) ----
   businessplanner-commerce:
-    image: localhost:5001/johndoe6345789/businessplanner/businessplanner-commerce:latest
+    image: localhost:5001/businessplanner/businessplanner-commerce:latest
     depends_on:
       db:
         condition: service_healthy
@@ -569,7 +569,7 @@ services:
 
   # ---- S3-compatible object store (in-house) ----------------
   s3:
-    image: localhost:5001/johndoe6345789/businessplanner/s3:latest
+    image: localhost:5001/businessplanner/s3:latest
     depends_on:
       s3-db:
         condition: service_healthy
@@ -592,7 +592,9 @@ services:
 
   # ---- Package repository — C++ backend ---------------------
   pkgrepo-backend:
-    image: localhost:5001/johndoe6345789/businessplanner/packagerepo-backend:latest
+    image: localhost:5001/businessplanner/packagerepo-backend:latest
+    ports:
+      - "5001:5000"
     depends_on:
       pkgrepo-db:
         condition: service_healthy
@@ -616,12 +618,12 @@ services:
       ES_HOST: elasticsearch
       ES_PORT: "9200"
       PORT: "5000"
-    mem_limit: 200m
+    mem_limit: 600m
     restart: unless-stopped
 
   # ---- Package repository — Next.js frontend ----------------
   pkgrepo-frontend:
-    image: localhost:5001/johndoe6345789/businessplanner/packagerepo-frontend:latest
+    image: localhost:5001/businessplanner/packagerepo-frontend:latest
     depends_on:
       - pkgrepo-backend
     environment:
@@ -633,7 +635,7 @@ services:
 
   # ---- S3 server frontend (Next.js) -------------------------
   s3-frontend:
-    image: localhost:5001/johndoe6345789/businessplanner/s3-frontend:latest
+    image: localhost:5001/businessplanner/s3-frontend:latest
     depends_on:
       - s3
     environment:
@@ -644,7 +646,7 @@ services:
 
   # ---- PgAdmin backend (Drogon C++ DB browser) --------------
   pgadmin-backend:
-    image: localhost:5001/johndoe6345789/businessplanner/pgadmin-backend:latest
+    image: localhost:5001/businessplanner/pgadmin-backend:latest
     depends_on:
       db:
         condition: service_healthy
@@ -664,7 +666,7 @@ services:
 
   # ---- PgAdmin frontend (Next.js) ---------------------------
   pgadmin-frontend:
-    image: localhost:5001/johndoe6345789/businessplanner/pgadmin-frontend:latest
+    image: localhost:5001/businessplanner/pgadmin-frontend:latest
     depends_on:
       - pgadmin-backend
     environment:
@@ -675,7 +677,7 @@ services:
 
   # ---- Mailserver (postfix + dovecot) -----------------------
   mailserver:
-    image: localhost:5001/johndoe6345789/businessplanner/mailserver:latest
+    image: localhost:5001/businessplanner/mailserver:latest
     hostname: mail
     domainname: businessplanner.local
     environment:
@@ -720,7 +722,7 @@ services:
 
   # ---- Email client API (Flask) -----------------------------
   emailclient-api:
-    image: localhost:5001/johndoe6345789/businessplanner/emailclient-api:latest
+    image: localhost:5001/businessplanner/emailclient-api:latest
     depends_on:
       mailserver:
         condition: service_healthy
@@ -743,7 +745,7 @@ services:
 
   # ---- Webmail (emailclient) Next.js ------------------------
   emailclient:
-    image: localhost:5001/johndoe6345789/businessplanner/emailclient:latest
+    image: localhost:5001/businessplanner/emailclient:latest
     depends_on:
       emailclient-api:
         condition: service_started
@@ -757,7 +759,7 @@ services:
 
   # ---- Alerts centre (Next.js) ------------------------------
   alerts:
-    image: localhost:5001/johndoe6345789/businessplanner/alerts:latest
+    image: localhost:5001/businessplanner/alerts:latest
     depends_on:
       emailclient-api:
         condition: service_started

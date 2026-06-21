@@ -5,7 +5,7 @@
 # Drogon, nlohmann_json, cli11, jwt-cpp, inja, mailio, fmt,
 # spdlog, hiredis, OpenSSL, librdkafka all baked in.
 # =============================================================
-ARG APT_IMAGE=host.docker.internal:5050/businessplanner/businessplanner-base-apt:latest
+ARG APT_IMAGE=host.docker.internal:5001/businessplanner/businessplanner-base-apt:latest
 FROM ${APT_IMAGE}
 
 WORKDIR /warm
