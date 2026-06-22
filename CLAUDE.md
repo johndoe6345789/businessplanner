@@ -7,17 +7,17 @@ project. Read this before making any changes.
 
 ## Local Docker Registry
 
-Businessplanner runs its own Docker image registry via the `pkgrepo-backend`
-service (the custom package repository). It is exposed on **host port 5001**.
+Docker images for this project are built and stored in the **jenkins CI
+registry (`registry:2`) on host port `5001`**.
 
 - Local image prefix: `localhost:5001/businessplanner/<service>:latest`
 - Under `act` (GitHub Actions locally): `host.docker.internal:5001/businessplanner/<service>:latest`
 - Production (CI push): `ghcr.io/<owner>/businessplanner/<service>:latest`
 
-**The jenkins registry at localhost:5001 is for Jenkins CI only — do not
-confuse it with this project's registry.** When businessplanner's
-`pkgrepo-backend` is running, it serves on the same port (5001) and
-replaces the need for the jenkins registry for this project's images.
+The `pkgrepo-backend` service (the custom package repository) is a **separate
+thing** and is exposed on **host port `5002`** — it previously collided with the
+jenkins registry on `5001`. `:5001` is the CI image registry; `:5002` is the
+package repository API.
 
 Base images are pre-baked and stored in this registry:
 - `localhost:5001/businessplanner/businessplanner-base-apt:latest`

@@ -27,7 +27,7 @@ services:
       - -c
       - shared_buffers=24MB
       - -c
-      - max_connections=20
+      - max_connections=100
       - -c
       - work_mem=1MB
       - -c
@@ -587,14 +587,18 @@ services:
       PGDATABASE: s3server
     volumes:
       - s3-data:/data/s3
-    mem_limit: 200m
+    # Receives blobs up to setClientMaxBodySize (2 GB) into a single
+    # in-memory request buffer, so the cap must clear 2 GB + overhead.
+    mem_limit: 2800m
     restart: unless-stopped
 
   # ---- Package repository — C++ backend ---------------------
   pkgrepo-backend:
     image: localhost:5001/businessplanner/packagerepo-backend:latest
     ports:
-      - "5001:5000"
+      # :5001 is the jenkins CI registry (registry:2). The package repository
+      # serves on :5002 so the two no longer collide on the host.
+      - "5002:5000"
     depends_on:
       pkgrepo-db:
         condition: service_healthy
@@ -618,7 +622,9 @@ services:
       ES_HOST: elasticsearch
       ES_PORT: "9200"
       PORT: "5000"
-    mem_limit: 600m
+    # Committing a blob holds it twice: the finalize() read buffer plus
+    # trantor's outbound S3 PUT send buffer. Needs ~2x the 2 GB max body.
+    mem_limit: 4500m
     restart: unless-stopped
 
   # ---- Package repository — Next.js frontend ----------------
