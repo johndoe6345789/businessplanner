@@ -810,3 +810,8 @@ volumes:
   emailclient-dbdata:
   pkgrepo_node_modules:
   pkgrepo_next:
+
+networks:
+  default:
+    external: true
+    name: businessplanner_default
