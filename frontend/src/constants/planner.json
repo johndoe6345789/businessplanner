@@ -1,8 +1,0 @@
-{
-  "progressThresholds": {
-    "warn": 25,
-    "caution": 50,
-    "good": 75
-  },
-  "streakMotivationDays": [3, 7, 14, 30, 60, 90]
-}
