@@ -1,0 +1,76 @@
+{
+  "resources": [
+    {
+      "id": "founder-agreement",
+      "category": "legal",
+      "title": "Founder Agreement Template",
+      "desc": "Co-founder equity, vesting, IP assignment, and exit clauses.",
+      "format": "DOCX",
+      "downloadUrl": "/resources/founder-agreement.docx",
+      "tags": ["legal", "equity"]
+    },
+    {
+      "id": "nda-template",
+      "category": "legal",
+      "title": "NDA Template (UK)",
+      "desc": "One-way and mutual NDA for early conversations.",
+      "format": "DOCX",
+      "downloadUrl": "/resources/nda-template.docx",
+      "tags": ["legal"]
+    },
+    {
+      "id": "cap-table",
+      "category": "finance",
+      "title": "Cap Table Starter",
+      "desc": "Simple spreadsheet for tracking equity, options, and dilution.",
+      "format": "XLSX",
+      "downloadUrl": "/resources/cap-table.xlsx",
+      "tags": ["finance", "equity"]
+    },
+    {
+      "id": "pitch-deck",
+      "category": "fundraising",
+      "title": "Pitch Deck Skeleton",
+      "desc": "12-slide structure used by top YC companies.",
+      "format": "PPTX",
+      "downloadUrl": "/resources/pitch-deck-skeleton.pptx",
+      "tags": ["fundraising"]
+    },
+    {
+      "id": "investor-update",
+      "category": "fundraising",
+      "title": "Monthly Investor Update Template",
+      "desc": "One-page format: highlights, metrics, asks, next steps.",
+      "format": "DOCX",
+      "downloadUrl": "/resources/investor-update.docx",
+      "tags": ["fundraising"]
+    },
+    {
+      "id": "job-description",
+      "category": "hiring",
+      "title": "Early Hire Job Description Template",
+      "desc": "For first 1-5 hires. Role summary, skills, equity note.",
+      "format": "DOCX",
+      "downloadUrl": "/resources/job-description.docx",
+      "tags": ["hiring"]
+    },
+    {
+      "id": "business-plan",
+      "category": "strategy",
+      "title": "One-Page Business Plan",
+      "desc": "Problem, solution, market, team, financials, ask.",
+      "format": "DOCX",
+      "downloadUrl": "/resources/one-page-plan.docx",
+      "tags": ["strategy"]
+    },
+    {
+      "id": "seis-checklist",
+      "category": "finance",
+      "title": "SEIS/EIS Eligibility Checklist (UK)",
+      "desc": "Check your eligibility before approaching SEIS/EIS investors.",
+      "format": "PDF",
+      "downloadUrl": "/resources/seis-checklist.pdf",
+      "tags": ["finance", "uk"]
+    }
+  ]
+}

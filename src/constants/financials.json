@@ -1,0 +1,19 @@
+{
+  "runway": { "safe": 6, "warn": 3 },
+  "ltvCac": { "good": 3.0, "warn": 1.0 },
+  "churn": { "good": 2.0, "warn": 5.0 },
+  "healthWeights": {
+    "runway": 30,
+    "ltvCac": 25,
+    "churn": 25,
+    "mrr": 20
+  },
+  "projectionMonths": 12,
+  "revenueModels": [
+    "subscription",
+    "freemium",
+    "usage",
+    "transactional",
+    "marketplace"
+  ]
+}
