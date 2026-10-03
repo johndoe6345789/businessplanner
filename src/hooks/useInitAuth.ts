@@ -19,6 +19,7 @@ import {
 import { parseJwt } from '@/lib/keycloakClient';
 import { COOKIE, readCookie }
   from '@/lib/keycloakCookies';
+import { userFromKeycloakClaims } from './keycloakUserMap';
 import type { User } from '@/types/auth';
 
 /**
@@ -36,24 +37,7 @@ export function useInitAuth(): void {
     if (tok) {
       const c = parseJwt(tok);
       if (c) {
-        const roles =
-          c.realm_access?.roles ?? [];
-        const role: User['role'] =
-          roles.includes('admin') ? 'admin'
-          : roles.includes('moderator')
-            ? 'moderator' : 'user';
-        const user: User = {
-          id: c.sub,
-          email: c.email ?? '',
-          username:
-            c.preferred_username ?? '',
-          displayName:
-            c.name
-            ?? c.preferred_username ?? '',
-          role,
-          createdAt: '',
-          updatedAt: '',
-        };
+        const user: User = userFromKeycloakClaims(c);
         dispatch(
           setCredentials({
             user,

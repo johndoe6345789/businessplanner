@@ -1,16 +1,12 @@
 {
-  "authority": "http://localhost:8892/sso/realms/businessplanner",
   "clientId": "businessplanner-app",
-  "redirectUri": "http://localhost:8892/app/en/auth/callback",
-  "postLogoutRedirectUri": "http://localhost:8892/app/en/login",
-  "scopes": "openid profile email",
+  "redirectPath": "/app/en/auth/callback",
+  "postLogoutPath": "/app/en/login",
+  "scopes": "openid profile email offline_access",
   "endpoints": {
-    "authorization":
-      "http://localhost:8892/sso/realms/businessplanner/protocol/openid-connect/auth",
-    "token":
-      "http://localhost:8892/sso/realms/businessplanner/protocol/openid-connect/token",
-    "logout":
-      "http://localhost:8892/sso/realms/businessplanner/protocol/openid-connect/logout"
+    "authorization": "/api/dbal/oidc/authorize",
+    "token": "/api/dbal/oidc/token",
+    "logout": "/api/dbal/oidc/logout"
   },
   "cookies": {
     "access": "businessplanner_sso",

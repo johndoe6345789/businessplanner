@@ -3,6 +3,7 @@
  * @brief Token endpoint calls (code exchange + refresh).
  */
 import cfg from '@/constants/keycloak.json';
+import { redirectUri } from './ssoUrls';
 import type { KeycloakTokenResponse } from './keycloakTypes';
 
 const HEADERS = {
@@ -23,7 +24,7 @@ export async function exchangeCode(
     grant_type: 'authorization_code',
     client_id: cfg.clientId,
     code,
-    redirect_uri: cfg.redirectUri,
+    redirect_uri: redirectUri(),
   });
   // PKCE is optional — the server-side 302 path from
   // /app/en/login doesn't generate a verifier.
