@@ -6,8 +6,8 @@
 ##    reuses the prebuilt businessplanner-base-conan layer — no host C++ compile).
 ##  - Elasticsearch COMMENTED OUT "for now" (user instruction + JVM mem
 ##    hog). Full-text search disabled until re-enabled.
-##  - Keycloak + keycloak-db KEPT (required for login/OIDC) but the JVM
-##    heap is tightly capped (Java is a mem hog on this 3.8 GB host).
+##  - Login is OIDC against dbal (see `dbal` below, profile local-sso;
+##    production uses the shared instance — businessplanner-deploy).
 ##  - Every service has a hard `mem_limit` (contains each container so a
 ##    spike cannot OOM-cascade the other resident stacks).
 ##  - Postgres shared_buffers 24MB, Redis maxmemory 48MB, Next heap 512MB.
@@ -44,75 +44,6 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 160m
-    restart: unless-stopped
-
-  # ---- Keycloak Postgres ------------------------------------
-  keycloak-db:
-    image: postgres:16-alpine
-    command:
-      - postgres
-      - -c
-      - shared_buffers=16MB
-      - -c
-      - max_connections=20
-      - -c
-      - work_mem=1MB
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak_dev
-    volumes:
-      - keycloak_pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    mem_limit: 140m
-    restart: unless-stopped
-
-  # ---- Keycloak (OIDC identity provider) --------------------
-  # REQUIRED for login. JVM/Quarkus — tightly heap-capped (Java is a
-  # mem hog on a 3.8 GB host); revisit caps after the 16 GB upgrade.
-  keycloak:
-    build:
-      context: ./docker/keycloak
-      dockerfile: Dockerfile
-    depends_on:
-      keycloak-db:
-        condition: service_healthy
-    environment:
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
-      KC_DB_USERNAME: keycloak
-      KC_DB_PASSWORD: keycloak_dev
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_HOSTNAME_URL: http://localhost:8892/sso
-      KC_HTTP_RELATIVE_PATH: /sso
-      KC_PROXY_HEADERS: xforwarded
-      KC_HOSTNAME_STRICT: "false"
-      JAVA_OPTS_KC_HEAP: "-Xms48m -Xmx256m"
-      KC_GITHUB_CLIENT_ID: ${KC_GITHUB_CLIENT_ID:-}
-      KC_GITHUB_CLIENT_SECRET: ${KC_GITHUB_CLIENT_SECRET:-}
-      KC_GOOGLE_CLIENT_ID: ${KC_GOOGLE_CLIENT_ID:-}
-      KC_GOOGLE_CLIENT_SECRET: ${KC_GOOGLE_CLIENT_SECRET:-}
-      KC_MICROSOFT_CLIENT_ID: ${KC_MICROSOFT_CLIENT_ID:-}
-      KC_MICROSOFT_CLIENT_SECRET: ${KC_MICROSOFT_CLIENT_SECRET:-}
-    mem_limit: 420m
-    restart: unless-stopped
-
-  # ---- Elasticsearch MOCK (hacky C++; no JVM) --------------
-  # Replaces the ~1 GB ES JVM (Java is a mem hog on this 3.8 GB
-  # host). Backend's ES client is unchanged — it "thinks it's
-  # talking to ES, but it's mocked": indexing is acknowledged,
-  # every search returns zero hits. Swap back to
-  # image: elasticsearch:8.17.0 after the 16 GB upgrade.
-  elasticsearch:
-    build:
-      context: ./docker/es-mock
-      dockerfile: Dockerfile
-    mem_limit: 32m
     restart: unless-stopped
 
   # ---- Redis (sessions + rate-limiting) ---------------------
@@ -169,6 +100,11 @@ services:
       JWT_SECRET: change-me-in-production
       AUTH_HOST: businessplanner-auth
       AUTH_PORT: "9001"
+      OIDC_ISSUER: ${OIDC_ISSUER:-http://localhost:8892/api/dbal}
+      OIDC_CLIENT_ID: businessplanner-app
+      OIDC_JWKS_URL: ${OIDC_JWKS_URL:-http://dbal:8080/oidc/jwks.json}
+      SSO_COOKIE_NAME: businessplanner_sso
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:8892}
     mem_limit: 96m
     restart: unless-stopped
 
@@ -510,6 +446,7 @@ services:
       - businessplanner-platform
     environment:
       NEXT_PUBLIC_ORIGIN: http://localhost:8892
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:8892}
       NODE_ENV: development
       NODE_OPTIONS: "--max-old-space-size=512"
     mem_limit: 700m
@@ -776,6 +713,31 @@ services:
     restart: unless-stopped
 
   # ---- Nginx reverse proxy ----------------------------------
+  # ---- dbal: local OIDC provider (docker compose --profile local-sso) ----
+  # SQLite, the stock demo users (<username>-Demo1!), and a client list that
+  # allows http://localhost:8892. Production uses the shared dbal instead.
+  dbal:
+    profiles: ["local-sso"]
+    image: ghcr.io/johndoe6345789/dbal:latest
+    environment:
+      DBAL_ADAPTER: sqlite
+      DATABASE_URL: /app/data/dbal.sqlite
+      DBAL_AUTO_CREATE_TABLES: "true"
+      DBAL_SEED_ON_STARTUP: "true"
+      DBAL_SEED_DIR: /app/seeds/database
+      DBAL_OIDC_ISSUER: http://localhost:8892/api/dbal
+      DBAL_PUBLIC_PATH_PREFIX: /api/dbal
+      DBAL_OIDC_CLIENTS_CONFIG: /app/schemas/oidc/clients.json
+      DBAL_OIDC_PRIVATE_KEY_PATH: /app/keys/oidc_signing_key.pem
+      JWT_SECRET_KEY: dev-only-change-me
+      DBAL_ADMIN_TOKEN: dev-only-change-me
+    volumes:
+      - ./docker/dbal/clients.json:/app/schemas/oidc/clients.json:ro
+      - dbal_data:/app/data
+      - dbal_keys:/app/keys
+    mem_limit: 128m
+    restart: unless-stopped
+
   portal:
     build:
       context: ./docker/nginx
@@ -796,7 +758,8 @@ services:
 
 volumes:
   pgdata:
-  keycloak_pgdata:
+  dbal_data:
+  dbal_keys:
   # esdata:            # commented out with elasticsearch
   redisdata:
   sso_node_modules:

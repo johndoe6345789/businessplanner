@@ -1,0 +1,398 @@
+{
+  "_comment": "Maps each path businessplanner's build expects (as of 1609bd9, the last full tree) onto the micro-repo that now owns it. Commit d866aab emptied services/, shared/, frontend/; run assemble_workspace.py to materialise them before building.",
+  "_comment_flavour": "Everything sourced via next_extra_primary's split (platform-core, notifications, gamification, social, ecommerce, search, content-service, ai-chat, analytics, comments, blog, polls, gallery, wiki, media_center, goodpackagerepo, design-system) is the nextra-renamed flavour: nextra_service(), NEXTRA_* cmake vars/defines, nextra-* binary names. See cmake/service.cmake + cmake/portal.cmake shims.",
+  "repos_root": "..",
+  "ignore": [
+    ".git",
+    "node_modules",
+    "__pycache__",
+    ".next",
+    "build",
+    "_build"
+  ],
+  "targets": {
+    "frontend": {
+      "repo": "launchpad-frontend",
+      "path": ""
+    },
+    "shared": {
+      "repo": "design-system",
+      "path": "shared"
+    },
+    "services/accelerators": {
+      "repo": "accelerators",
+      "path": "services/accelerators"
+    },
+    "services/ai-chat": {
+      "repo": "ai-chat",
+      "path": "ai-chat"
+    },
+    "services/ai-service": {
+      "repo": "ai-chat",
+      "path": "ai-service"
+    },
+    "services/alerts": {
+      "repo": "notifications",
+      "path": "alerts"
+    },
+    "services/analytics": {
+      "repo": "analytics",
+      "path": "services/analytics"
+    },
+    "services/analytics-service": {
+      "repo": "analytics",
+      "path": "analytics-service"
+    },
+    "services/api-documentation": {
+      "repo": "analytics",
+      "path": "services/api-documentation"
+    },
+    "services/api-keys": {
+      "repo": "platform-core",
+      "path": "services/api-keys"
+    },
+    "services/audit": {
+      "repo": "platform-core",
+      "path": "services/audit"
+    },
+    "services/auth": {
+      "repo": "platform-core",
+      "path": "services/auth"
+    },
+    "services/auth-service": {
+      "repo": "platform-core",
+      "path": "services/auth-service"
+    },
+    "services/backup": {
+      "repo": "platform-core",
+      "path": "services/backup"
+    },
+    "services/badges": {
+      "repo": "gamification",
+      "path": "badges"
+    },
+    "services/blog": {
+      "repo": "blog",
+      "path": ""
+    },
+    "services/comments": {
+      "repo": "comments",
+      "path": ""
+    },
+    "services/comments-service": {
+      "repo": "comments",
+      "path": "comments-service"
+    },
+    "services/commerce-service": {
+      "repo": "ecommerce",
+      "path": "services/commerce-service"
+    },
+    "services/content-service": {
+      "repo": "content-service",
+      "path": "content-service"
+    },
+    "services/cron": {
+      "repo": "platform-core",
+      "path": "services/cron"
+    },
+    "services/database": {
+      "repo": "platform-core",
+      "path": "services/database"
+    },
+    "services/decisions": {
+      "repo": "strategy-execution-p",
+      "path": "services/decisions"
+    },
+    "services/design-system": {
+      "repo": "design-system",
+      "path": "services/design-system"
+    },
+    "services/drogon-host": {
+      "repo": "platform-core",
+      "path": "services/drogon-host"
+    },
+    "services/ecommerce": {
+      "repo": "ecommerce",
+      "path": "services/ecommerce"
+    },
+    "services/elasticsearch": {
+      "repo": "search",
+      "path": "elasticsearch"
+    },
+    "services/email": {
+      "repo": "notifications",
+      "path": "services/email"
+    },
+    "services/email-sequences": {
+      "repo": "notifications",
+      "path": "services/email-sequences"
+    },
+    "services/feature-flags": {
+      "repo": "platform-core",
+      "path": "services/feature-flags"
+    },
+    "services/financials": {
+      "repo": "workforce-pay-bill-p",
+      "path": "services/financials"
+    },
+    "services/gallery": {
+      "repo": "gallery",
+      "path": ""
+    },
+    "services/gamification": {
+      "repo": "gamification",
+      "path": "gamification"
+    },
+    "services/gamification-service": {
+      "repo": "gamification",
+      "path": "gamification-service"
+    },
+    "services/gdpr": {
+      "repo": "gdpr",
+      "path": "services/gdpr"
+    },
+    "services/hoshin": {
+      "repo": "strategy-execution-p",
+      "path": "services/hoshin"
+    },
+    "services/http-filters": {
+      "repo": "platform-core",
+      "path": "services/http-filters"
+    },
+    "services/i18n": {
+      "repo": "platform-core",
+      "path": "services/i18n"
+    },
+    "services/image": {
+      "repo": "content-service",
+      "path": "image"
+    },
+    "services/imap-sync": {
+      "repo": "notifications",
+      "path": "services/imap-sync"
+    },
+    "services/infra": {
+      "repo": "platform-core",
+      "path": "services/infra"
+    },
+    "services/infra-service": {
+      "repo": "platform-core",
+      "path": "services/infra-service"
+    },
+    "services/job-queue": {
+      "repo": "platform-core",
+      "path": "services/job-queue"
+    },
+    "services/kpi": {
+      "repo": "strategy-execution-p",
+      "path": "services/kpi"
+    },
+    "services/leaderboards": {
+      "repo": "gamification",
+      "path": "leaderboards"
+    },
+    "services/legal-team": {
+      "repo": "legal-team",
+      "path": "services/legal-team"
+    },
+    "services/levels": {
+      "repo": "gamification",
+      "path": "levels"
+    },
+    "services/manager-cli": {
+      "repo": "platform-core",
+      "path": "services/manager-cli"
+    },
+    "services/market-research": {
+      "repo": "market-research",
+      "path": "services/market-research"
+    },
+    "services/media-service": {
+      "repo": "content-service",
+      "path": "media-service"
+    },
+    "services/migrate-service": {
+      "repo": "platform-core",
+      "path": "services/migrate-service"
+    },
+    "services/migration-runner": {
+      "repo": "platform-core",
+      "path": "services/migration-runner"
+    },
+    "services/notifications": {
+      "repo": "notifications",
+      "path": "services/notifications"
+    },
+    "services/notifications-service": {
+      "repo": "notifications",
+      "path": "notifications-service"
+    },
+    "services/object-store": {
+      "repo": "platform-core",
+      "path": "services/object-store"
+    },
+    "services/okr": {
+      "repo": "strategy-execution-p",
+      "path": "services/okr"
+    },
+    "services/organisations": {
+      "repo": "organisations",
+      "path": "services/organisations"
+    },
+    "services/orm-models": {
+      "repo": "platform-core",
+      "path": "services/orm-models"
+    },
+    "services/package-repository": {
+      "repo": "goodpackagerepo",
+      "path": "_new/package-repository"
+    },
+    "services/pdca": {
+      "repo": "strategy-execution-p",
+      "path": "services/pdca"
+    },
+    "services/pdf": {
+      "repo": "content-service",
+      "path": "pdf"
+    },
+    "services/pivot": {
+      "repo": "strategy-execution-p",
+      "path": "services/pivot"
+    },
+    "services/platform-service": {
+      "repo": "platform-core",
+      "path": "services/platform-service"
+    },
+    "services/polls": {
+      "repo": "polls",
+      "path": ""
+    },
+    "services/portal": {
+      "repo": "platform-core",
+      "path": "services/portal"
+    },
+    "services/progress": {
+      "repo": "gamification",
+      "path": "progress"
+    },
+    "services/rate-limit": {
+      "repo": "platform-core",
+      "path": "services/rate-limit"
+    },
+    "services/risk-assessment": {
+      "repo": "risk-assessment",
+      "path": "services/risk-assessment"
+    },
+    "services/scoping": {
+      "repo": "strategy-execution-p",
+      "path": "services/scoping"
+    },
+    "services/search": {
+      "repo": "search",
+      "path": "search"
+    },
+    "services/search-service": {
+      "repo": "search",
+      "path": "search-service"
+    },
+    "services/service-host": {
+      "repo": "platform-core",
+      "path": "services/service-host"
+    },
+    "services/social": {
+      "repo": "social",
+      "path": ""
+    },
+    "services/social-service": {
+      "repo": "social",
+      "path": "social-service"
+    },
+    "services/sso": {
+      "repo": "platform-core",
+      "path": "services/sso"
+    },
+    "services/startup-types": {
+      "repo": "startup-types",
+      "path": "services/startup-types"
+    },
+    "services/status-page": {
+      "repo": "platform-core",
+      "path": "services/status-page"
+    },
+    "services/streaks": {
+      "repo": "gamification",
+      "path": "streaks"
+    },
+    "services/streaming": {
+      "repo": "media_center",
+      "path": "streaming"
+    },
+    "services/user-lookup": {
+      "repo": "platform-core",
+      "path": "services/user-lookup"
+    },
+    "services/user-preferences": {
+      "repo": "platform-core",
+      "path": "services/user-preferences"
+    },
+    "services/user-profiles": {
+      "repo": "platform-core",
+      "path": "services/user-profiles"
+    },
+    "services/user-search": {
+      "repo": "platform-core",
+      "path": "services/user-search"
+    },
+    "services/user-stats": {
+      "repo": "platform-core",
+      "path": "services/user-stats"
+    },
+    "services/users": {
+      "repo": "platform-core",
+      "path": "services/users"
+    },
+    "services/video": {
+      "repo": "content-service",
+      "path": "video"
+    },
+    "services/webhooks": {
+      "repo": "notifications",
+      "path": "services/webhooks"
+    },
+    "services/weekly-review": {
+      "repo": "strategy-execution-p",
+      "path": "services/weekly-review"
+    },
+    "services/wiki": {
+      "repo": "wiki",
+      "path": ""
+    },
+    "services/xero": {
+      "repo": "workforce-pay-bill-p",
+      "path": "services/xero"
+    },
+    "services/xp": {
+      "repo": "gamification",
+      "path": "xp"
+    },
+    "services/zelt": {
+      "repo": "workforce-pay-bill-p",
+      "path": "services/zelt"
+    }
+  },
+  "_comment_overlay": "overlay/ is copied over the assembled tree last: LaunchPad's branding, seed content, search indexes and migration graph. Everything else comes from the shared micro-repos.",
+  "rename": [
+    [
+      "nextra",
+      "businessplanner"
+    ],
+    [
+      "Nextra",
+      "BusinessPlanner"
+    ],
+    [
+      "NEXTRA",
+      "BUSINESSPLANNER"
+    ]
+  ]
+}

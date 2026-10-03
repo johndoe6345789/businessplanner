@@ -86,3 +86,8 @@ replay_pid*
 /.claude/worktrees
 /.claude/scheduled_tasks.lock
 /.playwright-mcp
+
+# assembled by assemble_workspace.py from the micro-repos (see workspace.json)
+/services/
+/shared/
+/frontend/

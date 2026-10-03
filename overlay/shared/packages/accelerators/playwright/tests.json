@@ -1,0 +1,64 @@
+{
+  "$schema": "https://metabuilder.dev/schemas/package-playwright.schema.json",
+  "package": "accelerators",
+  "description": "Accelerator tracker page smoke tests",
+  "tests": [
+    {
+      "name": "accelerators page loads",
+      "tags": ["@smoke", "@accelerators"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/accelerators"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "accelerators-page",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "accelerator tracker component renders",
+      "tags": ["@accelerators"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/accelerators"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "accelerator-tracker",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "add accelerator button is visible",
+      "tags": ["@accelerators"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/accelerators"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "accel-add-btn",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    }
+  ]
+}
