@@ -1,48 +1,45 @@
+'use client';
+
+import { Suspense, useEffect, useRef } from 'react';
+import type { ReactElement } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { CircularProgress } from '@shared/m3';
+import KeycloakLoginButton from
+  '@/components/molecules/KeycloakLoginButton';
+import { useKeycloak } from '@/hooks/useKeycloak';
+
 /**
- * @file page.tsx (login)
- * @brief Server-side 302 redirector to Keycloak.
+ * Starts the OIDC authorization-code + PKCE flow.
  *
- * Phase 5 migration: Keycloak owns the visible login UI
- * at /sso/. Visiting /app/en/login simply 302s straight
- * to Keycloak's branded authorize endpoint — no PKCE
- * verifier is generated here because the realm client
- * accepts non-PKCE auth flows (the SPA still uses PKCE
- * via useKeycloak().login() when triggered from inside
- * the app, e.g. AvatarMenu's switch-account or token
- * recovery).
- *
- * The state param carries the original `?next=` so the
- * /app/en/auth/callback can land the user there after
- * code exchange.
- *
- * Source kept per template-repo policy.
+ * dbal requires PKCE, so the code verifier has to be kept in the
+ * browser: the login redirect cannot be built on the server. After a
+ * failed sign-in the callback sends the user back here with ?error=,
+ * so that case shows a button instead of retrying forever.
  */
-import { redirect } from 'next/navigation';
-import kc from '@/constants/keycloak.json';
+function StartLogin(): ReactElement {
+  const search = useSearchParams();
+  const { login, isAuthenticated } = useKeycloak();
+  const started = useRef(false);
+  const raw = search.get('next');
+  const next =
+    raw && raw.startsWith('/') && !raw.startsWith('//')
+      ? raw : undefined;
+  const failed = search.has('error');
 
-const KC_AUTH = kc.endpoints.authorization;
+  useEffect(() => {
+    if (started.current || failed || isAuthenticated) return;
+    started.current = true;
+    void login(next);
+  }, [failed, isAuthenticated, login, next]);
 
-interface LoginPageProps {
-  readonly searchParams: Promise<{ next?: string }>;
+  if (failed) return <KeycloakLoginButton next={next} />;
+  return <CircularProgress aria-label="Redirecting to login" />;
 }
 
-/**
- * 302 redirect to Keycloak's authorize endpoint.
- *
- * @param props - Page props with searchParams.
- */
-export default async function LoginPage({
-  searchParams,
-}: LoginPageProps): Promise<never> {
-  const { next: rawNext } = await searchParams;
-  const next = rawNext && rawNext.startsWith('/')
-    ? rawNext : '/app/en';
-  const params = new URLSearchParams({
-    client_id: kc.clientId,
-    response_type: 'code',
-    scope: 'openid profile email',
-    redirect_uri: kc.redirectUri,
-    state: next,
-  });
-  redirect(`${KC_AUTH}?${params.toString()}`);
+export default function LoginPage(): ReactElement {
+  return (
+    <Suspense fallback={null}>
+      <StartLogin />
+    </Suspense>
+  );
 }
