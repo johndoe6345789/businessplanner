@@ -72,12 +72,19 @@ export const BusinessModelCanvas: React.FC = () => {
                 f.lk as Parameters<typeof t>[0])}
               multiline rows={4}
               value={vm.canvas[f.key]}
-              onChange={(e) =>
+              onChange={(e) => {
                 vm.handleChange(
                   f.key, e.target.value,
-                )}
-              onBlur={() =>
-                vm.scheduleAutosave(vm.canvas)}
+                );
+                // Save as you type (debounced). The shared
+                // multiline TextField does not pass onBlur
+                // through, so a save-on-blur never ran and
+                // typed text was lost on reload.
+                vm.scheduleAutosave({
+                  ...vm.canvas,
+                  [f.key]: e.target.value,
+                });
+              }}
               inputProps={{
                 'aria-label': t(
                   f.lk as Parameters<typeof t>[0]),

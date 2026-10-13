@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import {
   useListPersonasQuery,
+  useDeletePersonaMutation,
 } from '@/store/api/marketResearchPersonaApi';
 import type { Persona } from '@/types/marketResearch';
 
@@ -19,6 +20,7 @@ import type { Persona } from '@/types/marketResearch';
 export function usePersonaBoard() {
   const { data = [], isLoading } =
     useListPersonasQuery();
+  const [deletePersona] = useDeletePersonaMutation();
   const [dialogOpen, setDialogOpen] =
     useState(false);
   const [editing, setEditing] =
@@ -37,5 +39,7 @@ export function usePersonaBoard() {
     data, isLoading,
     dialogOpen, setDialogOpen,
     editing, openAdd, openEdit,
+    removePersona: (p: Persona) =>
+      void deletePersona(p.id),
   };
 }

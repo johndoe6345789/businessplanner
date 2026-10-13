@@ -1,5 +1,10 @@
 import { withoutLocale } from '../withoutLocale';
 
+// The real routing module pulls in next-intl's ES module build, which jest cannot load.
+jest.mock('@/i18n/routing', () => ({
+  routing: { locales: ['en', 'de'] },
+}));
+
 describe('withoutLocale', () => {
   it('drops a leading configured locale', () => {
     expect(withoutLocale('/en/financials/burn'))
