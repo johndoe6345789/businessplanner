@@ -24,3 +24,23 @@ See the [reposplit README](https://github.com/johndoe6345789/reposplit#readme) f
 - `startup-types` → [startup-types](https://github.com/johndoe6345789/startup-types)
 - `accelerators` → [accelerators](https://github.com/johndoe6345789/accelerators)
 - `organisations` → [organisations](https://github.com/johndoe6345789/organisations)
+
+## Building
+
+This repo is the LaunchPad build and deploy tooling; the source lives in the
+micro-repos listed in `workspace.json`, shared with
+[Nextra](https://github.com/johndoe6345789/next_extra_primary). Clone them next
+to this repo, then:
+
+```bash
+python3 assemble_workspace.py      # materialise services/, shared/, frontend/
+```
+
+Assembly copies each target from its repo, renames Nextra's identifiers to
+LaunchPad's (`rename` in `workspace.json`: `nextra_db` → `businessplanner_db`,
+`nextra_service()` → `businessplanner_service()`, …), then copies `overlay/`
+over the result. `overlay/` holds what is LaunchPad's alone: branding, seed
+content, search indexes, the migration graph.
+
+Login is OIDC against [dbal](https://github.com/johndoe6345789/dbal). Locally,
+`docker compose --profile local-sso up` runs one with the demo users.

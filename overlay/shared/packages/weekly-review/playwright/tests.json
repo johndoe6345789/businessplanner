@@ -1,0 +1,69 @@
+{
+  "$schema": "https://metabuilder.dev/schemas/package-playwright.schema.json",
+  "package": "weekly-review",
+  "description": "Weekly review form page tests",
+  "tests": [
+    {
+      "name": "weekly review page loads with form",
+      "tags": ["@smoke", "@review"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/review"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "weekly-review-form",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "wins textarea is visible",
+      "tags": ["@review"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/review"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "expect",
+          "testId": "review-wins",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    },
+    {
+      "name": "fill wins field and save button visible",
+      "tags": ["@review"],
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "/review"
+        },
+        {
+          "action": "waitForLoadState",
+          "state": "domcontentloaded"
+        },
+        {
+          "action": "fill",
+          "testId": "review-wins",
+          "value": "Shipped the MVP feature"
+        },
+        {
+          "action": "expect",
+          "testId": "review-save-btn",
+          "assertion": { "matcher": "toBeVisible" }
+        }
+      ]
+    }
+  ]
+}
