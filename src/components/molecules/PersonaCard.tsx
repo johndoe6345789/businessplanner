@@ -10,6 +10,8 @@ import CardContent from '@shared/m3/CardContent';
 import Typography from '@shared/m3/Typography';
 import Chip from '@shared/m3/Chip';
 import Box from '@shared/m3/Box';
+import IconButton from '@shared/m3/IconButton';
+import { useTranslations } from 'next-intl';
 import type { Persona } from '@/types/marketResearch';
 
 const PREVIEW_LIMIT = 3;
@@ -20,6 +22,8 @@ export interface PersonaCardProps {
   persona: Persona;
   /** Called when the card is activated for editing. */
   onEdit: (p: Persona) => void;
+  /** When given, the card shows a delete button. */
+  onDelete?: (p: Persona) => void;
 }
 
 /**
@@ -30,8 +34,10 @@ export interface PersonaCardProps {
  * @returns PersonaCard UI.
  */
 export const PersonaCard: React.FC<PersonaCardProps> = (
-  { persona: p, onEdit },
-) => (
+  { persona: p, onEdit, onDelete },
+) => {
+  const t = useTranslations('marketResearch');
+  return (
   <Card
     data-testid={`persona-card-${p.id}`}
     onClick={() => onEdit(p)}
@@ -42,10 +48,26 @@ export const PersonaCard: React.FC<PersonaCardProps> = (
     onKeyDown={(e) => e.key === 'Enter' && onEdit(p)}
   >
     <CardContent>
-      <Typography variant="h6"
-        sx={{ fontWeight: 700 }}>
-        {p.name}
-      </Typography>
+      <Box sx={{ display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start' }}>
+        <Typography variant="h6"
+          sx={{ fontWeight: 700 }}>
+          {p.name}
+        </Typography>
+        {onDelete && (
+          <IconButton size="small"
+            aria-label={t('deletePersona')}
+            data-testid={`persona-delete-${p.id}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(p);
+            }}
+            onKeyDown={(e) => e.stopPropagation()}>
+            <span aria-hidden>✕</span>
+          </IconButton>
+        )}
+      </Box>
       <Typography variant="body2"
         color="text.secondary" sx={{ mb: 1 }}>
         {p.role}
@@ -68,6 +90,7 @@ export const PersonaCard: React.FC<PersonaCardProps> = (
       </Box>
     </CardContent>
   </Card>
-);
+  );
+};
 
 export default PersonaCard;

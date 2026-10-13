@@ -60,12 +60,15 @@ export const baseQueryWithReauth: BaseQueryFn<
         );
         refreshed = true;
       }
-    } else {
-      refreshed =
-        await reauthViaCookie(api, extra);
     }
+    // The dbal refresh cookie is the real session. Try it before the
+    // legacy /auth/sso-session endpoint, which answers 401 now.
     if (!refreshed) {
       refreshed = await reauthViaKeycloak(api);
+    }
+    if (!refreshed && !rt) {
+      refreshed =
+        await reauthViaCookie(api, extra);
     }
 
     if (refreshed) {

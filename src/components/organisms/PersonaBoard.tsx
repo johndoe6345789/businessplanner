@@ -54,7 +54,8 @@ export const PersonaBoard: React.FC = () => {
         flexWrap: 'wrap' }}>
         {vm.data.map((p) => (
           <PersonaCard key={p.id}
-            persona={p} onEdit={vm.openEdit} />
+            persona={p} onEdit={vm.openEdit}
+            onDelete={vm.removePersona} />
         ))}
       </Box>
       <Dialog open={vm.dialogOpen}

@@ -35,6 +35,12 @@ const plannerSlice = createSlice({
         !state.completedSteps[id];
     },
     /** Reset all step completions to zero. */
+    replaceSteps(
+      state,
+      action: PayloadAction<Record<string, boolean>>,
+    ) {
+      state.completedSteps = action.payload;
+    },
     resetPlan(state) {
       state.completedSteps = {};
     },
@@ -43,6 +49,7 @@ const plannerSlice = createSlice({
 
 export const {
   toggleStep,
+  replaceSteps,
   resetPlan,
 } = plannerSlice.actions;
 export default plannerSlice.reducer;

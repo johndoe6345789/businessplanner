@@ -7,6 +7,7 @@
 import type {
   BaseQueryFn, FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
+import cfg from '@/constants/keycloak.json';
 import { refresh, parseJwt } from '@/lib/keycloakClient';
 import {
   COOKIE, readCookie, writeCookie, clearCookie,
@@ -36,7 +37,7 @@ export async function reauthViaKeycloak(
     if (tok.refresh_token) {
       writeCookie(
         COOKIE.refresh, tok.refresh_token,
-        tok.refresh_expires_in ?? tok.expires_in,
+        tok.refresh_expires_in ?? cfg.refreshCookieSeconds,
       );
     }
     const c = parseJwt(tok.access_token);

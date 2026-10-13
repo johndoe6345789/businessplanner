@@ -10,6 +10,7 @@
 import React from 'react';
 import CardActionArea from '@shared/m3/CardActionArea';
 import { Link } from '@/i18n/navigation';
+import { withoutLocale } from '@/lib/withoutLocale';
 
 /** Props for LinkedCardActionArea. */
 export interface LinkedCardActionAreaProps {
@@ -29,7 +30,7 @@ export interface LinkedCardActionAreaProps {
 const LinkedCardActionArea: React.FC<
   LinkedCardActionAreaProps
 > = ({ href, children, ...rest }) => (
-  <CardActionArea component={Link} href={href} {...rest}>
+  <CardActionArea component={Link} href={withoutLocale(href)} {...rest}>
     {children}
   </CardActionArea>
 );
