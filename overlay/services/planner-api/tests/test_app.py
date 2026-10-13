@@ -26,6 +26,9 @@ def test_every_frontend_route_exists():
         ("GET", "/api/financials/hypotheses"), ("POST", "/api/financials/hypotheses"), ("PUT", "/api/financials/hypotheses/{rid}"), ("DELETE", "/api/financials/hypotheses/{rid}"),
         ("GET", "/api/accelerators"), ("PUT", "/api/accelerators/{rid}"), ("GET", "/api/organisations"), ("PUT", "/api/organisations/{rid}"), ("GET", "/api/organisations/{rid}/steps"),
         ("GET", "/api/startup-types"), ("GET", "/api/startup-types/{slug}"), ("POST", "/api/legal/equity/split"), ("POST", "/api/legal/equity/vesting"),
+        ("GET", "/api/xero/status"), ("POST", "/api/xero/connect"), ("DELETE", "/api/xero/disconnect"), ("GET", "/api/xero/reports/cash-flow"),
+        ("GET", "/api/zelt/status"), ("POST", "/api/zelt/connect"), ("GET", "/api/zelt/payroll"),
+        ("GET", "/api/planner/progress"), ("PUT", "/api/planner/progress/{step_id}"), ("DELETE", "/api/planner/progress"),
         ("GET", "/healthz"),
     ]
     missing = [e for e in expected if e not in ROUTES]
@@ -44,5 +47,5 @@ def test_every_data_route_requires_a_login():
     for method, path in sorted(ROUTES):
         if path in ("/healthz",) or not path.startswith("/api/"):
             continue
-        r = c.request(method, path.replace("{rid}", "3a3e243b-e335-0285-7caf-f925e16f0548").replace("{slug}", "saas"))
+        r = c.request(method, path.replace("{rid}", "3a3e243b-e335-0285-7caf-f925e16f0548").replace("{slug}", "saas").replace("{step_id}", "defineProblem"))
         assert r.status_code == 401, (method, path, r.status_code)

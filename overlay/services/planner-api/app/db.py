@@ -24,6 +24,15 @@ ADD_COLUMNS = [
     "ALTER TABLE kpi_metrics ADD COLUMN IF NOT EXISTS period_end date",
     "ALTER TABLE personas ADD COLUMN IF NOT EXISTS notes text NOT NULL DEFAULT ''",
 ]
+CREATE_TABLES = [
+    """CREATE TABLE IF NOT EXISTS planner_progress (
+         user_id    uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+         step_id    text NOT NULL,
+         completed  boolean NOT NULL DEFAULT true,
+         created_at timestamptz NOT NULL DEFAULT now(),
+         updated_at timestamptz NOT NULL DEFAULT now(),
+         PRIMARY KEY (user_id, step_id))""",
+]
 WIDEN_CHECKS = [  # (table, column, every allowed value)
     ("kpi_metrics", "category", ["financial", "operational", "customer", "strategic", "growth"]),
     ("okr_objectives", "status", ["active", "achieved", "at-risk", "abandoned", "completed", "cancelled"]),
@@ -50,7 +59,7 @@ async def start():
     async with pool.connection() as conn:
         async with conn.transaction():
             await conn.execute("SELECT pg_advisory_xact_lock(7340001)")  # one starter at a time
-            for stmt in ADD_COLUMNS:
+            for stmt in CREATE_TABLES + ADD_COLUMNS:
                 await conn.execute(stmt)
             for table, col, values in WIDEN_CHECKS:
                 await widen_check(conn, table, col, values)
