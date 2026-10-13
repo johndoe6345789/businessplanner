@@ -3,6 +3,7 @@
  * @brief Logout URL builder, JWT parser, session register.
  */
 import cfg from '@/constants/keycloak.json';
+import { postLogoutRedirectUri } from './ssoUrls';
 import apiCfg from '@/constants/api.json';
 import type { KeycloakJwtPayload } from './keycloakTypes';
 
@@ -14,7 +15,7 @@ import type { KeycloakJwtPayload } from './keycloakTypes';
  */
 export function logout(idTokenHint?: string): string {
   const p = new URLSearchParams({
-    post_logout_redirect_uri: cfg.postLogoutRedirectUri,
+    post_logout_redirect_uri: postLogoutRedirectUri(),
     client_id: cfg.clientId,
   });
   if (idTokenHint) p.set('id_token_hint', idTokenHint);

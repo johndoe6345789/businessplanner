@@ -28,6 +28,8 @@ export interface KeycloakJwtPayload {
   given_name?: string;
   family_name?: string;
   realm_access?: RealmAccess;
+  /** dbal: a single role string (no realm_access). */
+  role?: string;
   exp: number;
   iat: number;
   iss: string;

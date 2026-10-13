@@ -3,6 +3,7 @@
  * @brief Build the OIDC authorization URL.
  */
 import cfg from '@/constants/keycloak.json';
+import { redirectUri } from './ssoUrls';
 
 /**
  * Build the Keycloak authorization URL with PKCE.
@@ -20,7 +21,7 @@ export function buildAuthUrl(
   void codeVerifier;
   const p = new URLSearchParams({
     client_id: cfg.clientId,
-    redirect_uri: cfg.redirectUri,
+    redirect_uri: redirectUri(),
     response_type: 'code',
     scope: cfg.scopes,
     state,

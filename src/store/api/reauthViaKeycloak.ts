@@ -11,6 +11,7 @@ import { refresh, parseJwt } from '@/lib/keycloakClient';
 import {
   COOKIE, readCookie, writeCookie, clearCookie,
 } from '@/lib/keycloakCookies';
+import { userFromKeycloakClaims } from '@/hooks/keycloakUserMap';
 import { setCredentials } from '../slices/authSlice';
 import type { User } from '../../types/auth';
 
@@ -39,20 +40,10 @@ export async function reauthViaKeycloak(
       );
     }
     const c = parseJwt(tok.access_token);
-    const roles = c?.realm_access?.roles ?? [];
-    const role: User['role'] = roles.includes('admin')
-      ? 'admin' : roles.includes('moderator')
-        ? 'moderator' : 'user';
-    const now = new Date().toISOString();
-    const user: User = {
-      id: c?.sub ?? '',
-      email: c?.email ?? '',
-      username: c?.preferred_username ?? '',
-      displayName: c?.name ?? c?.preferred_username ?? '',
-      role,
-      createdAt: now,
-      updatedAt: now,
-    };
+    if (!c) throw new Error('unreadable access token');
+    const user: User = userFromKeycloakClaims(
+      c, new Date().toISOString(),
+    );
     api.dispatch(setCredentials({
       user, accessToken: tok.access_token,
     }));
