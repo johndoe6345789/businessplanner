@@ -12,6 +12,7 @@ import { useEffect, useRef } from 'react';
 import { useRouter, useSearchParams }
   from 'next/navigation';
 import { useLocale } from 'next-intl';
+import cfg from '@/constants/keycloak.json';
 import { exchangeCode }
   from '@/lib/keycloakClient';
 import { registerSession }
@@ -73,7 +74,7 @@ export function useAuthCallback(): void {
           writeCookie(COOKIE.refresh,
             tok.refresh_token,
             tok.refresh_expires_in
-              ?? tok.expires_in);
+              ?? cfg.refreshCookieSeconds);
         }
         clearCookie(COOKIE.state);
         clearCookie(COOKIE.verifier);

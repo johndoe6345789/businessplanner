@@ -14,5 +14,6 @@
     "state": "businessplanner_sso_state",
     "verifier": "businessplanner_sso_verifier"
   },
-  "refreshLeadSeconds": 60
+  "refreshLeadSeconds": 60,
+  "refreshCookieSeconds": 604800
 }
