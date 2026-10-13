@@ -1,8 +1,17 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { toggleStep, resetPlan } from '@/store/slices/plannerSlice';
+import {
+  toggleStep,
+  replaceSteps,
+  resetPlan,
+} from '@/store/slices/plannerSlice';
+import {
+  useGetPlannerProgressQuery,
+  useSetPlannerStepMutation,
+  useResetPlannerProgressMutation,
+} from '@/store/api/plannerProgressApi';
 import { useCompleteStepMutation } from '@/store/api/gamificationApi';
 import roadmap from '@/constants/startup-roadmap.json';
 import plannerConfig from '@/constants/planner.json';
@@ -53,21 +62,51 @@ export function usePlannerProgress() {
     (s) => s.planner.completedSteps,
   );
   const [completeStep] = useCompleteStepMutation();
+  const { data: server } = useGetPlannerProgressQuery();
+  const [saveStep] = useSetPlannerStepMutation();
+  const [resetServer] = useResetPlannerProgressMutation();
+  const adopted = useRef(false);
+
+  // Adopt the server's copy once per mount. A user whose server
+  // copy is empty but who has local ticks (from before progress
+  // was stored server-side) migrates them up instead.
+  useEffect(() => {
+    if (!server || adopted.current) return;
+    adopted.current = true;
+    const remote = server.steps ?? {};
+    if (Object.keys(remote).length === 0) {
+      Object.keys(completedSteps)
+        .filter((id) => completedSteps[id])
+        .forEach((id) => {
+          void saveStep({ id, completed: true });
+        });
+      return;
+    }
+    dispatch(replaceSteps(remote));
+  }, [server, completedSteps, dispatch, saveStep]);
 
   const toggle = useCallback(
     (stepId: string) => {
       const wasComplete = Boolean(completedSteps[stepId]);
       dispatch(toggleStep(stepId));
-      if (!wasComplete) {
-        void completeStep(stepId);
-      }
+      void saveStep({ id: stepId, completed: !wasComplete })
+        .unwrap()
+        .then((r) => {
+          if (r.completed && r.first_time) {
+            void completeStep(stepId);
+          }
+        })
+        .catch(() => undefined);
     },
-    [dispatch, completedSteps, completeStep],
+    [dispatch, completedSteps, completeStep, saveStep],
   );
 
   const reset = useCallback(
-    () => dispatch(resetPlan()),
-    [dispatch],
+    () => {
+      dispatch(resetPlan());
+      void resetServer();
+    },
+    [dispatch, resetServer],
   );
 
   const phases: PhaseProgress[] = roadmap.phases.map((phase) => {

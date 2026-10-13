@@ -31,7 +31,7 @@ export const baseApi = createApi({
     'ShopProducts', 'Cart', 'Orders',
     'ForumBoards', 'Wiki', 'Gallery',
     'StartupTypes', 'Knowledge',
-    'MarketResearch',
+    'MarketResearch', 'PlannerProgress',
     'Financials', 'FinancialHypotheses',
     'WeeklyReview',
     'Decisions',

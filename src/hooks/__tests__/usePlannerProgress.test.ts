@@ -40,3 +40,63 @@ describe('getPhaseStatus', () => {
     expect(getPhaseStatus(1, 1)).toBe('complete');
   });
 });
+
+import { renderHook, act } from '@testing-library/react';
+
+const saveStep = jest.fn();
+const resetServer = jest.fn();
+const dispatch = jest.fn();
+let serverData: { steps: Record<string, boolean> } | undefined;
+let local: Record<string, boolean> = {};
+
+jest.mock('@/store/hooks', () => ({
+  useAppDispatch: () => dispatch,
+  useAppSelector: (fn: (s: unknown) => unknown) =>
+    fn({ planner: { completedSteps: local } }),
+}));
+jest.mock('@/store/api/gamificationApi', () => ({
+  useCompleteStepMutation: () => [jest.fn()],
+}));
+jest.mock('@/store/api/plannerProgressApi', () => ({
+  useGetPlannerProgressQuery: () => ({ data: serverData }),
+  useSetPlannerStepMutation: () => [saveStep],
+  useResetPlannerProgressMutation: () => [resetServer],
+}));
+
+describe('usePlannerProgress server sync', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    saveStep.mockReturnValue({
+      unwrap: () => Promise.resolve({ completed: true, first_time: false }),
+    });
+  });
+
+  it('adopts the server copy when it has ticks', () => {
+    serverData = { steps: { a: true } };
+    local = {};
+    renderHook(() =>
+      require('../usePlannerProgress').usePlannerProgress());
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ payload: { a: true } }));
+  });
+
+  it('migrates local ticks up when the server is empty', () => {
+    serverData = { steps: {} };
+    local = { b: true, c: false };
+    renderHook(() =>
+      require('../usePlannerProgress').usePlannerProgress());
+    expect(saveStep).toHaveBeenCalledTimes(1);
+    expect(saveStep).toHaveBeenCalledWith({ id: 'b', completed: true });
+  });
+
+  it('saves each toggle and reset to the server', () => {
+    serverData = { steps: { a: true } };
+    local = { a: true };
+    const { result } = renderHook(() =>
+      require('../usePlannerProgress').usePlannerProgress());
+    act(() => result.current.toggle('a'));
+    expect(saveStep).toHaveBeenCalledWith({ id: 'a', completed: false });
+    act(() => result.current.reset());
+    expect(resetServer).toHaveBeenCalled();
+  });
+});
