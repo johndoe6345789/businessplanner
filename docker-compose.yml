@@ -382,6 +382,37 @@ services:
     mem_limit: 96m
     restart: unless-stopped
 
+  # ---- businessplanner-planner (private internal service): the planning tools API ----
+  # KPIs, OKRs, PDCA, Hoshin, risks, decisions, feature scoping, pivots, weekly reviews, market research,
+  # financial tools, accelerators, organisations, startup types, legal calculators. Python, not a C++ daemon:
+  # the old C++ domains were never linked into a daemon and disagreed with the frontend's field names.
+  businessplanner-planner:
+    build:
+      context: ./services/planner-api
+    image: businessplanner-planner:latest
+    depends_on:
+      db:
+        condition: service_healthy
+      businessplanner-migrate:
+        condition: service_completed_successfully
+      businessplanner-auth:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: businessplanner_db
+      DB_USER: businessplanner
+      DB_PASSWORD: businessplanner_dev
+      AUTH_HOST: businessplanner-auth
+      AUTH_PORT: "9001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9015/healthz', timeout=3)"]
+      interval: 15s
+      retries: 5
+      start_period: 15s
+    mem_limit: 128m
+    restart: unless-stopped
+
   # ---- businessplanner-commerce (private internal service) ----
   businessplanner-commerce:
     image: localhost:5001/businessplanner/businessplanner-commerce:latest
