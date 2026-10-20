@@ -6,6 +6,7 @@ import time
 import httpx
 from fastapi import Request
 
+from . import db
 from .core import ApiError, as_uuid
 
 AUTH_URL = f"http://{os.getenv('AUTH_HOST', 'businessplanner-auth')}:{os.getenv('AUTH_PORT', '9001')}/api/auth/me"
@@ -44,3 +45,16 @@ async def current_user(request: Request) -> str:
         _cache.clear()
     _cache[token] = (uid, now + CACHE_SECONDS)
     return uid
+
+
+async def data_owner(request: Request) -> str:
+    """The id whose rows this request works on. No X-Business-Id means the person's own (main) business, whose
+    data is stored under their own user id; any other business has a hidden workspace user that owns its rows."""
+    who = await current_user(request)
+    named = request.headers.get("x-business-id", "").strip()
+    if not named:
+        return who
+    row = await db.one("SELECT data_user_id FROM businesses WHERE id = %s AND owner_id = %s", as_uuid(named, "business"), who)
+    if not row:
+        raise ApiError(404, "business not found")
+    return str(row["data_user_id"])

@@ -21,10 +21,10 @@ def fakes(monkeypatch):
         if "DELETE FROM signup_accounts" in sql:
             state["claimed"].discard(a[0])
 
-    async def dbal(email, password):
+    async def dbal(username, email, password):
         if state.get("dbal_fail"):
             raise signup.Refused(502, "no")
-        state["dbal"].append((email, password))
+        state["dbal"].append((username, email, password))
 
     monkeypatch.setattr(signup.db, "one", one)
     monkeypatch.setattr(signup.db, "run", run)
@@ -47,7 +47,9 @@ GOOD = {"email": "New.Person@Example.com", "password": "correct horse 99", "disp
 def test_creates_the_login_with_the_lowercased_email(client, fakes):
     r = client.post("/api/auth/register", json=GOOD)
     assert r.status_code == 201 and r.json()["success"] is True
-    assert fakes["dbal"] == [("new.person@example.com", "correct horse 99")]
+    (username, email, password), = fakes["dbal"]
+    assert email == "new.person@example.com" and password == "correct horse 99"
+    assert username.startswith("bp_") and 3 <= len(username) <= 50 and username.replace("_", "").isalnum()
 
 
 def test_never_touches_dbal_for_an_address_it_already_knows(client, fakes):

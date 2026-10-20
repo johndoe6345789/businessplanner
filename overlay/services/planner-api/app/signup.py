@@ -4,14 +4,16 @@ Login belongs to the shared dbal. It has no public registration; the only way to
 admin-token endpoint, which *sets or resets* a password. So this runs as its own container, the only one
 holding that token, and is careful never to overwrite an existing account:
 
-* the login name is the e-mail address (always contains "@", so it cannot be one of dbal's plain system
-  names such as `admin` or `god`);
+* the dbal username is generated (`bp_` + random hex: it cannot be one of dbal's plain system names such as
+  `admin` or `god`) and the e-mail address is registered as the alternate login identifier, so people sign in
+  with their e-mail;
 * an address already known here (users or earlier sign-ups) is refused;
 * sign-ups are rate limited per client and overall.
 """
 import logging
 import os
 import re
+import secrets
 import time
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
@@ -65,13 +67,17 @@ def validate(body: dict) -> tuple[str, str, str]:
     return email, password, name or email.split("@")[0]
 
 
-async def dbal_set_credential(email: str, password: str):
+def new_username() -> str:
+    return "bp_" + secrets.token_hex(8)
+
+
+async def dbal_set_credential(username: str, email: str, password: str):
     token = os.getenv("DBAL_ADMIN_TOKEN", "")
     if not token:
         raise Refused(503, "Sign-up is not configured.")
     async with httpx.AsyncClient(timeout=15) as c:
         r = await c.post(f"{DBAL_URL}/admin/credentials", headers={"Authorization": f"Bearer {token}"},
-                         json={"username": email, "password": password, "email": email})
+                         json={"username": username, "password": password, "email": email})
     if r.status_code != 200 or not r.json().get("success"):
         log.warning("dbal refused the credential (%s): %s", r.status_code, r.text[:200])
         raise Refused(502, "Could not create the account. Please try again later.")
@@ -82,12 +88,14 @@ async def register(body: dict, client: str):
     check_rate(client)
     if await db.one("SELECT 1 AS x FROM users WHERE lower(email) = %s", email):
         raise Refused(409, "That e-mail address is already registered. Try signing in.")
+    username = new_username()
     claimed = await db.one(
-        "INSERT INTO signup_accounts (email, display_name) VALUES (%s, %s) ON CONFLICT (email) DO NOTHING RETURNING email", email, name)
+        "INSERT INTO signup_accounts (email, display_name, username) VALUES (%s, %s, %s) ON CONFLICT (email) DO NOTHING RETURNING email",
+        email, name, username)
     if not claimed:
         raise Refused(409, "That e-mail address is already registered. Try signing in.")
     try:
-        await dbal_set_credential(email, password)
+        await dbal_set_credential(username, email, password)
     except Exception:
         await db.run("DELETE FROM signup_accounts WHERE email = %s", email)    # let them try again
         raise
@@ -98,6 +106,7 @@ async def lifespan(app):
     await db.start()
     await db.run("""CREATE TABLE IF NOT EXISTS signup_accounts (
         email text PRIMARY KEY, display_name text NOT NULL DEFAULT '', created_at timestamptz NOT NULL DEFAULT now())""")
+    await db.run("ALTER TABLE signup_accounts ADD COLUMN IF NOT EXISTS username text")
     yield
     await db.stop()
 

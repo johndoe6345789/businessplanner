@@ -382,6 +382,41 @@ services:
     mem_limit: 96m
     restart: unless-stopped
 
+  # ---- stand-ins for Xero and Zelt (sample data, no account needed) ----
+  # The planner talks to whatever XERO_* / ZELT_* point at: these by default, the real services when credentials
+  # are configured instead (see compose.prod.yml in businessplanner-deploy). Their pages say plainly they are demos.
+  xero-surrogate:
+    build:
+      context: ./services/surrogates
+    image: businessplanner-surrogates:latest
+    environment:
+      SURROGATE_SECRET: ${SURROGATE_SECRET:-dev-only-secret}
+      XERO_CLIENT_ID: ${XERO_CLIENT_ID:-demo-xero-client}
+      XERO_CLIENT_SECRET: ${XERO_CLIENT_SECRET:-demo-xero-secret}
+      XERO_REDIRECT_URI: ${XERO_REDIRECT_URI:-https://business.wardcrew.com/api/xero/callback}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9020/healthz', timeout=3)"]
+      interval: 15s
+      retries: 5
+      start_period: 10s
+    mem_limit: 64m
+    restart: unless-stopped
+
+  zelt-surrogate:
+    image: businessplanner-surrogates:latest
+    command: ["uvicorn", "app.zelt:app", "--host", "0.0.0.0", "--port", "9021", "--no-access-log"]
+    depends_on:
+      - xero-surrogate
+    environment:
+      ZELT_DEMO_KEY: ${ZELT_DEMO_KEY:-demo-zelt-key}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9021/healthz', timeout=3)"]
+      interval: 15s
+      retries: 5
+      start_period: 10s
+    mem_limit: 64m
+    restart: unless-stopped
+
   # ---- businessplanner-signup (private internal service): self-service registration ----
   # The shared dbal has no public sign-up, only an admin-token endpoint, so this one container holds that token
   # (prod override); the planner does not. Same image as the planner, different entry point.
@@ -431,6 +466,19 @@ services:
       DB_PASSWORD: businessplanner_dev
       AUTH_HOST: businessplanner-auth
       AUTH_PORT: "9001"
+      INTEGRATION_STATE_SECRET: ${INTEGRATION_STATE_SECRET:-dev-only-state-secret}
+      XERO_CLIENT_ID: ${XERO_CLIENT_ID:-demo-xero-client}
+      XERO_CLIENT_SECRET: ${XERO_CLIENT_SECRET:-demo-xero-secret}
+      XERO_REDIRECT_URI: ${XERO_REDIRECT_URI:-https://business.wardcrew.com/api/xero/callback}
+      XERO_AUTHORIZE_URL: ${XERO_AUTHORIZE_URL:-https://business.wardcrew.com/surrogates/xero/identity/connect/authorize}
+      XERO_TOKEN_URL: ${XERO_TOKEN_URL:-http://xero-surrogate:9020/identity/connect/token}
+      XERO_CONNECTIONS_URL: ${XERO_CONNECTIONS_URL:-http://xero-surrogate:9020/connections}
+      XERO_API_URL: ${XERO_API_URL:-http://xero-surrogate:9020}
+      XERO_DEMO: ${XERO_DEMO:-1}
+      ZELT_ALLOWED_BASES: ${ZELT_ALLOWED_BASES:-https://api.zelt.app,http://zelt-surrogate:9021}
+      ZELT_DEFAULT_BASE_URL: ${ZELT_DEFAULT_BASE_URL:-http://zelt-surrogate:9021}
+      ZELT_DEMO: ${ZELT_DEMO:-1}
+      ZELT_DEMO_KEY: ${ZELT_DEMO_KEY:-demo-zelt-key}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9015/healthz', timeout=3)"]
       interval: 15s
