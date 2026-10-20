@@ -29,7 +29,7 @@ def test_every_frontend_route_exists():
         ("GET", "/api/xero/status"), ("POST", "/api/xero/connect"), ("GET", "/api/xero/callback"), ("DELETE", "/api/xero/disconnect"), ("GET", "/api/xero/reports/cash-flow"),
         ("GET", "/api/zelt/status"), ("POST", "/api/zelt/connect"), ("GET", "/api/zelt/payroll"),
         ("GET", "/api/planner/progress"), ("PUT", "/api/planner/progress/{step_id}"), ("DELETE", "/api/planner/progress"),
-        ("GET", "/api/businesses"), ("POST", "/api/businesses"), ("PUT", "/api/businesses/{bid}"), ("DELETE", "/api/businesses/{bid}"),
+        ("GET", "/api/planner/whoami"), ("GET", "/api/businesses"), ("POST", "/api/businesses"), ("PUT", "/api/businesses/{bid}"), ("DELETE", "/api/businesses/{bid}"),
         ("GET", "/healthz"),
     ]
     missing = [e for e in expected if e not in ROUTES]

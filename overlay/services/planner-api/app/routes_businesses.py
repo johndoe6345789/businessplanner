@@ -86,3 +86,12 @@ async def delete_business(bid: str, owner: str = Owner):
     # Deleting the workspace user removes the business and every plan row it owned (all cascade).
     await db.run("DELETE FROM users WHERE id = %s AND is_active = false AND role = 'guest'", row["data_user_id"])
     return {}
+
+
+@router.get("/api/planner/whoami")
+async def whoami(owner: str = Owner):
+    """The name and address the person gave when signing up. The login token carries only an internal username,
+    so the app asks here for what to show."""
+    row = await db.one("SELECT display_name, email FROM users WHERE id = %s", owner)
+    email = row["email"] if row and not row["email"].endswith("@unknown.local") else ""
+    return {"displayName": (row["display_name"] if row else "") or "", "email": email}
