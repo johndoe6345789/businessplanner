@@ -22,6 +22,7 @@ import plannerReducer from './slices/plannerSlice';
 import gamificationReducer from './slices/gamificationSlice';
 import startupTypeReducer
   from './slices/startupTypeSlice';
+import businessReducer from './slices/businessSlice';
 import { persistConfig } from './persistConfig';
 
 const rootReducer = combineReducers({
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   planner: plannerReducer,
   gamification: gamificationReducer,
   startupType: startupTypeReducer,
+  business: businessReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 

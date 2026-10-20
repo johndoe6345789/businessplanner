@@ -1291,10 +1291,18 @@
     "objectivePlaceholder": "Objective title",
     "noObjectives": "No objectives yet. Add one above.",
     "months": {
-      "1": "Jan", "2": "Feb", "3": "Mar",
-      "4": "Apr", "5": "May", "6": "Jun",
-      "7": "Jul", "8": "Aug", "9": "Sep",
-      "10": "Oct", "11": "Nov", "12": "Dec"
+      "1": "Jan",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Apr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Aug",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dec"
     },
     "status": {
       "not-started": "Not started",
@@ -1409,5 +1417,21 @@
       "headcount": "Headcount",
       "outstanding": "Outstanding Invoices"
     }
+  },
+  "business": {
+    "switcherLabel": "Switch business",
+    "new": "New business…",
+    "manage": "Manage businesses…",
+    "newHelp": "Each business has its own plan: canvas, KPIs, OKRs, risks, finances and roadmap.",
+    "nameLabel": "Business name",
+    "create": "Create",
+    "cancel": "Cancel",
+    "close": "Close",
+    "save": "Save",
+    "delete": "Delete",
+    "deleteForever": "Delete forever",
+    "renameLabel": "Rename {name}",
+    "mainNote": "Your main business: it can be renamed but not deleted.",
+    "confirmDelete": "Delete {name} and everything planned in it? This cannot be undone."
   }
 }

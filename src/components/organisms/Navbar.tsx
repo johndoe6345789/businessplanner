@@ -18,6 +18,7 @@ import {
 } from '../molecules/GamificationSummary';
 import NotificationBell
   from '../molecules/NotificationBell';
+import BusinessSwitcher from './BusinessSwitcher';
 import navLinks from '@/constants/nav-links.json';
 
 /** Props for the Navbar organism. */
@@ -70,6 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <Toolbar>
           <MobileDrawer links={LINKS} />
           <NavbarLogo label={tCommon('appName')} />
+          {isAuthenticated && <BusinessSwitcher />}
           <div className="spacer" />
           <DesktopActions />
           {isAuthenticated && <GamificationSummary compact />}
