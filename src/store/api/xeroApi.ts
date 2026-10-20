@@ -55,6 +55,12 @@ export const xeroApi = baseApi.injectEndpoints({
     }),
 
     /** Disconnect Xero (DELETE). */
+    /** Starts the Xero sign-in; the answer says where to send the
+     *  browser. */
+    xeroConnect: build.mutation<{ url: string }, void>({
+      query: () => ({ url: X.connect, method: 'POST' }),
+    }),
+
     xeroDisconnect: build.mutation<void, void>({
       query: () => ({ url: X.disconnect, method: 'DELETE' }),
       invalidatesTags: ['Xero'],
@@ -70,5 +76,6 @@ export const {
   useXeroProfitLossQuery,
   useXeroBalanceSheetQuery,
   useXeroCashFlowQuery,
+  useXeroConnectMutation,
   useXeroDisconnectMutation,
 } = xeroApi;
