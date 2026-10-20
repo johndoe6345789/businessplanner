@@ -53,7 +53,10 @@ let business: string | null = null;
 jest.mock('@/store/hooks', () => ({
   useAppDispatch: () => dispatch,
   useAppSelector: (fn: (s: unknown) => unknown) =>
-    fn({ planner: { completedSteps: local }, business: { activeId: business } }),
+    fn({
+      planner: { completedSteps: local },
+      business: { activeId: business },
+    }),
 }));
 jest.mock('@/store/api/gamificationApi', () => ({
   useCompleteStepMutation: () => [jest.fn()],

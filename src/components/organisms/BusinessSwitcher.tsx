@@ -36,7 +36,8 @@ const ManageRow: React.FC<{
       data-testid={`business-row-${b.id}`}>
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
         <TextField size="small" value={name} fullWidth
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(e.target.value)}
           inputProps={{ 'aria-label': t('renameLabel', { name: b.name }) }} />
         <Button disabled={!name.trim() || name.trim() === b.name}
           onClick={() => void run(() => onRename(b.id, name))}>
@@ -50,7 +51,8 @@ const ManageRow: React.FC<{
       </Box>
       {b.isDefault && <span>{t('mainNote')}</span>}
       {confirm && (
-        <Box role="alert" sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <Box role="alert"
+          sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
           <span>{t('confirmDelete', { name: b.name })}</span>
           <Button color="error" data-testid="business-delete-confirm"
             onClick={() => void run(() => onDelete(b))}>
@@ -121,7 +123,8 @@ export const BusinessSwitcher: React.FC = () => {
         <DialogContent>
           <p>{t('newHelp')}</p>
           <TextField autoFocus fullWidth label={t('nameLabel')} value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)}
             onKeyDown={(e: React.KeyboardEvent) => {
               if (e.key === 'Enter' && name.trim()) void submitNew();
             }} />

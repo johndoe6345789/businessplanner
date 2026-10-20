@@ -33,7 +33,8 @@ beforeEach(() => {
 describe('BusinessSwitcher', () => {
   it('shows the open business and lists them all', () => {
     render(<BusinessSwitcher />);
-    expect(screen.getByTestId('business-switcher')).toHaveTextContent('My business');
+    expect(screen.getByTestId('business-switcher'))
+      .toHaveTextContent('My business');
     fireEvent.click(screen.getByTestId('business-switcher'));
     expect(screen.getByTestId('business-option-s')).toBeInTheDocument();
   });
@@ -49,12 +50,14 @@ describe('BusinessSwitcher', () => {
     render(<BusinessSwitcher />);
     fireEvent.click(screen.getByTestId('business-switcher'));
     fireEvent.click(screen.getByTestId('business-new'));
-    fireEvent.change(screen.getByLabelText('nameLabel'), { target: { value: 'Acme' } });
+    fireEvent.change(screen.getByLabelText('nameLabel'), {
+      target: { value: 'Acme' },
+    });
     fireEvent.click(screen.getByTestId('business-create'));
     await waitFor(() => expect(create).toHaveBeenCalledWith('Acme'));
   });
 
-  it('asks before deleting and never offers it for the main business', async () => {
+  it('asks before deleting; never for the main business', async () => {
     render(<BusinessSwitcher />);
     fireEvent.click(screen.getByTestId('business-switcher'));
     fireEvent.click(screen.getByTestId('business-manage'));
