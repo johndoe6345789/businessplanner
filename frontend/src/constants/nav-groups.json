@@ -1,0 +1,27 @@
+[
+  {
+    "key": "plan",
+    "labelKey": "groupPlan",
+    "defaultOpen": true
+  },
+  {
+    "key": "discover",
+    "labelKey": "groupDiscover",
+    "defaultOpen": false
+  },
+  {
+    "key": "finance",
+    "labelKey": "groupFinance",
+    "defaultOpen": false
+  },
+  {
+    "key": "execute",
+    "labelKey": "groupExecute",
+    "defaultOpen": false
+  },
+  {
+    "key": "connect",
+    "labelKey": "groupConnect",
+    "defaultOpen": false
+  }
+]

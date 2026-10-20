@@ -1,0 +1,19 @@
+{
+  "clientId": "businessplanner-app",
+  "redirectPath": "/app/en/auth/callback",
+  "postLogoutPath": "/app/en/login",
+  "scopes": "openid profile email offline_access",
+  "endpoints": {
+    "authorization": "/api/dbal/oidc/authorize",
+    "token": "/api/dbal/oidc/token",
+    "logout": "/api/dbal/oidc/logout"
+  },
+  "cookies": {
+    "access": "businessplanner_sso",
+    "refresh": "businessplanner_sso_refresh",
+    "state": "businessplanner_sso_state",
+    "verifier": "businessplanner_sso_verifier"
+  },
+  "refreshLeadSeconds": 60,
+  "refreshCookieSeconds": 604800
+}
