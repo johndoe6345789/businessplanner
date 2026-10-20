@@ -13,9 +13,18 @@ export interface Business {
   createdAt: string;
 }
 
+/** The signed-in person's name and e-mail as given at sign-up. */
+export interface WhoAmI {
+  displayName: string;
+  email: string;
+}
+
 /** Businesses CRUD endpoints injected into baseApi. */
 export const businessesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    whoAmI: build.query<WhoAmI, void>({
+      query: () => ({ url: '/api/planner/whoami' }),
+    }),
     listBusinesses: build.query<Business[], void>({
       query: () => ({ url: '/api/businesses' }),
       providesTags: ['Businesses'],
@@ -47,6 +56,7 @@ export const businessesApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useWhoAmIQuery,
   useListBusinessesQuery,
   useCreateBusinessMutation,
   useRenameBusinessMutation,
