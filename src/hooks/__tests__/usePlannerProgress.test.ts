@@ -104,6 +104,8 @@ describe('usePlannerProgress server sync', () => {
 });
 
 describe('usePlannerProgress across businesses', () => {
+  beforeEach(() => jest.clearAllMocks());
+
   it('adopts the server copy again after another business is opened', () => {
     business = null; local = {}; serverData = { steps: { a: true } };
     const { rerender } = renderHook(() =>
