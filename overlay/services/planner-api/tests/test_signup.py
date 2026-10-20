@@ -92,3 +92,10 @@ def test_the_client_is_the_entry_the_first_proxy_added():
     assert signup.client_of(Req("spoofed, 203.0.113.9, 10.0.1.5")) == "203.0.113.9"
     assert signup.client_of(Req("203.0.113.9")) == "203.0.113.9"
     assert signup.client_of(Req("")) == "unknown"
+
+
+def test_profile_sync_only_touches_placeholder_emails_and_never_duplicates():
+    sql = signup.SYNC_SQL
+    assert "LIKE '%%@unknown.local'" in sql                       # %% = a literal % for the driver
+    assert "u.username = s.username" in sql                       # matched by the generated dbal username
+    assert "NOT EXISTS" in sql and "o.id <> u.id" in sql          # never creates a second row with the same address

@@ -352,7 +352,12 @@ services:
       AUTH_PORT: "9001"
       JWT_SECRET: change-me-in-production
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      # OpenAI-compatible server for the AI features. Default: the bundled Ollama (no real key needed; the key only has
+      # to be non-empty). For a hosted provider set OPENAI_BASE_URL (and a real OPENAI_API_KEY) in the secrets file.
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-local-model}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-http://ollama:11434}
+      OPENAI_MODEL: ${OPENAI_MODEL:-qwen2.5:3b-instruct}
+      OPENAI_TIMEOUT_S: ${OPENAI_TIMEOUT_S:-180}
     mem_limit: 96m
     restart: unless-stopped
 
@@ -380,6 +385,35 @@ services:
       ES_HOST: elasticsearch
       ES_PORT: "9200"
     mem_limit: 96m
+    restart: unless-stopped
+
+  # ---- a self-hosted language model for the AI features (no cloud API key needed) ----
+  # Ollama speaks the OpenAI API, which the AI service already supports: it is pointed here with OPENAI_BASE_URL.
+  # CPU-only, so replies take tens of seconds; to use a hosted model instead, set OPENAI_BASE_URL / OPENAI_API_KEY
+  # (or ANTHROPIC_API_KEY) in the secrets file and this service can be stopped.
+  ollama:
+    image: ollama/ollama:latest
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        ollama serve & pid=$$!
+        until ollama list >/dev/null 2>&1; do sleep 1; done
+        ollama pull $${OPENAI_MODEL}
+        wait $$pid
+    environment:
+      OPENAI_MODEL: ${OPENAI_MODEL:-qwen2.5:3b-instruct}
+      OLLAMA_KEEP_ALIVE: 10m
+      OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_MAX_LOADED_MODELS: "1"
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list | grep -q \"$${OPENAI_MODEL}\""]
+      interval: 20s
+      retries: 30
+      start_period: 30s
+    mem_limit: 6g
+    cpus: 4
     restart: unless-stopped
 
   # ---- stand-ins for Xero and Zelt (sample data, no account needed) ----
@@ -862,6 +896,8 @@ services:
     restart: unless-stopped
 
 volumes:
+  ollama_models:
+    name: bp-ollama-models
   pgdata:
   dbal_data:
   dbal_keys:

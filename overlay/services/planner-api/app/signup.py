@@ -10,6 +10,7 @@ holding that token, and is careful never to overwrite an existing account:
 * an address already known here (users or earlier sign-ups) is refused;
 * sign-ups are rate limited per client and overall.
 """
+import asyncio
 import logging
 import os
 import re
@@ -101,13 +102,31 @@ async def register(body: dict, client: str):
         raise
 
 
+# People who sign in only appear in `users` on their first login, as `<username>@unknown.local` (the login service
+# gives no e-mail or name). Fill in what we were told at sign-up so the app shows their name and has an address.
+SYNC_SQL = ("UPDATE users u SET email = s.email, display_name = s.display_name, updated_at = now() FROM signup_accounts s "
+            "WHERE u.username = s.username AND u.email LIKE '%%@unknown.local' "
+            "AND NOT EXISTS (SELECT 1 FROM users o WHERE lower(o.email) = s.email AND o.id <> u.id)")
+
+
+async def sync_profiles_forever(every: float = 15):
+    while True:
+        try:
+            await db.run(SYNC_SQL)
+        except Exception:
+            log.exception("profile sync failed")
+        await asyncio.sleep(every)
+
+
 @asynccontextmanager
 async def lifespan(app):
     await db.start()
     await db.run("""CREATE TABLE IF NOT EXISTS signup_accounts (
         email text PRIMARY KEY, display_name text NOT NULL DEFAULT '', created_at timestamptz NOT NULL DEFAULT now())""")
     await db.run("ALTER TABLE signup_accounts ADD COLUMN IF NOT EXISTS username text")
+    task = asyncio.create_task(sync_profiles_forever())
     yield
+    task.cancel()
     await db.stop()
 
 

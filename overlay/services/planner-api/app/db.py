@@ -42,6 +42,9 @@ CREATE_TABLES.append(
          is_default   boolean NOT NULL DEFAULT false,
          created_at   timestamptz NOT NULL DEFAULT now())""")
 CREATE_TABLES.append("CREATE UNIQUE INDEX IF NOT EXISTS businesses_one_default ON businesses (owner_id) WHERE is_default")
+# No cloud model key exists here; the bundled model is reached through the OpenAI-compatible client, so that is
+# what new accounts use (people with their own Anthropic key can still choose Claude in their settings).
+CREATE_TABLES.append("ALTER TABLE users ALTER COLUMN ai_provider SET DEFAULT 'openai'")
 CREATE_TABLES.append("CREATE UNIQUE INDEX IF NOT EXISTS businesses_owner_name ON businesses (owner_id, lower(name))")
 WIDEN_CHECKS = [  # (table, column, every allowed value)
     ("kpi_metrics", "category", ["financial", "operational", "customer", "strategic", "growth"]),
