@@ -358,6 +358,8 @@ services:
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-http://ollama:11434}
       OPENAI_MODEL: ${OPENAI_MODEL:-qwen2.5:3b-instruct}
       OPENAI_TIMEOUT_S: ${OPENAI_TIMEOUT_S:-180}
+      # The frontend names no provider, so this picks the one that serves every AI call.
+      AI_DEFAULT_PROVIDER: ${AI_DEFAULT_PROVIDER:-openai}
     mem_limit: 96m
     restart: unless-stopped
 
