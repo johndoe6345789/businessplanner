@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from . import auth, db
 from .core import ApiError
 from .routes_basic import router as basic
+from .routes_businesses import router as businesses
 from .routes_finance import router as finance
 from .routes_integrations import router as integrations
 from .routes_market import router as market
@@ -29,7 +30,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="businessplanner-planner", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
-for r in (basic, strategy, market, finance, integrations, progress):
+for r in (basic, businesses, strategy, market, finance, integrations, progress):
     app.include_router(r)
 
 

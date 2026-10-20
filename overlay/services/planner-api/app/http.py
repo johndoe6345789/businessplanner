@@ -1,10 +1,14 @@
 """Shared route plumbing."""
 from fastapi import Depends, Request
 
-from .auth import current_user
+from .auth import current_user, data_owner
 from .core import fail
 
-User = Depends(current_user)
+# `User` is whose data a planning route reads and writes: the caller's own (their main business) or, when the
+# request names one in X-Business-Id, the hidden workspace row that holds that business's data.
+User = Depends(data_owner)
+# `Owner` is the real signed-in person, for the routes that manage the businesses themselves.
+Owner = Depends(current_user)
 
 
 async def body(request: Request):
