@@ -1,8 +1,0 @@
-[
-  { "key": "roadmap", "icon": "map", "href": "/planner" },
-  { "key": "aiAdvisor", "icon": "psychology", "href": "/planner" },
-  { "key": "progress", "icon": "trending_up", "href": "/dashboard" },
-  { "key": "legal", "icon": "gavel", "href": "/planner" },
-  { "key": "finance", "icon": "account_balance", "href": "/planner" },
-  { "key": "resources", "icon": "auto_stories", "href": "/planner" }
-]
