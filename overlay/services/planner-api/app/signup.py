@@ -1,0 +1,134 @@
+"""Self-service sign-up (POST /api/auth/register).
+
+Login belongs to the shared dbal. It has no public registration; the only way to create a login is its
+admin-token endpoint, which *sets or resets* a password. So this runs as its own container, the only one
+holding that token, and is careful never to overwrite an existing account:
+
+* the login name is the e-mail address (always contains "@", so it cannot be one of dbal's plain system
+  names such as `admin` or `god`);
+* an address already known here (users or earlier sign-ups) is refused;
+* sign-ups are rate limited per client and overall.
+"""
+import logging
+import os
+import re
+import time
+from collections import defaultdict, deque
+from contextlib import asynccontextmanager
+
+import httpx
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+
+from . import db
+
+log = logging.getLogger("signup")
+DBAL_URL = os.getenv("DBAL_URL", "http://srv-captain--metabuilder-dbal:8080").rstrip("/")
+LOGIN_PATH = os.getenv("LOGIN_PATH", "/app/en/login")
+EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$")
+COMMON = {"password", "password1", "123456789", "1234567890", "qwertyuiop", "letmein123", "iloveyou12", "administrator"}
+PER_CLIENT, PER_HOUR = int(os.getenv("SIGNUP_PER_CLIENT", "5")), int(os.getenv("SIGNUP_PER_HOUR", "200"))
+_hits: dict[str, deque] = defaultdict(deque)
+_all: deque = deque()
+
+
+class Refused(Exception):
+    def __init__(self, status, message):
+        self.status, self.message = status, message
+
+
+def check_rate(client: str, now: float | None = None):
+    now = time.time() if now is None else now
+    for q in (_hits[client], _all):
+        while q and now - q[0] > 3600:
+            q.popleft()
+    if len(_hits[client]) >= PER_CLIENT or len(_all) >= PER_HOUR:
+        raise Refused(429, "Too many sign-ups right now. Please try again later.")
+    _hits[client].append(now)
+    _all.append(now)
+
+
+def validate(body: dict) -> tuple[str, str, str]:
+    if not isinstance(body, dict):
+        raise Refused(400, "Invalid request.")
+    if body.get("website"):                       # honeypot: real users never fill this in
+        raise Refused(400, "Invalid request.")
+    email = str(body.get("email") or "").strip().lower()
+    password = str(body.get("password") or "")
+    name = str(body.get("displayName") or body.get("username") or "").strip()[:128]
+    if not EMAIL_RE.match(email) or len(email) > 128:
+        raise Refused(400, "Enter a valid e-mail address.")
+    if not 10 <= len(password) <= 128:
+        raise Refused(400, "Use a password of 10 to 128 characters.")
+    if password.isdigit() or password.lower() in COMMON or password.lower() == email:
+        raise Refused(400, "That password is too easy to guess. Choose another.")
+    return email, password, name or email.split("@")[0]
+
+
+async def dbal_set_credential(email: str, password: str):
+    token = os.getenv("DBAL_ADMIN_TOKEN", "")
+    if not token:
+        raise Refused(503, "Sign-up is not configured.")
+    async with httpx.AsyncClient(timeout=15) as c:
+        r = await c.post(f"{DBAL_URL}/admin/credentials", headers={"Authorization": f"Bearer {token}"},
+                         json={"username": email, "password": password, "email": email})
+    if r.status_code != 200 or not r.json().get("success"):
+        log.warning("dbal refused the credential (%s): %s", r.status_code, r.text[:200])
+        raise Refused(502, "Could not create the account. Please try again later.")
+
+
+async def register(body: dict, client: str):
+    email, password, name = validate(body)
+    check_rate(client)
+    if await db.one("SELECT 1 AS x FROM users WHERE lower(email) = %s", email):
+        raise Refused(409, "That e-mail address is already registered. Try signing in.")
+    claimed = await db.one(
+        "INSERT INTO signup_accounts (email, display_name) VALUES (%s, %s) ON CONFLICT (email) DO NOTHING RETURNING email", email, name)
+    if not claimed:
+        raise Refused(409, "That e-mail address is already registered. Try signing in.")
+    try:
+        await dbal_set_credential(email, password)
+    except Exception:
+        await db.run("DELETE FROM signup_accounts WHERE email = %s", email)    # let them try again
+        raise
+
+
+@asynccontextmanager
+async def lifespan(app):
+    await db.start()
+    await db.run("""CREATE TABLE IF NOT EXISTS signup_accounts (
+        email text PRIMARY KEY, display_name text NOT NULL DEFAULT '', created_at timestamptz NOT NULL DEFAULT now())""")
+    yield
+    await db.stop()
+
+
+app = FastAPI(title="businessplanner-signup", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
+
+
+def client_of(req: Request) -> str:
+    """The caller's address. Behind CapRover the chain is "<whatever the caller sent>, <caller>, <proxy>": only the
+    entry the first trusted proxy added can be believed, so take the second from the end."""
+    chain = [p.strip() for p in req.headers.get("x-forwarded-for", "").split(",") if p.strip()]
+    if chain:
+        return chain[-2] if len(chain) >= 2 else chain[-1]
+    return req.client.host if req.client else "unknown"
+
+
+@app.post("/api/auth/register")
+async def register_route(req: Request):
+    try:
+        body = await req.json()
+    except ValueError:
+        body = None
+    try:
+        await register(body, client_of(req))
+    except Refused as e:
+        return JSONResponse({"message": e.message, "error": e.message}, status_code=e.status)
+    return JSONResponse({"success": True, "message": "Account created. Sign in with your e-mail address and password.",
+                         "loginUrl": LOGIN_PATH}, status_code=201)
+
+
+@app.get("/healthz")
+async def healthz():
+    await db.one("SELECT 1 AS ok")
+    return {"status": "ok"}

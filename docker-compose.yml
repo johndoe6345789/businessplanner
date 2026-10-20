@@ -382,6 +382,32 @@ services:
     mem_limit: 96m
     restart: unless-stopped
 
+  # ---- businessplanner-signup (private internal service): self-service registration ----
+  # The shared dbal has no public sign-up, only an admin-token endpoint, so this one container holds that token
+  # (prod override); the planner does not. Same image as the planner, different entry point.
+  businessplanner-signup:
+    image: businessplanner-planner:latest
+    command: ["uvicorn", "app.signup:app", "--host", "0.0.0.0", "--port", "9016", "--no-access-log"]
+    depends_on:
+      db:
+        condition: service_healthy
+      businessplanner-planner:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: businessplanner_db
+      DB_USER: businessplanner
+      DB_PASSWORD: businessplanner_dev
+      DB_POOL: "2"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9016/healthz', timeout=3)"]
+      interval: 15s
+      retries: 5
+      start_period: 15s
+    mem_limit: 96m
+    restart: unless-stopped
+
   # ---- businessplanner-planner (private internal service): the planning tools API ----
   # KPIs, OKRs, PDCA, Hoshin, risks, decisions, feature scoping, pivots, weekly reviews, market research,
   # financial tools, accelerators, organisations, startup types, legal calculators. Python, not a C++ daemon:
