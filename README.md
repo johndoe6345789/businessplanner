@@ -14,7 +14,7 @@ A step-by-step startup company setup guide — six phases from idea to first pay
 
 See the [reposplit README](https://github.com/johndoe6345789/reposplit#readme) for the full mapping. Services shared with `next_extra_primary` (auth, gamification, social, ecommerce, etc.) were already migrated via that repo as the canonical source — this repo's copies were redundant duplicates. LaunchPad-specific domains:
 
-- `frontend/` → [launchpad-frontend](https://github.com/johndoe6345789/launchpad-frontend) (a copy with its history is also kept in-tree under `frontend/`; `assemble_workspace.py` still overwrites it from the micro-repo, which remains the deploy source until the `frontend` target is removed from `workspace.json`)
+- `frontend/` → [launchpad-frontend](https://github.com/johndoe6345789/launchpad-frontend)
 - Strategy execution (`hoshin`, `okr`, `pdca`, `pivot`, `decisions`, `weekly-review`, `scoping`, `kpi`) → [strategy-execution-p](https://github.com/johndoe6345789/strategy-execution-p)
 - Billing + payroll (`financials`, `xero`, `zelt`) → [workforce-pay-bill-p](https://github.com/johndoe6345789/workforce-pay-bill-p)
 - `gdpr` → [gdpr](https://github.com/johndoe6345789/gdpr)
