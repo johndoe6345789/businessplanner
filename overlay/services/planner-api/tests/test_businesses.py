@@ -24,9 +24,38 @@ def owner(monkeypatch):
     return me
 
 
-def test_no_header_means_the_persons_own_business(owner):
-    assert asyncio.run(auth.data_owner(Req())) == owner
-    assert asyncio.run(auth.data_owner(Req("  "))) == owner
+def test_no_header_means_the_oldest_business(owner, monkeypatch):
+    ws = "44444444-4444-4444-8444-444444444444"
+    seen = []
+
+    async def first(person):
+        seen.append(person)
+        return ws
+    monkeypatch.setattr(auth.businesses, "first_workspace", first)
+    assert asyncio.run(auth.data_owner(Req())) == ws
+    assert asyncio.run(auth.data_owner(Req("  "))) == ws
+    assert seen == [owner, owner]
+
+
+def test_every_business_can_be_deleted(owner, monkeypatch):
+    ws = "55555555-5555-4555-8555-555555555555"
+    ran = []
+
+    async def one(sql, *a):
+        return {"id": a[0], "data_user_id": ws, "name": "Any"}
+
+    async def run(sql, *a):
+        ran.append((sql, a))
+        return 1
+    monkeypatch.setattr(rb.db, "one", one)
+    monkeypatch.setattr(rb.db, "run", run)
+    asyncio.run(rb.delete_business("66666666-6666-4666-8666-666666666666", owner))
+    assert ran and ran[0][1] == (ws,)
+
+
+def test_the_listing_has_no_main_flag():
+    row = {"id": "x", "name": "N", "created_at": "2026-01-01"}
+    assert "isDefault" not in rb.out(row)
 
 
 def test_a_named_business_resolves_to_its_workspace_user(owner, monkeypatch):

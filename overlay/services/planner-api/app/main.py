@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from . import auth, db
+from . import businesses as business_store
 from .core import ApiError
 from .routes_basic import router as basic
 from .routes_businesses import router as businesses
@@ -22,6 +23,9 @@ log = logging.getLogger("planner")
 @asynccontextmanager
 async def lifespan(app):
     await db.start()
+    moved = await business_store.migrate_main_businesses()
+    if moved:
+        log.info("moved %d rows of main businesses into their own workspaces", moved)
     await auth.start()
     log.info("planner ready")
     yield
