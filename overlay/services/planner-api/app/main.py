@@ -14,6 +14,7 @@ from .routes_finance import router as finance
 from .routes_integrations import router as integrations
 from .routes_market import router as market
 from .routes_progress import router as progress
+from .routes_preferences import router as preferences
 from .routes_strategy import router as strategy
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -34,7 +35,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="businessplanner-planner", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
-for r in (basic, businesses, strategy, market, finance, integrations, progress):
+for r in (basic, businesses, strategy, market, finance, integrations, progress, preferences):
     app.include_router(r)
 
 

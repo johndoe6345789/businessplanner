@@ -1,4 +1,4 @@
-"""One account, several equal businesses (see businesses.py). Any of them can be renamed or deleted; a person always
+"""One account, several equal businesses (see businesses.py). Any of them can be renamed or deleted, and there is no limit on how many; a person always
 keeps at least one, so deleting the last gives them a fresh empty one."""
 import re
 
@@ -9,7 +9,6 @@ from .core import ApiError, as_uuid, conv, fail
 from .http import Owner, body
 
 router = APIRouter()
-MAX_BUSINESSES = 20
 
 
 def clean_name(data) -> str:
@@ -39,8 +38,6 @@ async def list_businesses(owner: str = Owner):
 async def create_business(request: Request, owner: str = Owner):
     name = clean_name(await body(request))
     await businesses.ensure_business(owner)
-    if (await db.one("SELECT COUNT(*) AS n FROM businesses WHERE owner_id = %s", owner))["n"] >= MAX_BUSINESSES:
-        fail(f"you can have up to {MAX_BUSINESSES} businesses")
     if await db.one("SELECT 1 AS x FROM businesses WHERE owner_id = %s AND lower(name) = lower(%s)", owner, name):
         raise ApiError(409, "you already have a business with that name")
     async with db.pool.connection() as conn:

@@ -88,3 +88,40 @@ def test_names():
     for bad in ({}, {"name": 5}, {"name": "   "}, {"name": "x" * 81}, None):
         with pytest.raises(ApiError):
             rb.clean_name(bad)
+
+
+def test_there_is_no_limit_on_how_many_businesses(owner, monkeypatch):
+    """The old cap of 20 is gone: creating a 21st (or 200th) business is allowed."""
+    made = []
+
+    async def one(sql, *a):
+        assert "COUNT" not in sql, "creating a business must not count the existing ones"
+        return None
+
+    async def ensure(person):
+        return None
+
+    class Conn:
+        async def __aenter__(self): return self
+        async def __aexit__(self, *a): return False
+        def transaction(self): return self
+
+    class Pool:
+        def connection(self): return Conn()
+
+    async def make(conn, person, name):
+        made.append(name)
+        return {"id": "1", "name": name, "created_at": "2026-01-01"}
+
+    class Req:
+        async def json(self): return {"name": "Business 201"}
+
+    async def body(request): return await request.json()
+    monkeypatch.setattr(rb.db, "one", one)
+    monkeypatch.setattr(rb.db, "pool", Pool(), raising=False)
+    monkeypatch.setattr(rb.businesses, "ensure_business", ensure)
+    monkeypatch.setattr(rb.businesses, "make_business", make)
+    monkeypatch.setattr(rb, "body", body)
+    asyncio.run(rb.create_business(Req(), owner))
+    assert made == ["Business 201"]
+    assert not hasattr(rb, "MAX_BUSINESSES")
